@@ -4,6 +4,8 @@
 
 /* login-signup input fields */
 
+@import './imageUpload.css';
+
 .floating-input > input::placeholder {
   color: transparent;
 }
@@ -23,6 +25,23 @@
 }
 .signup-label {
   @apply absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out;
+}
+
+/* left-estimate-table */
+.left-estimate-table {
+  @apply px-3 text-gray-600 text-sm w-56;
+}
+
+.right-estimate-table > tr > td {
+  @apply px-3 text-gray-600 text-sm;
+}
+
+.right-estimate-table > tr > .left {
+  @apply text-right align-top w-1/4 md:w-1/4;
+}
+
+.right-estimate-table > tr > td > input {
+  @apply bg-gray-50 appearance-none border border-gray-400 rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-400;
 }
 
 /* Spinner */

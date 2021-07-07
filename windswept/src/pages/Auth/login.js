@@ -18,13 +18,13 @@ const Login = () => {
 
     const [error, setError] = useState(false);
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    // }, [showAlert])
+    }, [showAlert])
 
-    // const toggleAlert = () => {
-    //     setShowAlert(false);
-    // }
+    const toggleAlert = () => {
+        setShowAlert(false);
+    }
 
 
     const enableLoading = () => {
@@ -50,13 +50,13 @@ const Login = () => {
     const formik = useFormik({
         initialValues,
         validationSchema: LoginSchema,
-        onSubmit: (values, { setStatus, setSubmitting }) => {
+        onSubmit: ({ email, password }, { setStatus, setSubmitting }) => {
             enableLoading();
+            console.log("values", email, password)
             // setTimeout(() => {
-            //         login(values.email, values.password)
+            //         login(email, password)
             //             .then(({ data: { data: { accessToken, isAdmin }, message } }) => {
             //                 disableLoading();
-
             //                 setError(false);
             //                 setStatus(message);
             //                 setShowAlert(true);
@@ -89,16 +89,23 @@ const Login = () => {
                         Login Account
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-400">
-                        Enter your Username and Password
+                        Enter your Email and Password
                     </p>
-                    <p className="mt-4 text-center text-sm text-gray-400">
+                    {/* <p className="mt-4 text-center text-sm text-gray-400">
                         Don't Have an Account?  <Link to="/signup" className="font-medium text-gray-600  hover:text-red-600 hover:underline">
                             Sign up
                         </Link>
-                    </p>
+                    </p> */}
                 </div>
                 <form className="mt-8" onSubmit={formik.handleSubmit} >
-
+                    {
+                        showAlert === true ? (
+                            <div className={`${error === false ? "alert-light-success" : "alert-light-danger"} mb-10 alert alert-custom alert-dismissible fade show`}>
+                                <div className="alert-text font-weight-bold">{formik.status}</div>
+                                <button className="position-relative close" onClick={toggleAlert} type="button" data-dismiss="alert" aria-label="Close">×</button>
+                            </div>
+                        ) : ('')
+                    }
                     <InputField
                         name={"email"}
                         type={"text"}
@@ -150,17 +157,17 @@ const Login = () => {
                         <div className="text-red-700 text-sm mb-4" >{formik.errors.password}</div>
                     ) : null}
 
-                    <div className="flex items-center justify-between">
-                        <div className="text-sm">
+                    <div className="flex items-center justify-end">
+                        {/* <div className="text-sm">
                             <Link to="/forget-password" className="font-medium text-gray-600 hover:text-red-500 hover:underline">
                                 Forgot your password?
                             </Link>
-                        </div>
+                        </div> */}
 
                         <button type="submit" className="flex items-center text-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none ">
                             Log in
                             {loading &&
-                                <div class=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>}
+                                <div className=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>}
                         </button>
                     </div>
                 </form>
