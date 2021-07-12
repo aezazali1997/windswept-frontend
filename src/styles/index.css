@@ -5,6 +5,7 @@
 /* login-signup input fields */
 
 @import './imageUpload.css';
+@import './hamburger.css';
 
 .floating-input > input::placeholder {
   color: transparent;
@@ -36,14 +37,17 @@
   @apply px-3 text-gray-600 text-sm;
 }
 
-.right-estimate-table > tr > .left {
+.left {
   @apply text-right align-top w-1/4 md:w-1/4;
 }
 
-.right-estimate-table > tr > td > input {
+.input {
   @apply bg-gray-50 appearance-none border border-gray-400 rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-400;
 }
 
+.select {
+  @apply w-full border border-gray-400 bg-gray-50 rounded-md  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-400 sm:text-sm;
+}
 /* Spinner */
 
 .loader {
@@ -51,7 +55,15 @@
   -webkit-animation: spinner 1.5s linear infinite;
   animation: spinner 1.5s linear infinite;
 }
+.card:hover {
+  box-shadow: 5px 5px 10px #c5c5c5, -5px -5px 10px #c5c5c5;
+}
 
+.active {
+  background-color: #dc2626;
+  color: white;
+  font-weight: 600;
+}
 @-webkit-keyframes spinner {
   0% {
     -webkit-transform: rotate(0deg);
