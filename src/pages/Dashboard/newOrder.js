@@ -277,7 +277,7 @@ const NewOrder = ({ fileArray, ColorsArray, handleRemoveImg, onChangeFile, uploa
                         </div>
                         <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                             <MultiSelect
-                                className="border rounded-md border-gray-400"
+                                className=""
                                 value={selected}
                                 options={multiQty}
                                 selected={selected}

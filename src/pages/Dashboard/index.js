@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Router, useLocation } from 'react-router-dom';
 import MultiSelect from "react-multi-select-component";
 import _ from 'lodash';
+import { Helmet } from 'react-helmet';
 import Button from './button';
-
 import NewOrder from './newOrder';
 import OpenOrder from './openOrder';
 import ClosedOrder from './closedOrder';
@@ -169,6 +169,10 @@ const Dashboard = (props) => {
 
     return (
         <div className="flex flex-col w-full">
+            <Helmet>
+                <title>Dashboard | Windswept</title>
+
+            </Helmet>
             <div className="flex flex-col h-screen justify-center items-center p-5">
                 <h1 className="lg:text-5xl md:text-3xl sm:text-2xl text-2xl font-light mb-10">
                     What would you like to do?
@@ -212,7 +216,7 @@ const Dashboard = (props) => {
                             </svg>
                         </span>
                         <input class="w-full p-2 focus:outline-none" type="text" placeholder="Search by Item Name / Reference / Item No" />
-                        <button class="bg-red-500 hover:bg-red-600  text-white p-2 pl-6 pr-6">
+                        <button class="bg-red-500 hover:bg-red-600 border-0  text-white p-2 pl-6 pr-6">
                             <p class="font-semibold text-xs">Search</p>
                         </button>
                     </div>

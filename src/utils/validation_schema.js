@@ -35,6 +35,28 @@ export const LoginSchema = Yup.object().shape({
 });
 
 
+export const ContactFormSchema = Yup.object().shape({
+    email: Yup.string()
+        .email("Wrong email format")
+        .min(3, "Minimum 3 symbols")
+        .max(50, "Maximum 50 symbols")
+        .required('This field is required'),
+    name: Yup.string()
+        .min(3, "Minimum 3 symbols")
+        .max(50, "Maximum 50 symbols")
+        .required('This field is required'),
+    subject: Yup.string()
+        .min(3, "Minimum 3 symbols")
+        .max(50, "Maximum 50 symbols")
+        .required('This field is required'),
+    message: Yup.string()
+        .min(10, 'Minimum 10 characters')
+        .max(500, 'Maximum 500 characters')
+        .required('This field is required'),
+});
+
+
+
 export const ForgetPasswordSchema = Yup.object().shape({
     email: Yup.string()
         .email("Wrong email format")

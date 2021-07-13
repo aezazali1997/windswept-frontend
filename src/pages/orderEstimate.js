@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import MultiSelect from "react-multi-select-component";
 import { multiQty, size } from '../utils/consts';
-
+import { Helmet } from 'react-helmet';
 var ColorsArray = [];
 
 const OrderEstimate = () => {
@@ -43,6 +43,10 @@ const OrderEstimate = () => {
 
     return (
         <div className="flex flex-col lg:flex-row w-full md:pt-28  bg-white">
+            <Helmet>
+                <title>Estimator | Windswept</title>
+
+            </Helmet>
             <div className="flex w-full justify-center">
                 <table className="">
                     <tr>
@@ -112,11 +116,12 @@ const OrderEstimate = () => {
                     <tr>
                         <td className=" px-8 "></td>
                         <td className=" left-estimate-table">
-                            <button type="button" className="inline-flex bg-red-600 justify-center w-20 border border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium hover:bg-red-700 focus:outline-none"
+                            <button type="button" className="inline-flex
+                            text-white bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600  justify-center w-20 border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium  focus:outline-none"
                                 id="menu-button"
                                 aria-expanded="true"
                                 aria-haspopup="true"
-                            >Submit</button>
+                            >Print</button>
                         </td>
                     </tr>
                 </table>
@@ -270,7 +275,7 @@ const OrderEstimate = () => {
                     </div>
                     <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                         <MultiSelect
-                            className="border rounded-md border-gray-400"
+                            className=""
                             value={selected}
                             options={multiQty}
                             selected={selected}

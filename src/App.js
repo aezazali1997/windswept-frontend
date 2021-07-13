@@ -1,51 +1,66 @@
 import React, { useState, useEffect } from 'react'
-import { Switch, Route, Link, Redirect } from 'react-router-dom';
+import { Switch, Route, Link, Redirect, useHistory } from 'react-router-dom';
+import ScrollToTop from 'react-scroll-up';
 
+import CustomLayout from './Layout';
 import Dropdown from './components/Dropdown';
 import { Login, ForgetPassword, Signup } from './pages/Auth';
 import { OrderEstimate, Dashboard, Contact, ToggleTutorials, TermsOfServices } from './pages';
-import { Navbar, NavDropdown } from './components';
+
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+
+  const history = useHistory();
+  const [authorized, setAuthorized] = useState(null)
+
+
+  const handleLogout = async () => {
+    console.log('inLogout');
+    await localStorage.clear();
+    window.location = ('/')
+  }
+  const handleLogin = async () => {
+    console.log('in Login');
+    setAuthorized(await localStorage.setItem('login', true));
+    history.push('/dashboard')
+  }
 
   useEffect(() => {
-    const hideMenu = () => {
-      if (window.innerWidth > 768 && isOpen) {
-        setIsOpen(false);
-        console.log('i resized');
-      }
-    };
+    const login = localStorage.getItem('login')
+    console.log(login)
+    if (login === true) {
+      setAuthorized(login);
+    }
+    setAuthorized(login)
+  }, [])
 
-    window.addEventListener('resize', hideMenu);
+  useEffect(() => {
 
-    return () => {
-      window.removeEventListener('resize', hideMenu);
-    };
-  });
-
-
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
+  }, [authorized])
 
 
   return (
     <>
-      <Navbar toggle={toggle} isOpen={isOpen} />
-      <NavDropdown isOpen={isOpen} toggle={toggle} />
-      <Switch>
-        <Route path='/' exact component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path='/forget-password' component={ForgetPassword} />
-        <Route path='/new-estimate' component={OrderEstimate} />
-        <Route exact path='/dashboard' component={Dashboard} />
-        <Route exact path='/contact' component={Contact} />
-        <Route exact path='/toggle-tutorials' component={ToggleTutorials} />
-        <Route exact path='/terms-of-services' component={TermsOfServices} />
-
-        <Redirect to="/" />
-      </Switch>
+      <CustomLayout handleLogin={handleLogin} handleLogout={handleLogout} login={authorized}>
+        {
+          authorized === "true" ?
+            <Switch>
+              <Route path='/new-estimate' component={OrderEstimate} />
+              <Route path='/dashboard' component={Dashboard} />
+              <Route path='/contact' component={Contact} />
+              <Route path='/toggle-tutorials' component={ToggleTutorials} />
+              <Route path='/terms-of-services' component={TermsOfServices} />
+              <Redirect to="/new-estimate" />
+            </Switch>
+            :
+            <Switch>
+              <Route path='/' exact component={Login} />
+              <Route path="/signup" component={Signup} />
+              <Route path='/forget-password' component={ForgetPassword} />
+              <Redirect to="/" />
+            </Switch>
+        }
+      </CustomLayout>
     </>
   );
 }

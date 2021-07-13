@@ -1,0 +1,25 @@
+.circlescoll {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.scroll {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: opacity 0.2s linear 0s, visibility;
+  z-index: 1 !important;
+  height: 40px !important;
+  opacity: 1;
+  visibility: visible;
+  width: 40px !important;
+  background: white;
+  box-shadow: 0px 0px 10px 7px #0000000d !important;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+}

@@ -6,6 +6,8 @@
 
 @import './imageUpload.css';
 @import './hamburger.css';
+@import './scrollUp.css';
+@import '../../node_modules/video-react/dist/video-react.css';
 
 .floating-input > input::placeholder {
   color: transparent;
@@ -19,6 +21,19 @@
 .floating-input > input:focus ~ label,
 .floating-input > input:not(:placeholder-shown) ~ label {
   @apply opacity-75 scale-75 -translate-y-3 translate-x-1;
+}
+.floating-input > textarea::placeholder {
+  color: transparent;
+}
+
+.floating-input > textarea:focus,
+.floating-input > textarea:not(:placeholder-shown) {
+  @apply pt-8;
+}
+
+.floating-input > textarea:focus ~ label,
+.floating-input > textarea:not(:placeholder-shown) ~ label {
+  @apply opacity-75 scale-75 -translate-y-10 translate-x-1;
 }
 
 .signup-field {
