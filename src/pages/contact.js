@@ -65,106 +65,111 @@ const Contact = () => {
 
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
-            {/*SEO Support*/}
-            <Helmet>
-                <title>Contact | Windswept</title>
+        <div className='flex flex-col px-3 py-5'>
+            <h1 className='text-2xl text-center uppercase font-bold'>Contact</h1>
 
-            </Helmet>
-            {/*SEO Support End */}
-            <div className="max-w-md w-full space-y-8">
-                <form className="mt-8" onSubmit={formik.handleSubmit}>
+            <div className="min-h-screen flex items-center justify-center bg-white py-3 px-4 sm:px-6 lg:px-8">
+                {/*SEO Support*/}
+                <Helmet>
+                    <title>Contact | Windswept</title>
 
-                    <InputField
-                        name={"name"}
-                        type={"text"}
-                        value={formik.values.name}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.touched.name && formik.errors.name}
-                        inputClass={`${getInputClasses(
-                            "name"
-                        )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-16`}
-                        label={'Full Name'}
-                    />
-                    {formik.touched.name && formik.errors.name ? (
-                        <div className="text-red-700 text-sm mb-4" >{formik.errors.name}</div>
-                    ) : null}
+                </Helmet>
+                {/*SEO Support End */}
 
-                    <InputField
-                        name={"email"}
-                        type={"text"}
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.touched.email && formik.errors.email}
-                        inputClass={`${getInputClasses(
-                            "email"
-                        )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-16`}
-                        label={'Email'}
-                    />
-                    {formik.touched.email && formik.errors.email ? (
-                        <div className="text-red-700 text-sm mb-4" >{formik.errors.email}</div>
-                    ) : null}
+                <div className="max-w-md w-full space-y-8">
+                    <form className="mt-8" onSubmit={formik.handleSubmit}>
 
-                    <InputField
-                        name={"subject"}
-                        type={"text"}
-                        value={formik.values.subject}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.touched.subject && formik.errors.subject}
-                        inputClass={`${getInputClasses(
-                            "subject"
-                        )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-16`}
-                        label={'Subject'}
-                    />
-                    {formik.touched.subject && formik.errors.subject ? (
-                        <div className="text-red-700 text-sm mb-4" >{formik.errors.subject}</div>
-                    ) : null}
-
-                    <div className={`floating-input ${formik.touched.message && formik.errors.message ? "mb-1" : "mb-5"} relative`}>
-                        <textarea
+                        <InputField
+                            name={"name"}
                             type={"text"}
-                            rows={13}
-                            maxLength={500}
-                            id={'password'}
-                            name={'message'}
-                            className={`${getInputClasses(
-                                "message"
-                            )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3`}
-                            value={formik.values.message}
+                            value={formik.values.name}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            placeholder="name@example.com"
-                            autoComplete="off" />
-                        <label
-                            htmlFor="message"
-                            className="absolute top-0 left-0 px-3 py-2 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
-                            Message
-                        </label>
+                            error={formik.touched.name && formik.errors.name}
+                            inputClass={`${getInputClasses(
+                                "name"
+                            )} border bg-gray-50 border-gray-200 shadow-md focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-16`}
+                            label={'Full Name'}
+                        />
+                        {formik.touched.name && formik.errors.name ? (
+                            <div className="text-red-700 text-sm mb-4" >{formik.errors.name}</div>
+                        ) : null}
 
-                        <div className="flex text-sm justify-between">
-                            {formik.touched.message && formik.errors.message ? (
-                                <div className="text-red-700 text-sm mb-4" >{formik.errors.message}</div>
-                            ) : null}
-                            <div>
-                                {
-                                    limit - formik.values.message.length === 0 ? <p className="text-red-600">Maximum limit reached</p>
-                                        : ''
-                                }
+                        <InputField
+                            name={"email"}
+                            type={"text"}
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.email && formik.errors.email}
+                            inputClass={`${getInputClasses(
+                                "email"
+                            )} border bg-gray-50 border-gray-200 focus:outline-none shadow-md rounded-md focus:shadow-sm w-full p-3 h-16`}
+                            label={'Email'}
+                        />
+                        {formik.touched.email && formik.errors.email ? (
+                            <div className="text-red-700 text-sm mb-4" >{formik.errors.email}</div>
+                        ) : null}
+
+                        <InputField
+                            name={"subject"}
+                            type={"text"}
+                            value={formik.values.subject}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.subject && formik.errors.subject}
+                            inputClass={`${getInputClasses(
+                                "subject"
+                            )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md shadow-md focus:shadow-sm w-full p-3 h-16`}
+                            label={'Subject'}
+                        />
+                        {formik.touched.subject && formik.errors.subject ? (
+                            <div className="text-red-700 text-sm mb-4" >{formik.errors.subject}</div>
+                        ) : null}
+
+                        <div className={`floating-input ${formik.touched.message && formik.errors.message ? "mb-1" : "mb-5"} relative`}>
+                            <textarea
+                                type={"text"}
+                                rows={13}
+                                maxLength={500}
+                                id={'password'}
+                                name={'message'}
+                                className={`${getInputClasses(
+                                    "message"
+                                )} border bg-gray-50 border-gray-200 focus:outline-none shadow-md rounded-md focus:shadow-sm w-full p-3`}
+                                value={formik.values.message}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                placeholder="name@example.com"
+                                autoComplete="off" />
+                            <label
+                                htmlFor="message"
+                                className="absolute top-0 left-0 px-3 py-2 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
+                                Message
+                            </label>
+
+                            <div className="flex text-sm justify-between">
+                                {formik.touched.message && formik.errors.message ? (
+                                    <div className="text-red-700 text-sm mb-4" >{formik.errors.message}</div>
+                                ) : null}
+                                <div>
+                                    {
+                                        limit - formik.values.message.length === 0 ? <p className="text-red-600">Maximum limit reached</p>
+                                            : ''
+                                    }
+                                </div>
+                                <div>{limit - formik.values.message.length} / {limit}</div>
                             </div>
-                            <div>{limit - formik.values.message.length} / {limit}</div>
                         </div>
-                    </div>
-                    <div className="flex items-center justify-end">
-                        <button type="submit" className="flex items-center text-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none ">
-                            Submit
-                            {loading &&
-                                <div className=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>}
-                        </button>
-                    </div>
-                </form>
+                        <div className="flex items-center justify-end">
+                            <button type="submit" className="flex items-center text-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none ">
+                                Submit
+                                {loading &&
+                                    <div className=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>}
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );

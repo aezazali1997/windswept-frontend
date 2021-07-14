@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Switch, Route, Link, Redirect, useHistory } from 'react-router-dom';
-import ScrollToTop from 'react-scroll-up';
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
 import CustomLayout from './Layout';
-import Dropdown from './components/Dropdown';
 import { Login, ForgetPassword, Signup } from './pages/Auth';
 import { OrderEstimate, Dashboard, Contact, ToggleTutorials, TermsOfServices } from './pages';
 

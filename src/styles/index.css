@@ -7,6 +7,7 @@
 @import './imageUpload.css';
 @import './hamburger.css';
 @import './scrollUp.css';
+@import './navbar.css';
 @import '../../node_modules/video-react/dist/video-react.css';
 
 .floating-input > input::placeholder {
@@ -74,11 +75,47 @@
   box-shadow: 5px 5px 10px #c5c5c5, -5px -5px 10px #c5c5c5;
 }
 
-.active {
-  background-color: #dc2626;
-  color: white;
-  font-weight: 600;
+.nav-link {
+  font-weight: 600px;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+  padding: 20px 0px;
+  margin: 0px 20px;
+  display: inline-block;
+  position: relative;
+  opacity: 1;
 }
+
+.nav-link:hover {
+  color: red;
+}
+
+.nav-link::before {
+  transition: 300ms;
+  height: 3px;
+  content: '';
+  position: absolute;
+  background-color: red;
+}
+
+.nav-link-ltr::before {
+  width: 0%;
+  bottom: 10px;
+}
+
+.nav-link-ltr:hover::before {
+  width: 100%;
+}
+.active {
+  color: red;
+}
+.active::before {
+  width: 100%;
+  bottom: 10px;
+}
+
 @-webkit-keyframes spinner {
   0% {
     -webkit-transform: rotate(0deg);

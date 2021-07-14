@@ -1,8 +1,14 @@
 import React from 'react'
-
+import { Helmet } from 'react-helmet';
 const TermsOfServices = () => {
     return (
         <div className='flex flex-col px-3 py-5'>
+            {/*SEO Support*/}
+            <Helmet>
+                <title>Terms Of Services | Windswept</title>
+
+            </Helmet>
+            {/*SEO Support End */}
             <h1 className='text-2xl uppercase font-bold'>Terms of Services</h1>
             <div className="py-3 text-justify">
                 <p>

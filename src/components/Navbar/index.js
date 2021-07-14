@@ -6,8 +6,8 @@ import Button from '../Button';
 const Navbar = ({ toggle, isOpen, login, handleLogin, handleLogout }) => {
     return (
         <nav
-            className={`flex justify-between  items-center h-16 bg-white text-black relative shadow-sm font-mono'
-            role='navigation`}
+            className='flex justify-between items-center h-16 text-black relative shadow-md font-mono navbar'
+            role='navigation'
         >
             <Link to='/dashboard' className='pl-8'>
                 <img className="mx-auto h-9 w-auto" src="https://windsweptmarketing.com/wp-content/uploads/2015/12/logo.png" alt="Workflow" />
@@ -20,24 +20,24 @@ const Navbar = ({ toggle, isOpen, login, handleLogin, handleLogout }) => {
                 {
                     login ?
                         <>
-                            <NavLink to='/dashboard' className='p-4 font-sans' activeClassName="active">
+                            <NavLink to='/dashboard' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
                                 DashBoard
                             </NavLink>
-                            <NavLink to='/new-estimate' className='p-4 font-sans' activeClassName="active">
+                            <NavLink to='/new-estimate' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
                                 Estimator
                             </NavLink>
-                            <NavLink to='/toggle-tutorials' className='p-4 font-sans' activeClassName="active" >
-                                Toggle Tutorials
+                            <NavLink to='/toggle-tutorials' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active" >
+                                Tutorials
                             </NavLink>
-                            <NavLink to='/contact' className='p-4 font-sans' activeClassName="active">
+                            <NavLink to='/contact' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
                                 Contact
                             </NavLink>
-                            <NavLink to='/terms-of-services' className='p-4 font-sans' activeClassName="active">
+                            <NavLink to='/terms-of-services' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
                                 Terms of Services
                             </NavLink>
-                            <NavLink to='#' onClick={handleLogout} className='p-4 font-sans'>
+                            <button onClick={handleLogout} className='p-4 font-sans nav-link nav-link-ltr'>
                                 Logout
-                            </NavLink>
+                            </button>
                         </>
                         : ''
                 }

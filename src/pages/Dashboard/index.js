@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom';
-import { Router, useLocation } from 'react-router-dom';
-import MultiSelect from "react-multi-select-component";
+import { useLocation } from 'react-router-dom';
 import _ from 'lodash';
 import { Helmet } from 'react-helmet';
 import Button from './button';
@@ -23,12 +22,12 @@ const Dashboard = (props) => {
     let query = useQuery();
 
     const [images, setImages] = useState([]);
-    const [checked, setChecked] = useState(false);
-    const [selected, setSelected] = useState([]);
-    const [clicked, setClicked] = useState(false);
-    const [heightClicked, setHeightClicked] = useState(false);
-    const [rightWidth, setRightWidth] = useState('');
-    const [rightHeight, setRightHeight] = useState('');
+    // const [checked, setChecked] = useState(false);
+    // const [selected, setSelected] = useState([]);
+    // const [clicked, setClicked] = useState(false);
+    // const [heightClicked, setHeightClicked] = useState(false);
+    // const [rightWidth, setRightWidth] = useState('');
+    // const [rightHeight, setRightHeight] = useState('');
     const [color, setColor] = useState('');
     const [colors, setColors] = useState([]);
     const [showNewOrder, setShowNewOrder] = useState(true);
@@ -52,19 +51,19 @@ const Dashboard = (props) => {
 
     let upload = useRef();
 
-    let handleWidth = (value) => {
-        setRightWidth(value);
-    }
-    let handleHight = (value) => {
-        setRightHeight(value);
-    }
+    // let handleWidth = (value) => {
+    //     setRightWidth(value);
+    // }
+    // let handleHight = (value) => {
+    //     setRightHeight(value);
+    // }
 
-    let filterOptions = (options, filter) => {
-        if (!filter) {
-            return options;
-        }
-        return options.filter(({ label }) => label && label.includes(filter));
-    }
+    // let filterOptions = (options, filter) => {
+    //     if (!filter) {
+    //         return options;
+    //     }
+    //     return options.filter(({ label }) => label && label.includes(filter));
+    // }
 
 
     let onChangeFile = (event) => {
@@ -84,16 +83,16 @@ const Dashboard = (props) => {
         setImages(neww);
     }
 
-    let handleColors = () => {
-        ColorsArray.push(color);
-        setColors(ColorsArray);
-        setColor('');
-    }
+    // let handleColors = () => {
+    //     ColorsArray.push(color);
+    //     setColors(ColorsArray);
+    //     setColor('');
+    // }
 
-    let removeColor = (index) => {
-        let neww = ColorsArray.splice(index, 1);
-        setColors(neww);
-    }
+    // let removeColor = (index) => {
+    //     let neww = ColorsArray.splice(index, 1);
+    //     setColors(neww);
+    // }
 
     let handleNewOrder = (id) => {
         props.history.push(`/dashboard?active=${id}`)
@@ -133,28 +132,27 @@ const Dashboard = (props) => {
             case 'new-order':
                 return <NewOrder
                     fileArray={fileArray}
-                    ColorsArray={ColorsArray}
+                    // ColorsArray={ColorsArray}
                     handleRemoveImg={handleRemoveImg}
                     onChangeFile={onChangeFile}
                     upload={upload}
-                    showDraft={showDraft}
                     handleClick={handleClick}
-                    selected={selected}
-                    setChecked={setChecked}
-                    setClicked={setClicked}
-                    setColor={setColor}
-                    setSelected={setSelected}
-                    filterOptions={filterOptions}
-                    checked={checked}
-                    clicked={clicked}
-                    setHeightClicked={setHeightClicked}
-                    handleWidth={handleWidth}
-                    handleHight={handleHight}
-                    heightClicked={heightClicked}
-                    handleColors={handleColors}
-                    setColors={setColors}
-                    removeColor={removeColor}
-                    color={color}
+                // selected={selected}
+                // setChecked={setChecked}
+                // setClicked={setClicked}
+                // setColor={setColor}
+                // setSelected={setSelected}
+                // filterOptions={filterOptions}
+                // checked={checked}
+                // clicked={clicked}
+                // setHeightClicked={setHeightClicked}
+                // handleWidth={handleWidth}
+                // handleHight={handleHight}
+                // heightClicked={heightClicked}
+                // handleColors={handleColors}
+                // setColors={setColors}
+                // removeColor={removeColor}
+                // color={color}
 
                 />;
             case 'open-order':
@@ -171,9 +169,8 @@ const Dashboard = (props) => {
         <div className="flex flex-col w-full">
             <Helmet>
                 <title>Dashboard | Windswept</title>
-
             </Helmet>
-            <div className="flex flex-col h-screen justify-center items-center p-5">
+            <div className="flex flex-col h-screen lg:h-96 justify-center items-center p-5">
                 <h1 className="lg:text-5xl md:text-3xl sm:text-2xl text-2xl font-light mb-10">
                     What would you like to do?
                 </h1>
@@ -209,19 +206,21 @@ const Dashboard = (props) => {
                     />
                 </div>
                 <div className="flex flex-col md:flex-row mt-8  md:w-3/5 lg:w-2/5 items-center">
-                    <div class=" shadow-md w-full flex border-gray-400 border">
-                        <span class="w-auto flex justify-end items-center text-gray-500 p-2">
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </span>
-                        <input class="w-full p-2 focus:outline-none" type="text" placeholder="Search by Item Name / Reference / Item No" />
-                        <button class="bg-red-500 hover:bg-red-600 border-0  text-white p-2 pl-6 pr-6">
-                            <p class="font-semibold text-xs">Search</p>
+                    <div className="w-full flex shadow-md">
+                        <div class="  w-full flex border-gray-400 border">
+                            <span class="w-auto flex justify-end items-center text-gray-500 p-2">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </span>
+                            <input class="w-full p-2 focus:outline-none" type="text" placeholder="Search by Item Name / Reference / Item No" />
+                        </div>
+                        <button class="bg-red-600 hover:bg-white border hover:text-red-600  hover:border-red-600   text-white p-2 pl-6 pr-6">
+                            <p class="text-sm font-medium">Search</p>
                         </button>
                     </div>
                     <div className="text-larger md:text-sm md:ml-5 mt-3 md:mt-0">
-                        <Link to="/" className="font-medium  text-gray-600 hover:text-red-500 hover:underline">
+                        <Link to="/" className="font-medium text-sm text-gray-600 hover:text-red-500 hover:underline">
                             Reset
                         </Link>
                     </div>

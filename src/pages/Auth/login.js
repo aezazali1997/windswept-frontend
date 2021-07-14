@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { InputField } from "../../components";
 import { LoginSchema } from "../../utils/validation_schema";
+import AxiosInstance from "../../APIs/axiosInstance";
 
 const initialValues = {
     email: "",
@@ -68,23 +69,25 @@ const Login = () => {
                 setLoading(false);
 
             }
-            // setTimeout(() => {
-            //         login(email, password)
-            //             .then(({ data: { data: { accessToken, isAdmin }, message } }) => {
+            //     setTimeout(() => {
+            //         AxiosInstance.login(email, password)
+            //             .then(res => {
             //                 disableLoading();
             //                 setError(false);
-            //                 setStatus(message);
+            //                 setStatus('LoggedIn');
             //                 setShowAlert(true);
+            //                 localStorage.setItem('login', true);
+            //                 window.location = ('/dashboard');
             //             })
             //             .catch((e) => {
-            //                 console.log('Error', e.response.data.message)
+            //                 console.log('Error', e)
             //                 setError(true)
             //                 disableLoading();
             //                 setSubmitting(false);
-            //                 setStatus(e.response.data.message);
+            //                 setStatus(e);
             //                 setShowAlert(true);
             //             });
-            //         // }, 1000);
+            //     }, 1000);
         },
     })
 
