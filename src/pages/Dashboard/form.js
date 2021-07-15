@@ -1,125 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import MultiSelect from "react-multi-select-component";
 import { multiQty, size } from '../../utils/consts';
-import { useFormik } from 'formik';
-import AxiosInstance from '../../APIs/axiosInstance';
 
-var ColorsArray = [];
-
-
-const Form = ({ thread, submit, setData }) => {
-    const [checked, setChecked] = useState(false);
-    const [selected, setSelected] = useState([]);
-    const [clicked, setClicked] = useState(false);
-    const [heightClicked, setHeightClicked] = useState(false);
-    const [rightWidth, setRightWidth] = useState('');
-    const [rightHeight, setRightHeight] = useState('');
-    const [color, setColor] = useState('');
-    const [Size, setSize] = useState('');
-    const [colors, setColors] = useState([]);
-    const [values, setValues] = useState({
-        vendor: '',
-        product: '',
-        material: '',
-        backing: '',
-        pe: '',
-        border: '',
-        cut: '',
-        packaging: '',
-        setQty: '',
-        optionalItem: '',
-        markUp: '',
-        discountApply: '',
-        wLeft: '1',
-        wRight: '0',
-        wCenter: '0',
-        hLeft: '1',
-        hCenter: '0',
-        hRight: '0',
-    });
-
-    useEffect(() => {
-        console.log('Update')
-        handleSize();
-    }, [values]);
-
-    const handleChange = (e) => {
-        setValues({ ...values, [e.target.name]: e.target.value })
-
-    }
-
-    console.log("values", values);
-
-    let handleWidth = (value) => {
-        let newValue = value.split('/');
-        console.log(newValue);
-        let newArr = newValue.map(item => parseInt(item));
-        let result = newArr[0] / newArr[1];
-        console.log('value', result)
-        setValues({ ...values, wCenter: result })
-        setRightWidth(result);
-
-    }
-
-    let handleHight = (value) => {
-        console.log('value', value)
-        let newValue = value.split('/');
-        console.log(newValue);
-        let newArr = newValue.map(item => parseInt(item));
-        let result = newArr[0] / newArr[1];
-        console.log('value', result)
-        setValues({ ...values, hCenter: result })
-        setRightHeight(result);
-    }
-
-    let filterOptions = (options, filter) => {
-        if (!filter) {
-            return options;
-        }
-        return options.filter(({ label }) => label && label.includes(filter));
-    }
-
-
-    let handleColors = () => {
-        ColorsArray.push(color);
-        setColors(ColorsArray);
-        setColor('');
-    }
-
-    let removeColor = (index) => {
-        let neww = ColorsArray.splice(index, 1);
-        setColors(neww);
-    }
-
-
-    let handleSize = () => {
-        const { hLeft, hCenter, wLeft, wCenter } = values;
-        console.log({ hLeft, hCenter, wLeft, wCenter })
-        var size = (((parseInt(wLeft) + parseFloat(wCenter)) + (parseInt(hLeft) + parseFloat(hCenter))) / 2);
-        // console.log('size', size);
-        var roundedhalf = Math.round(size * 2) / 2;
-        console.log('roundedhalf', roundedhalf);
-        setSize(roundedhalf);
-    }
-
-
-    let handleSubmit = async () => {
-        const data = {
-            product: values.product,
-            material: values.material,
-            backing: values.backing,
-            size: Size,
-            pc: values.pe
-        }
-        console.log('data', data);
-        AxiosInstance.ordereEstimate(data)
-            .then(res => {
-                console.log(res);
-                alert('Order Posted Successfully')
-            }).catch(error => {
-                alert('Post Unsuccessfull')
-            })
-    }
+const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleSubmit, handleWidth,
+    selected, setSelected, setChecked, setClicked, setHeightClicked, filterOptions, values, checked,
+    clicked, heightClicked, Size, setColor, color, removeColor, ColorsArray, handleQty
+}) => {
 
     return (
         <>
@@ -143,7 +29,7 @@ const Form = ({ thread, submit, setData }) => {
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <select id="country" onChange={handleChange} name="product" autocomplete="country" className="select">
                         <option value="">select...</option>
-                        <option value="Emblems">Emblems</option>
+                        <option value="Emblem">Emblems</option>
                         <option value="Peel-N-Stick Embroidery">Peel-N-Stick Embroidery</option>
                         <option value="Embroidered KeyFobs">Embroidered KeyFobs</option>
                         <option value="Woven 3D Puff Key Fobs">Woven 3D Puff Key Fobs</option>
@@ -180,10 +66,10 @@ const Form = ({ thread, submit, setData }) => {
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <select id="country" name="backing" autocomplete="country" onChange={handleChange} className="select">
                         <option value="">select...</option>
-                        <option value="Plastic (sew on)">Plastic (sew on)</option>
-                        <option value="Heat Seal (iron on)">Heat Seal (iron on)</option>
-                        <option value="Peel-N-Stick Embroidery(stick on)">Peel-N-Stick Embroidery(stick on)</option>
-                        <option value="Velcro">Velcro</option>
+                        <option value="plastic">Plastic (sew on)</option>
+                        <option value="heatseal">Heat Seal (iron on)</option>
+                        <option value="pns">Peel-N-Stick Embroidery(stick on)</option>
+                        <option value="velcro">Velcro</option>
                         <option value="Cork(coaster)">Cork(coaster)</option>
                         <option value="Magnet">Magnet</option>
                     </select>
@@ -196,12 +82,12 @@ const Form = ({ thread, submit, setData }) => {
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <select id="country" name="pe" autocomplete="country" onChange={handleChange} className=" select">
                         <option value="">select...</option>
-                        <option value="100%">100%</option>
-                        <option value="85%">85%</option>
-                        <option value="75%">75%</option>
-                        <option value="60%">60%</option>
-                        <option value="50%">50%</option>
-                        <option value="40%">40%</option>
+                        <option value="100">100%</option>
+                        <option value="85">85%</option>
+                        <option value="75">75%</option>
+                        <option value="60">60%</option>
+                        <option value="50">50%</option>
+                        <option value="40">40%</option>
                     </select>
                 </div>
             </div>
@@ -273,10 +159,11 @@ const Form = ({ thread, submit, setData }) => {
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <MultiSelect
+                        className="text-black"
                         value={selected}
                         options={multiQty}
                         selected={selected}
-                        onChange={setSelected}
+                        onChange={handleQty}
                         labelledBy={"Select"}
                         filterOptions={filterOptions}
                     />
@@ -301,6 +188,7 @@ const Form = ({ thread, submit, setData }) => {
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <input
+                        onChange={handleChange}
                         className="input"
                         name="markup"
                         type="text"
@@ -447,7 +335,7 @@ const Form = ({ thread, submit, setData }) => {
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <div class="flex w-full border-gray-400 border">
-                        <input onChange={(e) => setColor(e.target.value)} value={color} className="w-full p-2 focus:outline-none " type="text" placeholder="Enter Color" />
+                        <input onChange={e => setColor(e.target.value)} value={color} className="w-full p-2 focus:outline-none " type="text" placeholder="Enter Color" />
                         <button onClick={handleColors} className="border bg-red-600 hover:bg-red-700  text-white p-2 w-1/4">
                             <p className="font-medium text-sm">Add Color</p>
                         </button>
@@ -505,7 +393,7 @@ const Form = ({ thread, submit, setData }) => {
                                     aria-expanded="true"
                                     aria-haspopup="true"
                                 >Save As Draft</button>
-                                <button onClick={() => handleSubmit} type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium hover:bg-red-700 focus:outline-none"
+                                <button onClick={handleSubmit} type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium hover:bg-red-700 focus:outline-none"
                                     id="menu-button"
                                     aria-expanded="true"
                                     aria-haspopup="true"

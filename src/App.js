@@ -11,7 +11,6 @@ function App() {
   const history = useHistory();
   const [authorized, setAuthorized] = useState(null)
 
-
   const handleLogout = async () => {
     console.log('inLogout');
     await localStorage.clear();
@@ -41,7 +40,7 @@ function App() {
     <>
       <CustomLayout handleLogin={handleLogin} handleLogout={handleLogout} login={authorized}>
         {
-          authorized === "true" ?
+          authorized ?
             <Switch>
               <Route path='/new-estimate' component={OrderEstimate} />
               <Route path='/dashboard' component={Dashboard} />

@@ -1,13 +1,108 @@
-import React, { useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input } from '../../components';
 import Button from './button';
 import _ from 'lodash';
 import ReactTooltip from 'react-tooltip';
 import Form from './form';
 
+var ColorsArray = [];
+
 const NewOrder = ({ fileArray, handleRemoveImg, onChangeFile, upload, handleClick }) => {
 
-    let fooRef = useRef(null);
+
+    const [checked, setChecked] = useState(false);
+    const [selected, setSelected] = useState([]);
+    const [clicked, setClicked] = useState(false);
+    const [heightClicked, setHeightClicked] = useState(false);
+    const [rightWidth, setRightWidth] = useState('');
+    const [rightHeight, setRightHeight] = useState('');
+    const [color, setColor] = useState('');
+    const [Size, setSize] = useState('');
+    const [colors, setColors] = useState([]);
+    const [values, setValues] = useState({
+        vendor: '',
+        product: '',
+        material: '',
+        backing: '',
+        pe: '',
+        border: '',
+        cut: '',
+        packaging: '',
+        setQty: '',
+        optionalItem: '',
+        markup: '',
+        discountApply: '',
+        wLeft: '1',
+        wRight: '0',
+        wCenter: '0',
+        hLeft: '1',
+        hCenter: '0',
+        hRight: '0',
+    });
+
+    useEffect(() => {
+        console.log('Update')
+        handleSize();
+    }, [values]);
+
+    const handleChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value })
+    }
+
+    let handleWidth = (value) => {
+        let newValue = value.split('/');
+        console.log(newValue);
+        let newArr = newValue.map(item => parseInt(item));
+        let result = newArr[0] / newArr[1];
+        console.log('value', result)
+        setValues({ ...values, wCenter: result })
+        setRightWidth(result);
+
+    }
+
+    let handleHight = (value) => {
+        console.log('value', value)
+        let newValue = value.split('/');
+        console.log(newValue);
+        let newArr = newValue.map(item => parseInt(item));
+        let result = newArr[0] / newArr[1];
+        console.log('value', result)
+        setValues({ ...values, hCenter: result })
+        setRightHeight(result);
+    }
+
+    let filterOptions = (options, filter) => {
+        if (!filter) {
+            return options;
+        }
+        return options.filter(({ label }) => label && label.includes(filter));
+    }
+
+
+    let handleColors = () => {
+        ColorsArray.push(color);
+        setColors(ColorsArray);
+        setColor('');
+    }
+
+    let removeColor = (index) => {
+        let neww = ColorsArray.splice(index, 1);
+        setColors(neww);
+    }
+
+
+    let handleSize = () => {
+        const { hLeft, hCenter, wLeft, wCenter } = values;
+        console.log({ hLeft, hCenter, wLeft, wCenter })
+        var size = (((parseInt(wLeft) + parseFloat(wCenter)) + (parseInt(hLeft) + parseFloat(hCenter))) / 2);
+        // console.log('size', size);
+        var roundedhalf = Math.round(size * 2) / 2;
+        console.log('roundedhalf', roundedhalf);
+        setSize(roundedhalf);
+    }
+
+
+
 
     return (
         <>
@@ -157,6 +252,25 @@ const NewOrder = ({ fileArray, handleRemoveImg, onChangeFile, upload, handleClic
                         </div>
                     </div>
                     <Form
+                        Size={Size}
+                        color={color}
+                        values={values}
+                        checked={checked}
+                        clicked={clicked}
+                        selected={selected}
+                        heightClicked={heightClicked}
+                        setColor={setColor}
+                        setChecked={setChecked}
+                        setClicked={setClicked}
+                        removeColor={removeColor}
+                        handleHight={handleHight}
+                        handleWidth={handleWidth}
+                        setSelected={setSelected}
+                        handleChange={handleChange}
+                        handleColors={handleColors}
+                        filterOptions={filterOptions}
+                        setHeightClicked={setHeightClicked}
+                        ColorsArray={ColorsArray}
                         thread={'thread'}
                         submit={''}
                     />
