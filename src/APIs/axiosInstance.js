@@ -21,4 +21,4 @@ class AxiosInstance {
 
 }
 
-export default new AxiosInstance;
+export default new AxiosInstance();

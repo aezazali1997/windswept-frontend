@@ -9,7 +9,8 @@ var ColorsArray = [];
 
 const NewOrder = ({ fileArray, handleRemoveImg, onChangeFile, upload, handleClick }) => {
 
-
+    const [order, setOrders] = useState()
+    const [data, setData] = useState([]);
     const [checked, setChecked] = useState(false);
     const [selected, setSelected] = useState([]);
     const [clicked, setClicked] = useState(false);
@@ -39,15 +40,21 @@ const NewOrder = ({ fileArray, handleRemoveImg, onChangeFile, upload, handleClic
         hCenter: '0',
         hRight: '0',
     });
+    const [errors, setErrors] = useState({
+        qty: true,
+        product: true,
+        material: true,
+        backing: true,
+        pe: true
+    });
 
     useEffect(() => {
-        console.log('Update')
+
         handleSize();
     }, [values]);
 
-    const handleChange = (e) => {
-        setValues({ ...values, [e.target.name]: e.target.value })
-    }
+    console.log("values", values);
+
 
     let handleWidth = (value) => {
         let newValue = value.split('/');
@@ -70,12 +77,39 @@ const NewOrder = ({ fileArray, handleRemoveImg, onChangeFile, upload, handleClic
         setValues({ ...values, hCenter: result })
         setRightHeight(result);
     }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'product' || name === "material" || name === "pe" || name === "backing") {
+            if (value === '') {
+                setErrors({ ...errors, [name]: true })
+                setValues({ ...values, [name]: value })
+            }
+            else {
+                setErrors({ ...errors, [name]: false })
+                setValues({ ...values, [name]: value })
+            }
+        }
+        else {
+            setValues({ ...values, [name]: value })
+        }
+    }
 
     let filterOptions = (options, filter) => {
         if (!filter) {
             return options;
         }
         return options.filter(({ label }) => label && label.includes(filter));
+    }
+    let handleQty = (values) => {
+        console.log('values', values);
+        if (_.isEmpty(values) === true) {
+            setErrors({ ...errors, qty: true })
+        }
+        else {
+            setErrors({ ...errors, qty: false })
+        }
+        let value = values.filter(({ value }) => value);
+        setSelected(value);
     }
 
 
@@ -172,27 +206,27 @@ const NewOrder = ({ fileArray, handleRemoveImg, onChangeFile, upload, handleClic
                         <div className="flex flex-col w-full md:w-3/12 px-3 py-2 justify-start">
                             {/* <p className="text-left sm:text-right text-sm align-top">Vendor</p> */}
                         </div>
-                        <div className="flex flex-col w-full justify-center items-center md:w-9/12 px-3 py-2">
-                            <div className="flex flex-col w-full sm:w-auto space-y-2 px-3">
+                        <div className="flex flex-col w-full justify-center items-center md:w-9/12 ">
+                            <div className="flex flex-col w-full  space-y-2 px-3">
                                 <Input
                                     type={"text"}
                                     name={"order"}
                                     placeholder={'Enter a name for your order...'}
-                                    classNames={"border placeholder-center content-center border-gray-400 p-2 text-sm w-full sm:w-80 focus:outline-none focus:ring-1 focus:ring-gray-600"}
+                                    classNames={"input"}
 
                                 />
                                 <Input
                                     type={"text"}
                                     name={"order"}
                                     placeholder={'Enter Customer Reference...'}
-                                    classNames={"border border-gray-400 p-2 text-sm w-auto sm:w-80 focus:outline-none focus:ring-1 focus:ring-gray-600"}
+                                    classNames={"input"}
 
                                 />
                                 <Input
                                     type={"text"}
                                     name={"order"}
                                     placeholder={'Select requested completion date...'}
-                                    classNames={"border border-gray-400 p-2 text-sm w-auto sm:w-80 focus:outline-none focus:ring-1 focus:ring-gray-600"}
+                                    classNames={"input"}
 
                                 />
                             </div>
@@ -202,7 +236,7 @@ const NewOrder = ({ fileArray, handleRemoveImg, onChangeFile, upload, handleClic
                         <div className="flex flex-col w-full md:w-3/12 px-3 py-2  justify-start  ">
                             {/* <p className="text-left sm:text-right text-sm align-top">Vendor</p> */}
                         </div>
-                        <div className="flex flex-col w-full md:w-9/12 px-3 py-2">
+                        <div className="flex flex-col w-full md:w-9/12 ">
                             <div className="flex flex-col w-full">
                                 <div className={`py-4  ${_.isEmpty(fileArray) !== true ? 'grid grid-cols-2 sm:grid-cols-4 gap-2' : 'flex justify-center'} w-full`}>
                                     {
@@ -239,19 +273,20 @@ const NewOrder = ({ fileArray, handleRemoveImg, onChangeFile, upload, handleClic
                                         onClick={handleClick}
                                         label={(
                                             <>
-                                                <p className="text-sm font-white font-bold">Add Image(s)</p>&nbsp;
+                                                <p className="text-sm  font-white font-bold">Add Image(s)</p>&nbsp;
                                                 <svg className="w-4 h-4 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                                                 </svg>
                                             </>
                                         )}
-                                        classNames="p-2 w-auto flex items-center bg-red-600 border text-white hover:bg-white hover:text-red-600 hover:border-red-600"
+                                        classNames="p-2 w-auto flex mb-8 items-center bg-red-600 border text-white hover:bg-white hover:text-red-600 hover:border-red-600"
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <Form
+                        errors={errors}
                         Size={Size}
                         color={color}
                         values={values}

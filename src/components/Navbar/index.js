@@ -35,7 +35,12 @@ const Navbar = ({ toggle, isOpen, login, handleLogin, handleLogout }) => {
                             <NavLink to='/terms-of-services' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
                                 Terms of Services
                             </NavLink>
-                            <button onClick={handleLogout} className='p-4 font-sans nav-link nav-link-ltr'>
+                            {/* <NavLink to="/" onClick={handleLogout} className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
+                                Logout
+                            </NavLink> */}
+                            <button type="button" onClick={handleLogout}
+                                className="p-4 font-weight: 600px;
+                                uppercase font-sans text-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none ">
                                 Logout
                             </button>
                         </>

@@ -20,14 +20,7 @@ let useQuery = () => {
 const Dashboard = (props) => {
 
     let query = useQuery();
-
     const [images, setImages] = useState([]);
-    // const [checked, setChecked] = useState(false);
-    // const [selected, setSelected] = useState([]);
-    // const [clicked, setClicked] = useState(false);
-    // const [heightClicked, setHeightClicked] = useState(false);
-    // const [rightWidth, setRightWidth] = useState('');
-    // const [rightHeight, setRightHeight] = useState('');
     const [color, setColor] = useState('');
     const [colors, setColors] = useState([]);
     const [showNewOrder, setShowNewOrder] = useState(true);
@@ -51,21 +44,6 @@ const Dashboard = (props) => {
 
     let upload = useRef();
 
-    // let handleWidth = (value) => {
-    //     setRightWidth(value);
-    // }
-    // let handleHight = (value) => {
-    //     setRightHeight(value);
-    // }
-
-    // let filterOptions = (options, filter) => {
-    //     if (!filter) {
-    //         return options;
-    //     }
-    //     return options.filter(({ label }) => label && label.includes(filter));
-    // }
-
-
     let onChangeFile = (event) => {
         fileObj.push(event.target.files)
         for (let i = 0; i < fileObj[0].length; i++) {
@@ -82,17 +60,6 @@ const Dashboard = (props) => {
         let neww = fileArray.splice(index, 1);
         setImages(neww);
     }
-
-    // let handleColors = () => {
-    //     ColorsArray.push(color);
-    //     setColors(ColorsArray);
-    //     setColor('');
-    // }
-
-    // let removeColor = (index) => {
-    //     let neww = ColorsArray.splice(index, 1);
-    //     setColors(neww);
-    // }
 
     let handleNewOrder = (id) => {
         props.history.push(`/dashboard?active=${id}`)
@@ -132,28 +99,10 @@ const Dashboard = (props) => {
             case 'new-order':
                 return <NewOrder
                     fileArray={fileArray}
-                    // ColorsArray={ColorsArray}
                     handleRemoveImg={handleRemoveImg}
                     onChangeFile={onChangeFile}
                     upload={upload}
                     handleClick={handleClick}
-                // selected={selected}
-                // setChecked={setChecked}
-                // setClicked={setClicked}
-                // setColor={setColor}
-                // setSelected={setSelected}
-                // filterOptions={filterOptions}
-                // checked={checked}
-                // clicked={clicked}
-                // setHeightClicked={setHeightClicked}
-                // handleWidth={handleWidth}
-                // handleHight={handleHight}
-                // heightClicked={heightClicked}
-                // handleColors={handleColors}
-                // setColors={setColors}
-                // removeColor={removeColor}
-                // color={color}
-
                 />;
             case 'open-order':
                 return <OpenOrder />;

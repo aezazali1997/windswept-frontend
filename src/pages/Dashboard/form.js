@@ -4,9 +4,10 @@ import { multiQty, size } from '../../utils/consts';
 
 const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleSubmit, handleWidth,
     selected, setSelected, setChecked, setClicked, setHeightClicked, filterOptions, values, checked,
-    clicked, heightClicked, Size, setColor, color, removeColor, ColorsArray, handleQty
+    clicked, heightClicked, Size, setColor, color, removeColor, ColorsArray, handleQty, errors, loading
 }) => {
 
+    const { product, material, pe, backing, qty } = errors;
     return (
         <>
             <div className="flex flex-col sm:flex-row">
@@ -24,10 +25,11 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Product</p>
+                    <p className="text-left sm:text-right text-sm align-top">Product <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" onChange={handleChange} name="product" autocomplete="country" className="select">
+                    <select id="country" onChange={handleChange} name="product" autocomplete="country"
+                        className={`select ${product ? 'border-red-500' : 'border-gray-500'}`}>
                         <option value="">select...</option>
                         <option value="Emblem">Emblems</option>
                         <option value="Peel-N-Stick Embroidery">Peel-N-Stick Embroidery</option>
@@ -43,10 +45,11 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Material</p>
+                    <p className="text-left sm:text-right text-sm align-top">Material <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="material" onChange={handleChange} autocomplete="country" className=" select">
+                    <select id="country" name="material" onChange={handleChange} autocomplete="country"
+                        className={`select ${material ? 'border-red-500' : 'border-gray-500'}`}>
                         <option value="">select...</option>
                         <option value="Fully_Embrod">Full Embriodery</option>
                         <option value="Twill">Twill</option>
@@ -61,10 +64,11 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Backing</p>
+                    <p className="text-left sm:text-right text-sm align-top">Backing <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="backing" autocomplete="country" onChange={handleChange} className="select">
+                    <select id="country" name="backing" autocomplete="country" onChange={handleChange}
+                        className={`select ${backing ? 'border-red-500' : 'border-gray-500'}`}>
                         <option value="">select...</option>
                         <option value="plastic">Plastic (sew on)</option>
                         <option value="heatseal">Heat Seal (iron on)</option>
@@ -77,10 +81,11 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Percent Embriodery</p>
+                    <p className="text-left sm:text-right text-sm align-top">Percent Embriodery <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="pe" autocomplete="country" onChange={handleChange} className=" select">
+                    <select id="country" name="pe" autocomplete="country" onChange={handleChange}
+                        className={`select ${pe ? 'border-red-500' : 'border-gray-500'}`}>
                         <option value="">select...</option>
                         <option value="100">100%</option>
                         <option value="85">85%</option>
@@ -155,11 +160,11 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Select Qty</p>
+                    <p className="text-left sm:text-right text-sm align-top">Select Qty <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <MultiSelect
-                        className="text-black"
+                        className={`border rounded-md ${qty ? 'border-red-500' : 'border-gray-50'}`}
                         value={selected}
                         options={multiQty}
                         selected={selected}
@@ -196,7 +201,7 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2 justify-start">
                     <p className="text-left sm:text-right text-sm align-top">Discount Apply</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
@@ -335,7 +340,7 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <div class="flex w-full border-gray-400 border">
-                        <input onChange={e => setColor(e.target.value)} value={color} className="w-full p-2 focus:outline-none " type="text" placeholder="Enter Color" />
+                        <input onChange={e => setColor(e.target.value)} value={color} className="w-full p-2 focus:outline-none " type="text" placeholder="Enter Color Code" />
                         <button onClick={handleColors} className="border bg-red-600 hover:bg-red-700  text-white p-2 w-1/4">
                             <p className="font-medium text-sm">Add Color</p>
                         </button>
@@ -385,7 +390,7 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                             </div>
                         </div>
                     </div>
-                    {
+                    {/* {
                         submit ?
                             <div className="flex flex-row w-full mt-7">
                                 <button type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
@@ -397,10 +402,12 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                                     id="menu-button"
                                     aria-expanded="true"
                                     aria-haspopup="true"
-                                >Submit</button>
+                                >Submit  {loading &&
+                                    <div className=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>}
+                                </button>
                             </div>
                             : ''
-                    }
+                    } */}
                 </div>
             </div>
 

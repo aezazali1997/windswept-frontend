@@ -4,7 +4,6 @@
 
 /* login-signup input fields */
 
-@import './imageUpload.css';
 @import './hamburger.css';
 @import './scrollUp.css';
 @import './navbar.css';
@@ -62,14 +61,14 @@
 }
 
 .select {
-  @apply w-full border border-gray-400 bg-gray-50 rounded-md  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-400 sm:text-sm;
+  @apply w-full border bg-gray-50 rounded-md py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white sm:text-sm;
 }
 /* Spinner */
 
 .loader {
-  border-top-color: #3498db;
-  -webkit-animation: spinner 1.5s linear infinite;
-  animation: spinner 1.5s linear infinite;
+  border-top-color: #dc2626;
+  -webkit-animation: spinner 0.5s linear infinite;
+  animation: spinner 0.5s linear infinite;
 }
 .card:hover {
   box-shadow: 5px 5px 10px #c5c5c5, -5px -5px 10px #c5c5c5;
@@ -89,7 +88,7 @@
 }
 
 .nav-link:hover {
-  color: red;
+  color: #dc2626;
 }
 
 .nav-link::before {
@@ -97,7 +96,7 @@
   height: 3px;
   content: '';
   position: absolute;
-  background-color: red;
+  background-color: #dc2626;
 }
 
 .nav-link-ltr::before {
@@ -109,7 +108,7 @@
   width: 100%;
 }
 .active {
-  color: red;
+  color: #dc2626;
 }
 .active::before {
   width: 100%;

@@ -10,7 +10,7 @@ const InputField = ({ label, inputClass, svg, name, type, value, onChange, onBlu
                 onChange={onChange}
                 onBlur={onBlur}
                 placeholder="name@example.com"
-                autoComplete="off" />
+                autoComplete="on" />
             <label
                 htmlFor="username"
                 className="absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
