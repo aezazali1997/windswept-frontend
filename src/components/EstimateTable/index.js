@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 class EstimateChart extends Component {
     render() {
 
-        const { values, data, selected, Size } = this.props;
+        const { values, data, selected, Size, apiError } = this.props;
 
         return (
             <table className="mt-8 md:mt-0 mx-auto" >
@@ -39,34 +39,47 @@ class EstimateChart extends Component {
                     <td className=" px-3 w-56 font-bold text-right">Quote</td>
                     {/* <td className="border px-8 py-4">Neal Garrison</td> */}
                 </tr>
-                {/* <tr>
-                    <td colSpan={2}> */}
-                <tr className="border">
-                    <td className=" left-estimate-table  text-right font-medium border-r">PC:</td>
-                    <td className=" left-estimate-table  text-left font-medium ">Unit Price:</td>
-                </tr>
-                {
-                    data ?
-                        selected.map(({ value }) => (
-                            data.map(({ count, unitPrice }, index) => (
-                                value === count.toString() ?
+                <tr>
+                    <td className="left-estimate-table" colSpan={2}>
+                        <div className="flex flex-col justify-center items-center w-full">
+                            {
+                                apiError ?
+                                    <p className="text-center font-medium py-1 px-1 border">{apiError}</p>
+                                    :
+                                    <>
+                                        <div className="flex w-full justify-center">
+                                            <div className="flex-col w-1/3 border">
+                                                <p className="text-center font-medium ">PC</p>
+                                            </div>
+                                            <div className="flex-col w-1/3 border">
+                                                <p className="text-center font-medium ">Unit Price</p>
+                                            </div>
+                                        </div>
+                                        {
+                                            data ?
+                                                selected.map(({ value }) => (
+                                                    data.map(({ count, unitPrice }, index) => (
+                                                        value === count.toString() ?
+                                                            <div className="flex w-full justify-center">
+                                                                <div className="flex-col w-1/3 border">
+                                                                    <p className="text-center ">{count}</p>
+                                                                </div>
+                                                                <div className="flex-col w-1/3 border">
+                                                                    <p className="text-center ">{unitPrice}</p>
+                                                                </div>
+                                                            </div>
+                                                            : ''
+                                                    ))
+                                                ))
 
-                                    <tr key={index} className="border">
-                                        <td className=" left-estimate-table text-right border-r">
-                                            {value}
-                                        </td>
-                                        <td className=" left-estimate-table text-left">
-                                            {unitPrice}
-                                        </td>
-                                    </tr>
-                                    : ''
-                            ))
-                        ))
-                        :
-                        ''
-                }
-                {/* </td>
-                </tr> */}
+                                                :
+                                                ''
+                                        }
+                                    </>
+                            }
+                        </div>
+                    </td>
+                </tr>
                 <tr>
                     <td className=" left-estimate-table text-right">Product Name:</td>
                     <td className=" left-estimate-table">{values.product}</td>

@@ -55,6 +55,16 @@ export const ContactFormSchema = Yup.object().shape({
         .required('This field is required'),
 });
 
+export const OrderFormSchema = Yup.object().shape({
+    title: Yup.string()
+        .required('This field is required'),
+    reference: Yup.string()
+        .required('This field is required'),
+    date: Yup.string()
+        .required('This field is required'),
+
+});
+
 
 
 export const ForgetPasswordSchema = Yup.object().shape({

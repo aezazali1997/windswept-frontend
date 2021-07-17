@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import MultiSelect from "react-multi-select-component";
 import { multiQty, size } from '../../utils/consts';
 
-const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleSubmit, handleWidth,
+const From = ({ thread, handleChange, handleColors, handleHight, handleSubmit, handleWidth,
     selected, setSelected, setChecked, setClicked, setHeightClicked, filterOptions, values, checked,
-    clicked, heightClicked, Size, setColor, color, removeColor, ColorsArray, handleQty, errors, loading
-}) => {
+    clicked, heightClicked, Size, setColor, color, removeColor, ColorsArray, handleQty, errors, loading, orderNo }) => {
 
     const { product, material, pe, backing, qty } = errors;
+    useEffect(() => {
+        console.log('formValues', values, orderNo)
+    })
     return (
         <>
             <div className="flex flex-col sm:flex-row">
@@ -16,10 +18,11 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <input
+                        value={values.vendor}
                         className="input"
                         type="text"
                         name="vendor"
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e, orderNo)}
                     />
                 </div>
             </div>
@@ -28,7 +31,7 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Product <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" onChange={handleChange} name="product" autocomplete="country"
+                    <select id="country" value={values.product} onChange={(e) => handleChange(e, orderNo)} name="product"
                         className={`select ${product ? 'border-red-500' : 'border-gray-500'}`}>
                         <option value="">select...</option>
                         <option value="Emblem">Emblems</option>
@@ -48,7 +51,9 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Material <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="material" onChange={handleChange} autocomplete="country"
+                    <select id="country" name="material"
+                        value={values.material}
+                        onChange={(e) => handleChange(e, orderNo)}
                         className={`select ${material ? 'border-red-500' : 'border-gray-500'}`}>
                         <option value="">select...</option>
                         <option value="Fully_Embrod">Full Embriodery</option>
@@ -67,7 +72,9 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Backing <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="backing" autocomplete="country" onChange={handleChange}
+                    <select id="country" name="backing"
+                        value={values.backing}
+                        onChange={(e) => handleChange(e, orderNo)}
                         className={`select ${backing ? 'border-red-500' : 'border-gray-500'}`}>
                         <option value="">select...</option>
                         <option value="plastic">Plastic (sew on)</option>
@@ -84,7 +91,9 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Percent Embriodery <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="pe" autocomplete="country" onChange={handleChange}
+                    <select id="country" name="pe"
+                        value={values.pe}
+                        onChange={(e) => handleChange(e, orderNo)}
                         className={`select ${pe ? 'border-red-500' : 'border-gray-500'}`}>
                         <option value="">select...</option>
                         <option value="100">100%</option>
@@ -101,7 +110,9 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Border</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="border" autocomplete="country" onChange={handleChange} className=" select">
+                    <select id="country" name="border"
+                        value={values.border}
+                        onChange={(e) => handleChange(e, orderNo)} className=" select">
                         <option value="">select...</option>
                         <option value="Merrowed">Merrowed</option>
                         <option value="Heat Cut">Heat Cut</option>
@@ -114,7 +125,9 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Cut</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="cut" autocomplete="country" onChange={handleChange} className="select">
+                    <select id="country" name="cut"
+                        value={values.cut}
+                        onChange={(e) => handleChange(e, orderNo)} className="select">
                         <option value="">select...</option>
                         <option value="1">Round</option>
                         <option value="Square">Square</option>
@@ -129,7 +142,7 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                             <p className="text-left sm:text-right text-sm align-top">Quantity</p>
                         </div>
                         <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                            <select id="country" name="country" autocomplete="country" className=" select">
+                            <select id="country" name="country"  className=" select">
                                 <option value="">select...</option>
                                 <option value="50">50</option>
                                 <option value="100">100</option>
@@ -148,7 +161,9 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Packaging</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="packaging" onChange={handleChange} autocomplete="country" className=" select">
+                    <select id="country" name="packaging"
+                        value={values.packaging}
+                        onChange={(e) => handleChange(e, orderNo)} className=" select">
                         <option value="">select...</option>
                         <option value="None">None</option>
                         <option value="Backer Card">Backer Card</option>
@@ -165,10 +180,10 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <MultiSelect
                         className={`border rounded-md ${qty ? 'border-red-500' : 'border-gray-50'}`}
-                        value={selected}
+                        value={values.setQty}
                         options={multiQty}
                         selected={selected}
-                        onChange={handleQty}
+                        onChange={(values) => handleQty(values, orderNo)}
                         labelledBy={"Select"}
                         filterOptions={filterOptions}
                     />
@@ -180,7 +195,8 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <input
-                        onChange={handleChange}
+                        value={values.optionalItem}
+                        onChange={(e) => handleChange(e, orderNo)}
                         className="input"
                         name="optionalItem"
                         type="text"
@@ -193,7 +209,8 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <input
-                        onChange={handleChange}
+                        value={values.markup}
+                        onChange={(e) => handleChange(e, orderNo)}
                         className="input"
                         name="markup"
                         type="text"
@@ -205,7 +222,11 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Discount Apply</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" checked={checked} onClick={(e) => setChecked(e.target.checked)} />
+                    <input type="checkbox"
+                        name="discount"
+                        class="form-checkbox h-4 w-4 text-blue-600"
+                        checked={values.discount}
+                        onChange={(e) => handleChange(e, orderNo)} />
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
@@ -214,7 +235,7 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <div className="flex flex-row border border-gray-400 w-full sm:w-1/2">
-                        <select id="wLeft" defaultValue={values.wLeft} name="wLeft" onChange={handleChange} autocomplete="country" className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
+                        <select id="wLeft" defaultValue={values.wLeft} name="wLeft" onChange={(e) => handleChange(e, orderNo)} className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
                             <option value="1">1"</option>
                             <option value="2">2"</option>
                             <option value="3">3"</option>
@@ -231,37 +252,14 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                             value={values.wCenter}
                             readOnly
                             type="text" />
-                        <div className="relative inline-block text-center">
-                            <div>
-                                <button onClick={() => setClicked(!clicked)} type="button" class="inline-flex bg-red-600 justify-center w-full shadow-sm px-2 py-3 text-sm font-medium text-gray-700 hover:bg-red-700 "
-                                    id="menu-button"
-                                    aria-expanded="true"
-                                    aria-haspopup="true"
-                                >
-                                    <svg className="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
+                        <select id="wRight" defaultValue={values.wRight} name="wRight" onChange={(e) => handleChange(e, orderNo)} className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
                             {
-                                clicked ? (
-                                    <div className="origin-top-center absolute shadow-lg border z-50 border-black right-0 mt-0 w-9 h-46  bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                                        <div className="py-0" role="none">
-                                            {
-                                                size && size.map((value, index) => (
-                                                    <p key={index} onClick={() => handleWidth(value)} className={`text-gray-700 py-1 px-1 block text-xs hover:bg-blue-500 text-left hover:text-white hover:cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0`}>
-                                                        {value}
-                                                    </p>
-
-                                                ))
-                                            }
-
-                                        </div>
-                                    </div>
-                                )
-                                    : ''
+                                size && size.map((value, index) => (
+                                    <option className="bg-white text-black" key={index} value={value}>{`${value}"`}</option>
+                                ))
                             }
-                        </div>
+                        </select>
+
                     </div>
                 </div>
             </div>
@@ -271,7 +269,7 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <div className="flex flex-row border border-gray-400 w-full sm:w-1/2">
-                        <select id="hLeft" defaultValue={values.hLeft} onChange={handleChange} name="hLeft" autocomplete="country" className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
+                        <select id="hLeft" defaultValue={values.hLeft} onChange={(e) => handleChange(e, orderNo)} name="hLeft" className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
                             <option value="1">1"</option>
                             <option value="2">2"</option>
                             <option value="3">3"</option>
@@ -288,39 +286,13 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                             name='hCenter'
                             value={values.hCenter}
                             type="text" />
-                        <div className="relative inline-block text-center">
-                            <div>
-                                <button onClick={() => setHeightClicked(!heightClicked)}
-                                    type="button"
-                                    className="inline-flex bg-red-600 justify-center w-full shadow-sm px-2 py-3 text-sm font-medium text-gray-700 hover:bg-red-700 "
-                                    id="menu-button"
-                                    aria-expanded="true"
-                                    aria-haspopup="true"
-                                >
-                                    <svg className="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
+                        <select id="wRight" defaultValue={values.hRight} name="hRight" onChange={(e) => handleChange(e, orderNo)} className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
                             {
-                                heightClicked ? (
-                                    <div className="origin-top-center absolute shadow-lg border border-black right-0 mt-0 w-9 h-46  bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                                        <div className="py-0" role="none">
-                                            {
-                                                size && size.map((value, index) => (
-                                                    <p key={index} onClick={() => handleHight(value)} className={`text-gray-700 py-1 px-1 block text-xs hover:bg-blue-500 text-left hover:text-white hover:cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0`}>
-                                                        {value}
-                                                    </p>
-
-                                                ))
-                                            }
-
-                                        </div>
-                                    </div>
-                                )
-                                    : ''
+                                size && size.map((value, index) => (
+                                    <option className="bg-white text-black" key={index} value={value}>{`${value}"`}</option>
+                                ))
                             }
-                        </div>
+                        </select>
 
                     </div>
                 </div>
@@ -345,23 +317,19 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                             <p className="font-medium text-sm">Add Color</p>
                         </button>
                     </div>
-                    {
-                        thread ?
-                            <div className="flex flex-row w-full">
-                                <button type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
-                                    id="menu-button"
-                                    aria-expanded="true"
-                                    aria-haspopup="true"
-                                >PMS</button>
-                                <button type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium hover:bg-red-700 focus:outline-none"
-                                    id="menu-button"
-                                    aria-expanded="true"
-                                    aria-haspopup="true"
-                                >Thread</button>
-                            </div>
-                            :
-                            ''
-                    }
+                    <div className="flex flex-row w-full">
+                        <button type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
+                            id="menu-button"
+                            aria-expanded="true"
+                            aria-haspopup="true"
+                        >PMS</button>
+                        <button type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium hover:bg-red-700 focus:outline-none"
+                            id="menu-button"
+                            aria-expanded="true"
+                            aria-haspopup="true"
+                        >Thread</button>
+                    </div>
+
                     <div className="h-56 w-full border overflow-y-scroll border-gray-400">
 
                         <div className="align-middle inline-block min-w-full">
@@ -390,24 +358,7 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                             </div>
                         </div>
                     </div>
-                    {/* {
-                        submit ?
-                            <div className="flex flex-row w-full mt-7">
-                                <button type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
-                                    id="menu-button"
-                                    aria-expanded="true"
-                                    aria-haspopup="true"
-                                >Save As Draft</button>
-                                <button onClick={handleSubmit} type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium hover:bg-red-700 focus:outline-none"
-                                    id="menu-button"
-                                    aria-expanded="true"
-                                    aria-haspopup="true"
-                                >Submit  {loading &&
-                                    <div className=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>}
-                                </button>
-                            </div>
-                            : ''
-                    } */}
+
                 </div>
             </div>
 
@@ -415,4 +366,4 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
     )
 }
 
-export default Form;
+export default From;

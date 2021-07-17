@@ -3,7 +3,7 @@ import _ from 'lodash';
 import swal from 'sweetalert';
 import { useReactToPrint } from 'react-to-print';
 import { Helmet } from 'react-helmet';
-import Form from './Dashboard/form';
+import Form from './Dashboard/estimateForm';
 import AxiosInstance from '../APIs/axiosInstance';
 import EstimateChart from '../components/EstimateTable';
 
@@ -29,6 +29,7 @@ const OrderEstimate = () => {
         backing: true,
         pe: true
     });
+    const [apiError, setAPIError] = useState('');
 
     const [values, setValues] = useState({
         vendor: '',
@@ -57,18 +58,14 @@ const OrderEstimate = () => {
     });
 
     useEffect(() => {
+        let size = handleSize();
+        handleSubmit(size);
+    }, [values, errors, values, selected, colors]);
+
+
+    useEffect(() => {
         handleSize();
-    }, [values]);
-
-    console.log('values', values);
-
-    useEffect(() => {
-    }, [data, errors])
-
-    useEffect(() => {
-        handleSubmit();
-    }, [values, selected])
-
+    }, [data])
 
     const enableLoading = () => {
         setLoading(true);
@@ -77,8 +74,6 @@ const OrderEstimate = () => {
     const disableLoading = () => {
         setLoading(false);
     };
-
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -97,37 +92,33 @@ const OrderEstimate = () => {
         }
     }
 
-    let handleWidth = (value) => {
-        if (value === '0') {
-            setValues({ ...values, wCenter: parseInt(value) })
-            setRightWidth(parseInt(value))
-            handleSubmit();
-        }
-        else {
-            let newValue = value.split('/');
-            let newArr = newValue.map(item => parseInt(item));
-            let result = newArr[0] / newArr[1];
-            setValues({ ...values, wCenter: result })
-            setRightWidth(result);
-            handleSubmit();
-        }
-    }
+    // let handleWidth = (value) => {
+    //     if (value === '0') {
+    //         setValues({ ...values, wCenter: parseInt(value) })
+    //         setRightWidth(parseInt(value))
+    //     }
+    //     else {
+    //         let newValue = value.split('/');
+    //         let newArr = newValue.map(item => parseInt(item));
+    //         let result = newArr[0] / newArr[1];
+    //         setValues({ ...values, wCenter: result })
+    //         setRightWidth(result);
+    //     }
+    // }
 
-    let handleHight = (value) => {
-        if (value === '0') {
-            setValues({ ...values, hCenter: parseInt(value) })
-            setRightHeight(parseInt(value))
-            handleSubmit();
-        }
-        else {
-            let newValue = value.split('/');
-            let newArr = newValue.map(item => parseInt(item));
-            let result = newArr[0] / newArr[1];
-            setValues({ ...values, hCenter: result })
-            setRightHeight(result);
-            handleSubmit();
-        }
-    }
+    // let handleHight = (value) => {
+    //     if (value === '0') {
+    //         setValues({ ...values, hCenter: parseInt(value) })
+    //         setRightHeight(parseInt(value))
+    //     }
+    //     else {
+    //         let newValue = value.split('/');
+    //         let newArr = newValue.map(item => parseInt(item));
+    //         let result = newArr[0] / newArr[1];
+    //         setValues({ ...values, hCenter: result })
+    //         setRightHeight(result);
+    //     }
+    // }
 
     let filterOptions = (options, filter) => {
         if (!filter) {
@@ -161,15 +152,15 @@ const OrderEstimate = () => {
         }
     }
 
-
     let handleSize = () => {
         const { hLeft, hCenter, wLeft, wCenter } = values;
         var size = (((parseInt(wLeft) + parseFloat(wCenter)) + (parseInt(hLeft) + parseFloat(hCenter))) / 2);
         var roundedhalf = Math.round(size * 2) / 2;
         setSize(roundedhalf);
+        return roundedhalf
     }
 
-    let handleSubmit = async () => {
+    let handleSubmit = async (size) => {
         const { product, material, backing, pe } = values;
 
         if (product === '' || material === '' || backing === '' || pe === '' || _.isEmpty(selected) === true) {
@@ -187,7 +178,7 @@ const OrderEstimate = () => {
                 product: values.product,
                 material: values.material,
                 backing: values.backing,
-                size: Size,
+                size: size,
                 pc: parseInt(values.pe),
                 addColor: ColorsArray.length
             }
@@ -203,6 +194,7 @@ const OrderEstimate = () => {
                             buttons: false,
                             timer: 3000,
                         })
+                        setAPIError('Custom Quote will be given in 1 - 2 days')
                         setData([]);
                         disableLoading();
                     }
@@ -214,6 +206,7 @@ const OrderEstimate = () => {
                             buttons: false,
                             timer: 3000,
                         })
+                        setAPIError('');
                         setData([]);
                         disableLoading();
                     }
@@ -225,6 +218,7 @@ const OrderEstimate = () => {
                             buttons: false,
                             timer: 3000,
                         })
+                        setAPIError('');
                         setData(data);
                         disableLoading();
 
@@ -255,6 +249,7 @@ const OrderEstimate = () => {
                     Size={Size}
                     selected={selected}
                     values={values}
+                    apiError={apiError}
                 />
                 <table>
                     <tr>
@@ -290,8 +285,8 @@ const OrderEstimate = () => {
                     setChecked={setChecked}
                     setClicked={setClicked}
                     removeColor={removeColor}
-                    handleHight={handleHight}
-                    handleWidth={handleWidth}
+                    // handleHight={handleHight}
+                    // handleWidth={handleWidth}
                     setSelected={setSelected}
                     handleChange={handleChange}
                     handleColors={handleColors}
