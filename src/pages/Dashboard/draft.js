@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react'
 import { isEmpty } from 'lodash';
+import { useSelector } from 'react-redux';
 import NewOrder from './newOrder';
 
-const OpenOrder = () => {
+const Draft = () => {
 
     const orders = useSelector(({ order: { order } }) => order);
     console.log(orders)
 
     const [selectedOrder, setSelectedOrder] = useState(undefined);
+    const [readOnly, setReadOnly] = useState(true);
 
     let handleClick = (order) => {
         setSelectedOrder(order)
@@ -17,16 +18,30 @@ const OpenOrder = () => {
         setSelectedOrder(undefined)
     }
 
+    let toggleEdit = () => {
+        console.log('toggled');
+        setReadOnly(!readOnly)
+    }
 
     return (
         selectedOrder ?
             <>
-                <span onClick={goBacktoDetail} className="px-10 cursor-pointer">
-                    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-                    </svg>
-                </span>
-                <NewOrder readOnly={true} selectedOrder={selectedOrder} />
+                <div className="flex flex-row w-full justify-between px-10">
+                    <span onClick={goBacktoDetail} className="cursor-pointer">
+                        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                        </svg>
+                    </span>
+                    <button onClick={toggleEdit} type="button" className="inline-flex bg-red-600 justify-center w-auto items-center
+            border border-gray-300 shadow-sm px-2 py-2 rounded-md text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
+                    >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg> &nbsp;
+                        Edit
+                    </button>
+                </div>
+                <NewOrder readOnly={readOnly} selectedOrder={selectedOrder} />
             </>
             :
             <div className="flex flex-col w-full h-full mb-4 space-y-4 px-3">
@@ -69,5 +84,4 @@ const OpenOrder = () => {
             </div>
     )
 }
-
-export default OpenOrder;
+export default Draft;

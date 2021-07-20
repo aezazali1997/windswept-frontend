@@ -6,7 +6,7 @@ const NavDropdown = ({ isOpen, toggle, handleLogout }) => {
         <div
             className={
                 isOpen
-                    ? 'grid grid-rows-4  w-full text-center items-center bg-white border-b-1 pb-5 shadow-lg z-50'
+                    ? 'grid grid-rows-4 absolute  w-full text-center items-center bg-white border-b-1 pb-5 shadow-lg z-50'
                     : 'hidden'
             }
             onClick={toggle}

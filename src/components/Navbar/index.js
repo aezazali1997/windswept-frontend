@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { Sling as Hamburger } from 'hamburger-react'
 import Button from '../Button';
 
-const Navbar = ({ toggle, isOpen, login, handleLogin, handleLogout }) => {
+const Navbar = ({ toggle, isOpen, login, handleLogout }) => {
     return (
         <nav
             className='flex justify-between items-center h-16 text-black relative shadow-md font-mono navbar'

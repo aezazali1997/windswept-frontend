@@ -7,10 +7,8 @@ import Button from './button';
 import NewOrder from './newOrder';
 import OpenOrder from './openOrder';
 import ClosedOrder from './closedOrder';
+import Draft from './draft';
 
-var fileObj = [];
-var fileArray = [];
-var ColorsArray = [];
 
 let useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -20,7 +18,7 @@ let useQuery = () => {
 const Dashboard = (props) => {
 
     let query = useQuery();
-    const [images, setImages] = useState([]);
+
     const [color, setColor] = useState('');
     const [colors, setColors] = useState([]);
     const [showNewOrder, setShowNewOrder] = useState(true);
@@ -39,27 +37,10 @@ const Dashboard = (props) => {
             const active = query.get("active")
             setActiveIndex(active);
         }
-    }, [images, colors, activeIndex])
+    }, [colors, activeIndex])
 
 
-    let upload = useRef();
 
-    let onChangeFile = (event) => {
-        fileObj.push(event.target.files)
-        for (let i = 0; i < fileObj[0].length; i++) {
-            fileArray.push(URL.createObjectURL(fileObj[0][i]))
-        }
-        setImages(fileArray); /// if you want to upload latter
-    }
-
-    let handleClick = () => {
-        upload.current.click();
-    }
-
-    let handleRemoveImg = (index) => {
-        let neww = fileArray.splice(index, 1);
-        setImages(neww);
-    }
 
     let handleNewOrder = (id) => {
         props.history.push(`/dashboard?active=${id}`)
@@ -98,18 +79,14 @@ const Dashboard = (props) => {
         switch (activeIndex) {
             case 'new-order':
                 return <NewOrder
-                    fileArray={fileArray}
-                    handleRemoveImg={handleRemoveImg}
-                    onChangeFile={onChangeFile}
-                    upload={upload}
-                    handleClick={handleClick}
+                    readOnly={false}
                 />;
             case 'open-order':
                 return <OpenOrder />;
             case 'closed-order':
                 return <ClosedOrder />;
             default:
-                return '';
+                return <Draft />;
         }
     }
 
@@ -156,7 +133,7 @@ const Dashboard = (props) => {
                 </div>
                 <div className="flex flex-col md:flex-row mt-8  md:w-3/5 lg:w-2/5 items-center">
                     <div className="w-full flex shadow-md">
-                        <div class="  w-full flex border-gray-400 border">
+                        <div class="w-full flex border-gray-400 border">
                             <span class="w-auto flex justify-end items-center text-gray-500 p-2">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -164,7 +141,7 @@ const Dashboard = (props) => {
                             </span>
                             <input class="w-full p-2 focus:outline-none" type="text" placeholder="Search by Item Name / Reference / Item No" />
                         </div>
-                        <button class="bg-red-600 hover:bg-white border hover:text-red-600  hover:border-red-600   text-white p-2 pl-6 pr-6">
+                        <button class="bg-red-600 ml-2 hover:bg-red-700  text-white p-2 pl-6 pr-6">
                             <p class="text-sm font-medium">Search</p>
                         </button>
                     </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Navbar, NavDropdown } from '../components';
 import ScrollUp from '../components/scrollUp';
 
-const CustomLayout = ({ children, login, handleLogin, handleLogout }) => {
+const CustomLayout = ({ children, login, handleLogout }) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -36,14 +36,12 @@ const CustomLayout = ({ children, login, handleLogin, handleLogout }) => {
                         toggle={toggle}
                         login={login}
                         isOpen={isOpen}
-                        handleLogin={handleLogin}
                         handleLogout={handleLogout}
                     />
 
                     <NavDropdown
                         isOpen={isOpen}
                         toggle={toggle}
-                        handleLogin={handleLogin}
                         handleLogout={handleLogout}
                         login={login}
                     />

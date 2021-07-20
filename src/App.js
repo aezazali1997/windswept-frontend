@@ -9,27 +9,13 @@ import { OrderEstimate, Dashboard, Contact, ToggleTutorials, TermsOfServices } f
 function App() {
 
   const history = useHistory();
-  const [authorized, setAuthorized] = useState(null)
+  const [authorized, setAuthorized] = useState(localStorage.getItem('login'))
 
   const handleLogout = async () => {
     console.log('inLogout');
     await localStorage.clear();
-    window.location = ('/')
+    window.location = ('/login')
   }
-  const handleLogin = async () => {
-    console.log('in Login');
-    setAuthorized(await localStorage.setItem('login', true));
-    history.push('/dashboard')
-  }
-
-  useEffect(() => {
-    const login = localStorage.getItem('login')
-    console.log(login)
-    if (login === true) {
-      setAuthorized(login);
-    }
-    setAuthorized(login)
-  }, [])
 
   useEffect(() => {
 
@@ -38,7 +24,7 @@ function App() {
 
   return (
     <>
-      <CustomLayout handleLogin={handleLogin} handleLogout={handleLogout} login={authorized}>
+      <CustomLayout handleLogout={handleLogout} login={authorized}>
         {
           authorized ?
             <Switch>
@@ -51,10 +37,12 @@ function App() {
             </Switch>
             :
             <Switch>
-              <Route path='/' exact component={Login} />
-              <Route path="/signup" component={Signup} />
-              <Route path='/forget-password' component={ForgetPassword} />
-              <Redirect to="/" />
+              <Route path="/login" component={Login} />
+              {/* <Route path="/signup" component={Signup} /> */}
+              {/* <Route path='/forget-password' component={ForgetPassword} /> */}
+              <Redirect from="/" to="/login" />
+              <Redirect to="/login" />
+
             </Switch>
         }
       </CustomLayout>
