@@ -14,6 +14,7 @@ const ClosedOrder = () => {
   let handleClick = (order) => {
     setSelectedOrder(order)
   }
+
   let goBacktoDetail = () => {
     setSelectedOrder(undefined)
   }
@@ -23,21 +24,26 @@ const ClosedOrder = () => {
     setReadOnly(!readOnly)
   }
 
-  // useEffect(() => {
-
-  // }, [readOnly])
-
   return (
     selectedOrder ?
       <>
         <div className="flex flex-row w-full justify-between px-10">
-          <span onClick={goBacktoDetail} className="cursor-pointer">
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-            </svg>
-          </span>
-          <button onClick={toggleEdit} type="button" className="inline-flex bg-red-600 justify-center w-auto items-center
-            border border-gray-300 shadow-sm px-2 py-2 rounded-md text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
+          <button
+            onClick={goBacktoDetail}
+            type="button"
+            className="inline-flex bg-red-600 justify-center w-auto items-center border border-gray-300  
+            shadow-sm px-4 py-2 rounded-md text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
+            </svg> &nbsp;
+            Back
+          </button>
+          <button
+            onClick={toggleEdit}
+            type="button"
+            className="inline-flex bg-red-600 justify-center w-auto items-center border border-gray-300 
+            shadow-sm px-4 py-2 rounded-md text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

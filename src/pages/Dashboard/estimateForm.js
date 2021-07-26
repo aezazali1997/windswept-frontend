@@ -1,14 +1,15 @@
 import React from 'react';
 import 'react-dropdown/style.css';
 import MultiSelect from "react-multi-select-component";
-import { multiQty, size } from '../../utils/consts';
+import { multiQty, size, products, materials, backings, peData, borders, cutData, packagingData } from '../../utils/consts';
+import { Select } from '../../components';
 
-const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleSubmit, handleWidth,
-    selected, setSelected, setChecked, setClicked, setHeightClicked, filterOptions, values, checked,
-    clicked, heightClicked, Size, setColor, color, removeColor, ColorsArray, handleQty, errors, loading,
+const Form = ({ thread, handleChange, handleColors, selected, setChecked, filterOptions,
+    values, checked, Size, setColor, color, removeColor, ColorsArray, handleQty, errors, loading,
 }) => {
 
     const { product, material, pe, backing, qty } = errors;
+
     return (
         <>
             <div className="flex flex-col sm:flex-row">
@@ -29,19 +30,13 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Product <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" onChange={handleChange} name="product"
-                        className={`select ${product ? 'border-red-500' : 'border-gray-500'}`}>
-                        <option value="">select...</option>
-                        <option value="Emblem">Emblems</option>
-                        <option value="Peel-N-Stick Embroidery">Peel-N-Stick Embroidery</option>
-                        <option value="Embroidered KeyFobs">Embroidered KeyFobs</option>
-                        <option value="Woven 3D Puff Key Fobs">Woven 3D Puff Key Fobs</option>
-                        <option value="Embriodered Bag Tags">Embriodered Bag Tags</option>
-                        <option value="Embriodery Book Mark">Embriodery Book Mark</option>
-                        <option value="Leather">Leather</option>
-                        <option value="Lapel Pins">Lapel Pins</option>
-                        <option value="Lanyards">Lanyards</option>
-                    </select>
+                    <Select
+                        id='product'
+                        name='product'
+                        classNames={`select ${product ? 'border-red-500' : 'border-gray-500'}`}
+                        handleChange={handleChange}
+                        data={products}
+                    />
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
@@ -49,18 +44,13 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Material <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="material" onChange={handleChange}
-                        className={`select ${material ? 'border-red-500' : 'border-gray-500'}`}>
-                        <option value="">select...</option>
-                        <option value="Fully_Embrod">Full Embriodery</option>
-                        <option value="Twill">Twill</option>
-                        <option value="Dye_Fully_Emb">Dye Sub 100% Embriodered</option>
-                        <option value="Dye_Twill">Dye Sub 100% Twill</option>
-                        <option value="Woven">Woven</option>
-                        <option value="Embriodery / Dye Sublimation Combination">Embriodery / Dye Sublimation Combination</option>
-                        <option value="Embriodery / Woven Combination">Embriodery / Woven Combination</option>
-                        <option value="Faux Leather">Faux Leather</option>
-                    </select>
+                    <Select
+                        id='material'
+                        name='material'
+                        classNames={`select ${material ? 'border-red-500' : 'border-gray-500'}`}
+                        handleChange={handleChange}
+                        data={materials}
+                    />
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
@@ -68,16 +58,13 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Backing <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="backing" onChange={handleChange}
-                        className={`select ${backing ? 'border-red-500' : 'border-gray-500'}`}>
-                        <option value="">select...</option>
-                        <option value="plastic">Plastic (sew on)</option>
-                        <option value="heatseal">Heat Seal (iron on)</option>
-                        <option value="pns">Peel-N-Stick Embroidery(stick on)</option>
-                        <option value="velcro">Velcro</option>
-                        <option value="Cork(coaster)">Cork(coaster)</option>
-                        <option value="Magnet">Magnet</option>
-                    </select>
+                    <Select
+                        id='backing'
+                        name='backing'
+                        classNames={`select ${backing ? 'border-red-500' : 'border-gray-500'}`}
+                        handleChange={handleChange}
+                        data={backings}
+                    />
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
@@ -85,16 +72,13 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Percent Embriodery <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="pe" onChange={handleChange}
-                        className={`select ${pe ? 'border-red-500' : 'border-gray-500'}`}>
-                        <option value="">select...</option>
-                        <option value="100">100%</option>
-                        <option value="85">85%</option>
-                        <option value="75">75%</option>
-                        <option value="60">60%</option>
-                        <option value="50">50%</option>
-                        <option value="40">40%</option>
-                    </select>
+                    <Select
+                        id='pe'
+                        name='pe'
+                        classNames={`select ${pe ? 'border-red-500' : 'border-gray-500'}`}
+                        handleChange={handleChange}
+                        data={peData}
+                    />
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row w-full">
@@ -102,12 +86,14 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Border</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="border" onChange={handleChange} className=" select">
-                        <option value="">select...</option>
-                        <option value="Merrowed">Merrowed</option>
-                        <option value="Heat Cut">Heat Cut</option>
+                    <Select
+                        id='border'
+                        name='border'
+                        classNames={`select`}
+                        handleChange={handleChange}
+                        data={borders}
+                    />
 
-                    </select>
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
@@ -115,14 +101,13 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Cut</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="cut" onChange={handleChange} className="select">
-                        <option value="">select...</option>
-                        <option value="1">Round</option>
-                        <option value="Square">Square</option>
-                        <option value="Rectangle">Rectangle</option>
-                        <option value="Contour (cut to shape of design)">Contour (cut to shape of design)</option>
-
-                    </select>
+                    <Select
+                        id='cut'
+                        name='cut'
+                        classNames={`select`}
+                        handleChange={handleChange}
+                        data={cutData}
+                    />
                 </div>
             </div>
             {/* <div className="flex flex-col sm:flex-row w-full ">
@@ -149,14 +134,13 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Packaging</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <select id="country" name="packaging" onChange={handleChange} className=" select">
-                        <option value="">select...</option>
-                        <option value="None">None</option>
-                        <option value="Backer Card">Backer Card</option>
-                        <option value="Poly Bag and Header Card">Poly Bag and Header Card</option>
-                        <option value="Perforated Sheets">Perforated Sheets</option>
-                        <option value="Bar Code Sticker Attachments">Bar Code Sticker Attachments</option>
-                    </select>
+                    <Select
+                        id='packaging'
+                        name='packaging'
+                        classNames={`select`}
+                        handleChange={handleChange}
+                        data={packagingData}
+                    />
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
@@ -206,7 +190,12 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                     <p className="text-left sm:text-right text-sm align-top">Discount Apply</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" checked={checked} onChange={(e) => setChecked(e.target.checked)} />
+                    <input
+                        type="checkbox"
+                        class="form-checkbox h-4 w-4 text-blue-600"
+                        checked={checked}
+                        onChange={(e) => setChecked(e.target.checked)}
+                    />
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
@@ -269,7 +258,7 @@ const Form = ({ thread, submit, handleChange, handleColors, handleHight, handleS
                         <select id="wRight" defaultValue={values.hRight} name="hRight" onChange={handleChange} className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
                             {
                                 size && size.map((value, index) => (
-                                    <option className="bg-white text-black" key={index} value={value}>{`${value}"`}</option>
+                                    <option className="bg-white text-black" key={index} value={value}>{`${value}`}</option>
                                 ))
                             }
                         </select>

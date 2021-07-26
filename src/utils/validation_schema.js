@@ -62,6 +62,9 @@ export const OrderFormSchema = Yup.object().shape({
         .required('This field is required'),
     date: Yup.string()
         .required('This field is required'),
+    shipAddress: Yup.string()
+        .min(10, 'Minimum 10 characters required')
+        .required('This field is required'),
 
 });
 

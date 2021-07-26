@@ -285,8 +285,6 @@ const OrderEstimate = () => {
                     setChecked={setChecked}
                     setClicked={setClicked}
                     removeColor={removeColor}
-                    // handleHight={handleHight}
-                    // handleWidth={handleWidth}
                     setSelected={setSelected}
                     handleChange={handleChange}
                     handleColors={handleColors}

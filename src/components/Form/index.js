@@ -3,8 +3,7 @@ import MultiSelect from "react-multi-select-component";
 import { multiQty, size } from '../../utils/consts';
 
 const From = ({ handleChange, handleColors, selected, filterOptions, values,
-    setColor, color, removeColor, ColorsArray, handleQty, errors,
-    orderNo, readOnly }) => {
+    setColor, color, removeColor, handleQty, errors, orderNo, readOnly }) => {
 
     const { product, material, pe, backing, qty } = errors;
 
@@ -275,7 +274,7 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                             <select id="wRight" value={values.wRight} name="wRight" onChange={(e) => handleChange(e, orderNo)} className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
                                 {
                                     size && size.map((value, index) => (
-                                        <option className="bg-white text-black" key={index} value={value}>{`${value}"`}</option>
+                                        <option className="bg-white text-black" key={index} value={value}>{`${value}`}</option>
                                     ))
                                 }
                             </select>
@@ -309,7 +308,7 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                             <select id="wRight" value={values.hRight} name="hRight" onChange={(e) => handleChange(e, orderNo)} className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
                                 {
                                     size && size.map((value, index) => (
-                                        <option className="bg-white text-black" key={index} value={value}>{`${value}"`}</option>
+                                        <option className="bg-white text-black" key={index} value={value}>{`${value}`}</option>
                                     ))
                                 }
                             </select>
@@ -337,14 +336,14 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                                 type='button'
                                 disabled={readOnly ? true : false}
                                 onClick={handleColors}
-                                className="border bg-red-600 hover:bg-red-700 text-white p-2 w-1/4">
+                                className=" bg-red-600 hover:bg-red-700 text-white p-2 w-1/4">
                                 <p className="font-medium text-sm">Add Color</p>
                             </button>
                         </div>
                         <div className="flex flex-row w-full">
-                            <button type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
+                            <button type="button" className="inline-flex bg-red-600 justify-center w-full border-r border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
                             >PMS</button>
-                            <button type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium hover:bg-red-700 focus:outline-none"
+                            <button type="button" className="inline-flex bg-red-600 justify-center w-full  border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium hover:bg-red-700 focus:outline-none"
                             >Thread</button>
                         </div>
 
@@ -375,10 +374,11 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                                     </table>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
+
             </form>
         </>
     )

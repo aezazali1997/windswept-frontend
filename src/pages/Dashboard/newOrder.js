@@ -1,33 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 import swal from 'sweetalert';
 import { useFormik } from 'formik';
 import ReactTooltip from "react-tooltip";
-import DatePicker from 'react-date-picker';
 
 import Button from './button';
-import { Input, Form } from '../../components';
+import { Form, TextEditor } from '../../components';
 import { OrderFormSchema } from '../../utils/validation_schema';
+import { updateValues, updateErrors } from '../../utils/helpers'
 import store from '../../store';
-import { storeOrder } from '../../actions'
+import { storeOrder, storeOrderCache } from '../../actions'
 
 var fileArray = [];
 var fileObj = [];
-var ColorsArray = [];
+var fileOrderArray = [];
+var fileOrderObj = [];
 
 const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
-	const [loading, setLoading] = useState(false)
-	const [orderNo, setOrderNo] = useState(0)
-	const [images, setImages] = useState([]);
-	const [checked, setChecked] = useState(false);
-	const [selected, setSelected] = useState([]);
-	const [clicked, setClicked] = useState(false);
-	const [heightClicked, setHeightClicked] = useState(false);
-	const [color, setColor] = useState('');
-
-	const [colors, setColors] = useState([]);
-	const [values, setValues] = useState([{
+	const item = {
 		vendor: '',
 		product: '',
 		material: '',
@@ -47,36 +38,47 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		hCenter: '0',
 		hRight: '0',
 		size: 1,
-		colors: []
-	}]);
-	const [errors, setErrors] = useState({
+		colors: [],
+	};
+
+	const error = {
 		qty: true,
 		product: true,
 		material: true,
 		backing: true,
 		pe: true
-	});
+	}
 
+	const [loading, setLoading] = useState(false)
+	const [orderNo, setOrderNo] = useState(0)
+	const [images, setImages] = useState([]);
+	const [orderImages, setOrderImages] = useState([]);
+	const [selected, setSelected] = useState([]);
+	const [color, setColor] = useState('');
+	const [notes, setNotes] = useState('');
+	const [values, setValues] = useState([item]);
+	const [errors, setErrors] = useState([error]);
+
+
+	useEffect(() => {
+		if (selectedOrder) {
+			let { items, images, errors, notes } = selectedOrder;
+			setImages(images);
+			setNotes(notes);
+			setErrors(errors);
+			setValues(items);
+		}
+	}, [])
+
+	useEffect(() => { }, [images, values, errors]);
 
 
 	const initialValues = {
 		title: selectedOrder?.title || '',
 		reference: selectedOrder?.reference || '',
 		date: selectedOrder?.date || '',
+		shipAddress: selectedOrder?.shipAddress || ''
 	};
-
-	useEffect(() => {
-		if (selectedOrder) {
-			let { items, images } = selectedOrder;
-			setImages(images);
-			setValues(items);
-		}
-	}, [])
-
-	useEffect(() => {
-
-	}, [images, values]);
-
 
 	let upload = useRef();
 
@@ -89,6 +91,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	}
 
 	let handleClick = () => {
+		console.log('clicked')
 		upload.current.click();
 	}
 
@@ -99,6 +102,36 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 			setImages(CopyOriginal);
 		}
 	}
+	let orderUpload = useRef();
+
+	let onChangeOrderFile = (event) => {
+		fileOrderObj.push(event.target.files)
+		for (let i = 0; i < fileOrderObj[0].length; i++) {
+			fileOrderArray.push(URL.createObjectURL(fileOrderObj[0][i]))
+		}
+		setOrderImages(fileOrderArray); /// if you want to upload latter
+	}
+
+	let OrderUploadClick = () => {
+		orderUpload.current.click();
+	}
+
+	let handleRemoveOrderImg = (index) => {
+		if (!readOnly) {
+			let CopyOriginal = [...orderImages];
+			CopyOriginal.splice(index, 1);
+			setOrderImages(CopyOriginal);
+		}
+	}
+
+	const handleNotes = (value) => {
+		console.log('notes', value);
+		setNotes(notes => notes = value)
+		const { title, reference, date } = initialValues;
+		const data = [{ title, reference, date, images, purchaseOrders: orderImages, value, items: [...values], errors: [...errors] }]
+		store.dispatch(storeOrderCache(data))
+	};
+
 
 
 	let handleSize = (orderNo) => {
@@ -132,51 +165,38 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 				return item;
 			})
 			setValues([...UpdateArray]);
+
 		}
 	}
 
 	const handleChange = (e, index) => {
 		const { name, value, checked } = e.target;
-		console.log(value, checked)
 		const NewArray = [...values];
+		const NewErrors = [...errors];
+
 		setValues([]);
 
 		if (name === 'product' || name === "material" || name === "pe" || name === "backing") {
 			if (value === '') {
-				setErrors({ ...errors, [name]: true })
-				let abc = NewArray.map((item, i) => {
-					if (i !== index) return item;
-					item[name] = value;
-					return item;
-				})
-				setValues([...abc]);
+				let updatedErrorArray = updateErrors(NewErrors, name, true, index)
+				let updatedArray = updateValues(NewArray, name, value, index)
+				setErrors([...updatedErrorArray])
+				setValues([...updatedArray]);
 			}
 			else {
-				setErrors({ ...errors, [name]: false })
-				let abc = NewArray.map((item, i) => {
-					if (i !== index) return item;
-					item[name] = value;
-					return item;
-				})
-				setValues([...abc]);
+				let updatedErrorArray = updateErrors(NewErrors, name, false, index)
+				let updatedArray = updateValues(NewArray, name, value, index)
+				setErrors([...updatedErrorArray])
+				setValues([...updatedArray]);
 			}
 		}
 		else if (e.target.name === 'discountApply') {
-			let abc = NewArray.map((item, i) => {
-				if (i !== index) return item;
-				item.discountApply = checked;
-				return item;
-			})
-			setValues([...abc]);
+			let updatedArray = updateValues(NewArray, name, checked, index)
+			setValues([...updatedArray]);
 		}
 		else {
-			let abc = NewArray.map((item, i) => {
-				if (i !== index) return item;
-				item[name] = value;
-				return item;
-			})
-			setValues([...abc]);
-
+			let updatedArray = updateValues(NewArray, name, value, index)
+			setValues([...updatedArray]);
 		}
 		handleSize(orderNo);
 	}
@@ -189,21 +209,23 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	}
 
 	let handleQty = (valuess, index) => {
-		if (_.isEmpty(valuess) === true) {
-			setErrors({ ...errors, qty: true })
+		const NewErrors = [...errors];
+		let updatedErrorArray = [];
+
+		if (isEmpty(valuess) === true) {
+			updatedErrorArray = updateErrors(NewErrors, 'qty', true, orderNo)
+			setErrors([...updatedErrorArray])
 		}
 		else {
-			setErrors({ ...errors, qty: false })
+			updatedErrorArray = updateErrors(NewErrors, 'qty', false, orderNo)
+			setErrors([...updatedErrorArray])
 		}
 		let value = valuess.filter(({ value }) => value);
+
 		setSelected(value);
-		let updatedQtyArray = values.map((item, i) => {
-			if (i !== orderNo) return item;
-			item.setQty = valuess;
-			return item;
-		})
-		setValues([...updatedQtyArray]);
-		console.log('-abc', updatedQtyArray)
+		let updatedArray = updateValues(values, 'setQty', valuess, orderNo)
+		setValues([...updatedArray]);
+
 	}
 
 
@@ -216,65 +238,59 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		})
 		setValues([...updatedColorArray]);
 		setColor('');
+
 	}
 
 	let removeColor = (index) => {
-		let CopyOriginal = [...values];
-		let colors = CopyOriginal[orderNo].colors;
-		let FilteredColors = colors.filter((color) => !colors[index].match(color));
-		let updatedArray = CopyOriginal.map((item, i) => {
-			if (i !== orderNo) return item;
-			item.colors = FilteredColors;
-			return item;
-		})
-		setValues(updatedArray);
+		if (!readOnly) {
+			let CopyOriginal = [...values];
+			let colors = CopyOriginal[orderNo].colors;
+			let FilteredColors = colors.filter((color) => !colors[index].match(color));
+			let updatedArray = updateValues(CopyOriginal, 'colors', FilteredColors, orderNo)
+			setValues(updatedArray);
+
+		}
 	}
 
 
 	let addAnother = () => {
-		let CopyOriginal = [...values];
-		let data = {
-			vendor: '',
-			product: '',
-			material: '',
-			backing: '',
-			pe: '',
-			border: '',
-			cut: '',
-			packaging: '',
-			setQty: [],
-			optionalItem: '',
-			markup: '',
-			discountApply: false,
-			wLeft: '1',
-			wRight: '0',
-			wCenter: '0',
-			hLeft: '1',
-			hCenter: '0',
-			hRight: '0',
-			size: 1,
-			colors: [],
-		}
-		let newArray = [...CopyOriginal, data]
-		console.log('newArray', newArray)
+		let CopyOriginalValues = [...values];
+		let CopyOriginalErrors = [...errors];
+		let newErrorArray = [...CopyOriginalErrors, error]
+		let newValueArray = [...CopyOriginalValues, item]
+		console.log('newArray', newValueArray)
+		console.log('newArray', newErrorArray)
 		setOrderNo(orderNo + 1);
-		setValues(newArray)
+		setErrors(newErrorArray)
+		setValues(newValueArray)
+
 	}
 
 	let removeItem = (index) => {
 		console.log('index', index)
 		if (!readOnly) {
-			if (values.length < 2) {
+			if (values.length < 2 && errors.length < 2) {
 				return
 			}
 			let currValues = [...values];
+			let currErrors = [...errors];
 			currValues.splice(index, 1);
+			currErrors.splice(index, 1);
 			setOrderNo((currentValue) => currentValue - 1);
+			setErrors(currErrors);
 			setValues(currValues);
+
 		}
 	}
 
-	console.log({ values })
+	let onCancleOrder = () => {
+		if (!readOnly) {
+			setErrors([error]);
+			setOrderNo(0);
+			setValues([item]);
+		}
+	}
+
 	const enableLoading = () => {
 		setLoading(true);
 	};
@@ -302,9 +318,16 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		onSubmit: ({ title, reference, date }, { setStatus, setSubmitting, resetForm, setFieldValue }) => {
 			setSubmitting(true);
 			enableLoading();
-			const data = [{ title, reference, date, images, items: [...values] }]
+			const data = [{ title, reference, date, images, purchaseOrders: orderImages, notes, items: [...values], errors: [...errors] }]
 			console.log('data', data)
 			store.dispatch(storeOrder(data))
+			swal({
+				icon: 'success',
+				text: 'Order Submitted Sucessfully',
+				dangerMode: true,
+				buttons: false,
+				timer: 3000,
+			})
 			disableLoading();
 		},
 	});
@@ -312,7 +335,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	let showFormDetails = (index) => {
 		setOrderNo(index);
 	}
-	console.log('orderNo', orderNo)
+
 	return (
 		<>
 			<form
@@ -330,7 +353,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 					</h1>
 				</div>
 				<div className="flex flex-col md:flex-row py-5 space-y-2 md:space-y-0 
-            justify-center md:justify-around items-start"
+            			justify-center md:justify-around items-start"
 				>
 
 					<div className="flex w-full justify-center items-center md:sticky md:top-2">
@@ -342,10 +365,11 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 											<tbody className="bg-white divide-y divide-gray-200">
 
 												{
-													values && !_.isEmpty(values) ?
+													values && !isEmpty(values) ?
 														values.map((item, index) => (
 															<div key={index} onClick={() => showFormDetails(index)}
-																className={`flex flex-row ${index === orderNo ? 'bg-red-600' : 'bg-white'} hover:bg-red-600 group-hover:text-white w-full py-2 px-3  items-center`}>
+																className={`flex flex-row cursor-pointer ${index === orderNo ? 'bg-red-600' : 'bg-white'} hover:bg-red-600 
+																group-hover:text-white w-full py-2 px-3  items-center`}>
 																<div className="flex flex-col w-1/12 text-center">
 																	<div className={`text-sm ${index === orderNo ? 'text-white' : 'text-black'} `}>{index + 1}</div>
 																</div>
@@ -354,8 +378,8 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 																</div>
 																<div
 																	onClick={() => removeItem(index)}
-																	className="flex flex-col w-1/12 px-5 cursor-pointer ">
-																	<svg className={`w-4 h-4 hover:w-6 hover:h-6 ${index === orderNo ? 'text-white' : 'text-black'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+																	className="flex flex-col w-1/12 px-5 cursor-pointer">
+																	<svg className={`w-4 h-4 ${index === orderNo ? 'text-white' : 'text-black'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 																		<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
 																	</svg>
 																</div>
@@ -391,6 +415,12 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 											<div className=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>}
 									</button>
 								</div>
+								<button
+									disabled={readOnly ? true : false}
+									onClick={onCancleOrder} type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
+								>
+									Cancel
+								</button>
 							</div>
 						</div>
 					</div>
@@ -465,13 +495,12 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 						</div>
 						<div className="flex flex-col md:flex-row">
 							<div className="flex flex-col w-full md:w-3/12 px-3 py-2  justify-start  ">
-								{/* <p className="text-left sm:text-right text-sm align-top">Vendor</p> */}
 							</div>
-							<div className="flex flex-col w-full md:w-9/12 ">
+							<div className="flex flex-col w-full md:w-9/12">
 								<div className="flex flex-col w-full">
-									<div className={`py-4  ${_.isEmpty(images) !== true ? 'grid grid-cols-2 sm:grid-cols-4 gap-2' : 'flex justify-center'} w-full`}>
+									<div className={`py-4  ${isEmpty(images) !== true ? 'grid grid-cols-2 sm:grid-cols-4 gap-2' : 'flex justify-center'} w-full`}>
 										{
-											_.isEmpty(images) !== true ?
+											isEmpty(images) !== true ?
 												images.map((image, index) => (
 													<div key={index} className="relative">
 														<img src={image} alt="img" className="w-36 h-36 rounded-lg" />
@@ -481,7 +510,6 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 															</svg>
 														</div>
 													</div>
-
 												))
 												:
 												<div>
@@ -498,9 +526,10 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 											accept='image/*'
 											ref={upload}
 											className="hidden"
-											onChange={(e) => onChangeFile(e)}
+											onChange={onChangeFile}
 										/>
 										<Button
+											type='button'
 											disabled={readOnly ? true : false}
 											onClick={handleClick}
 											label={(
@@ -518,33 +547,109 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 							</div>
 						</div>
 						{
-							values[orderNo] && (
+							values[orderNo] && errors[orderNo] && (
 								<Form
-									readOnly={readOnly}
-									orderNo={orderNo}
-									loading={loading}
-									errors={errors}
 									color={color}
-									values={values[orderNo]}
-									checked={checked}
-									clicked={clicked}
+									errors={errors[orderNo]}
+									orderNo={orderNo}
 									selected={selected}
-									heightClicked={heightClicked}
+									readOnly={readOnly}
+									values={values[orderNo]}
 									setColor={setColor}
-									setChecked={setChecked}
-									setClicked={setClicked}
-									removeColor={removeColor}
-									setSelected={setSelected}
-									handleChange={handleChange}
-									handleColors={handleColors}
-									filterOptions={filterOptions}
-									setHeightClicked={setHeightClicked}
 									handleQty={handleQty}
-									ColorsArray={ColorsArray}
+									removeColor={removeColor}
+									handleColors={handleColors}
+									handleChange={handleChange}
+									filterOptions={filterOptions}
 								/>
 
 							)
 						}
+						<div className="flex flex-col sm:flex-row">
+							<div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+								<p className="text-left sm:text-right text-sm align-top">Ship To Address:</p>
+							</div>
+							<div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+								<textarea
+									rows={4}
+									disabled={readOnly ? true : false}
+									className={`input ${getInputClassNamees('shipAddress')}`}
+									placeholder="Shipping Address..."
+									type="text"
+									id="shipAddress"
+									name="shipAddress"
+									{...formik.getFieldProps('shipAddress')}
+								/>
+							</div>
+						</div>
+						<div className="flex flex-col md:flex-row">
+							<div className="flex flex-col w-full md:w-3/12 px-3 py-2  justify-start  ">
+							</div>
+							<div className="flex flex-col w-full md:w-9/12">
+								<div className="flex flex-col w-full">
+									<div className={`py-4  ${isEmpty(orderImages) !== true ? 'grid grid-cols-2 sm:grid-cols-4 gap-2' : 'flex justify-center'} w-full`}>
+										{
+											isEmpty(orderImages) !== true ?
+												orderImages.map((image, index) => (
+													<div key={index} className="relative">
+														<img src={image} alt="img" className="w-36 h-36 rounded-lg" />
+														<div onClick={() => handleRemoveOrderImg(index)} className="absolute flex top-0 right-0 border-1 rounded-full text-red-600 hover:ring-2 hover:ring-red-500  w-5 h-5 shadow-md z-50 bg-white items-center justify-center">
+															<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+																<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+															</svg>
+														</div>
+													</div>
+												))
+												:
+												<div>
+													<svg className="w-40 h-40 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+														<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+													</svg>
+												</div>
+										}
+									</div>
+									<div className="flex flex-row justify-center">
+										<input
+											type="file"
+											multiple={true}
+											accept='image/*'
+											ref={orderUpload}
+											className="hidden"
+											onChange={onChangeOrderFile}
+										/>
+										<Button
+											type='button'
+											disabled={readOnly ? true : false}
+											onClick={OrderUploadClick}
+											label={(
+												<>
+													<p className="text-sm font-white font-bold">Upload Purchase Order(s)</p>&nbsp;
+													<svg className="w-4 h-4 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+														<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+													</svg>
+												</>
+											)}
+											classNames="p-2 w-auto flex mb-8 items-center bg-red-600 text-white hover:bg-red-700 "
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className="flex flex-col sm:flex-row ">
+							<div className="flex flex-col w-full sm:w-3/12 px-3 py-2 justify-start">
+								<p className="text-left sm:text-right text-sm align-top">Customer Notes:</p>
+							</div>
+							<div
+								style={{ height: 'fit-content' }}
+								className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+								<TextEditor
+									notes={notes}
+									handleNotes={handleNotes}
+
+								/>
+
+							</div>
+						</div>
 					</div>
 				</div>
 			</form>

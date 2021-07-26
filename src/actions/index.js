@@ -18,3 +18,18 @@ export const receiveWebsite = order => ({
     type: types.RECIEVE_ORDER,
     order
 })
+
+export const OrderCacheBegin = () => ({
+    type: types.CACHE_ORDER_BEGIN
+});
+
+export const storeOrderCache = (cache) => dispatch => {
+    dispatch(OrderCacheBegin());
+    dispatch(receiveCache(cache))
+    return cache
+}
+
+export const receiveCache = cache => ({
+    type: types.RECIEVE_CACHE_ORDER,
+    cache
+})

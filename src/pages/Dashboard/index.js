@@ -8,7 +8,7 @@ import NewOrder from './newOrder';
 import OpenOrder from './openOrder';
 import ClosedOrder from './closedOrder';
 import Draft from './draft';
-
+import ReactTooltip from "react-tooltip";
 
 let useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -132,14 +132,30 @@ const Dashboard = (props) => {
                     />
                 </div>
                 <div className="flex flex-col md:flex-row mt-8  md:w-3/5 lg:w-2/5 items-center">
-                    <div className="w-full flex shadow-md">
+
+                    <div className="w-full flex ">
+                        <span className="self-center">
+                            <svg data-tip data-for="search" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <ReactTooltip id="search" place="top" effect="solid" border={false} borderColor="white" clickable={false}>
+                                <ul>
+                                    <li>Date</li>
+                                    <li>Opp Stage</li>
+                                    <li>Order Name</li>
+                                    <li>Product Name</li>
+                                    <li>Other OPPORTUNITY</li>
+                                </ul>
+                            </ReactTooltip>
+                        </span> &nbsp;
                         <div class="w-full flex border-gray-400 border">
                             <span class="w-auto flex justify-end items-center text-gray-500 p-2">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
                             </span>
-                            <input class="w-full p-2 focus:outline-none" type="text" placeholder="Search by Item Name / Reference / Item No" />
+
+                            <input class="w-full p-2 focus:outline-none text-sm" type="text" placeholder="Search by:" />
                         </div>
                         <button class="bg-red-600 ml-2 hover:bg-red-700  text-white p-2 pl-6 pr-6">
                             <p class="text-sm font-medium">Search</p>

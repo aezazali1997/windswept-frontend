@@ -6,7 +6,7 @@ const NavDropdown = ({ isOpen, toggle, handleLogout }) => {
         <div
             className={
                 isOpen
-                    ? 'grid grid-rows-4 absolute  w-full text-center items-center bg-white border-b-1 pb-5 shadow-lg z-50'
+                    ? 'grid grid-rows-4 absolute w-full text-center items-center bg-white border-b-1 pb-5 shadow-lg z-50'
                     : 'hidden'
             }
             onClick={toggle}
@@ -29,7 +29,9 @@ const NavDropdown = ({ isOpen, toggle, handleLogout }) => {
                 </NavLink>
                 <button type="button" onClick={handleLogout}
                     className="p-4 font-weight: 600px;
-                        uppercase font-sans text-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none ">
+                        uppercase font-sans text-center py-2 px-4 border border-transparent text-sm font-medium
+                        rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none"
+                >
                     Logout
                 </button>
             </>
