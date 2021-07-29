@@ -23,9 +23,9 @@ const Navbar = ({ toggle, isOpen, login, handleLogout }) => {
                             <NavLink to='/dashboard' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
                                 DashBoard
                             </NavLink>
-                            <NavLink to='/new-estimate' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
+                            {/* <NavLink to='/new-estimate' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
                                 Estimator
-                            </NavLink>
+                            </NavLink> */}
                             <NavLink to='/toggle-tutorials' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active" >
                                 Tutorials
                             </NavLink>

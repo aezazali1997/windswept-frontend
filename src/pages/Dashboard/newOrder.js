@@ -5,17 +5,19 @@ import { useFormik } from 'formik';
 import ReactTooltip from "react-tooltip";
 
 import Button from './button';
-import { Form, TextEditor } from '../../components';
+import { DashboardChart, Form, TextEditor } from '../../components';
 import { OrderFormSchema } from '../../utils/validation_schema';
 import { updateValues, updateErrors } from '../../utils/helpers'
 import store from '../../store';
 import { storeOrder, storeOrderCache } from '../../actions'
+import AxiosInstance from '../../APIs/axiosInstance';
+import moment from 'moment';
+
 
 var fileArray = [];
 var fileObj = [];
 var fileOrderArray = [];
 var fileOrderObj = [];
-
 const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
 	const item = {
@@ -29,7 +31,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		packaging: '',
 		setQty: [],
 		optionalItem: '',
-		markup: '',
+		markup: '10',
 		discountApply: false,
 		wLeft: '1',
 		wRight: '0',
@@ -38,6 +40,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		hCenter: '0',
 		hRight: '0',
 		size: 1,
+		data: [],
 		colors: [],
 	};
 
@@ -51,6 +54,9 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
 	const [loading, setLoading] = useState(false)
 	const [orderNo, setOrderNo] = useState(0)
+	const [date, setDate] = useState('')
+	const [week, setWeek] = useState(0)
+
 	const [images, setImages] = useState([]);
 	const [orderImages, setOrderImages] = useState([]);
 	const [selected, setSelected] = useState([]);
@@ -58,26 +64,37 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	const [notes, setNotes] = useState('');
 	const [values, setValues] = useState([item]);
 	const [errors, setErrors] = useState([error]);
+	const [data, setData] = useState([]);
+	const [total, setTotal] = useState(0);
+	const [grandTotal, setGrandTotal] = useState(0);
+	const [gTotalWithMarkup, setGrandTotalWithMarkup] = useState(0);
+	const [apiError, setAPIError] = useState('');
 
 
 	useEffect(() => {
 		if (selectedOrder) {
-			let { items, images, errors, notes } = selectedOrder;
+			let { items, images, date, week, errors, notes } = selectedOrder;
+			setDate(date);
 			setImages(images);
 			setNotes(notes);
 			setErrors(errors);
 			setValues(items);
+			setData(items[orderNo].data)
+			setWeek(week);
 		}
 	}, [])
 
-	useEffect(() => { }, [images, values, errors]);
+	useEffect(() => {
+		_Total();
+		_grandTotal();
+		_GrandTotalWithMarkup();
+	}, [images, values, errors]);
 
 
 	const initialValues = {
 		title: selectedOrder?.title || '',
 		reference: selectedOrder?.reference || '',
 		date: selectedOrder?.date || '',
-		shipAddress: selectedOrder?.shipAddress || ''
 	};
 
 	let upload = useRef();
@@ -127,12 +144,50 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	const handleNotes = (value) => {
 		console.log('notes', value);
 		setNotes(notes => notes = value)
-		const { title, reference, date } = initialValues;
+		const { title, reference } = initialValues;
 		const data = [{ title, reference, date, images, purchaseOrders: orderImages, value, items: [...values], errors: [...errors] }]
 		store.dispatch(storeOrderCache(data))
 	};
 
+	const handleChange = (e, index) => {
+		const { name, value, checked } = e.target;
+		const NewArray = [...values];
+		const NewErrors = [...errors];
 
+		setValues([]);
+
+		if (name === 'product' || name === "material" || name === "pe" || name === "backing") {
+			if (value === '') {
+				let updatedErrorArray = updateErrors(NewErrors, name, true, index)
+				let updatedArray = updateValues(NewArray, name, value, index)
+				setErrors([...updatedErrorArray])
+				setValues([...updatedArray]);
+			}
+			else {
+				let updatedErrorArray = updateErrors(NewErrors, name, false, index)
+				let updatedArray = updateValues(NewArray, name, value, index)
+				setErrors([...updatedErrorArray])
+				setValues([...updatedArray]);
+			}
+		}
+		else if (name === 'discountApply') {
+			let updatedArray = updateValues(NewArray, name, checked, index)
+			setValues([...updatedArray]);
+		}
+		else if (name === 'date') {
+			var now = moment(new Date()); //todays date
+			var end = moment(value); // end date
+			var weeks = end.diff(now, 'weeks');
+			console.log(weeks)
+			setDate(value);
+			setWeek(weeks);
+		}
+		else {
+			let updatedArray = updateValues(NewArray, name, value, index)
+			setValues([...updatedArray]);
+		}
+		handleSize(orderNo);
+	}
 
 	let handleSize = (orderNo) => {
 		let CopyOriginal = [...values];
@@ -165,41 +220,90 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 				return item;
 			})
 			setValues([...UpdateArray]);
-
+			callAPI();
 		}
 	}
+	let callAPI = async () => {
+		const { product, material, backing, size, pe, freight, markup, colors, setQty } = values[orderNo];
 
-	const handleChange = (e, index) => {
-		const { name, value, checked } = e.target;
-		const NewArray = [...values];
-		const NewErrors = [...errors];
-
-		setValues([]);
-
-		if (name === 'product' || name === "material" || name === "pe" || name === "backing") {
-			if (value === '') {
-				let updatedErrorArray = updateErrors(NewErrors, name, true, index)
-				let updatedArray = updateValues(NewArray, name, value, index)
-				setErrors([...updatedErrorArray])
-				setValues([...updatedArray]);
-			}
-			else {
-				let updatedErrorArray = updateErrors(NewErrors, name, false, index)
-				let updatedArray = updateValues(NewArray, name, value, index)
-				setErrors([...updatedErrorArray])
-				setValues([...updatedArray]);
-			}
-		}
-		else if (e.target.name === 'discountApply') {
-			let updatedArray = updateValues(NewArray, name, checked, index)
-			setValues([...updatedArray]);
+		if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
+			// swal({
+			//     text: 'Fill Mandatory Fields',
+			//     icon: 'error',
+			//     dangerMode: true,
+			//     buttons: false,
+			//     timer: 3000,
+			// })
 		}
 		else {
-			let updatedArray = updateValues(NewArray, name, value, index)
-			setValues([...updatedArray]);
+			const data = {
+				product: product,
+				material: material,
+				backing: backing,
+				size: size,
+				pc: parseInt(pe),
+				addColor: colors.length,
+				freight: freight || 0,
+				markup: markup || 1,
+			}
+			console.log('data', data);
+			AxiosInstance.ordereEstimate(data)
+				.then(({ data: { data, message } }) => {
+					console.log(data);
+					if (message === "Failed" && data[0].error === 'Custom') {
+						swal({
+							text: 'Custom Quote will be given in 1-2 days',
+							icon: 'info',
+							dangerMode: true,
+							buttons: false,
+							timer: 3000,
+						})
+						setAPIError('Custom Quote will be given in 1 - 2 days')
+						setData([]);
+					}
+					else if (message === 'Failed' && data[0].error === 'Not Found') {
+						swal({
+							text: 'Data Not Found',
+							icon: 'info',
+							dangerMode: true,
+							buttons: false,
+							timer: 3000,
+						})
+						setAPIError('');
+						setData([]);
+					}
+					else {
+						swal({
+							text: 'Data Successfully Fetched',
+							icon: 'success',
+							dangerMode: true,
+							buttons: false,
+							timer: 3000,
+						})
+						setAPIError('');
+						setData(data);
+						let UpdateArray = [...values].map((item, i) => {
+							if (i !== orderNo) return item;
+							item.data = data;
+							return item;
+						})
+						setValues([...UpdateArray]);
+						disableLoading();
+
+					}
+
+				}).catch(error => {
+					swal({
+						text: error,
+						icon: 'error',
+						dangerMode: true,
+						buttons: false,
+						timer: 3000,
+					})
+				})
 		}
-		handleSize(orderNo);
 	}
+
 
 	let filterOptions = (options, filter) => {
 		if (!filter) {
@@ -225,7 +329,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		setSelected(value);
 		let updatedArray = updateValues(values, 'setQty', valuess, orderNo)
 		setValues([...updatedArray]);
-
+		callAPI();
 	}
 
 
@@ -315,10 +419,10 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		initialValues,
 		validationSchema: OrderFormSchema,
 		validateOnBlur: true,
-		onSubmit: ({ title, reference, date }, { setStatus, setSubmitting, resetForm, setFieldValue }) => {
+		onSubmit: ({ title, reference }, { setStatus, setSubmitting, resetForm, setFieldValue }) => {
 			setSubmitting(true);
 			enableLoading();
-			const data = [{ title, reference, date, images, purchaseOrders: orderImages, notes, items: [...values], errors: [...errors] }]
+			const data = [{ title, reference, date, images, week: week, purchaseOrders: orderImages, notes, items: [...values], errors: [...errors] }]
 			console.log('data', data)
 			store.dispatch(storeOrder(data))
 			swal({
@@ -334,6 +438,84 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
 	let showFormDetails = (index) => {
 		setOrderNo(index);
+	}
+
+	let _onFocus = (e) => {
+		e.currentTarget.type = "date";
+	}
+
+	let _onBlur = (e) => {
+		if (date === '') {
+			e.currentTarget.type = "text";
+			e.currentTarget.placeholder = "In hands date";
+		}
+	}
+
+	let _Total = () => {
+		const CopyOriginal = [...values];
+		var Total = 0;
+		CopyOriginal.map((item, i) => (
+			item.data.map(({ unitPrice, count }) => (
+				Total = Total + (count * unitPrice)
+			))
+		))
+		setTotal(total => total = Total);
+	}
+	let _grandTotal = () => {
+		const CopyOriginal = [...values];
+		var GrandTotal = 0;
+		CopyOriginal.map((item, i) => (
+			item.data.map(({ unitPrice, count }) => {
+				if (week < 1) {
+
+					GrandTotal = GrandTotal + ((unitPrice * count).toFixed(3)) * 0.75
+				}
+				else if (week >= 1 && week <= 2) {
+
+					GrandTotal = GrandTotal + ((unitPrice * count).toFixed(3)) * 0.50
+
+				}
+				else if (week > 2 && week <= 3) {
+
+					GrandTotal = GrandTotal + ((unitPrice * count).toFixed(3)) * 0.30
+
+				}
+				else {
+
+					GrandTotal = GrandTotal + ((unitPrice * count).toFixed(3)) * 1
+				}
+
+			})
+		))
+		setGrandTotal(grandTotal => grandTotal = GrandTotal)
+	}
+	let _GrandTotalWithMarkup = () => {
+		const CopyOriginal = [...values];
+		var GrandTotalWithMarkup = 0;
+		CopyOriginal.map((item, i) => (
+			item.data.map(({ unitPrice, count }) => {
+				if (week < 1) {
+
+					GrandTotalWithMarkup = GrandTotalWithMarkup + ((((((unitPrice * count).toFixed(3)) * 0.75).toFixed(3))) * item.markup)
+				}
+				else if (week >= 1 && week <= 2) {
+
+					GrandTotalWithMarkup = GrandTotalWithMarkup + (((((unitPrice * count).toFixed(3)) * 0.50).toFixed(3)) * item.markup)
+
+				}
+				else if (week > 2 && week <= 3) {
+
+					GrandTotalWithMarkup = GrandTotalWithMarkup + (((((unitPrice * count).toFixed(3)) * 0.30).toFixed(3)) * item.markup)
+
+				}
+				else {
+
+					GrandTotalWithMarkup = GrandTotalWithMarkup + (((((unitPrice * count).toFixed(3)) * 1).toFixed(3)) * item.markup)
+				}
+
+			})
+		))
+		setGrandTotalWithMarkup(gTotalWithMarkup => gTotalWithMarkup = GrandTotalWithMarkup)
 	}
 
 	return (
@@ -356,8 +538,8 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
             			justify-center md:justify-around items-start"
 				>
 
-					<div className="flex w-full justify-center items-center md:sticky md:top-2">
-						<div className="h-52 w-full px-3 sm:w-1/2">
+					<div className="flex flex-col w-full h-full justify-center items-center md:sticky md:top-2">
+						<div className="w-full h-full px-3 sm:w-1/2">
 							<div className=" h-44 w-full border overflow-y-scroll border-gray-400">
 								<div className="align-middle inline-block min-w-full">
 									<div className="overflow-hidden border">
@@ -422,6 +604,49 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 									Cancel
 								</button>
 							</div>
+
+						</div>
+						<div className="flex flex-col w-full h-full pt-5 space-y-8">
+							<DashboardChart
+								data={data}
+								apiError={apiError}
+								values={values[orderNo]}
+								week={week}
+							/>
+							<table className="mt-10 md:mt-0 mx-auto" >
+								<tr>
+									<td className="left-estimate-table text-right font-medium">Total:</td>
+									<td className="left-estimate-table">{total}</td>
+								</tr>
+								<tr>
+									<td className="left-estimate-table text-right font-medium">Fee:</td>
+									<td className="left-estimate-table">{
+										week < 1 ? (
+											"75%"
+										)
+											:
+											week >= 1 && week <= 2 ? (
+												"50%"
+											)
+												:
+												week > 2 && week <= 3 ? (
+													"30%"
+												)
+													:
+
+													("Standard")
+									}</td>
+								</tr>
+								<tr>
+									<td className=" left-estimate-table text-right font-medium">Grand Total:</td>
+									<td className=" left-estimate-table">{grandTotal}</td>
+								</tr>
+								<tr>
+									<td className=" left-estimate-table text-right font-medium">Grand Total(including markup):</td>
+									<td className=" left-estimate-table">{gTotalWithMarkup}</td>
+								</tr>
+
+							</table>
 						</div>
 					</div>
 					<div className="flex flex-col pt-20 md:pt-0 w-full">
@@ -478,16 +703,24 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 											</svg>
 											<ReactTooltip id="orderDate" place="top" effect="solid" border={false} borderColor="white" clickable={false}>
-												Date of order to be placed
+												<ul>
+													<li>Standard - 3-4 weeks</li>
+													<li>Expedited - 2-3 weeks</li>
+													<li>Rush - 1-2 weeks</li>
+													<li>Miracle if even possible under 1 week</li>
+												</ul>
 											</ReactTooltip>
 										</span>&nbsp;
 										<input
-											type="date"
+											type={'text'}
 											name="date"
-											value={formik.values.date}
+											value={date}
+											placeholder="In hands date"
+											onFocus={_onFocus}
 											disabled={readOnly ? true : false}
+											onBlur={_onBlur}
 											className={`input ${getInputClassNamees('date')}`}
-											{...formik.getFieldProps('date')}
+											onChange={handleChange}
 										/>
 									</div>
 								</div>

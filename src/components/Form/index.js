@@ -28,7 +28,7 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
     return (
         <>
             <form id={'orderForm'} onSubmit={(e) => e.preventDefault()}>
-                <div className="flex flex-col sm:flex-row">
+                {/* <div className="flex flex-col sm:flex-row">
                     <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
                         <p className="text-left sm:text-right text-sm align-top">Vendor</p>
                     </div>
@@ -41,7 +41,7 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                             onChange={(e) => handleChange(e, orderNo)}
                         />
                     </div>
-                </div>
+                </div> */}
                 <div className="flex flex-col sm:flex-row w-full ">
                     <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
                         <p className="text-left sm:text-right text-sm align-top">Product <span className="text-red-600 font-bold">*</span></p>
@@ -192,7 +192,7 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                 </div>
                 <div className="flex flex-col sm:flex-row w-full ">
                     <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                        <p className="text-left sm:text-right text-sm align-top">Select Qty <span className="text-red-600 font-bold">*</span></p>
+                        <p className="text-left sm:text-right text-sm align-top">Select Quantity <span className="text-red-600 font-bold">*</span></p>
                     </div>
                     <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                         <MultiSelect
@@ -228,6 +228,7 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                     <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                         <input
                             value={values.markup}
+                            disabled={true}
                             onChange={(e) => handleChange(e, orderNo)}
                             className="input"
                             name="markup"
@@ -235,7 +236,7 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                         />
                     </div>
                 </div>
-                <div className="flex flex-col sm:flex-row w-full ">
+                {/* <div className="flex flex-col sm:flex-row w-full ">
                     <div className="flex flex-col w-full sm:w-3/12 px-3 py-2 justify-start">
                         <p className="text-left sm:text-right text-sm align-top">Discount Apply</p>
                     </div>
@@ -247,7 +248,7 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                             checked={values.discountApply}
                             onChange={(e) => handleChange(e, orderNo)} />
                     </div>
-                </div>
+                </div> */}
                 <div className="flex flex-col sm:flex-row w-full ">
                     <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
                         <p className="text-left sm:text-right text-sm align-top">Width</p>
@@ -312,7 +313,6 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                                     ))
                                 }
                             </select>
-
                         </div>
                     </div>
                 </div>

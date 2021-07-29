@@ -6,13 +6,15 @@ import { Helmet } from 'react-helmet';
 import Form from './Dashboard/estimateForm';
 import AxiosInstance from '../APIs/axiosInstance';
 import EstimateChart from '../components/EstimateTable';
-
+import CopyToClipboard from 'react-copy-to-clipboard';
+import moment from 'moment';
 var ColorsArray = [];
 
 const OrderEstimate = () => {
 
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
+    const [isCopied, setIsCopied] = useState(false);
     const [checked, setChecked] = useState(false);
     const [selected, setSelected] = useState([]);
     const [clicked, setClicked] = useState(false);
@@ -32,24 +34,28 @@ const OrderEstimate = () => {
     const [apiError, setAPIError] = useState('');
 
     const [values, setValues] = useState({
-        vendor: '',
+        // vendor: '',
         product: '',
         material: '',
         backing: '',
         pe: '',
         border: '',
         cut: '',
-        packaging: '',
+        // packaging: '',
         setQty: '',
-        optionalItem: '',
+        // optionalItem: '',
         markup: '',
-        discountApply: '',
+        // discountApply: '',
         wLeft: '1',
         wRight: '0',
         wCenter: '0',
         hLeft: '1',
         hCenter: '0',
         hRight: '0',
+        size: 1,
+        colorPick: '',
+        freight: '',
+        custom: '7'
     });
     let PDF = useRef();
     const handlePrint = useReactToPrint({
@@ -58,14 +64,17 @@ const OrderEstimate = () => {
     });
 
     useEffect(() => {
-        let size = handleSize();
-        handleSubmit(size);
-    }, [values, errors, values, selected, colors]);
+        handleSubmit();
+    }, [values, errors, selected, colors]);
 
 
     useEffect(() => {
-        handleSize();
+        // handleSize();
     }, [data])
+
+
+    console.log('values', values)
+
 
     const enableLoading = () => {
         setLoading(true);
@@ -75,50 +84,28 @@ const OrderEstimate = () => {
         setLoading(false);
     };
 
-    const handleChange = (e) => {
+    const onCopyText = () => {
+        setIsCopied(true);
+        setTimeout(() => {
+            setIsCopied(false);
+        }, 1000);
+    };
+
+
+    const handleChange = async (e) => {
         const { name, value } = e.target;
         if (name === 'product' || name === "material" || name === "pe" || name === "backing") {
             if (value === '') {
                 setErrors({ ...errors, [name]: true })
-                setValues({ ...values, [name]: value })
             }
             else {
                 setErrors({ ...errors, [name]: false })
-                setValues({ ...values, [name]: value })
             }
         }
-        else {
-            setValues({ ...values, [name]: value })
-        }
+        let updatedObj = { ...values, [name]: value, };
+        const size = await handleSize(updatedObj);
+        setValues({ ...size })
     }
-
-    // let handleWidth = (value) => {
-    //     if (value === '0') {
-    //         setValues({ ...values, wCenter: parseInt(value) })
-    //         setRightWidth(parseInt(value))
-    //     }
-    //     else {
-    //         let newValue = value.split('/');
-    //         let newArr = newValue.map(item => parseInt(item));
-    //         let result = newArr[0] / newArr[1];
-    //         setValues({ ...values, wCenter: result })
-    //         setRightWidth(result);
-    //     }
-    // }
-
-    // let handleHight = (value) => {
-    //     if (value === '0') {
-    //         setValues({ ...values, hCenter: parseInt(value) })
-    //         setRightHeight(parseInt(value))
-    //     }
-    //     else {
-    //         let newValue = value.split('/');
-    //         let newArr = newValue.map(item => parseInt(item));
-    //         let result = newArr[0] / newArr[1];
-    //         setValues({ ...values, hCenter: result })
-    //         setRightHeight(result);
-    //     }
-    // }
 
     let filterOptions = (options, filter) => {
         if (!filter) {
@@ -152,15 +139,36 @@ const OrderEstimate = () => {
         }
     }
 
-    let handleSize = () => {
-        const { hLeft, hCenter, wLeft, wCenter } = values;
-        var size = (((parseInt(wLeft) + parseFloat(wCenter)) + (parseInt(hLeft) + parseFloat(hCenter))) / 2);
-        var roundedhalf = Math.round(size * 2) / 2;
-        setSize(roundedhalf);
-        return roundedhalf
+    let handleSize = (updatedObj) => {
+        let HResult = 0;
+        let WResult = 0;
+        let { hLeft, hRight, wLeft, wRight } = updatedObj;
+        let newValues;
+        //width
+        // eslint-disable-next-line no-lone-blocks
+        {
+            if (wRight !== '0') {
+                let newWidthCenter = wRight.split('/');
+                let WidthNum = parseInt(newWidthCenter[0])
+                let WidthDen = parseInt(newWidthCenter[1])
+                WResult = WidthNum / WidthDen;
+            }
+            //height
+            if (hRight !== '0') {
+                let newHeightCenter = hRight.split('/');
+                let HeightNum = parseInt(newHeightCenter[0])
+                let HeightDen = parseInt(newHeightCenter[1])
+                HResult = HeightNum / HeightDen;
+            }
+            var size = (((parseInt(wLeft) + WResult) + (parseInt(hLeft) + HResult)) / 2);
+            var roundedhalf = Math.round(size * 2) / 2;
+            newValues = { ...updatedObj, wCenter: WResult, hCenter: HResult, size: roundedhalf }
+        }
+        return newValues;
     }
 
-    let handleSubmit = async (size) => {
+
+    let handleSubmit = async () => {
         const { product, material, backing, pe } = values;
 
         if (product === '' || material === '' || backing === '' || pe === '' || _.isEmpty(selected) === true) {
@@ -173,14 +181,17 @@ const OrderEstimate = () => {
             // })
         }
         else {
+            const { product, material, backing, size, pe, freight, markup } = values;
             enableLoading();
             const data = {
-                product: values.product,
-                material: values.material,
-                backing: values.backing,
+                product: product,
+                material: material,
+                backing: backing,
                 size: size,
-                pc: parseInt(values.pe),
-                addColor: ColorsArray.length
+                pc: parseInt(pe),
+                addColor: ColorsArray.length,
+                freight: freight || 0,
+                markup: markup || 1,
             }
             console.log('data', data);
             AxiosInstance.ordereEstimate(data)
@@ -236,10 +247,11 @@ const OrderEstimate = () => {
         }
     }
 
+    const { backing, markup, product, border, pe, cut, size } = values;
     return (
         <div className="flex flex-col lg:flex-row w-full md:pt-28 bg-white">
             <Helmet>
-                <title>Estimator | Windswept</title>
+                <title>WIMPIE | Windswept</title>
 
             </Helmet>
             <div className="flex w-full flex-col justify-top items-center space-y-2">
@@ -253,7 +265,20 @@ const OrderEstimate = () => {
                 />
                 <table>
                     <tr>
-                        <td className="px-8 left-estimate-table"></td>
+                        <td className="px-8 left-estimate-table text-right">
+                            <CopyToClipboard text={`${backing}, ${markup}, ${product}, ${border}, ${pe}, ${cut}, ${size}, ${moment().format('MMMM Do YYYY, h:mm:ss a')}`} onCopy={onCopyText}>
+                                <div className="copy-area">
+                                    <button
+                                        className="inline-flex text-white bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600  justify-center w-40 border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium  focus:outline-none"
+                                        id="menu-button"
+                                        aria-expanded="true"
+                                        aria-haspopup="true"
+                                    >
+                                        {isCopied ? 'Copied' : 'Copy to clipboard'}
+                                    </button>
+                                </div>
+                            </CopyToClipboard>
+                        </td>
                         <td className="left-estimate-table">
                             <button
 

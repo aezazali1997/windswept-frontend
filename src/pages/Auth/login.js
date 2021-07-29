@@ -65,7 +65,7 @@ const Login = () => {
                         setStatus(message);
                         setShowAlert(true);
                         localStorage.setItem('login', token);
-                        window.location = ('/new-estimate');
+                        window.location = ('/dashboard');
                     })
                     .catch((e) => {
                         setError(true)

@@ -15,9 +15,9 @@ const NavDropdown = ({ isOpen, toggle, handleLogout }) => {
                 <NavLink to='/dashboard' className='p-4 font-sans '>
                     Dashboard
                 </NavLink>
-                <NavLink to='/new-estimate' className='p-4 font-sans '>
+                {/* <NavLink to='/new-estimate' className='p-4 font-sans '>
                     Estimator
-                </NavLink>
+                </NavLink> */}
                 <NavLink to='/toggle-tutorials' className='p-4 font-sans '>
                     Tutorials
                 </NavLink>

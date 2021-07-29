@@ -28,21 +28,21 @@ function App() {
         {
           authorized ?
             <Switch>
-              <Route path='/new-estimate' component={OrderEstimate} />
               <Route path='/dashboard' component={Dashboard} />
               <Route path='/contact' component={Contact} />
               <Route path='/toggle-tutorials' component={ToggleTutorials} />
               <Route path='/terms-of-services' component={TermsOfServices} />
-              <Redirect to="/new-estimate" />
+              <Redirect to="/dashboard" />
             </Switch>
             :
             <Switch>
               <Route path="/login" component={Login} />
+              <Route path='/wimpie' component={OrderEstimate} />
+
               {/* <Route path="/signup" component={Signup} /> */}
               {/* <Route path='/forget-password' component={ForgetPassword} /> */}
               <Redirect from="/" to="/login" />
               <Redirect to="/login" />
-
             </Switch>
         }
       </CustomLayout>

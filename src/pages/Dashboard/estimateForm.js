@@ -12,7 +12,7 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
 
     return (
         <>
-            <div className="flex flex-col sm:flex-row">
+            {/* <div className="flex flex-col sm:flex-row">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
                     <p className="text-left sm:text-right text-sm align-top">Vendor</p>
                 </div>
@@ -24,7 +24,7 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                         onChange={handleChange}
                     />
                 </div>
-            </div>
+            </div> */}
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
                     <p className="text-left sm:text-right text-sm align-top">Product <span className="text-red-600 font-bold">*</span></p>
@@ -53,6 +53,39 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                     />
                 </div>
             </div>
+            {
+                values.material === 'Woven' && (
+                    <>
+                        <div className="flex flex-col sm:flex-row w-full ">
+                            <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+                                <p className="text-left sm:text-right text-sm align-top">Custom</p>
+                            </div>
+                            <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+                                <input
+                                    value={`${values.custom}%`}
+                                    disabled={true}
+                                    className="input"
+                                    name="custom"
+                                    type="text"
+                                />
+                            </div>
+                        </div>
+                        <div className="flex flex-col sm:flex-row w-full ">
+                            <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+                                <p className="text-left sm:text-right text-sm align-top">Freight</p>
+                            </div>
+                            <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+                                <input
+                                    onChange={handleChange}
+                                    className="input"
+                                    name="freight"
+                                    type="text"
+                                />
+                            </div>
+                        </div>
+                    </>
+                )
+            }
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
                     <p className="text-left sm:text-right text-sm align-top">Backing <span className="text-red-600 font-bold">*</span></p>
@@ -129,8 +162,8 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                             </select>
                         </div>
                     </div> */}
-            <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+            {/* <div className="flex flex-col sm:flex-row w-full ">
+                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start">
                     <p className="text-left sm:text-right text-sm align-top">Packaging</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
@@ -142,10 +175,10 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                         data={packagingData}
                     />
                 </div>
-            </div>
+            </div> */}
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Select Qty <span className="text-red-600 font-bold">*</span></p>
+                    <p className="text-left sm:text-right text-sm align-top">Select Quantity <span className="text-red-600 font-bold">*</span></p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <MultiSelect
@@ -159,7 +192,7 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                     />
                 </div>
             </div>
-            <div className="flex flex-col sm:flex-row w-full ">
+            {/* <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
                     <p className="text-left sm:text-right text-sm align-top">Optional item #</p>
                 </div>
@@ -171,7 +204,7 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                         type="text"
                     />
                 </div>
-            </div>
+            </div> */}
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
                     <p className="text-left sm:text-right text-sm align-top">Mark Up</p>
@@ -185,7 +218,7 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                     />
                 </div>
             </div>
-            <div className="flex flex-col sm:flex-row w-full ">
+            {/* <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2 justify-start">
                     <p className="text-left sm:text-right text-sm align-top">Discount Apply</p>
                 </div>
@@ -197,14 +230,14 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                         onChange={(e) => setChecked(e.target.checked)}
                     />
                 </div>
-            </div>
+            </div> */}
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
                     <p className="text-left sm:text-right text-sm align-top">Width</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <div className="flex flex-row border border-gray-400 w-full sm:w-1/2">
-                        <select id="wLeft" defaultValue={values.wLeft} name="wLeft" onChange={handleChange} className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
+                        <select id="wLeft" value={values.wLeft} name="wLeft" onChange={handleChange} className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
                             <option value="1">1"</option>
                             <option value="2">2"</option>
                             <option value="3">3"</option>
@@ -221,10 +254,10 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                             value={values.wCenter}
                             readOnly
                             type="text" />
-                        <select id="wRight" defaultValue={values.wRight} name="wRight" onChange={handleChange} className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
+                        <select id="wRight" value={values.wRight} name="wRight" onChange={handleChange} className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
                             {
                                 size && size.map((value, index) => (
-                                    <option className="bg-white text-black" key={index} value={value}>{`${value}"`}</option>
+                                    <option className="bg-white text-black" key={index} value={value}>{`${value}`}</option>
                                 ))
                             }
                         </select>
@@ -238,7 +271,7 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <div className="flex flex-row border border-gray-400 w-full sm:w-1/2">
-                        <select id="hLeft" defaultValue={values.hLeft} onChange={handleChange} name="hLeft" className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
+                        <select id="hLeft" value={values.hLeft} onChange={handleChange} name="hLeft" className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
                             <option value="1">1"</option>
                             <option value="2">2"</option>
                             <option value="3">3"</option>
@@ -255,14 +288,13 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                             name='hCenter'
                             value={values.hCenter}
                             type="text" />
-                        <select id="wRight" defaultValue={values.hRight} name="hRight" onChange={handleChange} className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
+                        <select id="hRight" value={values.hRight} name="hRight" onChange={handleChange} className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
                             {
                                 size && size.map((value, index) => (
                                     <option className="bg-white text-black" key={index} value={value}>{`${value}`}</option>
                                 ))
                             }
                         </select>
-
                     </div>
                 </div>
             </div>
@@ -271,7 +303,7 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                     <p className="text-left sm:text-right text-sm align-top">Size</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <p className="text-sm ">{Size}</p>
+                    <p className="text-sm ">{values.size}</p>
                 </div>
             </div>
 
@@ -281,6 +313,18 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <div class="flex w-full border-gray-400 border">
+                        <select id="colorPick" value={values.colorPick} onChange={handleChange} name="colorPick" className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
                         <input onChange={e => setColor(e.target.value)} value={color} className="w-full p-2 focus:outline-none " type="text" placeholder="Enter Color Code" />
                         <button onClick={handleColors} className="border bg-red-600 hover:bg-red-700  text-white p-2 w-1/4">
                             <p className="font-medium text-sm">Add Color</p>
