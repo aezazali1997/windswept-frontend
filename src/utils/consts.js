@@ -102,3 +102,4 @@ export const size = [
     '6/8',
     '7/8',
 ]
+

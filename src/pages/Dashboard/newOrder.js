@@ -69,6 +69,8 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	const [grandTotal, setGrandTotal] = useState(0);
 	const [gTotalWithMarkup, setGrandTotalWithMarkup] = useState(0);
 	const [apiError, setAPIError] = useState('');
+	const [showPMSModal, setShowPMSModal] = useState(false);
+	const [showThreadModal, setShowThreadModal] = useState(false);
 
 
 	useEffect(() => {
@@ -354,6 +356,13 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 			setValues(updatedArray);
 
 		}
+	}
+
+	let handlePMSModal = () => {
+		setShowPMSModal(showPMSModal => !showPMSModal);
+	}
+	let handleThreadModal = () => {
+		setShowThreadModal(showThreadModal => !showThreadModal);
 	}
 
 
@@ -792,6 +801,10 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 									handleQty={handleQty}
 									removeColor={removeColor}
 									handleColors={handleColors}
+									handlePMSModal={handlePMSModal}
+									handleThreadModal={handleThreadModal}
+									showPMS={showPMSModal}
+									showThread={showThreadModal}
 									handleChange={handleChange}
 									filterOptions={filterOptions}
 								/>

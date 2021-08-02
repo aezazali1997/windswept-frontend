@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
 import MultiSelect from "react-multi-select-component";
 import { multiQty, size } from '../../utils/consts';
+import Modal from '../Modal';
+import PMSschema from '../../utils/PMSschema.json';
 
 const From = ({ handleChange, handleColors, selected, filterOptions, values,
-    setColor, color, removeColor, handleQty, errors, orderNo, readOnly }) => {
+    setColor, color, removeColor, handleQty, errors, orderNo, readOnly, handlePMSModal, handleThreadModal,
+    showThread, showPMS
+}) => {
 
     const { product, material, pe, backing, qty } = errors;
 
@@ -341,10 +345,20 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                             </button>
                         </div>
                         <div className="flex flex-row w-full">
-                            <button type="button" className="inline-flex bg-red-600 justify-center w-full border-r border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
-                            >PMS</button>
-                            <button type="button" className="inline-flex bg-red-600 justify-center w-full  border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium hover:bg-red-700 focus:outline-none"
-                            >Thread</button>
+                            <button
+                                onClick={() => handlePMSModal()}
+                                type="button"
+                                className="inline-flex bg-red-600 justify-center w-full border-r border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
+                            >
+                                PMS
+                            </button>
+                            <button
+                                onClick={() => handleThreadModal()}
+                                type="button"
+                                className="inline-flex bg-red-600 justify-center w-full  border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium hover:bg-red-700 focus:outline-none"
+                            >
+                                Thread
+                            </button>
                         </div>
 
                         <div className="h-56 w-full border overflow-y-scroll border-gray-400">
@@ -380,6 +394,24 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                 </div>
 
             </form>
+            {
+                showPMS ?
+                    (
+                        <Modal
+                            handleModal={handlePMSModal}
+                            title={'PMS Chart'}
+                            schema={PMSschema}
+                        />
+                    ) :
+                    showThread ? (
+                        <Modal
+                            handleModal={handleThreadModal}
+                            title={'Thread Chart'}
+                            schema={''}
+                        />
+                    ) :
+                        ''
+            }
         </>
     )
 }
