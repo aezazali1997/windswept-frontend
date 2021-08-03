@@ -483,12 +483,12 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
 					GrandTotal = GrandTotal + ((unitPrice * count).toFixed(3)) * 0.75
 				}
-				else if (week >= 1 && week <= 2) {
+				else if (week >= 1 && week < 2) {
 
 					GrandTotal = GrandTotal + ((unitPrice * count).toFixed(3)) * 0.50
 
 				}
-				else if (week > 2 && week <= 3) {
+				else if (week >= 2 && week < 3) {
 
 					GrandTotal = GrandTotal + ((unitPrice * count).toFixed(3)) * 0.30
 
@@ -511,12 +511,12 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
 					GrandTotalWithMarkup = GrandTotalWithMarkup + ((((((unitPrice * count).toFixed(3)) * 0.75).toFixed(3))) * item.markup)
 				}
-				else if (week >= 1 && week <= 2) {
+				else if (week >= 1 && week < 2) {
 
 					GrandTotalWithMarkup = GrandTotalWithMarkup + (((((unitPrice * count).toFixed(3)) * 0.50).toFixed(3)) * item.markup)
 
 				}
-				else if (week > 2 && week <= 3) {
+				else if (week >= 2 && week < 3) {
 
 					GrandTotalWithMarkup = GrandTotalWithMarkup + (((((unitPrice * count).toFixed(3)) * 0.30).toFixed(3)) * item.markup)
 
@@ -638,11 +638,11 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 											"75%"
 										)
 											:
-											week >= 1 && week <= 2 ? (
+											week >= 1 && week < 2 ? (
 												"50%"
 											)
 												:
-												week > 2 && week <= 3 ? (
+												week >= 2 && week < 3 ? (
 													"30%"
 												)
 													:

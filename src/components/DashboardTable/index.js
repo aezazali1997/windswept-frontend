@@ -88,11 +88,11 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 																			"75%"
 																		)
 																			:
-																			week >= 1 && week <= 2 ? (
+																			week >= 1 && week < 2 ? (
 																				"50%"
 																			)
 																				:
-																				week > 2 && week <= 3 ? (
+																				week >= 2 && week < 3 ? (
 																					"30%"
 																				)
 																					:
@@ -108,11 +108,11 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 																			parseFloat((unitPrice * count) * 0.75).toFixed(3)
 																		)
 																			:
-																			week >= 1 && week <= 2 ? (
+																			week >= 1 && week < 2 ? (
 																				parseFloat((unitPrice * count) * 0.50).toFixed(3)
 																			)
 																				:
-																				week > 2 && week <= 3 ? (
+																				week >= 2 && week < 3 ? (
 
 																					parseFloat((unitPrice * count) * 0.30).toFixed(3)
 																				)
@@ -128,11 +128,11 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 																			parseFloat(((unitPrice * count) * 0.75) * values.markup).toFixed(3)
 																		)
 																			:
-																			week > 1 && week < 2 ? (
+																			week >= 1 && week < 2 ? (
 																				parseFloat(((((unitPrice * count)) * 0.50)) * values.markup).toFixed(3)
 																			)
 																				:
-																				week > 2 && week < 3 ? (
+																				week >= 2 && week < 3 ? (
 
 																					parseFloat(((((unitPrice * count)) * 0.30)) * values.markup).toFixed(3)
 																				)
