@@ -3,6 +3,7 @@ import MultiSelect from "react-multi-select-component";
 import { multiQty, size } from '../../utils/consts';
 import Modal from '../Modal';
 import PMSschema from '../../utils/PMSschema.json';
+import Threadschema from '../../utils/ThreadSchema.json';
 
 const From = ({ handleChange, handleColors, selected, filterOptions, values,
     setColor, color, removeColor, handleQty, errors, orderNo, readOnly, handlePMSModal, handleThreadModal,
@@ -145,7 +146,8 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                         <p className="text-left sm:text-right text-sm align-top">Cut</p>
                     </div>
                     <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                        <select id="cut"
+                        <select
+                            id="cut"
                             name="cut"
                             value={values.cut}
                             onChange={(e) => handleChange(e, orderNo)} className="select">
@@ -182,7 +184,9 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                         <p className="text-left sm:text-right text-sm align-top">Packaging</p>
                     </div>
                     <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                        <select id="packaging" name="packaging"
+                        <select
+                            id="packaging"
+                            name="packaging"
                             value={values.packaging}
                             onChange={(e) => handleChange(e, orderNo)} className=" select">
                             <option value="">select...</option>
@@ -335,7 +339,13 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                     </div>
                     <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                         <div class="flex w-full border-gray-400 border">
-                            <input onChange={e => setColor(e.target.value)} value={color} className="w-full p-2 focus:outline-none " type="text" placeholder="Enter Color Code" />
+                            <input
+                                value={color}
+                                type="text"
+                                placeholder="Enter Color Code"
+                                onChange={e => setColor(e.target.value)}
+                                className="w-full p-2 focus:outline-none"
+                            />
                             <button
                                 type='button'
                                 disabled={readOnly ? true : false}
@@ -388,11 +398,9 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                                     </table>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </form>
             {
                 showPMS ?
@@ -401,13 +409,15 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                             handleModal={handlePMSModal}
                             title={'PMS Chart'}
                             schema={PMSschema}
+                            setColor={setColor}
                         />
                     ) :
                     showThread ? (
                         <Modal
                             handleModal={handleThreadModal}
                             title={'Thread Chart'}
-                            schema={''}
+                            schema={Threadschema}
+                            setColor={setColor}
                         />
                     ) :
                         ''

@@ -42,6 +42,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		size: 1,
 		data: [],
 		colors: [],
+		pmsColors: []
 	};
 
 	const error = {
@@ -110,7 +111,6 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	}
 
 	let handleClick = () => {
-		console.log('clicked')
 		upload.current.click();
 	}
 
@@ -144,7 +144,6 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	}
 
 	const handleNotes = (value) => {
-		console.log('notes', value);
 		setNotes(notes => notes = value)
 		const { title, reference } = initialValues;
 		const data = [{ title, reference, date, images, purchaseOrders: orderImages, value, items: [...values], errors: [...errors] }]
@@ -180,7 +179,6 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 			var now = moment(new Date()); //todays date
 			var end = moment(value); // end date
 			var weeks = end.diff(now, 'weeks');
-			console.log(weeks)
 			setDate(value);
 			setWeek(weeks);
 		}
@@ -226,7 +224,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		}
 	}
 	let callAPI = async () => {
-		const { product, material, backing, size, pe, freight, markup, colors, setQty } = values[orderNo];
+		const { product, material, backing, size, pe, freight, markup, pmsColors, setQty } = values[orderNo];
 
 		if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
 			// swal({
@@ -244,14 +242,12 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 				backing: backing,
 				size: size,
 				pc: parseInt(pe),
-				addColor: colors.length,
+				addColor: pmsColors.length,
 				freight: freight || 0,
 				markup: markup || 1,
 			}
-			console.log('data', data);
 			AxiosInstance.ordereEstimate(data)
 				.then(({ data: { data, message } }) => {
-					console.log(data);
 					if (message === "Failed" && data[0].error === 'Custom') {
 						swal({
 							text: 'Custom Quote will be given in 1-2 days',
@@ -336,15 +332,27 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
 
 	let handleColors = () => {
-		let CopyOriginal = [...values];
-		let updatedColorArray = CopyOriginal.map((item, i) => {
-			if (i !== orderNo) return item;
-			item.colors.push(color);
-			return item;
-		})
-		setValues([...updatedColorArray]);
-		setColor('');
-
+		if (color !== '') {
+			let CopyOriginal = [...values];
+			let updatedColorArray = CopyOriginal.map((item, i) => {
+				if (i !== orderNo) return item;
+				if (color.includes('PMS')) {
+					item.colors.push(color);
+					item.pmsColors.push(color);
+				}
+				else if (color.includes('G')) {
+					item.colors.push(color);
+				}
+				else {
+					item.colors.push(`PMS ${color}`);
+					item.pmsColors.push(`PMS ${color}`);
+				}
+				return item;
+			})
+			setValues([...updatedColorArray]);
+			setColor('');
+		}
+		handleSize(orderNo);
 	}
 
 	let removeColor = (index) => {
@@ -354,7 +362,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 			let FilteredColors = colors.filter((color) => !colors[index].match(color));
 			let updatedArray = updateValues(CopyOriginal, 'colors', FilteredColors, orderNo)
 			setValues(updatedArray);
-
+			handleSize(orderNo);
 		}
 	}
 
@@ -371,8 +379,6 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		let CopyOriginalErrors = [...errors];
 		let newErrorArray = [...CopyOriginalErrors, error]
 		let newValueArray = [...CopyOriginalValues, item]
-		console.log('newArray', newValueArray)
-		console.log('newArray', newErrorArray)
 		setOrderNo(orderNo + 1);
 		setErrors(newErrorArray)
 		setValues(newValueArray)
@@ -380,7 +386,6 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	}
 
 	let removeItem = (index) => {
-		console.log('index', index)
 		if (!readOnly) {
 			if (values.length < 2 && errors.length < 2) {
 				return
@@ -428,11 +433,10 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		initialValues,
 		validationSchema: OrderFormSchema,
 		validateOnBlur: true,
-		onSubmit: ({ title, reference }, { setStatus, setSubmitting, resetForm, setFieldValue }) => {
+		onSubmit: ({ title, reference }, { setStatus, setSubmitting, resetForm }) => {
 			setSubmitting(true);
 			enableLoading();
 			const data = [{ title, reference, date, images, week: week, purchaseOrders: orderImages, notes, items: [...values], errors: [...errors] }]
-			console.log('data', data)
 			store.dispatch(storeOrder(data))
 			swal({
 				icon: 'success',
@@ -797,14 +801,14 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 									selected={selected}
 									readOnly={readOnly}
 									values={values[orderNo]}
+									showPMS={showPMSModal}
+									showThread={showThreadModal}
 									setColor={setColor}
 									handleQty={handleQty}
 									removeColor={removeColor}
 									handleColors={handleColors}
 									handlePMSModal={handlePMSModal}
 									handleThreadModal={handleThreadModal}
-									showPMS={showPMSModal}
-									showThread={showThreadModal}
 									handleChange={handleChange}
 									filterOptions={filterOptions}
 								/>
