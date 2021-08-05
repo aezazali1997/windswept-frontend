@@ -45,7 +45,7 @@
 
 /* left-estimate-table */
 .left-estimate-table {
-  @apply px-3 text-gray-600 text-sm w-56;
+  @apply px-3 text-gray-600 text-sm w-80;
 }
 
 .right-estimate-table > tr > td {

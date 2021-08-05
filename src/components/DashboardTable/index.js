@@ -14,10 +14,10 @@ const DashboardChart = ({ values, data, apiError, week }) => {
                     <td className="left-estimate-table text-right">Estimated Price:</td>
                     <td className="left-estimate-table"></td>
                 </tr> */}
-			<tr>
+			{/* <tr>
 				<td className="left-estimate-table text-right">Backing:</td>
 				<td className="left-estimate-table">{values.backing}</td>
-			</tr>
+			</tr> */}
 			{/* <tr>
                     <td className=" left-estimate-table text-right">Pricing:</td>
                     <td className=" left-estimate-table"></td>
@@ -26,17 +26,21 @@ const DashboardChart = ({ values, data, apiError, week }) => {
                     <td className=" left-estimate-table text-right">Vendor:</td>
                     <td className=" left-estimate-table">{values.vendor}</td>
                 </tr> */}
-			<tr>
+			{/* <tr>
 				<td className="left-estimate-table text-right">Date:</td>
 				<td className="left-estimate-table">{moment().format('MMMM Do YYYY')}</td>
 			</tr>
 			<tr>
 				<td className="left-estimate-table text-right">Markup:</td>
 				<td className="left-estimate-table">{values.markup}</td>
-			</tr>
-			<tr>
+			</tr>*/}
+			{/* <tr>
 				<td className=" px-3 w-56 font-bold text-right">Result</td>
-				{/* <td className="border px-8 py-4">Neal Garrison</td> */}
+				<td className="left-estimate-table"></td>
+			</tr> */}
+			<tr>
+				<td className=" px-3 w-56 font-bold text-right"></td>
+				<td className="left-estimate-table"></td>
 			</tr>
 			<tr>
 				<td className="left-estimate-table" colSpan={2}>
@@ -56,7 +60,7 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 										<div className="flex-col w-1/3 border">
 											<p className="text-center font-medium">Total</p>
 										</div>
-										<div className="flex-col w-1/3 border">
+										{/* <div className="flex-col w-1/3 border">
 											<p className="text-center font-medium">Fee</p>
 										</div>
 										<div className="flex-col w-1/3 border">
@@ -64,7 +68,7 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 										</div>
 										<div className="flex-col w-1/3 border">
 											<p className="text-center font-medium">Grand Total (including markup)</p>
-										</div>
+										</div> */}
 									</div>
 									{
 										data ?
@@ -81,7 +85,7 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 															<div className="flex-col w-1/3 border">
 																<p className="text-center ">{(unitPrice * count).toFixed(3)}</p>
 															</div>
-															<div className="flex-col w-1/3 border">
+															{/* <div className="flex-col w-1/3 border">
 																<p className="text-center ">
 																	{
 																		week < 1 ? (
@@ -140,7 +144,7 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 																					((((unitPrice * count))) * values.markup).toFixed(3)
 																	}
 																</p>
-															</div>
+															</div> */}
 														</div>
 														: ''
 												))
@@ -154,7 +158,7 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 					</div>
 				</td>
 			</tr>
-			<tr>
+			{/* <tr>
 				<td className=" left-estimate-table text-right">Product Name:</td>
 				<td className=" left-estimate-table">{values.product}</td>
 			</tr>
@@ -176,9 +180,9 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 			</tr>
 			<tr>
 				<td className="left-estimate-table text-right">Size:</td>
-				<td className=" left-estimate-table">{values.size}</td>
-			</tr>
-		</table>
+				<td className=" left-estimate-table">{values.size}</td> */}
+			{/* </tr> */}
+		</table >
 	)
 }
 

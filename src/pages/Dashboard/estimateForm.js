@@ -1,7 +1,7 @@
 import React from 'react';
 import 'react-dropdown/style.css';
 import MultiSelect from "react-multi-select-component";
-import { multiQty, size, products, materials, backings, peData, borders, cutData, packagingData } from '../../utils/consts';
+import { multiQty, size, products, materials, backings, peData, borders, cutData, packagingData, colorData } from '../../utils/consts';
 import { Select } from '../../components';
 
 const Form = ({ thread, handleChange, handleColors, selected, setChecked, filterOptions,
@@ -126,12 +126,11 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                         handleChange={handleChange}
                         data={borders}
                     />
-
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Cut</p>
+                    <p className="text-left sm:text-right text-sm align-top">Shape</p>
                 </div>
                 <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                     <Select
@@ -306,7 +305,21 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                     <p className="text-sm ">{values.size}</p>
                 </div>
             </div>
-
+            <div className="flex flex-col sm:flex-row w-full ">
+                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+                    <p className="text-left sm:text-right text-sm align-top">Color</p>
+                </div>
+                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+                    <Select
+                        id='color'
+                        name='color'
+                        classNames={`select`}
+                        handleChange={handleChange}
+                        data={colorData}
+                    />
+                </div>
+            </div>
+            {/* 
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2 justify-start">
                     <p className="text-left sm:text-right text-sm align-top">Colors</p>
@@ -375,7 +388,7 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                             </div>
                         </div>
                     </div>
-                    {/* {
+                    {
                         submit ?
                             <div className="flex flex-row w-full mt-7">
                                 <button type="button" className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
@@ -392,9 +405,9 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                                 </button>
                             </div>
                             : ''
-                    } */}
+                    }
                 </div>
-            </div>
+            </div> */}
 
         </>
     )

@@ -55,7 +55,8 @@ const OrderEstimate = () => {
         size: 1,
         colorPick: '',
         freight: '',
-        custom: '7'
+        custom: '7',
+        color: '',
     });
     let PDF = useRef();
     const handlePrint = useReactToPrint({
@@ -85,10 +86,24 @@ const OrderEstimate = () => {
     };
 
     const onCopyText = () => {
-        setIsCopied(true);
-        setTimeout(() => {
-            setIsCopied(false);
-        }, 1000);
+        let price = "";
+        let cost = "";
+        if (data) {
+            selected.map(({ value }) => {
+                data.map(({ count, unitCost, unitPrice }, index) => {
+                    if (value === count.toString()) {
+                        price = price + `pcs${count} @ ${unitPrice} / `
+                        cost = cost + `pcs${count} @ ${unitCost} / `
+                    }
+                })
+            })
+            navigator.clipboard.writeText(`Backing: ${backing}, Date: ${moment().format('MMMM Do YYYY')}, Markup: ${markup}, Unit Price: ${price}, Unit Cost: ${cost}, Product: ${product}, Border: ${border}, Percent Embriodery: ${pe}, Shape: ${cut}, Size: ${size}`)
+            setIsCopied(true);
+            setTimeout(() => {
+                setIsCopied(false);
+            }, 1000);
+        }
+
     };
 
 
@@ -181,7 +196,7 @@ const OrderEstimate = () => {
             // })
         }
         else {
-            const { product, material, backing, size, pe, freight, markup } = values;
+            const { product, material, backing, size, pe, freight, markup, color } = values;
             enableLoading();
             const data = {
                 product: product,
@@ -189,7 +204,8 @@ const OrderEstimate = () => {
                 backing: backing,
                 size: size,
                 pc: parseInt(pe),
-                addColor: ColorsArray.length,
+                // addColor: ColorsArray.length,
+                color: parseInt(color),
                 freight: freight || 0,
                 markup: markup || 1,
             }
@@ -249,12 +265,12 @@ const OrderEstimate = () => {
 
     const { backing, markup, product, border, pe, cut, size } = values;
     return (
-        <div className="flex flex-col lg:flex-row w-full md:pt-28 bg-white">
+        <div className="flex flex-col lg:flex-row w-full md:pt-12 bg-white">
             <Helmet>
                 <title>WIMPIE | Windswept</title>
 
             </Helmet>
-            <div className="flex w-full flex-col justify-top items-center space-y-2">
+            <div className="flex w-full flex-col justify-top space-y-2">
                 <EstimateChart
                     ref={PDF}
                     data={data}
@@ -263,21 +279,18 @@ const OrderEstimate = () => {
                     values={values}
                     apiError={apiError}
                 />
-                <table>
+                <table className="mx-auto" >
                     <tr>
-                        <td className="px-8 left-estimate-table text-right">
-                            <CopyToClipboard text={`${backing}, ${markup}, ${product}, ${border}, ${pe}, ${cut}, ${size}, ${moment().format('MMMM Do YYYY, h:mm:ss a')}`} onCopy={onCopyText}>
-                                <div className="copy-area">
-                                    <button
-                                        className="inline-flex text-white bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600  justify-center w-40 border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium  focus:outline-none"
-                                        id="menu-button"
-                                        aria-expanded="true"
-                                        aria-haspopup="true"
-                                    >
-                                        {isCopied ? 'Copied' : 'Copy to clipboard'}
-                                    </button>
-                                </div>
-                            </CopyToClipboard>
+                        <td className="left-estimate-table text-right">
+                            <button
+                                onClick={onCopyText}
+                                className="inline-flex text-white bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600  justify-center w-40 border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium  focus:outline-none"
+                                id="menu-button"
+                                aria-expanded="true"
+                                aria-haspopup="true"
+                            >
+                                {isCopied ? 'Copied' : 'Copy to clipboard'}
+                            </button>
                         </td>
                         <td className="left-estimate-table">
                             <button
@@ -294,6 +307,32 @@ const OrderEstimate = () => {
                         </td>
                     </tr>
                 </table>
+                {/* <tr>
+                    <td className="left-estimate-table text-right">
+                        <button
+                            onClick={onCopyText}
+                            className="inline-flex text-white bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600  justify-center w-40 border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium  focus:outline-none"
+                            id="menu-button"
+                            aria-expanded="true"
+                            aria-haspopup="true"
+                        >
+                            {isCopied ? 'Copied' : 'Copy to clipboard'}
+                        </button>
+                    </td>
+                    <td className="left-estimate-table">
+                        <button
+
+                            onClick={handlePrint}
+                            type="button"
+                            className="inline-flex text-white bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600  justify-center w-20 border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium  focus:outline-none"
+                            id="menu-button"
+                            aria-expanded="true"
+                            aria-haspopup="true"
+                        >
+                            Print
+                        </button>
+                    </td>
+                </tr> */}
             </div>
             <div className="flex flex-col w-full pt-2 lg:pt-0 mb-5 ">
                 <Form

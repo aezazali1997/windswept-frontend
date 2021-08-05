@@ -59,7 +59,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	const [week, setWeek] = useState(0)
 
 	const [images, setImages] = useState([]);
-	const [orderImages, setOrderImages] = useState([]);
+	const [orderImages, setOrderImages] = useState('');
 	const [selected, setSelected] = useState([]);
 	const [color, setColor] = useState('');
 	const [notes, setNotes] = useState('');
@@ -91,13 +91,15 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		_Total();
 		_grandTotal();
 		_GrandTotalWithMarkup();
-	}, [images, values, errors]);
+	}, [images, values, errors, orderImages]);
 
 
 	const initialValues = {
 		title: selectedOrder?.title || '',
 		reference: selectedOrder?.reference || '',
 		date: selectedOrder?.date || '',
+		shipAddress: selectedOrder?.shipAddress || '',
+		customerNote: selectedOrder?.customerNote || ''
 	};
 
 	let upload = useRef();
@@ -124,11 +126,8 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	let orderUpload = useRef();
 
 	let onChangeOrderFile = (event) => {
-		fileOrderObj.push(event.target.files)
-		for (let i = 0; i < fileOrderObj[0].length; i++) {
-			fileOrderArray.push(URL.createObjectURL(fileOrderObj[0][i]))
-		}
-		setOrderImages(fileOrderArray); /// if you want to upload latter
+		const { files } = event.target;
+		setOrderImages(files[0]); /// if you want to upload latter
 	}
 
 	let OrderUploadClick = () => {
@@ -137,9 +136,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
 	let handleRemoveOrderImg = (index) => {
 		if (!readOnly) {
-			let CopyOriginal = [...orderImages];
-			CopyOriginal.splice(index, 1);
-			setOrderImages(CopyOriginal);
+			setOrderImages(orderImages => orderImages = '');
 		}
 	}
 
@@ -547,12 +544,82 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 						}
 					</h1>
 				</div>
+				<div className="flex flex-col justify-center items-center" >
+					<div className="flex flex-col w-full sm:w-2/3 lg:w-1/3  mb-10 space-y-2 px-3">
+
+						<div className="flex flex-row items-center">
+							<span>
+								<svg data-tip data-for="orderTitle" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+								</svg>
+								<ReactTooltip id="orderTitle" place="top" effect="solid" border={false} borderColor="white" clickable={false}>
+									Name of your Order
+								</ReactTooltip>
+							</span>&nbsp;
+
+							<input
+								disabled={readOnly ? true : false}
+								className={`input ${getInputClassNamees('title')}`}
+								placeholder="Enter a name for your order..."
+								type="text"
+								id="title"
+								name="title"
+								{...formik.getFieldProps('title')}
+							/>
+						</div>
+						<div className="flex flex-row items-center">
+							<span>
+								<svg data-tip data-for="orderRef" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+								</svg>
+								<ReactTooltip id="orderRef" place="top" effect="solid" border={false} borderColor="white" clickable={false}>
+									Reference name with which you want your order to be identified
+								</ReactTooltip>
+							</span>&nbsp;
+
+							<input
+								disabled={readOnly ? true : false}
+								className={`input ${getInputClassNamees('reference')}`}
+								placeholder="Enter Customer Reference..."
+								type="text"
+								id="reference"
+								name="reference"
+								{...formik.getFieldProps('reference')}
+							/>
+						</div>
+						<div className="flex flex-row items-center">
+							<span>
+								<svg data-tip data-for="orderDate" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+								</svg>
+								<ReactTooltip id="orderDate" place="top" effect="solid" border={false} borderColor="white" clickable={false}>
+									<ul>
+										<li>Standard - 3-4 weeks - Standard</li>
+										<li>Expedited - 2-3 weeks - 30%</li>
+										<li>Rush - 1-2 weeks - 50%</li>
+										<li>Miracle if even possible under 1 week - 75%</li>
+									</ul>
+								</ReactTooltip>
+							</span>&nbsp;
+							<input
+								type={'text'}
+								name="date"
+								value={date}
+								placeholder="In hands date"
+								onFocus={_onFocus}
+								disabled={readOnly ? true : false}
+								onBlur={_onBlur}
+								className={`input ${getInputClassNamees('date')}`}
+								onChange={handleChange}
+							/>
+						</div>
+					</div>
+				</div>
 				<div className="flex flex-col md:flex-row py-5 space-y-2 md:space-y-0 
             			justify-center md:justify-around items-start"
 				>
-
 					<div className="flex flex-col w-full h-full justify-center items-center md:sticky md:top-2">
-						<div className="w-full h-full px-3 sm:w-1/2">
+						<div className="w-full h-full px-3 sm:w-2/3">
 							<div className=" h-44 w-full border overflow-y-scroll border-gray-400">
 								<div className="align-middle inline-block min-w-full">
 									<div className="overflow-hidden border">
@@ -569,7 +636,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 																	<div className={`text-sm ${index === orderNo ? 'text-white' : 'text-black'} `}>{index + 1}</div>
 																</div>
 																<div className="flex flex-col w-10/12 px-10">
-																	<div className={`text-sm ${index === orderNo ? 'text-white' : 'text-black'}`}>{item.product}</div>
+																	<div className={`text-sm ${index === orderNo ? 'text-white' : 'text-black'}`}>{item.product}, {item.material}, {item.backing}</div>
 																</div>
 																<div
 																	onClick={() => removeItem(index)}
@@ -617,8 +684,86 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 									Cancel
 								</button>
 							</div>
-
 						</div>
+						<div className={`flex flex-row w-full px-3 mt-6 sm:w-2/3 space-x-2 ${orderImages === '' ? 'justify-center' : 'justify-start'}`}>
+							<div className={`flex flex-row ${orderImages === '' ? '' : 'w-full'}`}>
+								<input
+									type="file"
+									accept='image/*'
+									ref={orderUpload}
+									className="hidden"
+									onChange={onChangeOrderFile}
+								/>
+								<Button
+									type='button'
+									disabled={readOnly ? true : false}
+									onClick={OrderUploadClick}
+									label={(
+										<>
+											<p className="text-sm font-white font-bold">Upload Purchase Order(s)</p>&nbsp;
+											<svg className="w-4 h-4 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+											</svg>
+										</>
+									)}
+									classNames="p-2 w-auto flex mb-8 items-center bg-red-600 text-white hover:bg-red-700 "
+								/>
+							</div>
+							<div onClick={() => handleRemoveOrderImg()}
+								className={`${orderImages === '' ? 'hidden' : 'flex border relative border-red-600 rounded-md p-1 w-full h-10'}`}>
+								<p>{orderImages?.name}  <svg className="w-6 h-6 rounded-md absolute right-0 top-2 cursor-pointer hover:shadow-lg z-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+								</svg></p>
+							</div>
+						</div>
+
+						<div className="flex flex-col w-full px-3 sm:w-2/3 border border-red-600 rounded-md border-dotted">
+							<div className={`py-4  ${isEmpty(images) !== true ? 'grid grid-cols-2 sm:grid-cols-4 gap-2' : 'flex justify-center'} w-full`}>
+								{
+									!isEmpty(images) ?
+										images.map((image, index) => (
+											<div key={index} className="relative">
+												<img src={image} alt="img" className="w-36 h-30 rounded-lg" />
+												<div onClick={() => handleRemoveImg(index)} className="absolute flex top-0 right-0 border-1 rounded-full text-red-600 hover:ring-2 hover:ring-red-500  w-5 h-5 shadow-md z-50 bg-white items-center justify-center">
+													<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+														<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+													</svg>
+												</div>
+											</div>
+										))
+										: <div>
+											<svg className="w-40 h-40 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+											</svg>
+										</div>
+								}
+							</div>
+							<div className="flex flex-row justify-center">
+								<input
+									type="file"
+									multiple={true}
+									accept='image/*'
+									ref={upload}
+									className="hidden"
+									onChange={onChangeFile}
+								/>
+								<Button
+									type='button'
+									disabled={readOnly ? true : false}
+									onClick={handleClick}
+									label={(
+										<>
+											<p className="text-sm font-white font-bold">Add Image(s)</p>&nbsp;
+											<svg className="w-4 h-4 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+											</svg>
+										</>
+									)}
+									classNames="p-2 w-auto flex mb-8 items-center bg-red-600 text-white hover:bg-red-700 "
+								/>
+							</div>
+						</div>
+
 						<div className="flex flex-col w-full h-full pt-5 space-y-8">
 							<DashboardChart
 								data={data}
@@ -663,83 +808,15 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 						</div>
 					</div>
 					<div className="flex flex-col pt-20 md:pt-0 w-full">
-						<div className="flex flex-col md:flex-row">
+						{/* <div className="flex flex-col md:flex-row">
 							<div className="flex flex-col w-full md:w-3/12 px-3 py-2 justify-start">
-								{/* <p className="text-left sm:text-right text-sm align-top">Vendor</p> */}
+								<p className="text-left sm:text-right text-sm align-top">Vendor</p>
 							</div>
 							<div className="flex flex-col w-full justify-center items-center md:w-9/12 ">
-								<div className="flex flex-col w-full  space-y-2 px-3">
-
-									<div className="flex flex-row items-center">
-										<span>
-											<svg data-tip data-for="orderTitle" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-											</svg>
-											<ReactTooltip id="orderTitle" place="top" effect="solid" border={false} borderColor="white" clickable={false}>
-												Name of your Order
-											</ReactTooltip>
-										</span>&nbsp;
-
-										<input
-											disabled={readOnly ? true : false}
-											className={`input ${getInputClassNamees('title')}`}
-											placeholder="Enter a name for your order..."
-											type="text"
-											id="title"
-											name="title"
-											{...formik.getFieldProps('title')}
-										/>
-									</div>
-									<div className="flex flex-row items-center">
-										<span>
-											<svg data-tip data-for="orderRef" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-											</svg>
-											<ReactTooltip id="orderRef" place="top" effect="solid" border={false} borderColor="white" clickable={false}>
-												Reference name with which you want your order to be identified
-											</ReactTooltip>
-										</span>&nbsp;
-
-										<input
-											disabled={readOnly ? true : false}
-											className={`input ${getInputClassNamees('reference')}`}
-											placeholder="Enter Customer Reference..."
-											type="text"
-											id="reference"
-											name="reference"
-											{...formik.getFieldProps('reference')}
-										/>
-									</div>
-									<div className="flex flex-row items-center">
-										<span>
-											<svg data-tip data-for="orderDate" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-											</svg>
-											<ReactTooltip id="orderDate" place="top" effect="solid" border={false} borderColor="white" clickable={false}>
-												<ul>
-													<li>Standard - 3-4 weeks</li>
-													<li>Expedited - 2-3 weeks</li>
-													<li>Rush - 1-2 weeks</li>
-													<li>Miracle if even possible under 1 week</li>
-												</ul>
-											</ReactTooltip>
-										</span>&nbsp;
-										<input
-											type={'text'}
-											name="date"
-											value={date}
-											placeholder="In hands date"
-											onFocus={_onFocus}
-											disabled={readOnly ? true : false}
-											onBlur={_onBlur}
-											className={`input ${getInputClassNamees('date')}`}
-											onChange={handleChange}
-										/>
-									</div>
-								</div>
+								
 							</div>
-						</div>
-						<div className="flex flex-col md:flex-row">
+						</div> */}
+						{/* <div className="flex flex-col md:flex-row">
 							<div className="flex flex-col w-full md:w-3/12 px-3 py-2  justify-start  ">
 							</div>
 							<div className="flex flex-col w-full md:w-9/12">
@@ -791,7 +868,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> */}
 						{
 							values[orderNo] && errors[orderNo] && (
 								<Form
@@ -815,7 +892,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
 							)
 						}
-						<div className="flex flex-col sm:flex-row">
+						{/* <div className="flex flex-col sm:flex-row">
 							<div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
 								<p className="text-left sm:text-right text-sm align-top">Ship To Address:</p>
 							</div>
@@ -831,15 +908,15 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 									{...formik.getFieldProps('shipAddress')}
 								/>
 							</div>
-						</div>
-						<div className="flex flex-col md:flex-row">
+						</div> */}
+						{/* <div className="flex flex-col md:flex-row">
 							<div className="flex flex-col w-full md:w-3/12 px-3 py-2  justify-start  ">
 							</div>
 							<div className="flex flex-col w-full md:w-9/12">
 								<div className="flex flex-col w-full">
 									<div className={`py-4  ${isEmpty(orderImages) !== true ? 'grid grid-cols-2 sm:grid-cols-4 gap-2' : 'flex justify-center'} w-full`}>
 										{
-											isEmpty(orderImages) !== true ?
+											!isEmpty(orderImages) ?
 												orderImages.map((image, index) => (
 													<div key={index} className="relative">
 														<img src={image} alt="img" className="w-36 h-36 rounded-lg" />
@@ -884,8 +961,8 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 									</div>
 								</div>
 							</div>
-						</div>
-						<div className="flex flex-col sm:flex-row ">
+						</div> */}
+						{/* <div className="flex flex-col sm:flex-row ">
 							<div className="flex flex-col w-full sm:w-3/12 px-3 py-2 justify-start">
 								<p className="text-left sm:text-right text-sm align-top">Customer Notes:</p>
 							</div>
@@ -899,7 +976,37 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 								/>
 
 							</div>
-						</div>
+						</div> */}
+					</div>
+				</div>
+				<div className="flex flex-col w-full px-3 py-2  justify-start  ">
+					<p className="text-left text-sm align-top">Ship To Address:</p>
+					<div className="flex flex-col w-full ">
+						<textarea
+							rows={4}
+							disabled={readOnly ? true : false}
+							className={`input ${getInputClassNamees('shipAddress')}`}
+							placeholder="Shipping Address..."
+							type="text"
+							id="shipAddress"
+							name="shipAddress"
+							{...formik.getFieldProps('shipAddress')}
+						/>
+					</div>
+				</div>
+				<div className="flex flex-col w-full px-3 py-2  justify-start  ">
+					<p className="text-left text-sm align-top">Customer Notes:</p>
+					<div className="flex flex-col w-full ">
+						<textarea
+							rows={4}
+							disabled={readOnly ? true : false}
+							className={`input ${getInputClassNamees('customerNote')}`}
+							placeholder="Please add any additional information needed for this order"
+							type="text"
+							id="customerNote"
+							name="customerNote"
+							{...formik.getFieldProps('customerNote')}
+						/>
 					</div>
 				</div>
 			</form>

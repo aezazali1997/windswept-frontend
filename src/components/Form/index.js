@@ -56,7 +56,7 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                             className={`select ${product ? 'border-red-500' : 'border-gray-500'}`}>
                             <option value="">select...</option>
                             <option value="Emblem">Emblems</option>
-                            <option value="Peel-N-Stick Embroidery">Peel-N-Stick Embroidery</option>
+                            {/* <option value="Peel-N-Stick Embroidery">Peel-N-Stick Embroidery</option> */}
                             <option value="Embroidered KeyFobs">Embroidered KeyFobs</option>
                             <option value="Woven 3D Puff Key Fobs">Woven 3D Puff Key Fobs</option>
                             <option value="Embriodered Bag Tags">Embriodered Bag Tags</option>
@@ -137,13 +137,12 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                             <option value="">select...</option>
                             <option value="Merrowed">Merrowed</option>
                             <option value="Heat Cut">Heat Cut</option>
-
                         </select>
                     </div>
                 </div>
                 <div className="flex flex-col sm:flex-row w-full ">
                     <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                        <p className="text-left sm:text-right text-sm align-top">Cut</p>
+                        <p className="text-left sm:text-right text-sm align-top">Shape</p>
                     </div>
                     <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                         <select
@@ -231,7 +230,7 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
                 </div>
                 <div className="flex flex-col sm:flex-row w-full ">
                     <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                        <p className="text-left sm:text-right text-sm align-top">Mark Up</p>
+                        <p className="text-left sm:text-right text-sm align-top">Your Customer Markup</p>
                     </div>
                     <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
                         <input
