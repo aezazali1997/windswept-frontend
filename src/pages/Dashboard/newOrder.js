@@ -31,7 +31,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		packaging: '',
 		setQty: [],
 		optionalItem: '',
-		markup: '10',
+		markup: '',
 		discountApply: false,
 		wLeft: '1',
 		wRight: '0',
@@ -779,20 +779,22 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 								<tr>
 									<td className="left-estimate-table text-right font-medium">Fee:</td>
 									<td className="left-estimate-table">{
-										week < 1 ? (
-											"75%"
-										)
+										date === '' ? ''
 											:
-											week >= 1 && week < 2 ? (
-												"50%"
+											week < 1 ? (
+												"75%"
 											)
 												:
-												week >= 2 && week < 3 ? (
-													"30%"
+												week >= 1 && week < 2 ? (
+													"50%"
 												)
 													:
+													week >= 2 && week < 3 ? (
+														"30%"
+													)
+														:
 
-													("Standard")
+														("Standard")
 									}</td>
 								</tr>
 								<tr>
