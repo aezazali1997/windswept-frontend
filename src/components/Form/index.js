@@ -3,7 +3,7 @@ import MultiSelect from "react-multi-select-component";
 import { multiQty, size } from '../../utils/consts';
 import Modal from '../Modal';
 import PMSschema from '../../utils/PMSschema.json';
-import Threadschema from '../../utils/ThreadSchema.json';
+import Threadschema from '../../utils/thread-schema.json';
 
 const From = ({ handleChange, handleColors, selected, filterOptions, values,
     setColor, color, removeColor, handleQty, errors, orderNo, readOnly, handlePMSModal, handleThreadModal,

@@ -333,12 +333,12 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 			let CopyOriginal = [...values];
 			let updatedColorArray = CopyOriginal.map((item, i) => {
 				if (i !== orderNo) return item;
-				if (color.includes('PMS')) {
+				if (color.includes('(') && color.includes('PMS')) {
+					item.colors.push(color);
+				}
+				else if (color.includes('PMS')) {
 					item.colors.push(color);
 					item.pmsColors.push(color);
-				}
-				else if (color.includes('G')) {
-					item.colors.push(color);
 				}
 				else {
 					item.colors.push(`PMS ${color}`);
@@ -346,18 +346,22 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 				}
 				return item;
 			})
+			console.log(updatedColorArray)
 			setValues([...updatedColorArray]);
 			setColor('');
 		}
 		handleSize(orderNo);
 	}
 
+
 	let removeColor = (index) => {
 		if (!readOnly) {
 			let CopyOriginal = [...values];
 			let colors = CopyOriginal[orderNo].colors;
-			let FilteredColors = colors.filter((color) => !colors[index].match(color));
+			console.log('color', color, CopyOriginal[orderNo].colors, orderNo, colors[0].match(color))
+			let FilteredColors = colors.filter((color) => colors[index] !== (color));
 			let updatedArray = updateValues(CopyOriginal, 'colors', FilteredColors, orderNo)
+			console.log(updatedArray);
 			setValues(updatedArray);
 			handleSize(orderNo);
 		}
