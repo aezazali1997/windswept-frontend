@@ -117,3 +117,36 @@ export const size = [
     '7/8',
 ]
 
+export const CustomerRoutes = [
+    {
+        route: '/dashboard',
+        name: 'Dashboard'
+    },
+    {
+        route: '/toggle-tutorials',
+        name: 'Tutorials'
+    },
+    {
+        route: '/contact',
+        name: 'Contact'
+    },
+    {
+        route: '/terms-of-services',
+        name: 'Terms of Services'
+    }
+]
+
+export const AdminRoutes = [
+    {
+        route: '/admin/wimpie',
+        name: 'Wimpie'
+    },
+    {
+        route: '/admin/price-sheet',
+        name: 'Price Sheet'
+    },
+    {
+        route: '/admin/Orders',
+        name: 'Orders'
+    }
+]

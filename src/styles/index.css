@@ -7,6 +7,7 @@
 @import './hamburger.css';
 @import './scrollUp.css';
 @import './navbar.css';
+@import './spreadsheet.css';
 @import '../../node_modules/video-react/dist/video-react.css';
 
 .floating-input > input::placeholder {
@@ -133,4 +134,8 @@ th[colspan='2'] {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.pricesheet{
+  height: 89.5vh;
 }

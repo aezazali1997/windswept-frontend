@@ -1,9 +1,10 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Sling as Hamburger } from 'hamburger-react'
-import Button from '../Button';
+import { AdminRoutes, CustomerRoutes } from '../../utils/consts';
 
 const Navbar = ({ toggle, isOpen, login, handleLogout }) => {
+
     return (
         <nav
             className='flex justify-between items-center h-16 text-black relative shadow-md font-mono navbar'
@@ -20,24 +21,20 @@ const Navbar = ({ toggle, isOpen, login, handleLogout }) => {
                 {
                     login ?
                         <>
-                            <NavLink to='/dashboard' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
-                                DashBoard
-                            </NavLink>
-                            {/* <NavLink to='/new-estimate' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
-                                Estimator
-                            </NavLink> */}
-                            <NavLink to='/toggle-tutorials' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active" >
-                                Tutorials
-                            </NavLink>
-                            <NavLink to='/contact' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
-                                Contact
-                            </NavLink>
-                            <NavLink to='/terms-of-services' className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
-                                Terms of Services
-                            </NavLink>
-                            {/* <NavLink to="/" onClick={handleLogout} className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
-                                Logout
-                            </NavLink> */}
+                            {
+                                localStorage.getItem('type') === 'customer' ?
+                                    CustomerRoutes.map(({ name, route }, index) => (
+                                        <NavLink key={index} to={route} className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
+                                            {name}
+                                        </NavLink>
+                                    ))
+                                    :
+                                    AdminRoutes.map(({ name, route }, index) => (
+                                        <NavLink key={index} to={route} className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
+                                            {name}
+                                        </NavLink>
+                                    ))
+                            }
                             <button type="button" onClick={handleLogout}
                                 className="p-4 font-weight: 600px;
                                 uppercase font-sans text-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none ">

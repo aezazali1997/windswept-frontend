@@ -2,7 +2,6 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import { InputField } from "../../components";
 import { LoginSchema } from "../../utils/validation_schema";
 import AxiosInstance from "../../APIs/axiosInstance";
@@ -12,7 +11,7 @@ const initialValues = {
     password: "",
 };
 
-const Login = () => {
+const AdminLogin = () => {
     const [loading, setLoading] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -58,7 +57,7 @@ const Login = () => {
                     email,
                     password
                 }
-                AxiosInstance.login(payload)
+                AxiosInstance.adminLogin(payload)
                     .then(({ data: { data: { token, type }, message } }) => {
                         disableLoading();
                         setError(false);
@@ -84,7 +83,7 @@ const Login = () => {
         <div className="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
             {/*SEO Support*/}
             <Helmet>
-                <title>Login | Windswept</title>
+                <title>Admin Login | Windswept</title>
 
             </Helmet>
             {/*SEO Support End */}
@@ -189,5 +188,5 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default AdminLogin;
 

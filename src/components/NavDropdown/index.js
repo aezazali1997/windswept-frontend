@@ -1,7 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { AdminRoutes, CustomerRoutes } from '../../utils/consts';
 
 const NavDropdown = ({ isOpen, toggle, handleLogout }) => {
+
     return (
         <div
             className={
@@ -12,21 +14,21 @@ const NavDropdown = ({ isOpen, toggle, handleLogout }) => {
             onClick={toggle}
         >
             <>
-                <NavLink to='/dashboard' className='p-4 font-sans '>
-                    Dashboard
-                </NavLink>
-                {/* <NavLink to='/new-estimate' className='p-4 font-sans '>
-                    Estimator
-                </NavLink> */}
-                <NavLink to='/toggle-tutorials' className='p-4 font-sans '>
-                    Tutorials
-                </NavLink>
-                <NavLink to='/contact' className='p-4 font-sans '>
-                    Contact
-                </NavLink>
-                <NavLink to='/terms-of-services' className='p-4 font-sans '>
-                    Terms of Services
-                </NavLink>
+                {
+                    localStorage.getItem('type') === 'customer' ?
+                        CustomerRoutes.map(({ route, name }, index) => (
+                            <NavLink key={index} to={route} className='p-4 font-sans '>
+                                {name}
+                            </NavLink>
+
+                        ))
+                        :
+                        AdminRoutes.map(({ route, name }, index) => (
+                            <NavLink key={index} to={route} className='p-4 font-sans '>
+                                {name}
+                            </NavLink>
+                        ))
+                }
                 <button type="button" onClick={handleLogout}
                     className="p-4 font-weight: 600px;
                         uppercase font-sans text-center py-2 px-4 border border-transparent text-sm font-medium

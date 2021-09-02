@@ -1,14 +1,18 @@
 import axios from "axios";
-export const USER_API_BASE_URL = `${process.env.BASE_URL}`;
+export const BASE_URL = 'https://windswept-backend.herokuapp.com';
 
 class AxiosInstance {
     async ordereEstimate(payload) {
         console.log('In OrderEstimate API')
-        return await axios.post('https://windswept-backend.herokuapp.com' + "/api/wimpie", payload);
+        return await axios.post(BASE_URL + "/api/wimpie", payload);
     }
 
     async login(credentials) {
-        return await axios.post('https://windswept-backend.herokuapp.com' + "/api/user/signin", credentials);
+        return await axios.post(BASE_URL + "/api/user/signin", credentials);
+    }
+
+    async adminLogin(credentials) {
+        return await axios.post(BASE_URL + "/api/admin/signin", credentials);
     }
 
     getUserInfo() {
