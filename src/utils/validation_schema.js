@@ -34,6 +34,13 @@ export const LoginSchema = Yup.object().shape({
         .required('This field is required'),
 });
 
+export const PriceSheetSchema = Yup.object().shape({
+    title: Yup.string()
+        .required('This field is required'),
+    material: Yup.string()
+        .required('This field is required'),
+});
+
 
 export const ContactFormSchema = Yup.object().shape({
     email: Yup.string()

@@ -13,3 +13,4 @@ export { default as Select } from './Select';
 export { default as TextEditor } from './TextEditor';
 export { default as Modal } from './TextEditor';
 export { default as AutoSizeInput } from './AutoSizeInput';
+export { default as PriceSheetModal } from './PriceSheetModal';
