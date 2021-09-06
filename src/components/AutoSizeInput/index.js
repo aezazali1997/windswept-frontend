@@ -6,11 +6,11 @@ const AutoSizeInput = ({ value, name, handleChange, Style, rowIndex, readOnly, t
     return (
         <AutosizeInput
             type={type}
-            className={Style}
+            inputClassName={Style}
             readOnly={readOnly}
             name={name}
             minWidth='100'
-            defaultValue={value}
+            value={value}
             onChange={(e) => handleChange(e, rowIndex)}
         />
     )

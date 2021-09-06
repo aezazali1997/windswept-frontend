@@ -41,6 +41,11 @@ export const PriceSheetSchema = Yup.object().shape({
         .required('This field is required'),
 });
 
+export const AddColumnSchema = Yup.object().shape({
+    column: Yup.string()
+        .required('Column field is required')
+});
+
 
 export const ContactFormSchema = Yup.object().shape({
     email: Yup.string()
