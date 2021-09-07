@@ -98,26 +98,26 @@ const UseFetchPriceData = () => {
     }
 
     const _DeleteColumn = () => {
-        // let copyArray = [...data];
-        // let copyAllData = [...allData];
-        // let updatedPricingData = [];
-        // if (!isEmpty(copyArray)) {
-        //     updatedPricingData = copyArray.map(item => {
-        //         const x = Object.keys(item)
-        //         if (x) {
-        //             console.log('x: ', x);
-        //             delete item[x[x.length - 1]]
-        //             return item;
-        //         }
-        //     });
-        // }
-        // let updateData = copyAllData.map((item, i) => {
-        //     if (i !== selected?.index) return item;
-        //     return item;
-        // })
-        // console.log('AfterCell: ', updatedPricingData);
-        // setData(updatedPricingData);
-        // setAllData([updateData]);
+        let copyArray = [...data];
+        let copyAllData = [...allData];
+        let updatedPricingData = [];
+        if (!isEmpty(copyArray)) {
+            updatedPricingData = copyArray.map(item => {
+                const x = Object.keys(item)
+                if (x) {
+                    console.log('x: ', x);
+                    delete item[x[x.length - 1]]
+                    return item;
+                }
+            });
+        }
+        let updateData = copyAllData.map((item, i) => {
+            if (i !== selected?.index) return item;
+            return item;
+        })
+        console.log('AfterCell: ', updatedPricingData);
+        setData(updatedPricingData);
+        setAllData([updateData]);
     }
 
     const onSelectSheet = (values) => {
