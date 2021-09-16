@@ -44,11 +44,11 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 			</tr>
 			<tr>
 				<td className="left-estimate-table" colSpan={2}>
-					<div className="flex flex-col justify-center items-center w-full">
-						{
-							apiError ?
-								<p className="text-center font-medium py-1 px-1 border">{apiError}</p>
-								:
+					{
+						apiError ?
+							<p className="text-center font-medium py-2 px-1 border">{apiError}</p>
+							:
+							<div className="flex flex-col justify-center items-center w-full">
 								<>
 									<div className="flex w-full justify-center">
 										<div className="flex-col w-1/3 border">
@@ -68,7 +68,7 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 										</div>
 										<div className="flex-col w-1/3 border">
 											<p className="text-center font-medium">Grand Total (including markup)</p>
-										</div> */}
+										</div>  */}
 									</div>
 									{
 										data ?
@@ -149,13 +149,11 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 														: ''
 												))
 											))
-
-											:
-											''
+											: ''
 									}
 								</>
-						}
-					</div>
+							</div>
+					}
 				</td>
 			</tr>
 			{/* <tr>

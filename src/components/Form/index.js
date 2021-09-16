@@ -12,6 +12,14 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
 
     const { product, material, pe, backing, qty } = errors;
 
+    let handleFormDisable = (value) => {
+        var form = document.getElementById("orderForm");
+        var elements = form.elements;
+        for (var i = 0, len = elements.length; i < len; ++i) {
+            elements[i].disabled = value;
+        }
+    }
+
     useEffect(() => {
         if (readOnly === true) {
             handleFormDisable(true);
@@ -22,13 +30,6 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
         console.log('errors', errors);
     }, [readOnly])
 
-    let handleFormDisable = (value) => {
-        var form = document.getElementById("orderForm");
-        var elements = form.elements;
-        for (var i = 0, len = elements.length; i < len; ++i) {
-            elements[i].disabled = value;
-        }
-    }
 
     return (
         <>

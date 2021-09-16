@@ -78,6 +78,15 @@ export const OrderFormSchema = Yup.object().shape({
 
 });
 
+export const FilterFormSchema = Yup.object().shape({
+    orderName: Yup.string(),
+    customerReference: Yup.string(),
+    productName: Yup.string(),
+    oppStage: Yup.string(),
+    otherOpportunity: Yup.string(),
+    date: Yup.date()
+});
+
 
 
 export const ForgetPasswordSchema = Yup.object().shape({

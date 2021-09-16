@@ -15,3 +15,5 @@ export { default as Modal } from './TextEditor';
 export { default as AutoSizeInput } from './AutoSizeInput';
 export { default as PriceSheetModal } from './PriceSheetModal';
 export { default as ModalDecider } from './ModalDecider';
+export { default as CustomModal } from './CustomModal';
+export { default as SearchFilters } from './SearchFilters';

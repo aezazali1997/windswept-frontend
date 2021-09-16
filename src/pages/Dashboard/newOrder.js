@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import ReactTooltip from "react-tooltip";
 
 import Button from './button';
-import { DashboardChart, Form, TextEditor } from '../../components';
+import { DashboardChart, Form } from '../../components';
 import { OrderFormSchema } from '../../utils/validation_schema';
 import { updateValues, updateErrors } from '../../utils/helpers'
 import store from '../../store';
@@ -16,8 +16,7 @@ import moment from 'moment';
 
 var fileArray = [];
 var fileObj = [];
-var fileOrderArray = [];
-var fileOrderObj = [];
+
 const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
 	const item = {
@@ -57,7 +56,6 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	const [orderNo, setOrderNo] = useState(0)
 	const [date, setDate] = useState('')
 	const [week, setWeek] = useState(0)
-
 	const [images, setImages] = useState([]);
 	const [orderImages, setOrderImages] = useState('');
 	const [selected, setSelected] = useState([]);
@@ -239,21 +237,23 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 				backing: backing,
 				size: size,
 				pc: parseInt(pe),
-				addColor: pmsColors.length,
+				addColor: pmsColors?.length,
 				freight: freight || 0,
 				markup: markup || 1,
 			}
 			AxiosInstance.ordereEstimate(data)
 				.then(({ data: { data, message } }) => {
 					if (message === "Failed" && data[0].error === 'Custom') {
-						swal({
-							text: 'Custom Quote will be given in 1-2 days',
-							icon: 'info',
-							dangerMode: true,
-							buttons: false,
-							timer: 3000,
-						})
+						// swal({
+						// 	text: 'Custom Quote will be given in 1-2 days',
+						// 	icon: 'info',
+						// 	dangerMode: true,
+						// 	buttons: false,
+						// 	timer: 3000,
+						// })
 						setAPIError('Custom Quote will be given in 1 - 2 days')
+						setTotal(0);
+						setGrandTotal(0);
 						setData([]);
 					}
 					else if (message === 'Failed' && data[0].error === 'Not Found') {
@@ -378,8 +378,8 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 	let addAnother = () => {
 		let CopyOriginalValues = [...values];
 		let CopyOriginalErrors = [...errors];
-		let newErrorArray = [...CopyOriginalErrors, error]
-		let newValueArray = [...CopyOriginalValues, item]
+		let newErrorArray = [...CopyOriginalErrors, error,]
+		let newValueArray = [...CopyOriginalValues, item,]
 		setOrderNo(orderNo + 1);
 		setErrors(newErrorArray)
 		setValues(newValueArray)
@@ -388,17 +388,18 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
 	let removeItem = (index) => {
 		if (!readOnly) {
-			if (values.length < 2 && errors.length < 2) {
-				return
+			console.log('before: ', errors, values);
+			console.log('orderNo: ', orderNo)
+			if (values.length > 1 && errors.length > 1) {
+				let currValues = [...values];
+				let currErrors = [...errors];
+				currValues.splice(index, 1);
+				currErrors.splice(index, 1);
+				console.log('after: ', currErrors, currValues);
+				setOrderNo(0);
+				setErrors(currErrors);
+				setValues(currValues);
 			}
-			let currValues = [...values];
-			let currErrors = [...errors];
-			currValues.splice(index, 1);
-			currErrors.splice(index, 1);
-			setOrderNo((currentValue) => currentValue - 1);
-			setErrors(currErrors);
-			setValues(currValues);
-
 		}
 	}
 
@@ -434,10 +435,10 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 		initialValues,
 		validationSchema: OrderFormSchema,
 		validateOnBlur: true,
-		onSubmit: ({ title, reference }, { setStatus, setSubmitting, resetForm }) => {
+		onSubmit: ({ title, reference, shipAddress }, { setSubmitting }) => {
 			setSubmitting(true);
 			enableLoading();
-			const data = [{ title, reference, date, images, week: week, purchaseOrders: orderImages, notes, items: [...values], errors: [...errors] }]
+			const data = [{ title, reference, date, images, week: week, purchaseOrders: orderImages, notes, shipAddress: shipAddress, items: [...values], errors: [...errors] }]
 			store.dispatch(storeOrder(data))
 			swal({
 				icon: 'success',
@@ -551,7 +552,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 				<div className="flex flex-col justify-center items-center" >
 					<div className="flex flex-col w-full sm:w-2/3 lg:w-1/3  mb-10 space-y-2 px-3">
 
-						<div className="flex flex-row items-center">
+						<div className="flex flex-row items-center space-x-2">
 							<span>
 								<svg data-tip data-for="orderTitle" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -559,8 +560,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 								<ReactTooltip id="orderTitle" place="top" effect="solid" border={false} borderColor="white" clickable={false}>
 									Name of your Order
 								</ReactTooltip>
-							</span>&nbsp;
-
+							</span>
 							<input
 								disabled={readOnly ? true : false}
 								className={`input ${getInputClassNamees('title')}`}
@@ -570,8 +570,9 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 								name="title"
 								{...formik.getFieldProps('title')}
 							/>
+							<p className="font-semibold text-red-600">*</p>
 						</div>
-						<div className="flex flex-row items-center">
+						<div className="flex flex-row items-center space-x-2">
 							<span>
 								<svg data-tip data-for="orderRef" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -579,8 +580,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 								<ReactTooltip id="orderRef" place="top" effect="solid" border={false} borderColor="white" clickable={false}>
 									Reference name with which you want your order to be identified
 								</ReactTooltip>
-							</span>&nbsp;
-
+							</span>
 							<input
 								disabled={readOnly ? true : false}
 								className={`input ${getInputClassNamees('reference')}`}
@@ -590,8 +590,9 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 								name="reference"
 								{...formik.getFieldProps('reference')}
 							/>
+							<p className="font-semibold text-red-600">*</p>
 						</div>
-						<div className="flex flex-row items-center">
+						<div className="flex flex-row items-center space-x-2">
 							<span>
 								<svg data-tip data-for="orderDate" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -604,7 +605,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 										<li>Miracle if even possible under 1 week - 75%</li>
 									</ul>
 								</ReactTooltip>
-							</span>&nbsp;
+							</span>
 							<input
 								type={'text'}
 								name="date"
@@ -613,9 +614,10 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 								onFocus={_onFocus}
 								disabled={readOnly ? true : false}
 								onBlur={_onBlur}
-								className={`input ${getInputClassNamees('date')}`}
+								className={`input ${isEmpty(date) ? 'border-red-600' : 'border-green-600'}`}
 								onChange={handleChange}
 							/>
+							<p className="font-semibold text-red-600">*</p>
 						</div>
 					</div>
 				</div>
@@ -633,14 +635,16 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 												{
 													values && !isEmpty(values) ?
 														values.map((item, index) => (
-															<div key={index} onClick={() => showFormDetails(index)}
-																className={`flex flex-row cursor-pointer ${index === orderNo ? 'bg-red-600' : 'bg-white'} hover:bg-red-600 
+															<div
+																className={`flex flex-row ${index === orderNo ? 'bg-red-600' : 'bg-white'} hover:bg-red-600 
 																group-hover:text-white w-full py-2 px-3  items-center`}>
-																<div className="flex flex-col w-1/12 text-center">
-																	<div className={`text-sm ${index === orderNo ? 'text-white' : 'text-black'} `}>{index + 1}</div>
-																</div>
-																<div className="flex flex-col w-10/12 px-10">
-																	<div className={`text-sm ${index === orderNo ? 'text-white' : 'text-black'}`}>{item.product}, {item.material}, {item.backing}</div>
+																<div key={index} onClick={() => showFormDetails(index)} className="flex w-full items-center">
+																	<div className="flex flex-col  text-center">
+																		<div className={`text-sm ${index === orderNo ? 'text-white' : 'text-black'} `}>{index + 1}</div>
+																	</div>
+																	<div className="flex flex-col px-10">
+																		<div className={`text-sm ${index === orderNo ? 'text-white' : 'text-black'}`}>{item.product}, {item.material}, {item.backing}</div>
+																	</div>
 																</div>
 																<div
 																	onClick={() => removeItem(index)}
@@ -721,7 +725,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 							</div>
 						</div>
 
-						<div className="flex flex-col w-full px-3 sm:w-2/3 border border-red-600 rounded-md border-dotted">
+						<div className="flex flex-col w-full px-3 sm:w-2/3 border rounded-md ">
 							<div className={`py-4  ${isEmpty(images) !== true ? 'grid grid-cols-2 sm:grid-cols-4 gap-2' : 'flex justify-center'} w-full`}>
 								{
 									!isEmpty(images) ?
@@ -819,7 +823,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 								<p className="text-left sm:text-right text-sm align-top">Vendor</p>
 							</div>
 							<div className="flex flex-col w-full justify-center items-center md:w-9/12 ">
-								
+
 							</div>
 						</div> */}
 						{/* <div className="flex flex-col md:flex-row">
@@ -985,8 +989,8 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 						</div> */}
 					</div>
 				</div>
-				<div className="flex flex-col w-full px-3 py-2  justify-start  ">
-					<p className="text-left text-sm align-top">Ship To Address:</p>
+				<div className="flex flex-col w-full px-3 py-2 justify-start ">
+					<p className=" text-left text-sm align-top">Ship To Address: <span className="text-red-600 font-semibold">*</span></p>
 					<div className="flex flex-col w-full ">
 						<textarea
 							rows={4}

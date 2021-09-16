@@ -16,12 +16,12 @@
 
 .floating-input > input:focus,
 .floating-input > input:not(:placeholder-shown) {
-  @apply pt-8;
+  @apply pt-2;
 }
 
 .floating-input > input:focus ~ label,
 .floating-input > input:not(:placeholder-shown) ~ label {
-  @apply opacity-75 scale-75 -translate-y-3 translate-x-1;
+  @apply opacity-75 scale-75 -translate-y-5 translate-x-1;
 }
 .floating-input > textarea::placeholder {
   color: transparent;

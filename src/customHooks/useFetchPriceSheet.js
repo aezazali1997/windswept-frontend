@@ -64,6 +64,8 @@ const UseFetchPriceData = () => {
         const { name, value } = e.target;
         let copyArray = [...data];
         let UpdatedArray = updateValues(copyArray, name, parseFloat(value), rowIndex);
+        console.log({ UpdatedArray })
+        setData(copyArray);
     }
 
     const addRow = () => {

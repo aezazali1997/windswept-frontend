@@ -31,7 +31,7 @@ const CustomLayout = ({ children, login, handleLogout }) => {
     return (
         <div>
             {login ?
-                <div>
+                <div className={isOpen ? 'z-50 fixed top-0 w-full' : 'z-0'} >
                     <Navbar
                         toggle={toggle}
                         login={login}

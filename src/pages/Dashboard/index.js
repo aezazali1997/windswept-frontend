@@ -9,11 +9,11 @@ import OpenOrder from './openOrder';
 import ClosedOrder from './closedOrder';
 import Draft from './draft';
 import ReactTooltip from "react-tooltip";
+import { CustomModal, SearchFilters } from '../../components';
 
 let useQuery = () => {
     return new URLSearchParams(useLocation().search);
 }
-
 
 const Dashboard = (props) => {
 
@@ -24,8 +24,14 @@ const Dashboard = (props) => {
     const [showNewOrder, setShowNewOrder] = useState(true);
     const [showOpenOrder, setShowOpenOrder] = useState(false);
     const [showCloseOrder, setShowCloseOrder] = useState(false);
+    const [showSearchModal, setShowSearchModal] = useState(false);
     const [showDraft, setShowDraft] = useState(false);
     const [activeIndex, setActiveIndex] = useState('new-order');
+    const [search, setSearch] = useState('');
+    const [filters, setFilters] = useState({
+        date: '', oppStage: '', orderName: '', productName: '', customerReference: '', otherOpportunity: ''
+    });
+
 
 
     useEffect(() => {
@@ -40,7 +46,31 @@ const Dashboard = (props) => {
     }, [colors, activeIndex])
 
 
+    let _ToggleModal = () => {
+        setShowSearchModal(!showSearchModal);
+    }
 
+    let _onChangeFilter = (e) => {
+        const { value, name } = e.target;
+        let copyOriginal = { ...filters };
+        let updatedData = { ...copyOriginal, [name]: value };
+        setFilters(updatedData);
+    }
+
+    let _Submit = () => {
+        console.log('filters: ', filters)
+        const { date, oppStage, orderName, productName, customerReference, otherOpportunity } = filters;
+        let search = Object.keys(filters).map((k) => { return filters[k] }).join(", ");
+        setSearch(search);
+        const data = {
+            object_ref: customerReference,
+            document_date: date,
+            opportunity_stage_name: '',
+            cf_opportunity_item_name: '',
+            opportunity_stage_id: ''
+        }
+        _ToggleModal();
+    }
 
     let handleNewOrder = (id) => {
         props.history.push(`/dashboard?active=${id}`)
@@ -89,6 +119,9 @@ const Dashboard = (props) => {
                 return <Draft />;
         }
     }
+
+
+
 
 
     return (
@@ -144,21 +177,30 @@ const Dashboard = (props) => {
                                     <li>Opp Stage</li>
                                     <li>Order Name</li>
                                     <li>Product Name</li>
+                                    <li>Customer Reference</li>
                                     <li>Other OPPORTUNITY</li>
                                 </ul>
                             </ReactTooltip>
                         </span> &nbsp;
-                        <div class="w-full flex border-gray-400 border">
-                            <span class="w-auto flex justify-end items-center text-gray-500 p-2">
+                        <div className="w-full flex border-gray-400 border">
+                            <span className="w-auto flex justify-end items-center text-gray-500 p-2">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
                             </span>
 
-                            <input class="w-full p-2 focus:outline-none text-sm" type="text" placeholder="Search by:" />
+                            <input
+                                type="text"
+                                readOnly={true}
+                                value={search}
+                                placeholder="Search by:"
+                                onClick={_ToggleModal}
+                                className="w-full p-2 focus:outline-none text-sm  overflow-ellipsis"
+
+                            />
                         </div>
-                        <button class="bg-red-600 ml-2 hover:bg-red-700  text-white p-2 pl-6 pr-6">
-                            <p class="text-sm font-medium">Search</p>
+                        <button className="bg-red-600 ml-2 hover:bg-red-700  text-white p-2 pl-6 pr-6">
+                            <p className="text-sm font-medium">Search</p>
                         </button>
                     </div>
                     <div className="text-larger md:text-sm md:ml-5 mt-3 md:mt-0">
@@ -170,6 +212,22 @@ const Dashboard = (props) => {
             </div>
             {
                 ActiveView()
+            }
+            {
+                showSearchModal && (
+                    <CustomModal
+                        _Toggle={_ToggleModal}
+                        onSubmit={_Submit}
+                        ConfirmButton={'Submit'}
+                        type={'button'}
+                        title={'Filter Orders'}
+                        body={(
+                            <div className="flex flex-col  h-full w-auto sm:w-80">
+                                <SearchFilters filter={filters} handleChange={_onChangeFilter} />
+                            </div>
+                        )}
+                    />
+                )
             }
         </div>
     )
