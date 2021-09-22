@@ -27,7 +27,6 @@ const From = ({ handleChange, handleColors, selected, filterOptions, values,
         else {
             handleFormDisable(false);
         }
-        console.log('errors', errors);
     }, [readOnly])
 
 

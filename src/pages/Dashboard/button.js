@@ -1,4 +1,4 @@
-const Button = ({ label, classNames, onClick, disabled, type }) => {
+const Button = ({ label, classNames, onClick, disabled, type, ...props }) => {
 
     return (
         <button
@@ -6,6 +6,7 @@ const Button = ({ label, classNames, onClick, disabled, type }) => {
             onClick={onClick}
             disabled={disabled}
             className={classNames}
+            {...props}
         >
             {label}
         </button>

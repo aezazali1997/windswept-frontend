@@ -6,7 +6,6 @@ import NewOrder from './newOrder';
 const ClosedOrder = () => {
 
   const orders = useSelector(({ order: { order } }) => order);
-  console.log(orders)
 
   const [selectedOrder, setSelectedOrder] = useState(undefined);
   const [readOnly, setReadOnly] = useState(true);
@@ -20,7 +19,6 @@ const ClosedOrder = () => {
   }
 
   let toggleEdit = () => {
-    console.log('toggled');
     setReadOnly(!readOnly)
   }
 

@@ -19,18 +19,18 @@ const NavDropdown = ({ isOpen, toggle, handleLogout }) => {
             >
                 <>
                     {
-                        localStorage.getItem('type') === 'customer' ?
+                        localStorage.getItem('type') === 'Admin' ?
+                            AdminRoutes.map(({ route, name }, index) => (
+                                <NavLink key={index} to={route} className='p-4 font-sans '>
+                                    {name}
+                                </NavLink>
+                            ))
+                            :
                             CustomerRoutes.map(({ route, name }, index) => (
                                 <NavLink key={index} to={route} className='p-4  font-sans '>
                                     {name}
                                 </NavLink>
 
-                            ))
-                            :
-                            AdminRoutes.map(({ route, name }, index) => (
-                                <NavLink key={index} to={route} className='p-4 font-sans '>
-                                    {name}
-                                </NavLink>
                             ))
                     }
                     <div>

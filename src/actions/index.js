@@ -33,3 +33,25 @@ export const receiveCache = cache => ({
     type: types.RECIEVE_CACHE_ORDER,
     cache
 })
+export const SaveDraftBegin = () => ({
+    type: types.FETCH_DRAFT_BEGIN
+});
+
+export const receiveDraft = draft => ({
+    type: types.RECIEVE_DRAFT,
+    draft
+})
+
+export const EndDraft = () => ({
+    type: types.FETCH_DRAFT_END
+})
+
+export const SaveDraft = (draft) => dispatch => {
+    dispatch(SaveDraftBegin());
+    console.log()
+    dispatch(receiveDraft(draft));
+    dispatch(EndDraft());
+    return draft
+}
+
+

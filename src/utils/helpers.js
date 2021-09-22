@@ -16,3 +16,16 @@ export const updateErrors = (originalArray, name, value, index) => {
     })
     return abc
 }
+
+
+export const getInputClasses = (formik, fieldname) => {
+    if (formik.touched[fieldname] && formik.errors[fieldname]) {
+        return "border-red-500";
+    }
+
+    if (formik.touched[fieldname] && !formik.errors[fieldname]) {
+        return "border-blue-500";
+    }
+
+    return "";
+};

@@ -2,8 +2,15 @@ import axios from "axios";
 export const BASE_URL = 'https://windswept-backend.herokuapp.com';
 
 class AxiosInstance {
+    getUserInfo() {
+        return localStorage.getItem("token");
+    }
+
+    getAuthHeader() {
+        return { headers: { Authorization: "Bearer " + this.getUserInfo() } };
+    }
+
     async ordereEstimate(payload) {
-        console.log('In OrderEstimate API')
         return await axios.post(BASE_URL + "/api/wimpie", payload);
     }
 
@@ -15,13 +22,10 @@ class AxiosInstance {
         return await axios.post(BASE_URL + "/api/admin/signin", credentials);
     }
 
-    getUserInfo() {
-        return localStorage.getItem("login");
+    async getUserType() {
+        return await axios.get(BASE_URL + "/api/verify", this.getAuthHeader());
     }
 
-    getAuthHeader() {
-        return { headers: { Authorization: "Bearer " + this.getUserInfo() } };
-    }
 
 }
 

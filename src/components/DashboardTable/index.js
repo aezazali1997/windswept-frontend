@@ -1,13 +1,10 @@
 import { render } from '@testing-library/react';
 import React, { useEffect } from 'react';
-import moment from 'moment';
-//   import { useReactToPrint } from 'react-to-print'; only works with class component.
-
 
 const DashboardChart = ({ values, data, apiError, week }) => {
 
+	useEffect(() => { }, [week])
 
-	useEffect(() => { console.log('week', week) }, [week])
 	return (
 		<table className="mt-8 md:mt-0 mx-auto" >
 			{/* <tr>
@@ -75,7 +72,7 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 											values.setQty.map(({ value }) => (
 												data.map(({ count, unitPrice }, index) => (
 													value === count.toString() ?
-														<div className="flex w-full justify-center">
+														<div key={index} className="flex w-full justify-center">
 															<div className="flex-col w-1/3 border">
 																<p className="text-center ">{count}</p>
 															</div>
@@ -180,7 +177,7 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 				<td className="left-estimate-table text-right">Size:</td>
 				<td className=" left-estimate-table">{values.size}</td> */}
 			{/* </tr> */}
-		</table >
+		</table>
 	)
 }
 

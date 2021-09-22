@@ -74,7 +74,6 @@ const OrderEstimate = () => {
     }, [data])
 
 
-    console.log('values', values)
 
 
     const enableLoading = () => {
@@ -141,7 +140,6 @@ const OrderEstimate = () => {
     }
 
     let handleQty = (values) => {
-        console.log('values', values);
         if (_.isEmpty(values) === true) {
             setErrors({ ...errors, qty: true })
             let value = values.filter(({ value }) => value);
@@ -209,10 +207,8 @@ const OrderEstimate = () => {
                 freight: freight || 0,
                 markup: markup || 1,
             }
-            console.log('data', data);
             AxiosInstance.ordereEstimate(data)
                 .then(({ data: { data, message } }) => {
-                    console.log(data);
                     if (message === "Failed" && data[0].error === 'Custom') {
                         swal({
                             text: 'Custom Quote will be given in 1-2 days',

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import _ from 'lodash';
+// import _ from 'lodash';
 import { Helmet } from 'react-helmet';
 import Button from './button';
 import NewOrder from './newOrder';
@@ -10,6 +10,10 @@ import ClosedOrder from './closedOrder';
 import Draft from './draft';
 import ReactTooltip from "react-tooltip";
 import { CustomModal, SearchFilters } from '../../components';
+import { InfoSVG } from '../../assets/SVGs';
+import moment from 'moment';
+import { useSelector } from 'react-redux';
+import { isEmpty } from 'lodash';
 
 let useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -18,6 +22,12 @@ let useQuery = () => {
 const Dashboard = (props) => {
 
     let query = useQuery();
+
+    const filter = {
+        date: '', oppStage: '', orderName: '', productName: '', customerReference: '', otherOpportunity: ''
+    }
+
+    const drafts = useSelector(({ order: { draft } }) => draft);
 
     const [color, setColor] = useState('');
     const [colors, setColors] = useState([]);
@@ -28,9 +38,7 @@ const Dashboard = (props) => {
     const [showDraft, setShowDraft] = useState(false);
     const [activeIndex, setActiveIndex] = useState('new-order');
     const [search, setSearch] = useState('');
-    const [filters, setFilters] = useState({
-        date: '', oppStage: '', orderName: '', productName: '', customerReference: '', otherOpportunity: ''
-    });
+    const [filters, setFilters] = useState(filter);
 
 
 
@@ -43,7 +51,7 @@ const Dashboard = (props) => {
             const active = query.get("active")
             setActiveIndex(active);
         }
-    }, [colors, activeIndex])
+    }, [colors, activeIndex, drafts])
 
 
     let _ToggleModal = () => {
@@ -57,18 +65,23 @@ const Dashboard = (props) => {
         setFilters(updatedData);
     }
 
+    let _ResetFilter = () => {
+        setSearch('');
+        setFilters(filter);
+    }
+
     let _Submit = () => {
-        console.log('filters: ', filters)
         const { date, oppStage, orderName, productName, customerReference, otherOpportunity } = filters;
-        let search = Object.keys(filters).map((k) => { return filters[k] }).join(", ");
+        let search = Object.values(filters).filter((k) => k).join(", ");
         setSearch(search);
         const data = {
             object_ref: customerReference,
-            document_date: date,
+            document_date: moment(date).format('Do MMMM YYYY'),
             opportunity_stage_name: '',
             cf_opportunity_item_name: '',
             opportunity_stage_id: ''
         }
+        console.log(data);
         _ToggleModal();
     }
 
@@ -156,21 +169,22 @@ const Dashboard = (props) => {
                         classNames={`w-56 h-20 uppercase border
                         ${activeIndex === 'closed-order' ? 'bg-white text-red-600 border-red-600' : 'text-white bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'}`}
                     />
-                    <Button
-                        id={4}
-                        onClick={() => handleDraft('saved-as-draft')}
-                        label={'saved as draft'}
-                        classNames={`w-56 h-20 uppercase border
+                    {
+                        !isEmpty(drafts) &&
+                        <Button
+                            id={4}
+                            onClick={() => handleDraft('saved-as-draft')}
+                            label={'saved as draft'}
+                            classNames={`w-56 h-20 uppercase border
                         ${activeIndex === 'saved-as-draft' ? 'bg-white text-red-600 border-red-600' : 'text-white bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'}`}
-                    />
+                        />
+                    }
                 </div>
                 <div className="flex flex-col md:flex-row mt-8  md:w-3/5 lg:w-2/5 items-center">
 
                     <div className="w-full flex ">
                         <span className="self-center">
-                            <svg data-tip data-for="search" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <InfoSVG name={"search"} />
                             <ReactTooltip id="search" place="top" effect="solid" border={false} borderColor="white" clickable={false}>
                                 <ul>
                                     <li>Date</li>
@@ -204,9 +218,9 @@ const Dashboard = (props) => {
                         </button>
                     </div>
                     <div className="text-larger md:text-sm md:ml-5 mt-3 md:mt-0">
-                        <Link to="/" className="font-medium text-sm text-gray-600 hover:text-red-500 hover:underline">
+                        <p onClick={_ResetFilter} className="font-medium text-sm text-gray-600 hover:text-red-500 hover:underline cursor-pointer">
                             Reset
-                        </Link>
+                        </p>
                     </div>
                 </div>
             </div>

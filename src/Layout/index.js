@@ -11,7 +11,6 @@ const CustomLayout = ({ children, login, handleLogout }) => {
         const hideMenu = () => {
             if (window.innerWidth > 768 && isOpen) {
                 setIsOpen(false);
-                console.log('i resized');
             }
         };
 
@@ -26,7 +25,6 @@ const CustomLayout = ({ children, login, handleLogout }) => {
     const toggle = () => {
         setIsOpen(!isOpen);
     };
-
 
     return (
         <div>

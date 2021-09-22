@@ -47,7 +47,6 @@ const Signup = () => {
         validationSchema: SignupSchema,
         onSubmit: (values, { setStatus, setSubmitting }) => {
             enableLoading();
-            console.log('values>>>', values);
             // setTimeout(() => {
             //         login(values.email, values.password)
             //             .then(({ data: { data: { accessToken, isAdmin }, message } }) => {

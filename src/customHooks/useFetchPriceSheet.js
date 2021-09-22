@@ -64,7 +64,6 @@ const UseFetchPriceData = () => {
         const { name, value } = e.target;
         let copyArray = [...data];
         let UpdatedArray = updateValues(copyArray, name, parseFloat(value), rowIndex);
-        console.log({ UpdatedArray })
         setData(copyArray);
     }
 
@@ -107,7 +106,6 @@ const UseFetchPriceData = () => {
             updatedPricingData = copyArray.map(item => {
                 const x = Object.keys(item)
                 if (x) {
-                    console.log('x: ', x);
                     delete item[x[x.length - 1]]
                     return item;
                 }
@@ -117,7 +115,6 @@ const UseFetchPriceData = () => {
             if (i !== selected?.index) return item;
             return item;
         })
-        console.log('AfterCell: ', updatedPricingData);
         setData(updatedPricingData);
         setAllData([updateData]);
     }
@@ -253,12 +250,6 @@ const UseFetchPriceData = () => {
                         })
                         setData(newCol);
                     }
-                }
-                // else if (modalTitle === 'Delete Sheet') {
-
-                // }
-                else {
-                    console.log('Save button clicked');
                 }
                 toggleModal()
 

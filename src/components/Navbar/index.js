@@ -22,14 +22,14 @@ const Navbar = ({ toggle, isOpen, login, handleLogout }) => {
                     login ?
                         <>
                             {
-                                localStorage.getItem('type') === 'customer' ?
-                                    CustomerRoutes.map(({ name, route }, index) => (
+                                localStorage.getItem('type') === 'Admin' ?
+                                    AdminRoutes.map(({ name, route }, index) => (
                                         <NavLink key={index} to={route} className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
                                             {name}
                                         </NavLink>
                                     ))
                                     :
-                                    AdminRoutes.map(({ name, route }, index) => (
+                                    CustomerRoutes.map(({ name, route }, index) => (
                                         <NavLink key={index} to={route} className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
                                             {name}
                                         </NavLink>

@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { InputField } from "../components";
 import { ContactFormSchema } from "../utils/validation_schema";
+import { getInputClasses } from "../utils/helpers";
 
 const initialValues = {
     name: "",
@@ -25,24 +26,11 @@ const Contact = () => {
         setLoading(false);
     };
 
-    const getInputClasses = (fieldname) => {
-        if (formik.touched[fieldname] && formik.errors[fieldname]) {
-            return "border-red-500";
-        }
-
-        if (formik.touched[fieldname] && !formik.errors[fieldname]) {
-            return "border-blue-500";
-        }
-
-        return "";
-    };
-
     const formik = useFormik({
         initialValues,
         validationSchema: ContactFormSchema,
         onSubmit: ({ email, name, message, subject }, { setStatus, setSubmitting }) => {
             enableLoading();
-            console.log("values", email, name, message, subject)
             // setTimeout(() => {
             //         login(email, password)
             //             .then(({ data: { data: { accessToken, isAdmin }, message } }) => {
@@ -72,7 +60,6 @@ const Contact = () => {
                 {/*SEO Support*/}
                 <Helmet>
                     <title>Contact | Windswept</title>
-
                 </Helmet>
                 {/*SEO Support End */}
 
@@ -86,14 +73,14 @@ const Contact = () => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             error={formik.touched.name && formik.errors.name}
-                            inputClass={`${getInputClasses(
+                            inputClass={`${getInputClasses(formik,
                                 "name"
                             )} border bg-gray-50 border-gray-200 shadow-md focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-16`}
                             label={'Full Name'}
                         />
-                        {formik.touched.name && formik.errors.name ? (
+                        {formik.touched.name && formik.errors.name &&
                             <div className="text-red-700 text-sm mb-4" >{formik.errors.name}</div>
-                        ) : null}
+                        }
 
                         <InputField
                             name={"email"}
@@ -102,14 +89,14 @@ const Contact = () => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             error={formik.touched.email && formik.errors.email}
-                            inputClass={`${getInputClasses(
+                            inputClass={`${getInputClasses(formik,
                                 "email"
                             )} border bg-gray-50 border-gray-200 focus:outline-none shadow-md rounded-md focus:shadow-sm w-full p-3 h-16`}
                             label={'Email'}
                         />
-                        {formik.touched.email && formik.errors.email ? (
+                        {formik.touched.email && formik.errors.email &&
                             <div className="text-red-700 text-sm mb-4" >{formik.errors.email}</div>
-                        ) : null}
+                        }
 
                         <InputField
                             name={"subject"}
@@ -118,14 +105,14 @@ const Contact = () => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             error={formik.touched.subject && formik.errors.subject}
-                            inputClass={`${getInputClasses(
+                            inputClass={`${getInputClasses(formik,
                                 "subject"
                             )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md shadow-md focus:shadow-sm w-full p-3 h-16`}
                             label={'Subject'}
                         />
-                        {formik.touched.subject && formik.errors.subject ? (
+                        {formik.touched.subject && formik.errors.subject &&
                             <div className="text-red-700 text-sm mb-4" >{formik.errors.subject}</div>
-                        ) : null}
+                        }
 
                         <div className={`floating-input ${formik.touched.message && formik.errors.message ? "mb-1" : "mb-5"} relative`}>
                             <textarea
@@ -134,14 +121,13 @@ const Contact = () => {
                                 maxLength={500}
                                 id={'password'}
                                 name={'message'}
-                                className={`${getInputClasses(
+                                className={`${getInputClasses(formik,
                                     "message"
                                 )} border bg-gray-50 border-gray-200 focus:outline-none shadow-md rounded-md focus:shadow-sm w-full p-3`}
-                                value={formik.values.message}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
                                 placeholder="name@example.com"
-                                autoComplete="off" />
+                                autoComplete="off"
+                                {...formik.getFieldProps('message')}
+                            />
                             <label
                                 htmlFor="message"
                                 className="absolute top-0 left-0 px-3 py-2 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
@@ -149,13 +135,13 @@ const Contact = () => {
                             </label>
 
                             <div className="flex text-sm justify-between">
-                                {formik.touched.message && formik.errors.message ? (
+                                {formik.touched.message && formik.errors.message &&
                                     <div className="text-red-700 text-sm mb-4" >{formik.errors.message}</div>
-                                ) : null}
+                                }
                                 <div>
                                     {
-                                        limit - formik.values.message.length === 0 ? <p className="text-red-600">Maximum limit reached</p>
-                                            : ''
+                                        limit - formik.values.message.length === 0 && <p className="text-red-600">Maximum limit reached</p>
+
                                     }
                                 </div>
                                 <div>{limit - formik.values.message.length} / {limit}</div>

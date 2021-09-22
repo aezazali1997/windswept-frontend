@@ -18,7 +18,6 @@ const OpenOrder = () => {
     let history = useHistory();
 
     const orders = useSelector(({ order: { order } }) => order);
-    console.log(orders)
 
     const [selectedOrder, setSelectedOrder] = useState(undefined);
     const [activeIndex, setActiveIndex] = useState(null);
@@ -26,17 +25,10 @@ const OpenOrder = () => {
     useEffect(() => {
         if (query.get("item") !== null && !isEmpty(orders)) {
             const index = query.get("item")
-            // console.log('index', index)
             let order = orders.filter(order => order[index])
-            // console.log('order', order)
             if (!isEmpty(order)) {
-                console.log('noEmpty')
                 setSelectedOrder(order);
                 setActiveIndex(activeIndex => activeIndex = index);
-            }
-            else {
-                console.log('isEmpty')
-                // history.push(`/dashboard?active=open-order`)
             }
         }
 
@@ -47,7 +39,6 @@ const OpenOrder = () => {
         setActiveIndex(index)
         setSelectedOrder(order)
         history.push(`/dashboard?active=open-order&item=${index}`)
-
     }
 
     let goBacktoDetail = () => {

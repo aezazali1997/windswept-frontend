@@ -1,19 +1,23 @@
 import * as Yup from 'yup';
 
+const emailValidation = Yup.string()
+    .email("Wrong email format")
+    .min(3, "Minimum 3 symbols")
+    .max(50, "Maximum 50 symbols")
+    .required("This field is required")
+
+const passwordValidation = Yup.string()
+    .min(3, "Minimum 3 symbols")
+    .max(50, "Maximum 50 symbols")
+    .required("This field is required")
+
 
 export const SignupSchema = Yup.object().shape({
     username: Yup.string()
         .min(3, "Please enter at least 3 characters")
         .required("This field is required"),
-    email: Yup.string()
-        .email("Wrong email format")
-        .min(3, "Minimum 3 symbols")
-        .max(50, "Maximum 50 symbols")
-        .required("This field is required"),
-    password: Yup.string()
-        .min(3, "Minimum 3 symbols")
-        .max(50, "Maximum 50 symbols")
-        .required("This field is required"),
+    email: emailValidation,
+    password: passwordValidation,
     // confirmPassword: Yup.string()
     //     .oneOf([Yup.ref("password")], "Confirm passwords must match with password")
     //     .required("This field is required"),
@@ -23,15 +27,8 @@ export const SignupSchema = Yup.object().shape({
 
 
 export const LoginSchema = Yup.object().shape({
-    email: Yup.string()
-        .email("Wrong email format")
-        .min(3, "Minimum 3 symbols")
-        .max(50, "Maximum 50 symbols")
-        .required('This field is required'),
-    password: Yup.string()
-        .min(3, "Minimum 3 symbols")
-        .max(50, "Maximum 50 symbols")
-        .required('This field is required'),
+    email: emailValidation,
+    password: passwordValidation,
 });
 
 export const PriceSheetSchema = Yup.object().shape({
@@ -48,11 +45,7 @@ export const AddColumnSchema = Yup.object().shape({
 
 
 export const ContactFormSchema = Yup.object().shape({
-    email: Yup.string()
-        .email("Wrong email format")
-        .min(3, "Minimum 3 symbols")
-        .max(50, "Maximum 50 symbols")
-        .required('This field is required'),
+    email: emailValidation,
     name: Yup.string()
         .min(3, "Minimum 3 symbols")
         .max(50, "Maximum 50 symbols")
@@ -90,9 +83,6 @@ export const FilterFormSchema = Yup.object().shape({
 
 
 export const ForgetPasswordSchema = Yup.object().shape({
-    email: Yup.string()
-        .email("Wrong email format")
-        .min(3, "Minimum 3 symbols")
-        .max(50, "Maximum 50 symbols")
-        .required('This field is required')
+    email: emailValidation
 });
+

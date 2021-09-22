@@ -7,7 +7,8 @@
 @import './hamburger.css';
 @import './scrollUp.css';
 @import './navbar.css';
-@import './spreadsheet.css';
+@import './button.css';
+
 @import '../../node_modules/video-react/dist/video-react.css';
 
 .floating-input > input::placeholder {
@@ -139,3 +140,18 @@ th[colspan='2'] {
 .pricesheet{
   height: 89.5vh;
 }
+
+/* ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+} */
+
+/* Handle */
+/* ::-webkit-scrollbar-thumb {
+  background: red;
+  border-radius: 10px;
+}  */
