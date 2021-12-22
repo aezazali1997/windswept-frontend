@@ -2,20 +2,20 @@ import { createStore, applyMiddleware, compose } from 'redux';
 
 // middlewares
 import thunkMiddleware from 'redux-thunk'
-import logger from 'redux-logger'
+// import logger from 'redux-logger'
 
 // Import custom components
 import rootReducer from '../reducers';
 
 
-function saveToLocalStorage(state) {
-    try {
-        const serializedState = JSON.stringify(state)
-        localStorage.setItem('state', serializedState)
-    }catch(e){
-        console.log(e);
-    }
-}
+// function saveToLocalStorage(state) {
+//     try {
+//         const serializedState = JSON.stringify(state)
+//         localStorage.setItem('state', serializedState)
+//     }catch(e){
+//         console.log(e);
+//     }
+// }
 
 function loadFromLocalStorage() {
     try {
@@ -42,9 +42,9 @@ const store = createStore(rootReducer, persistedState, compose(
     }
 ));
 
-const unsubscribe = store.subscribe(() => {
-    const state = store.getState();
-    saveToLocalStorage(state);
-});
+// const unsubscribe = store.subscribe(() => {
+//     const state = store.getState();
+//     saveToLocalStorage(state);
+// });
 
 export default store;

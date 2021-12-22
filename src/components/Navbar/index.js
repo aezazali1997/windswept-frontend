@@ -17,13 +17,13 @@ const Navbar = ({ toggle, isOpen, login, handleLogout }) => {
                 <Hamburger toggled={isOpen} onToggle={toggle} color='#dc2626' direction="right" duration={0.5} rounded />
             </div>
 
-            <div className='pr-8 lg:block  hidden'>
+            <div className='pr-8 hidden lg:block'>
                 {
                     login ?
                         <>
                             {
-                                localStorage.getItem('type') === 'Admin' ?
-                                    AdminRoutes.map(({ name, route }, index) => (
+                                localStorage.getItem('role') === 'admin' ?
+                                     AdminRoutes.map(({ name, route }, index) => (
                                         <NavLink key={index} to={route} className='p-4 font-sans nav-link nav-link-ltr' activeClassName="active">
                                             {name}
                                         </NavLink>

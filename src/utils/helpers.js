@@ -17,7 +17,52 @@ export const updateErrors = (originalArray, name, value, index) => {
     return abc
 }
 
+export const deserializeItems = (items)=>{
+    let itemDetails=[]
+    for (let i=0; i<items.length; i++){
+        let sumQuantity=0;
+        let product_name = items[i].product;
+        let material=items[i].material;
+        let backing=items[i].backing;
+        let percentage_embroidery=items[i].pe;
+        let border=items[i].border;
+        let shape=items[i].cut;
+        let packaging=items[i].packaging;
+        items[i].setQty.forEach((quantity)=>{
+            sumQuantity+=(Number(quantity.value))
+        })
+        let quantity=sumQuantity;
+        let optional_item=items[i].optionalItem;
+        let customer_markup=items[i].markup;
+        let width=items[i].wCenter;
+        let height=items[i].hCenter;
+        let size =items[i].size;
+        let colors=items[i].colors;
+        let unit_cost='2.333 USD';
+        let unit_price='3.3333 USD';
+        itemDetails.push({
+            product_name,
+            material,
+            backing,
+            percentage_embroidery,
+            border,
+            shape,
+            packaging,
+            quantity,
+            optional_item,
+            customer_markup,
+            width,
+            height,
+            size,
+            colors,
+            unit_cost,
+            unit_price
+        })
 
+    }
+    return itemDetails;
+
+}
 export const getInputClasses = (formik, fieldname) => {
     if (formik.touched[fieldname] && formik.errors[fieldname]) {
         return "border-red-500";

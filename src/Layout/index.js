@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Navbar, NavDropdown } from '../components';
 import ScrollUp from '../components/scrollUp';
 

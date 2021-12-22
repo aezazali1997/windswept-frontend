@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { InputField } from "../components";

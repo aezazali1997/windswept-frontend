@@ -1,4 +1,3 @@
-import { render } from '@testing-library/react';
 import React, { useEffect } from 'react';
 
 const DashboardChart = ({ values, data, apiError, week }) => {
@@ -7,6 +6,7 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 
 	return (
 		<table className="mt-8 md:mt-0 mx-auto" >
+		<tbody>
 			{/* <tr>
                     <td className="left-estimate-table text-right">Estimated Price:</td>
                     <td className="left-estimate-table"></td>
@@ -177,6 +177,7 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 				<td className="left-estimate-table text-right">Size:</td>
 				<td className=" left-estimate-table">{values.size}</td> */}
 			{/* </tr> */}
+			</tbody>
 		</table>
 	)
 }

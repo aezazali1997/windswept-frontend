@@ -1,4 +1,3 @@
-import { render } from '@testing-library/react';
 import React, { Component } from 'react';
 import moment from 'moment';
 //   import { useReactToPrint } from 'react-to-print'; only works with class component.
@@ -6,7 +5,7 @@ import moment from 'moment';
 class EstimateChart extends Component {
 	render() {
 
-		const { values, data, selected, Size, apiError } = this.props;
+		const { values, data, selected, apiError } = this.props;
 
 		return (
 			<table className="mt-8 md:mt-0 mx-auto" >

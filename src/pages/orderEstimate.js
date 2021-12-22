@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 import Form from './Dashboard/estimateForm';
 import AxiosInstance from '../APIs/axiosInstance';
 import EstimateChart from '../components/EstimateTable';
-import CopyToClipboard from 'react-copy-to-clipboard';
+// import CopyToClipboard from 'react-copy-to-clipboard';
 import moment from 'moment';
 var ColorsArray = [];
 
@@ -19,8 +19,8 @@ const OrderEstimate = () => {
     const [selected, setSelected] = useState([]);
     const [clicked, setClicked] = useState(false);
     const [heightClicked, setHeightClicked] = useState(false);
-    const [rightWidth, setRightWidth] = useState('');
-    const [rightHeight, setRightHeight] = useState('');
+    // const [rightWidth, setRightWidth] = useState('');
+    // const [rightHeight, setRightHeight] = useState('');
     const [color, setColor] = useState('');
     const [Size, setSize] = useState('');
     const [colors, setColors] = useState([]);
@@ -89,7 +89,8 @@ const OrderEstimate = () => {
         let cost = "";
         if (data) {
             selected.map(({ value }) => {
-                data.map(({ count, unitCost, unitPrice }, index) => {
+                return data.map(({ count, unitCost, unitPrice }, index) => {
+                 
                     if (value === count.toString()) {
                         price = price + `pcs${count} @ ${unitPrice} / `
                         cost = cost + `pcs${count} @ ${unitCost} / `
