@@ -187,7 +187,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     const NewErrors = [...errors];
     let updatedErrorArray = [];
     let updatedArray = [];
-
     setValues([]);
 
     if (name === 'product' || name === 'material' || name === 'pe' || name === 'backing') {
@@ -216,6 +215,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       var end = moment(value); // end date
       var weeks = end.diff(now, 'weeks');
       setDate(value);
+      // issue here
       setWeek(weeks);
     } else {
       let updatedArray = updateValues(NewArray, name, value, index);
