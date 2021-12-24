@@ -100,19 +100,20 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                   border={false}
                   borderColor="white"
                   clickable={false}>
-                  Reference name with which you want your order to be identified
+                  Your reference number
                 </ReactTooltip>
               </span>
               <input
                 // disabled={readOnly ? true : false}
-                className={`input ${getInputClasses(formik, 'reference')}`}
+                className={`input custom-style ${getInputClasses(formik, 'reference')}`}
+                // style={{ marginRight: '14px' }}
                 type="text"
                 id="reference"
                 name="reference"
                 disabled
                 {...formik.getFieldProps('reference')}
               />
-              <p className="font-semibold text-red-600">*</p>
+              {/* <p className="font-semibold text-red-600">*</p> */}
             </div>
             <div className="flex flex-row items-center space-x-2">
               <span>
@@ -159,8 +160,8 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                       <tbody className="bg-white divide-y divide-gray-200">
                         {values && !isEmpty(values)
                           ? values.map((item, index) => (
-                              //  
-                               <div
+                              //
+                              <div
                                 key={index}
                                 className={`flex flex-row cursor-pointer ${
                                   index === orderNo ? 'bg-red-600' : 'bg-white'
@@ -257,7 +258,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
               </div>
             </div>
             <div
-              className={`flex flex-row w-full px-3 mt-6 sm:w-2/3 space-x-2 ${
+              className={`flex flex-row w-full px-3 mt-6 mb-6 sm:w-2/3 space-x-2 ${
                 orderImages === '' ? 'justify-center' : 'justify-start'
               }`}>
               <div className={`flex flex-row ${orderImages === '' ? '' : 'w-full'}`}>
@@ -290,20 +291,20 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                       </svg>
                     </>
                   }
-                  classNames="p-2 w-auto flex mb-8 items-center bg-red-600 text-white hover:bg-red-700 "
+                  classNames="p-2 w-auto flex items-center bg-red-600 text-white hover:bg-red-700 "
                 />
               </div>
               <div
-                onClick={() => handleRemoveOrderImg()}
                 className={`${
                   orderImages === ''
                     ? 'hidden'
-                    : 'flex border relative border-red-600 rounded-md p-1 w-full h-10'
+                    : 'flex  border pr-1 relative border-red-600 rounded-md p-1 w-full h-auto items-center'
                 }`}>
-                <p>
-                  {orderImages?.name}{' '}
+                <p className="flex justify-between w-full">
+                  {orderImages?.name}
                   <svg
-                    className="w-6 h-6 rounded-md absolute right-0 top-2 cursor-pointer hover:shadow-lg z-50"
+                    onClick={() => handleRemoveOrderImg()}
+                    className="w-6 h-6 rounded-md cursor-pointer hover:shadow-lg z-50"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -411,35 +412,35 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                 week={week}
               />
               <table className="mt-10 md:mt-0 mx-auto">
-              <thead>
-                <tr>
-                  <td className="left-estimate-table text-right font-medium">Total:</td>
-                  <td className="left-estimate-table">{total}</td>
-                </tr>
-                <tr>
-                  <td className="left-estimate-table text-right font-medium">Fee:</td>
-                  <td className="left-estimate-table">
-                    {date === ''
-                      ? ''
-                      : week < 1
-                      ? '75%'
-                      : week >= 1 && week < 2
-                      ? '50%'
-                      : week >= 2 && week < 3
-                      ? '30%'
-                      : 'Standard'}
-                  </td>
-                </tr>
-                <tr>
-                  <td className=" left-estimate-table text-right font-medium">Grand Total:</td>
-                  <td className=" left-estimate-table">{grandTotal}</td>
-                </tr>
-                <tr>
-                  <td className=" left-estimate-table text-right font-medium">
-                    Grand Total(including markup):
-                  </td>
-                  <td className=" left-estimate-table">{gTotalWithMarkup}</td>
-                </tr>
+                <thead>
+                  <tr>
+                    <td className="left-estimate-table text-right font-medium">Total:</td>
+                    <td className="left-estimate-table">{total}</td>
+                  </tr>
+                  <tr>
+                    <td className="left-estimate-table text-right font-medium">Fee:</td>
+                    <td className="left-estimate-table">
+                      {date === ''
+                        ? ''
+                        : week < 1
+                        ? '75%'
+                        : week >= 1 && week < 2
+                        ? '50%'
+                        : week >= 2 && week < 3
+                        ? '30%'
+                        : 'Standard'}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className=" left-estimate-table text-right font-medium">Grand Total:</td>
+                    <td className=" left-estimate-table">{grandTotal}</td>
+                  </tr>
+                  <tr>
+                    <td className=" left-estimate-table text-right font-medium">
+                      Grand Total(including markup):
+                    </td>
+                    <td className=" left-estimate-table">{gTotalWithMarkup}</td>
+                  </tr>
                 </thead>
               </table>
             </div>
