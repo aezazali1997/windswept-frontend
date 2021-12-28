@@ -56,6 +56,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   const [week, setWeek] = useState(0);
 
   const [images, setImages] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);
   const [orderImages, setOrderImages] = useState('');
   const [selected, setSelected] = useState([]);
   const [color, setColor] = useState('');
@@ -109,7 +110,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       setWeek(week);
     }
   }, []);
-
   useEffect(() => {
     _Total();
     _grandTotal();
@@ -127,10 +127,13 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   let upload = useRef();
 
   let onChangeFile = (event) => {
+    let imageFiles = [];
     fileObj = event.target.files;
     for (let i = 0; i < fileObj.length; i++) {
+      imageFiles.push(fileObj[i]);
       fileArray.push(URL.createObjectURL(fileObj[i]));
     }
+    setImageFiles(imageFiles);
     setImages(fileArray); /// if you want to upload latter
   };
 
@@ -215,7 +218,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       var end = moment(value); // end date
       var weeks = end.diff(now, 'weeks');
       setDate(value);
-      // issue here
+
       setWeek(weeks);
     } else {
       let updatedArray = updateValues(NewArray, name, value, index);
@@ -527,7 +530,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   };
 
   const formik = useFormik({
-    enableReinitialize: true,
+    enableReinitialize: selectedOrder ? true : false,
     initialValues,
     validationSchema: OrderFormSchema,
     validateOnBlur: true,
@@ -538,7 +541,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         title,
         reference,
         date,
-        images,
+        images: imageFiles,
         week,
         notes: customerNote,
         purchaseOrders: orderImages,

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { isEmpty } from 'lodash';
 import { useSelector } from 'react-redux';
 import NewOrder from './newOrder';
+import Button from './button';
 import AxiosInstance from '../../APIs/axiosInstance';
 import { Spinner } from '../../components/spinner/Spinner';
 const ClosedOrder = () => {
@@ -35,6 +36,21 @@ const ClosedOrder = () => {
 
   let toggleEdit = () => {
     setReadOnly(!readOnly);
+  };
+
+  const reOrder = async (index, opp_id) => {
+    let tempOrders = [];
+    setIsloading(true);
+
+    try {
+      let res = await AxiosInstance.reOrder(opp_id);
+      if (res.status === 200) {
+        tempOrders = [...orders];
+        tempOrders.splice(index, 1);
+        setOrders(tempOrders);
+        setIsloading(false);
+      }
+    } catch (error) {}
   };
 
   return selectedOrder ? (
@@ -92,34 +108,55 @@ const ClosedOrder = () => {
           <div className="flex flex-col w-full h-full mb-4 space-y-4 px-3">
             {!isEmpty(orders) ? (
               orders.map((order, index) => {
-                let { cf_opportunity_item_name, allow_edit, document_date, id } =
-                  order['object_ref'];
+                let {
+                  cf_opportunity_item_name,
+                  allow_edit,
+                  document_date,
+                  cf_opportunity_status,
+                  opportunity_id,
+                  id
+                } = order['object_ref'];
 
                 return (
                   <div
                     key={index}
-                    onClick={() => handleClick(order)}
-                    className="flex flex-row h-44 divide-gray-50 border divide-x-4 rounded-md divide-red-600
-                                border-gray-200 card cursor-pointer ">
-                    <div className="flex flex-col w-1/4 py-2">
+                    className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card">
+                    <div className="flex flex-col w-full lg:w-1/4 py-2">
                       <img
-                        src="https://bashooka.com/wp-content/uploads/2019/04/portrait-logo-design-4.jpg"
+                        src={
+                          'https://bashooka.com/wp-content/uploads/2019/04/portrait-logo-design-4.jpg'
+                        }
                         alt="item"
                         className="object-contain w-auto h-40"
                       />
                     </div>
-
-                    <div className="flex flex-col w-3/4 py-2 px-3 justify-between">
+                    <div className="w-1 bg-red-500"></div>
+                    <div className="flex flex-col w-full lg:w-3/4 py-2 px-3 justify-between">
                       <div className="flex flex-row h-full w-full items-center">
                         <h1 className="font-bold text-lg text-gray-800">
                           {cf_opportunity_item_name}
                         </h1>
                       </div>
                       <div className="flex w-full h-full flex-col space-y-4 justify-end lg:justify-between">
-                        <p className="text-sm text-gray-500">{'reference'}</p>
-                        <div className="flex flex-row justify-between ">
+                        <p className="text-sm text-gray-500 break-all whitespace-pre-wrap">
+                          {cf_opportunity_status}
+                        </p>
+
+                        <div className="flex flex-col lg:flex-row justify-between">
+                          <div className="flex flex-row  lg:absolute lg:top-1 lg:right-1  space-x-2">
+                            <Button
+                              label={'reOrder'}
+                              onClick={() => {
+                                reOrder(index, id, opportunity_id);
+                              }}
+                              classNames={`px-2 sm:px-5 py-2 uppercase border w-full
+                                        ${'text-white text-sm bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'}`}
+                            />
+                          </div>
                           <p className="uppercase text-xs text-gray-500"></p>
-                          <p className="uppercase text-xs text-gray-500">{document_date}</p>
+                          <p className="uppercase text-xs text-gray-500 text-right mt-2 sm:text-left sm:mt-0">
+                            {document_date}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -127,7 +164,7 @@ const ClosedOrder = () => {
                 );
               })
             ) : (
-              <div>Empty orders</div>
+              <div className="text-center">No Closed orders</div>
             )}
           </div>
         </>

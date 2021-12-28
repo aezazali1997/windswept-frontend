@@ -38,19 +38,6 @@ const OpenOrder = () => {
     } catch (error) {}
     setIsLoading(false);
   }, [1]);
-  // load the images
-  // useEffect( async ()=>{
-
-  //     for (let i=0; i<Orders.length; i++){
-  //         if (!(Orders[i]['object_ref']['cf_opportunity_box_folder_id']==='' || Orders[i]['object_ref']['cf_opportunity_box_folder_id']===null )){
-  //             // let image=await AxiosInstance.loadImage(Orders[i]['object_ref']['cf_opportunity_box_folder_id']) not completed
-  //         }
-  //     }
-  //     // console.log(fodlerIds.length)
-
-  // },[loadingOrders])
-  // const orders = useSelector(({ order: { order } }) => order);
-
   useEffect(() => {
     if (query.get('item') !== null && !isEmpty(Orders)) {
       const index = query.get('item');
@@ -68,10 +55,10 @@ const OpenOrder = () => {
     history.push(`/dashboard?active=open-order&item=${index}`);
   };
 
-  const handleApprove = async (id) => {
+  const handleApprove = async (index, ref) => {
     setIsDeleting(true);
     try {
-      let res = await AxiosInstance.approveOrder(id);
+      let res = await AxiosInstance.approveOrder(ref);
       setIsDeleting(false);
     } catch (error) {
       console.log(error);
@@ -168,6 +155,8 @@ const OpenOrder = () => {
                   allow_edit,
                   cf_opportunity_status,
                   document_date,
+                  opportunity_id,
+                  cf_opportunity_box_image,
                   id
                 } = Order['object_ref'];
                 return (
@@ -176,9 +165,7 @@ const OpenOrder = () => {
                     className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card">
                     <div className="flex flex-col w-full lg:w-1/4 py-2">
                       <img
-                        src={
-                          'https://bashooka.com/wp-content/uploads/2019/04/portrait-logo-design-4.jpg'
-                        }
+                        src={cf_opportunity_box_image}
                         alt="item"
                         className="object-contain w-auto h-40"
                       />
@@ -208,7 +195,7 @@ const OpenOrder = () => {
                                 <Button
                                   label={'Approve'}
                                   onClick={() => {
-                                    handleApprove(id);
+                                    handleApprove(index, id);
                                   }}
                                   classNames={`px-2 sm:px-5 py-2 uppercase border w-full
                                         ${'text-white text-sm bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'}`}
