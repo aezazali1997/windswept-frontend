@@ -78,7 +78,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         document_date,
         cf_opportunity_item_name,
         cf_opportunity_box_folder_id,
-        cf_opportunity_po_box_id,
         cf_opportunity_portal_notes,
         cf_opportunity_ship_to_address,
         cf_opportunity_status
@@ -89,19 +88,19 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       let address = cf_opportunity_ship_to_address;
 
       for (let i = 0; i < items.length; i++) {
-        // let product =
+        let product = items[i]['object_ref']['product_name'];
+        let quantity = items[i]['object_ref']['unit_quanity'];
         console.log(items[i]['object_ref']);
       }
       // items.map((item) => {
       //   console.log(item);
-      // if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
+      //   if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
       //     DisableAddAnother();
-      // }
-      // else {
+      //   } else {
       //     EnableAddAnother();
-      // }
-      // setDate(date);
-      // })
+      //   }
+      //   setDate(date);
+      // });
       setImages(images);
       setNotes(notes);
       setErrors(errors);
@@ -118,7 +117,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
 
   const initialValues = {
     title: selectedOrder?.title || '',
-    reference: localStorage.getItem('person_ref'),
+    reference: selectedOrder?.reference || '',
     date: date || '',
     shipAddress: selectedOrder?.shipAddress || '',
     customerNote: selectedOrder?.customerNote || ''
@@ -186,6 +185,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
 
   const _HandleChange = (e, index) => {
     const { name, value, checked } = e.target;
+
     const NewArray = [...values];
     const NewErrors = [...errors];
     let updatedErrorArray = [];

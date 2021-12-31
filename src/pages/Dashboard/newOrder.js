@@ -104,16 +104,15 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                 </ReactTooltip>
               </span>
               <input
-                // disabled={readOnly ? true : false}
-                className={`input custom-style ${getInputClasses(formik, 'reference')}`}
-                // style={{ marginRight: '14px' }}
+                disabled={readOnly ? true : false}
+                className={`input ${getInputClasses(formik, 'reference')}`}
+                placeholder="Enter Customer Reference..."
                 type="text"
                 id="reference"
                 name="reference"
-                disabled
                 {...formik.getFieldProps('reference')}
               />
-              {/* <p className="font-semibold text-red-600">*</p> */}
+              <p className="font-semibold text-red-600">*</p>
             </div>
             <div className="flex flex-row items-center space-x-2">
               <span>

@@ -1,0 +1,8 @@
+.radioChoose {
+display: flex;
+padding:.5rem 0;
+justify-content: center;
+}
+.radioChoose > div{
+  margin:0 1rem;
+}

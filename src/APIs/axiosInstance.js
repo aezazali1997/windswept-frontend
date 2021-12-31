@@ -23,6 +23,7 @@ class AxiosInstance {
     formData.append('id', localStorage.getItem('user_id'));
     formData.append('order_name', data.title);
     formData.append('customer_ref', data.reference);
+    formData.append('week', data.week);
     formData.append('in_hands_date', data.date);
     formData.append('ship_address', data.shipAddress);
     formData.append('customer_notes', data.notes);
@@ -63,6 +64,15 @@ class AxiosInstance {
     try {
       return await axios.put(BASE_URL + `/opportunity?proc=2&opp_id=${ref}`);
     } catch (error) {}
+  }
+  async searchFilter(data,orderType) {
+    console.log();
+    try {
+      let id = localStorage.getItem('user_id');
+      return await axios.get(BASE_URL + `/search?id=${id}&data=${JSON.stringify(data)}&order=${orderType}`);
+    } catch (er) {
+      console.log(er);
+    }
   }
   // async getUserType() {
   //   return await axios.get(BASE_URL + '/api/verify', this.getAuthHeader());

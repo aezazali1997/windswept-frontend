@@ -58,20 +58,6 @@
 		}
 	},
 
-	"PNS":{
-		"type": "dynamic",
-		"name": "Peel-N-Stick Embroidery™",
-		"options": {
-			"lsc":{
-				"name": "Light Switch Cover",
-				"items":{
-					"PNS/LSC: Light Switch Cover": "Light Switch Cover"
-				}
-				
-			}
-		}
-	},
-
 	"EKF":{
 		"type": "dynamic",
 		"name": "Embroidered Key Fobs",

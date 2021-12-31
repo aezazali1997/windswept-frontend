@@ -1,25 +1,51 @@
 import React, { useState, useEffect } from 'react'
 import { isEmpty } from 'lodash';
-import { useSelector } from 'react-redux';
 import NewOrder from './newOrder';
 import Button from './button';
 import AxiosInstance from '../../APIs/axiosInstance';
 import { Spinner } from '../../components/spinner/Spinner';
-const ClosedOrder = () => {
-  const [isLoading, setIsloading] = useState(false);
-  const [orders, setOrders] = useState([]);
-  useEffect(async () => {
-    setIsloading(true);
-    try {
-      let id = localStorage.getItem('user_id');
-      let res = await AxiosInstance.getClosedOrders(id);
-      if (res.status === 200) {
-        setOrders(res.data);
-        setIsloading(false);
-      }
-    } catch (error) {
-      console.log(error);
+const ClosedOrder = ({ filters }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const checkFilters = (filters) => {
+    if (
+      filters.date !== '' ||
+      filters.customerReference !== '' ||
+      filters.oppStage !== '' ||
+      filters.orderName !== ''
+    ) {
+      return true;
     }
+    return false;
+  };
+  const getData = async () => {
+    if (checkFilters(filters)) {
+      setIsLoading(true);
+      try {
+        let resp = await AxiosInstance.searchFilter(filters, 'closed');
+        if (resp.status === 200) {
+          setOrders(resp.data);
+        }
+      } catch (error) {}
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+      try {
+        let id = localStorage.getItem('user_id');
+        let res = await AxiosInstance.getClosedOrders(id);
+        if (res.status === 200) {
+          setOrders(res.data);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const [orders, setOrders] = useState([]);
+
+  useEffect(async () => {
+    getData();
   }, []);
   // const orders = useSelector(({ order: { order } }) => order);
   //  redux
@@ -40,7 +66,7 @@ const ClosedOrder = () => {
 
   const reOrder = async (index, opp_id) => {
     let tempOrders = [];
-    setIsloading(true);
+    setIsLoading(true);
 
     try {
       let res = await AxiosInstance.reOrder(opp_id);
@@ -48,7 +74,7 @@ const ClosedOrder = () => {
         tempOrders = [...orders];
         tempOrders.splice(index, 1);
         setOrders(tempOrders);
-        setIsloading(false);
+        setIsLoading(false);
       }
     } catch (error) {}
   };

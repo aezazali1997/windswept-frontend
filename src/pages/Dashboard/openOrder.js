@@ -16,7 +16,7 @@ const getAllOrders = () => {
   return AxiosInstance.getAllOrders(id);
 };
 
-const OpenOrder = () => {
+const OpenOrder = ({ filters }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [Orders, setOrders] = useState([]);
@@ -27,16 +27,42 @@ const OpenOrder = () => {
   let tempOrders = [];
   let query = useQuery();
   let history = useHistory();
+  const checkFilters = (filters) => {
+    if (
+      filters.date !== '' ||
+      filters.customerReference !== '' ||
+      filters.oppStage !== '' ||
+      filters.orderName !== ''
+    ) {
+      return true;
+    }
+    return false;
+  };
+  const getData = async () => {
+    if (checkFilters(filters)) {
+      setIsLoading(true);
+      try {
+        let resp = await AxiosInstance.searchFilter(filters, 'open');
+        if (resp.status === 200) {
+          setOrders(resp.data);
+        }
+      } catch (error) {}
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+      try {
+        const res = await getAllOrders();
+        if (res.status === 200) {
+          setOrders(res.data);
+        }
+      } catch (error) {}
+      setIsLoading(false);
+    }
+  };
+
   // make a query to get all the open orders
-  useEffect(async () => {
-    setIsLoading(true);
-    try {
-      const res = await getAllOrders();
-      if (res.status === 200) {
-        setOrders(res.data);
-      }
-    } catch (error) {}
-    setIsLoading(false);
+  useEffect(() => {
+    getData();
   }, [1]);
   useEffect(() => {
     if (query.get('item') !== null && !isEmpty(Orders)) {
@@ -165,7 +191,11 @@ const OpenOrder = () => {
                     className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card">
                     <div className="flex flex-col w-full lg:w-1/4 py-2">
                       <img
-                        src={cf_opportunity_box_image}
+                        src={
+                          cf_opportunity_box_image
+                            ? cf_opportunity_box_image
+                            : 'https://bashooka.com/wp-content/uploads/2019/04/portrait-logo-design-4.jpg'
+                        }
                         alt="item"
                         className="object-contain w-auto h-40"
                       />
@@ -213,9 +243,9 @@ const OpenOrder = () => {
                               ''
                             )}
                             <Button
-                              // onClick={() => {
-                              //   handleDetails(Order, index);
-                              // }}
+                              onClick={() => {
+                                handleDetails(Order, index);
+                              }}
                               label={'Details'}
                               classNames={`px-2 sm:px-5 py-2 uppercase border w-full
                                                 ${'text-white text-sm bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'}`}
