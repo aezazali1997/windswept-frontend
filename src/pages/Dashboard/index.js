@@ -45,6 +45,7 @@ const Dashboard = (props) => {
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState(filter);
   const [isLoading, setIsLoading] = useState(false);
+  const [searched, setSearched] = useState(false);
 
   useEffect(() => {
     if (query.get('active') === null) {
@@ -72,6 +73,7 @@ const Dashboard = (props) => {
     setFilters(filter);
   };
   const searchForData = async () => {
+    setSearched(true);
     if (orderType === 'open') {
       props.history.push(`/dashboard?active=open-order`);
       setActiveIndex('open-order');
@@ -128,9 +130,9 @@ const Dashboard = (props) => {
       case 'new-order':
         return <NewOrder readOnly={false} />;
       case 'open-order':
-        return <OpenOrder filters={filters} />;
+        return <OpenOrder filters={filters} searched={searched} setSearched={setSearched} />;
       case 'closed-order':
-        return <ClosedOrder filters={filters} />;
+        return <ClosedOrder filters={filters} searched={searched} setSearched={setSearched} />;
       default:
         return <Draft />;
     }

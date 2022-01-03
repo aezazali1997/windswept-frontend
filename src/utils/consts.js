@@ -14,15 +14,15 @@ export const Roles = [
 ]
 
 export const multiQty = [
-    { label: "50", value: "50" },
-    { label: "100", value: "100" },
-    { label: "200", value: "200" },
-    { label: "300", value: "300" },
-    { label: "500", value: "500" },
-    { label: "1000", value: "1000" },
-    { label: "2000", value: "2000" },
-    { label: "3000", value: "3000" },
-    { label: "5000", value: "5000" }
+  { label: '50', value: '50' }, //0
+  { label: '100', value: '100' }, //1
+  { label: '200', value: '200' }, //2
+  { label: '300', value: '300' }, //3
+  { label: '500', value: '500' }, //4 ->
+  { label: '1000', value: '1000' }, //5
+  { label: '2000', value: '2000' }, //6 ->
+  { label: '3000', value: '3000' }, //7
+  { label: '5000', value: '5000' } //8
 ];
 
 export const products = [

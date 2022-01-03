@@ -157,9 +157,9 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                   <div className="overflow-hidden border">
                     <table className="min-w-full divide-y divide-gray-200">
                       <tbody className="bg-white divide-y divide-gray-200">
+                        {console.log('add another :', values[0])}
                         {values && !isEmpty(values)
                           ? values.map((item, index) => (
-                              //
                               <div
                                 key={index}
                                 className={`flex flex-row cursor-pointer ${
@@ -182,7 +182,17 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                                       className={`text-sm ${
                                         index === orderNo ? 'text-white' : 'text-black'
                                       }`}>
-                                      {item.product}, {item.material}, {item.backing}
+                                      {item['object_ref']?.product
+                                        ? item['object_ref']?.product
+                                        : item.product}
+                                      ,{' '}
+                                      {item['object_ref']?.material
+                                        ? item['object_ref']?.material
+                                        : item.material}
+                                      ,{' '}
+                                      {item['object_ref']?.backing
+                                        ? item['object_ref']?.backing
+                                        : item.backing}
                                     </div>
                                   </div>
                                 </div>
@@ -241,7 +251,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                     disabled={readOnly ? true : false}
                     type="submit"
                     className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none">
-                    {closeOrder ? 'Reorder' : 'Submit Order'}
+                    {closeOrder ? 'Re Submit Order' : 'Submit Order'}
                     {loading && (
                       <div className=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>
                     )}
@@ -506,6 +516,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 								</div>
 							</div>
 						</div> */}
+
             {values[orderNo] && errors[orderNo] && (
               <Form
                 color={color}
@@ -513,7 +524,9 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                 orderNo={orderNo}
                 selected={selected}
                 readOnly={readOnly}
-                values={values[orderNo]}
+                values={
+                  values[orderNo]['object_ref'] ? values[orderNo]['object_ref'] : values[orderNo]
+                }
                 showPMS={showPMSModal}
                 showThread={showThreadModal}
                 setColor={setColor}

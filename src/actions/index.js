@@ -47,11 +47,11 @@ export const EndDraft = () => ({
 })
 
 export const SaveDraft = (draft) => dispatch => {
-    dispatch(SaveDraftBegin());
-    console.log()
-    dispatch(receiveDraft(draft));
-    dispatch(EndDraft());
-    return draft
+  dispatch(SaveDraftBegin());
+
+  dispatch(receiveDraft(draft));
+  dispatch(EndDraft());
+  return draft;
 }
 
 

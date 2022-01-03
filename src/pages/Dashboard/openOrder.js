@@ -16,7 +16,7 @@ const getAllOrders = () => {
   return AxiosInstance.getAllOrders(id);
 };
 
-const OpenOrder = ({ filters }) => {
+const OpenOrder = ({ filters, searched, setSearched }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [Orders, setOrders] = useState([]);
@@ -39,7 +39,8 @@ const OpenOrder = ({ filters }) => {
     return false;
   };
   const getData = async () => {
-    if (checkFilters(filters)) {
+    if (checkFilters(filters) && searched) {
+      setSearched(false);
       setIsLoading(true);
       try {
         let resp = await AxiosInstance.searchFilter(filters, 'open');
@@ -63,7 +64,7 @@ const OpenOrder = ({ filters }) => {
   // make a query to get all the open orders
   useEffect(() => {
     getData();
-  }, [1]);
+  }, [searched]);
   useEffect(() => {
     if (query.get('item') !== null && !isEmpty(Orders)) {
       const index = query.get('item');
@@ -155,6 +156,7 @@ const OpenOrder = ({ filters }) => {
             &nbsp; Back
           </button>
         </div>
+
         <NewOrder readOnly={true} selectedOrder={selectedOrder} />
       </>
     );
@@ -183,6 +185,7 @@ const OpenOrder = ({ filters }) => {
                   document_date,
                   opportunity_id,
                   cf_opportunity_box_image,
+                  customer_ref,
                   id
                 } = Order['object_ref'];
                 return (
@@ -191,11 +194,7 @@ const OpenOrder = ({ filters }) => {
                     className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card">
                     <div className="flex flex-col w-full lg:w-1/4 py-2">
                       <img
-                        src={
-                          cf_opportunity_box_image
-                            ? cf_opportunity_box_image
-                            : 'https://bashooka.com/wp-content/uploads/2019/04/portrait-logo-design-4.jpg'
-                        }
+                        src="https://bashooka.com/wp-content/uploads/2019/04/portrait-logo-design-4.jpg"
                         alt="item"
                         className="object-contain w-auto h-40"
                       />
@@ -208,15 +207,10 @@ const OpenOrder = ({ filters }) => {
                         </h1>
                       </div>
                       <div className="flex w-full h-full flex-col space-y-4 justify-end lg:justify-between">
-                        {localStorage.getItem('role') === 'manager' ? (
-                          <p className="text-sm text-gray-500 break-all whitespace-pre-wrap">
-                            {localStorage.getItem('role') === 'manager'
-                              ? cf_opportunity_status
-                              : ''}
-                          </p>
-                        ) : (
-                          ''
-                        )}
+                        <p className="text-sm text-gray-500 break-all whitespace-pre-wrap">
+                          {customer_ref}
+                        </p>
+
                         <div className="flex flex-col lg:flex-row justify-between">
                           <div className="flex flex-row  lg:absolute lg:top-1 lg:right-1  space-x-2">
                             {localStorage.getItem('role') === 'manager' &&

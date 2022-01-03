@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import moment from 'moment';
-import { useFormik } from 'formik';
+import { isEmptyArray, useFormik } from 'formik';
 import { isEmpty } from 'lodash';
 import store from '../store';
 import { storeOrder, storeOrderCache, SaveDraft } from '../actions';
@@ -9,6 +9,7 @@ import axiosInstance from '../APIs/axiosInstance';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
 import { OrderFormSchema } from '../utils/validation_schema';
+import { arrayGenerator } from '../utils/arrayGenerator';
 
 var fileArray = [];
 var fileObj = null;
@@ -17,7 +18,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   const history = useHistory();
 
   const item = {
-    vendor: '',
     product: '',
     material: '',
     backing: '',
@@ -73,40 +73,64 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
 
   useEffect(() => {
     if (selectedOrder) {
-      let {
-        opp_line_items,
-        document_date,
-        cf_opportunity_item_name,
-        cf_opportunity_box_folder_id,
-        cf_opportunity_portal_notes,
-        cf_opportunity_ship_to_address,
-        cf_opportunity_status
-      } = selectedOrder['object_ref'];
+      let { document_date, cf_opportunity_portal_notes, opp_line_items } =
+        selectedOrder['object_ref'];
       let items = opp_line_items;
       let date = document_date;
       let notes = cf_opportunity_portal_notes;
-      let address = cf_opportunity_ship_to_address;
-
-      for (let i = 0; i < items.length; i++) {
-        let product = items[i]['object_ref']['product_name'];
-        let quantity = items[i]['object_ref']['unit_quanity'];
-        console.log(items[i]['object_ref']);
+      if (!isEmptyArray(items)) {
+        items.map((item) => {
+          item = item['object_ref'];
+          let product = item['product[refcode]'];
+          let material = item['material'];
+          let backing = item['backing'];
+          let pe = item['percentage_embroidery'];
+          let setQty = item['unit_quantity'];
+          if (product === '' || material === '' || backing === '' || pe === '' || setQty === '') {
+            DisableAddAnother();
+          } else {
+            EnableAddAnother();
+          }
+          setDate(date);
+        });
+        // setImages(images);
+        let backing = items[0]['object_ref']['backing'];
+        let border = items[0]['object_ref']['border'];
+        let colors = items[0]['object_ref']['colors'];
+        let cut = items[0]['object_ref']['shape'];
+        let hCenter = items[0]['object_ref']['height'];
+        let wCenter = items[0]['object_ref']['width'];
+        let material = items[0]['object_ref']['material'];
+        let optionalItem = items[0]['object_ref']['optional_item'];
+        let packaging = items[0]['object_ref']['packaging'];
+        let pe = items[0]['object_ref']['percentage_embroidery'];
+        let product = items[0]['object_ref']['product[refcode]'];
+        let quantitySum = items[0]['object_ref']['unit_quantity'];
+        let markup = items[0]['object_ref']['markup'];
+        let setQty = arrayGenerator(quantitySum);
+        setSelected(setQty);
+        let size = items[0]['object_ref']['cf_opportunity_line_item_size'];
+        let data = {
+          backing,
+          border,
+          colors,
+          cut,
+          hCenter,
+          wCenter,
+          material,
+          optionalItem,
+          packaging,
+          pe,
+          product,
+          setQty,
+          size,
+          markup
+        };
+        setNotes(notes);
+        setValues(items);
+        setData(data);
+        setWeek(week);
       }
-      // items.map((item) => {
-      //   console.log(item);
-      //   if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
-      //     DisableAddAnother();
-      //   } else {
-      //     EnableAddAnother();
-      //   }
-      //   setDate(date);
-      // });
-      setImages(images);
-      setNotes(notes);
-      setErrors(errors);
-      setValues(items);
-      setData(items[orderNo].data);
-      setWeek(week);
     }
   }, []);
   useEffect(() => {
@@ -116,11 +140,11 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   }, [images, values, errors, orderImages]);
 
   const initialValues = {
-    title: selectedOrder?.title || '',
-    reference: selectedOrder?.reference || '',
+    title: selectedOrder?.object_ref?.cf_opportunity_item_name || '',
+    reference: selectedOrder?.object_ref?.customer_ref || '',
     date: date || '',
-    shipAddress: selectedOrder?.shipAddress || '',
-    customerNote: selectedOrder?.customerNote || ''
+    shipAddress: selectedOrder?.object_ref?.cf_opportunity_ship_to_address || '',
+    customerNote: notes || ''
   };
 
   let upload = useRef();
@@ -184,8 +208,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   };
 
   const _HandleChange = (e, index) => {
+    console.log('in changed');
     const { name, value, checked } = e.target;
-
     const NewArray = [...values];
     const NewErrors = [...errors];
     let updatedErrorArray = [];
@@ -222,6 +246,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       setWeek(weeks);
     } else {
       let updatedArray = updateValues(NewArray, name, value, index);
+      console.log(updatedArray);
       setValues([...updatedArray]);
     }
     handleSize(orderNo);
@@ -361,8 +386,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       setErrors([...updatedErrorArray]);
     }
     let value = valuess.filter(({ value }) => value);
-
-    setSelected(value);
+    setSelected(valuess);
     let updatedArray = updateValues(values, 'setQty', valuess, orderNo);
     const { product, material, backing, pe, setQty } = updatedArray[orderNo];
     if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
@@ -379,6 +403,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       let CopyOriginal = [...values];
       let updatedColorArray = CopyOriginal.map((item, i) => {
         if (i !== orderNo) return item;
+
         if (color.includes('(') && color.includes('PMS')) {
           item.colors.push(color);
         } else if (color.includes('PMS')) {
@@ -621,52 +646,52 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   };
 
   let _Total = () => {
-    const CopyOriginal = [...values];
-    var Total = 0;
-    CopyOriginal.map((item, i) =>
-      item.data.map(({ unitPrice, count }) => (Total = Total + count * unitPrice))
-    );
-    setTotal((total) => (total = Total));
+    // const CopyOriginal = [...values];
+    // var Total = 0;
+    // CopyOriginal.map((item, i) =>
+    //   item.data.map(({ unitPrice, count }) => (Total = Total + count * unitPrice))
+    // );
+    // setTotal((total) => (total = Total));
   };
   let _grandTotal = () => {
-    const CopyOriginal = [...values];
-    var GrandTotal = 0;
-    CopyOriginal.map((item, i) =>
-      item.data.map(({ unitPrice, count }) => {
-        if (week < 1) {
-          GrandTotal = GrandTotal + (unitPrice * count).toFixed(3) * 0.75;
-        } else if (week >= 1 && week < 2) {
-          GrandTotal = GrandTotal + (unitPrice * count).toFixed(3) * 0.5;
-        } else if (week >= 2 && week < 3) {
-          GrandTotal = GrandTotal + (unitPrice * count).toFixed(3) * 0.3;
-        } else {
-          GrandTotal = GrandTotal + (unitPrice * count).toFixed(3) * 1;
-        }
-      })
-    );
-    setGrandTotal((grandTotal) => (grandTotal = GrandTotal));
+    // const CopyOriginal = [...values];
+    // var GrandTotal = 0;
+    // CopyOriginal.map((item, i) =>
+    //   item.data.map(({ unitPrice, count }) => {
+    //     if (week < 1) {
+    //       GrandTotal = GrandTotal + (unitPrice * count).toFixed(3) * 0.75;
+    //     } else if (week >= 1 && week < 2) {
+    //       GrandTotal = GrandTotal + (unitPrice * count).toFixed(3) * 0.5;
+    //     } else if (week >= 2 && week < 3) {
+    //       GrandTotal = GrandTotal + (unitPrice * count).toFixed(3) * 0.3;
+    //     } else {
+    //       GrandTotal = GrandTotal + (unitPrice * count).toFixed(3) * 1;
+    //     }
+    //   })
+    // );
+    // setGrandTotal((grandTotal) => (grandTotal = GrandTotal));
   };
   let _GrandTotalWithMarkup = () => {
-    const CopyOriginal = [...values];
-    var GrandTotalWithMarkup = 0;
-    CopyOriginal.map((item, i) =>
-      item.data.map(({ unitPrice, count }) => {
-        if (week < 1) {
-          GrandTotalWithMarkup =
-            GrandTotalWithMarkup + ((unitPrice * count).toFixed(3) * 0.75).toFixed(3) * item.markup;
-        } else if (week >= 1 && week < 2) {
-          GrandTotalWithMarkup =
-            GrandTotalWithMarkup + ((unitPrice * count).toFixed(3) * 0.5).toFixed(3) * item.markup;
-        } else if (week >= 2 && week < 3) {
-          GrandTotalWithMarkup =
-            GrandTotalWithMarkup + ((unitPrice * count).toFixed(3) * 0.3).toFixed(3) * item.markup;
-        } else {
-          GrandTotalWithMarkup =
-            GrandTotalWithMarkup + ((unitPrice * count).toFixed(3) * 1).toFixed(3) * item.markup;
-        }
-      })
-    );
-    setGrandTotalWithMarkup((gTotalWithMarkup) => (gTotalWithMarkup = GrandTotalWithMarkup));
+    // const CopyOriginal = [...values];
+    // var GrandTotalWithMarkup = 0;
+    // CopyOriginal.map((item, i) =>
+    //   item.data.map(({ unitPrice, count }) => {
+    //     if (week < 1) {
+    //       GrandTotalWithMarkup =
+    //         GrandTotalWithMarkup + ((unitPrice * count).toFixed(3) * 0.75).toFixed(3) * item.markup;
+    //     } else if (week >= 1 && week < 2) {
+    //       GrandTotalWithMarkup =
+    //         GrandTotalWithMarkup + ((unitPrice * count).toFixed(3) * 0.5).toFixed(3) * item.markup;
+    //     } else if (week >= 2 && week < 3) {
+    //       GrandTotalWithMarkup =
+    //         GrandTotalWithMarkup + ((unitPrice * count).toFixed(3) * 0.3).toFixed(3) * item.markup;
+    //     } else {
+    //       GrandTotalWithMarkup =
+    //         GrandTotalWithMarkup + ((unitPrice * count).toFixed(3) * 1).toFixed(3) * item.markup;
+    //     }
+    //   })
+    // );
+    // setGrandTotalWithMarkup((gTotalWithMarkup) => (gTotalWithMarkup = GrandTotalWithMarkup));
   };
 
   return {

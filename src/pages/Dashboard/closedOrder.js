@@ -4,7 +4,7 @@ import NewOrder from './newOrder';
 import Button from './button';
 import AxiosInstance from '../../APIs/axiosInstance';
 import { Spinner } from '../../components/spinner/Spinner';
-const ClosedOrder = ({ filters }) => {
+const ClosedOrder = ({ filters, searched, setSearched }) => {
   const [isLoading, setIsLoading] = useState(false);
   const checkFilters = (filters) => {
     if (
@@ -18,7 +18,8 @@ const ClosedOrder = ({ filters }) => {
     return false;
   };
   const getData = async () => {
-    if (checkFilters(filters)) {
+    if (checkFilters(filters) && searched) {
+      setSearched(false);
       setIsLoading(true);
       try {
         let resp = await AxiosInstance.searchFilter(filters, 'closed');
@@ -46,7 +47,7 @@ const ClosedOrder = ({ filters }) => {
 
   useEffect(async () => {
     getData();
-  }, []);
+  }, [searched]);
   // const orders = useSelector(({ order: { order } }) => order);
   //  redux
   const [selectedOrder, setSelectedOrder] = useState(undefined);
@@ -62,21 +63,6 @@ const ClosedOrder = ({ filters }) => {
 
   let toggleEdit = () => {
     setReadOnly(!readOnly);
-  };
-
-  const reOrder = async (index, opp_id) => {
-    let tempOrders = [];
-    setIsLoading(true);
-
-    try {
-      let res = await AxiosInstance.reOrder(opp_id);
-      if (res.status === 200) {
-        tempOrders = [...orders];
-        tempOrders.splice(index, 1);
-        setOrders(tempOrders);
-        setIsLoading(false);
-      }
-    } catch (error) {}
   };
 
   return selectedOrder ? (
@@ -171,10 +157,8 @@ const ClosedOrder = ({ filters }) => {
                         <div className="flex flex-col lg:flex-row justify-between">
                           <div className="flex flex-row  lg:absolute lg:top-1 lg:right-1  space-x-2">
                             <Button
-                              label={'reOrder'}
-                              onClick={() => {
-                                reOrder(index, id, opportunity_id);
-                              }}
+                              label={'Details'}
+                              onClick={() => handleClick(order)}
                               classNames={`px-2 sm:px-5 py-2 uppercase border w-full
                                         ${'text-white text-sm bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'}`}
                             />

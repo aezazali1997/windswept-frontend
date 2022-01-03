@@ -30,7 +30,8 @@ class AxiosInstance {
     formData.append('purchase_order', data.purchaseOrders);
     formData.append('images_length', data.images.length);
     for (let i = 0; i < data.images.length; i++) {
-      formData.append(`image${i}`, JSON.stringify(data.images[i]));
+      // console.log(data.images[i]);
+      formData.append(`image${i}`, data.images[i]);
     }
     formData.append('item_details', JSON.stringify(deserializeItems(data.items)));
     await axios.post(BASE_URL + '/opportunity', formData);
@@ -66,7 +67,6 @@ class AxiosInstance {
     } catch (error) {}
   }
   async searchFilter(data,orderType) {
-    console.log();
     try {
       let id = localStorage.getItem('user_id');
       return await axios.get(BASE_URL + `/search?id=${id}&data=${JSON.stringify(data)}&order=${orderType}`);
