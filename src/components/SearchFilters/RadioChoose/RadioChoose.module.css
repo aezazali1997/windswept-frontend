@@ -1,8 +1,9 @@
 .radioChoose {
 display: flex;
 padding:.5rem 0;
-justify-content: center;
+justify-content: space-between;
+margin-bottom: .5rem;
 }
-.radioChoose > div{
-  margin:0 1rem;
+.tipPos{
+  margin-left: -1rem !important;
 }

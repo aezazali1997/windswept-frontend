@@ -30,7 +30,6 @@ class AxiosInstance {
     formData.append('purchase_order', data.purchaseOrders);
     formData.append('images_length', data.images.length);
     for (let i = 0; i < data.images.length; i++) {
-      // console.log(data.images[i]);
       formData.append(`image${i}`, data.images[i]);
     }
     formData.append('item_details', JSON.stringify(deserializeItems(data.items)));
@@ -61,11 +60,11 @@ class AxiosInstance {
       console.log(error);
     }
   }
-  async reOrder(ref) {
-    try {
-      return await axios.put(BASE_URL + `/opportunity?proc=2&opp_id=${ref}`);
-    } catch (error) {}
-  }
+  // async reOrder(ref) {
+  //   try {
+  //     return await axios.put(BASE_URL + `/opportunity?proc=2&opp_id=${ref}`);
+  //   } catch (error) {}
+  // }
   async searchFilter(data,orderType) {
     try {
       let id = localStorage.getItem('user_id');
@@ -73,6 +72,30 @@ class AxiosInstance {
     } catch (er) {
       console.log(er);
     }
+  }
+  async updateOrder(data,opp_ref,id){
+    const formData = new FormData();
+    formData.append('user_id', localStorage.getItem('user_id'));
+    formData.append('opp_id', id);
+    formData.append('opp_ref', opp_ref);
+    formData.append('order_name', data.title);
+    formData.append('customer_ref', data.reference);
+    formData.append('week', data.week);
+    formData.append('in_hands_date', data.date);
+    formData.append('ship_address', data.shipAddress);
+    formData.append('customer_notes', data.notes);
+    formData.append('purchase_order', data.purchaseOrders);
+    formData.append('images_length', data.images.length);
+    for (let i = 0; i < data.images.length; i++) {
+      formData.append(`image${i}`, data.images[i]);
+    }
+    formData.append('item_details', JSON.stringify(deserializeItems(data.items)));
+    try {
+      return axios.put(BASE_URL + `/opportunity?proc=3`, formData);
+    } catch (error) {
+      console.log(error);
+    }
+  
   }
   // async getUserType() {
   //   return await axios.get(BASE_URL + '/api/verify', this.getAuthHeader());

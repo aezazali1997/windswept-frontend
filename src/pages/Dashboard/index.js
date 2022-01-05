@@ -271,7 +271,7 @@ const Dashboard = (props) => {
           body={
             <div className="flex flex-col  h-full w-auto sm:w-80">
               <SearchFilters
-                setOrderType={setOrderType}
+                setOrderType={setOrderType} orderType={orderType}
                 filter={filters}
                 handleChange={_onChangeFilter}
               />

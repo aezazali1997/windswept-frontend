@@ -2,12 +2,12 @@ import React from 'react';
 import { InputField } from '..';
 import { RadioChoose } from './RadioChoose/RadioChoose';
 
-const Index = ({ filter, handleChange, setOrderType }) => {
+const Index = ({ filter, handleChange, setOrderType, orderType }) => {
   const { date, oppStage, orderName, productName, customerReference, otherOpportunity } = filter;
 
   return (
     <div className="flex flex-col">
-      <RadioChoose setOrderType={setOrderType} />
+      <RadioChoose setOrderType={setOrderType} orderType={orderType} />
       <InputField
         name={'date'}
         type={'date'}

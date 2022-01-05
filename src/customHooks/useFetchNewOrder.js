@@ -10,44 +10,20 @@ import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
 import { OrderFormSchema } from '../utils/validation_schema';
 import { arrayGenerator } from '../utils/arrayGenerator';
+import { useLocation } from 'react-router-dom';
+import { Error } from '../constants/Errors';
+import { Item } from '../constants/Item';
+import { deserializeApiResponse } from '../utils/ApiResponse';
 
-var fileArray = [];
-var fileObj = null;
+let fileArray = [];
+let fileObj = null;
 
 const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
+  let useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+  };
+  const query = useQuery();
   const history = useHistory();
-
-  const item = {
-    product: '',
-    material: '',
-    backing: '',
-    pe: '',
-    border: '',
-    cut: '',
-    packaging: '',
-    setQty: [],
-    optionalItem: '',
-    markup: '',
-    discountApply: false,
-    wLeft: '1',
-    wRight: '0',
-    wCenter: '0',
-    hLeft: '1',
-    hCenter: '0',
-    hRight: '0',
-    size: 1,
-    data: [],
-    colors: [],
-    pmsColors: []
-  };
-
-  const error = {
-    qty: true,
-    product: true,
-    material: true,
-    backing: true,
-    pe: true
-  };
 
   const [loading, setLoading] = useState(false);
   const [canAddAnother, setDisableAddAnother] = useState(true);
@@ -61,8 +37,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   const [selected, setSelected] = useState([]);
   const [color, setColor] = useState('');
   const [notes, setNotes] = useState('');
-  const [values, setValues] = useState([item]);
-  const [errors, setErrors] = useState([error]);
+  const [values, setValues] = useState([Item]);
+  const [errors, setErrors] = useState([Error]);
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
@@ -94,42 +70,16 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
           setDate(date);
         });
         // setImages(images);
-        let backing = items[0]['object_ref']['backing'];
-        let border = items[0]['object_ref']['border'];
-        let colors = items[0]['object_ref']['colors'];
-        let cut = items[0]['object_ref']['shape'];
-        let hCenter = items[0]['object_ref']['height'];
-        let wCenter = items[0]['object_ref']['width'];
-        let material = items[0]['object_ref']['material'];
-        let optionalItem = items[0]['object_ref']['optional_item'];
-        let packaging = items[0]['object_ref']['packaging'];
-        let pe = items[0]['object_ref']['percentage_embroidery'];
-        let product = items[0]['object_ref']['product[refcode]'];
-        let quantitySum = items[0]['object_ref']['unit_quantity'];
-        let markup = items[0]['object_ref']['markup'];
-        let setQty = arrayGenerator(quantitySum);
-        setSelected(setQty);
-        let size = items[0]['object_ref']['cf_opportunity_line_item_size'];
-        let data = {
-          backing,
-          border,
-          colors,
-          cut,
-          hCenter,
-          wCenter,
-          material,
-          optionalItem,
-          packaging,
-          pe,
-          product,
-          setQty,
-          size,
-          markup
-        };
+
+        let all_line_items = deserializeApiResponse(items);
+        for (let i = 0; i < all_line_items.length; i++) {
+          setSelected([...all_line_items[i].setQty]);
+        }
+
         setNotes(notes);
-        setValues(items);
-        setData(data);
+        setValues(all_line_items);
         setWeek(week);
+        // setData([data]);
       }
     }
   }, []);
@@ -208,19 +158,22 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   };
 
   const _HandleChange = (e, index) => {
-    console.log('in changed');
     const { name, value, checked } = e.target;
+
     const NewArray = [...values];
     const NewErrors = [...errors];
     let updatedErrorArray = [];
     let updatedArray = [];
-    setValues([]);
+    // if (!NewArray[0]['object_ref']) {
+    //   setValues([]);
+    // }
 
     if (name === 'product' || name === 'material' || name === 'pe' || name === 'backing') {
       if (value === '') {
         updatedErrorArray = updateErrors(NewErrors, name, true, index);
         updatedArray = updateValues(NewArray, name, value, index);
         setErrors([...updatedErrorArray]);
+
         setValues([...updatedArray]);
       } else {
         updatedErrorArray = updateErrors(NewErrors, name, false, index);
@@ -238,27 +191,29 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       let updatedArray = updateValues(NewArray, name, checked, index);
       setValues([...updatedArray]);
     } else if (name === 'date') {
-      var now = moment(new Date()); //todays date
-      var end = moment(value); // end date
-      var weeks = end.diff(now, 'weeks');
+      let now = moment(new Date()); //todays date
+      let end = moment(value); // end date
+      let weeks = end.diff(now, 'weeks');
       setDate(value);
-
       setWeek(weeks);
     } else {
       let updatedArray = updateValues(NewArray, name, value, index);
-      console.log(updatedArray);
+
       setValues([...updatedArray]);
     }
     handleSize(orderNo);
   };
 
   let handleSize = (orderNo) => {
-    let CopyOriginal = [...values];
-    let HResult = 0;
-    let WResult = 0;
-    let { hLeft, hRight, wLeft, wRight } = values[orderNo];
-    //width
-    {
+    if (
+      values[orderNo].hLeft &&
+      values[orderNo].hRight &&
+      values[orderNo].wLeft &&
+      values[orderNo].wRight
+    ) {
+      let HResult = 0;
+      let WResult = 0;
+      let { hLeft, hRight, wLeft, wRight } = values[orderNo];
       if (wRight !== '0') {
         let newWidthCenter = wRight.split('/');
         let WidthNum = parseInt(newWidthCenter[0]);
@@ -272,8 +227,10 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         let HeightDen = parseInt(newHeightCenter[1]);
         HResult = HeightNum / HeightDen;
       }
-      var size = (parseInt(wLeft) + WResult + (parseInt(hLeft) + HResult)) / 2;
-      var roundedhalf = Math.round(size * 2) / 2;
+      let size = (parseInt(wLeft) + WResult + (parseInt(hLeft) + HResult)) / 2;
+      let roundedhalf = Math.round(size * 2) / 2;
+
+      let CopyOriginal = [...values];
 
       let UpdateArray = CopyOriginal.map((item, i) => {
         if (i !== orderNo) return item;
@@ -442,8 +399,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   let addAnother = () => {
     let CopyOriginalValues = [...values];
     let CopyOriginalErrors = [...errors];
-    let newErrorArray = [...CopyOriginalErrors, error];
-    let newValueArray = [...CopyOriginalValues, item];
+    let newErrorArray = [...CopyOriginalErrors, Error];
+    let newValueArray = [...CopyOriginalValues, Item];
     setOrderNo(orderNo + 1);
     setErrors(newErrorArray);
     setValues(newValueArray);
@@ -475,9 +432,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
 
   let onCancleOrder = () => {
     if (!readOnly) {
-      setErrors([error]);
+      setErrors([Error]);
       setOrderNo(0);
-      setValues([item]);
+      setValues([Item]);
     }
   };
 
@@ -496,7 +453,21 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   const DisableAddAnother = () => {
     setDisableAddAnother(true);
   };
+  const updateData = async (data) => {
+    try {
+      setLoading(true);
+      let res = await axiosInstance.updateOrder(
+        data,
+        selectedOrder['object_ref']['opportunity_id'],
+        selectedOrder['object_ref']['id']
+      );
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
 
+    // this function will call the update method in backend
+  };
   const ConfirmSubmit = (data) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -590,7 +561,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
             }
           });
         } else {
-          ConfirmSubmit(data);
+          query.get('active') === 'new-order' ? ConfirmSubmit(data) : updateData(data);
         }
       } else if (values.length > 1) {
         let empty = false;
@@ -612,7 +583,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
                   'w-full inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
               }
             })
-          : ConfirmSubmit(data);
+          : query.get('active') === 'new-order'
+          ? ConfirmSubmit(data)
+          : updateData(data);
       }
 
       disableLoading();
@@ -636,6 +609,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   let _onFocus = (e) => {
     e.currentTarget.type = 'date';
     e.currentTarget.min = new Date().toISOString().split('T')[0];
+    e.currentTarget.value = date;
   };
 
   let _onBlur = (e) => {

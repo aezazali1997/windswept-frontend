@@ -24,7 +24,25 @@ const From = ({
   showThread,
   showPMS
 }) => {
-  const { product, material, pe, backing, qty } = errors;
+  let { product, material, pe, backing, qty } = errors;
+  if (values) {
+    if (values.product) {
+      product = false;
+    }
+    if (values.material) {
+      material = false;
+    }
+    if (values.pe) {
+      pe = false;
+    }
+    if (values.backing) {
+      backing = false;
+    }
+    if (values.setQty.length > 0) {
+      qty = false;
+    }
+  }
+
   let handleFormDisable = (value) => {
     let form = document.getElementById('orderForm');
     let elements = form.elements;
@@ -68,7 +86,7 @@ const From = ({
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
             <select
               id="product"
-              value={values?.product}
+              value={values.product}
               onChange={(e) => handleChange(e, orderNo)}
               name="product"
               className={`select ${product ? 'border-red-500' : 'border-gray-500'}`}>
@@ -106,7 +124,7 @@ const From = ({
             <select
               id="material"
               name="material"
-              value={values?.material}
+              value={values.material}
               onChange={(e) => handleChange(e, orderNo)}
               className={`select ${material ? 'border-red-500' : 'border-gray-500'}`}>
               <option value="select">select...</option>
@@ -135,7 +153,7 @@ const From = ({
             <select
               id="backing"
               name="backing"
-              value={values?.backing}
+              value={values.backing}
               onChange={(e) => handleChange(e, orderNo)}
               className={`select ${backing ? 'border-red-500' : 'border-gray-500'}`}>
               <option value="select">select...</option>
@@ -160,7 +178,7 @@ const From = ({
             <select
               id="pe"
               name="pe"
-              value={values?.percentage_embroidery}
+              value={values.pe}
               onChange={(e) => handleChange(e, orderNo)}
               className={`select ${pe ? 'border-red-500' : 'border-gray-500'}`}>
               <option value="select">select...</option>
@@ -181,7 +199,7 @@ const From = ({
             <select
               id="border"
               name="border"
-              value={values?.border}
+              value={values.border}
               onChange={(e) => handleChange(e, orderNo)}
               className=" select">
               <option value="select">select...</option>
@@ -198,7 +216,7 @@ const From = ({
             <select
               id="cut"
               name="cut"
-              value={values?.shape}
+              value={values.cut}
               onChange={(e) => handleChange(e, orderNo)}
               className="select">
               <option value="select">select...</option>
@@ -220,7 +238,7 @@ const From = ({
             <select
               id="packaging"
               name="packaging"
-              value={values?.packaging}
+              value={values.packaging}
               onChange={(e) => handleChange(e, orderNo)}
               className=" select">
               <option value="select">select...</option>
@@ -242,7 +260,7 @@ const From = ({
             <MultiSelect
               disabled={readOnly ? true : false}
               className={`border rounded-md ${qty ? 'border-red-500' : 'border-gray-50'}`}
-              value={values?.setQty ? values.setQty : selected}
+              value={values.setQty}
               options={multiQty}
               selected={selected}
               onChange={(values) => {
@@ -259,7 +277,7 @@ const From = ({
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
             <input
-              value={values?.optional_item}
+              value={values.optionalItem}
               onChange={(e) => handleChange(e, orderNo)}
               className="input"
               name="optionalItem"
@@ -273,7 +291,7 @@ const From = ({
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
             <inputmarkup
-              value={values?.markup}
+              value={values.markup}
               disabled={true}
               onChange={(e) => handleChange(e, orderNo)}
               className="input"
@@ -320,7 +338,7 @@ const From = ({
               <input
                 className="py-2 px-3 w-full focus:outline-none"
                 name="wCenter"
-                value={values.wCenter ? values.wCenter : values.width}
+                value={values.wCenter}
                 readOnly
                 type="text"
               />
@@ -367,12 +385,12 @@ const From = ({
                 className="py-2 px-3 w-full focus:outline-none"
                 readOnly
                 name="hCenter"
-                value={values.hCenter ? values.hCenter : values.height}
+                value={values.hCenter}
                 type="text"
               />
               <select
                 id="wRight"
-                value={values.hRight}
+                value={values?.hRight}
                 name="hRight"
                 onChange={(e) => handleChange(e, orderNo)}
                 className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
@@ -392,11 +410,7 @@ const From = ({
             <p className="text-left sm:text-right text-sm align-top">Size</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-            <p className="text-sm ">
-              {values.cf_opportunity_line_item_size
-                ? values.cf_opportunity_line_item_size
-                : values.size}
-            </p>
+            <p className="text-sm ">{values.size}</p>
           </div>
         </div>
 
@@ -443,7 +457,7 @@ const From = ({
                 <div className="">
                   <table className="min-w-full divide-y divide-gray-200">
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {values?.colors.map((color, index) => (
+                      {values.colors.map((color, index) => (
                         <div
                           key={index}
                           className="flex flex-row border-b hover:bg-red-600 group-hover:text-white w-full py-2 px-3  items-center">

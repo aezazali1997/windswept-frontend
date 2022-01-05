@@ -151,7 +151,7 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
                       </div>
                       <div className="flex w-full h-full flex-col space-y-4 justify-end lg:justify-between">
                         <p className="text-sm text-gray-500 break-all whitespace-pre-wrap">
-                          {cf_opportunity_status}
+                          status: {cf_opportunity_status}
                         </p>
 
                         <div className="flex flex-col lg:flex-row justify-between">
