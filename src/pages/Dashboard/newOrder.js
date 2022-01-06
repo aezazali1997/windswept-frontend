@@ -65,7 +65,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
   return (
     <>
-      {loading && <Spinner />}
+      {loading && query.get('active') === 'open-order' && <Spinner />}
       <form onSubmit={formik.handleSubmit} className="form" noValidate="novalidate">
         <div className="flex flex-col justify-center items-center">
           <h1 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-light mb-10">
@@ -266,7 +266,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                     {query.get('active') === 'open-order' && 'Update Order'}
                     {query.get('active') === 'closed-order' && ' Reorder'}
 
-                    {loading && (
+                    {loading && query.get('active') !== 'open-order' && (
                       <div className=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>
                     )}
                   </button>

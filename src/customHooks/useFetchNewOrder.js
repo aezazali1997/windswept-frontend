@@ -454,21 +454,18 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     setDisableAddAnother(true);
   };
   const updateData = async (data) => {
+    enableLoading();
     try {
-      setLoading(true);
       let res = await axiosInstance.updateOrder(
         data,
         selectedOrder['object_ref']['opportunity_id'],
         selectedOrder['object_ref']['id']
       );
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-
+    } catch (error) {}
+    disableLoading();
     // this function will call the update method in backend
   };
-  const ConfirmSubmit = (data) => {
+  const ConfirmSubmit = async (data) => {
     Swal.fire({
       title: 'Are you sure?',
       icon: 'question',
@@ -486,7 +483,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         denyButton:
           'w-full inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
       }
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         Swal.fire({
           title: 'Your order has been submitted and will be reviewed later',
@@ -499,15 +496,18 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
             confirmButton:
               'w-full inline-flex justify-center rounded-md border-none btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
           }
-        }).then((result) => {
+        }).then(async (result) => {
           if (result.isConfirmed) {
             // history.push('/dashboard?active=open-order')
           }
         });
+        enableLoading();
+        try {
+          let res = await axiosInstance.postOrder(data);
+        } catch (error) {}
+        disableLoading();
         // changes by aezaz
-        axiosInstance.postOrder(data);
-        // changes by aezaz
-        store.dispatch(storeOrder(data));
+        // store.dispatch(storeOrder(data));
       } else if (result.isDenied) {
         Swal.fire({
           text: 'Your order is saved in drafts, waiting for your submission',
@@ -532,7 +532,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     validateOnBlur: true,
     onSubmit: ({ title, reference, shipAddress, customerNote }, { setSubmitting }) => {
       setSubmitting(true);
-      enableLoading();
+
       const data = {
         title,
         reference,
@@ -587,8 +587,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
           ? ConfirmSubmit(data)
           : updateData(data);
       }
-
-      disableLoading();
     }
   });
 

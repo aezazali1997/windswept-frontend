@@ -423,30 +423,36 @@ const From = ({
               <input
                 value={color}
                 type="text"
+                disabled={values.colors.length === 12 || readOnly ? true : false}
                 placeholder="Enter Color Code"
                 onChange={(e) => {
                   setColor(e.target.value);
                 }}
                 className="w-full p-2 focus:outline-none"
               />
+
               <button
                 type="button"
-                disabled={readOnly ? true : false}
+                disabled={values.colors.length === 12 || readOnly ? true : false}
                 onClick={handleColors}
                 className=" bg-red-600 hover:bg-red-700 text-white p-2 w-1/4">
-                <p className="font-medium text-sm">Add Color</p>
+                <p className="font-medium text-sm">
+                  {values.colors.length === 12 ? 'No more colors allowed' : 'Add Color'}
+                </p>
               </button>
             </div>
             <div className="flex flex-row w-full">
               <button
                 onClick={() => handlePMSModal()}
                 type="button"
+                disabled={values.colors.length === 12 || readOnly ? true : false}
                 className="inline-flex bg-red-600 justify-center w-full border-r border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none">
                 PMS
               </button>
               <button
                 onClick={() => handleThreadModal()}
                 type="button"
+                disabled={values.colors.length === 12 || readOnly ? true : false}
                 className="inline-flex bg-red-600 justify-center w-full  border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium hover:bg-red-700 focus:outline-none">
                 Thread
               </button>

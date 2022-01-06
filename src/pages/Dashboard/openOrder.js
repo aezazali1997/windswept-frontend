@@ -129,10 +129,11 @@ const OpenOrder = ({ filters, searched, setSearched }) => {
       });
     };
 
-    let goBacktoDetail = () => {
+    let goBacktoDetail = async () => {
       setSelectedOrder(undefined);
       setActiveIndex(null);
       history.push(`/dashboard?active=open-order`);
+      getData();
     };
 
     if (selectedOrder) {
