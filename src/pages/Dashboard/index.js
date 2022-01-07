@@ -14,6 +14,7 @@ import { InfoSVG } from '../../assets/SVGs';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
+import axiosInstance from '../../APIs/axiosInstance';
 
 let useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -22,6 +23,7 @@ let useQuery = () => {
 const Dashboard = (props) => {
   let query = useQuery();
   const [orderType, setOrderType] = useState('open');
+  const [isDraftpresent, setIsDraftPresent] = useState(false);
 
   const filter = {
     date: '',
@@ -30,6 +32,15 @@ const Dashboard = (props) => {
     productName: '',
     customerReference: '',
     otherOpportunity: ''
+  };
+
+  const fetchDrafts = async () => {
+    try {
+      let res = await axiosInstance.checkDraftExist();
+      if (res.data.count > 0) {
+        setIsDraftPresent(true);
+      }
+    } catch (error) {}
   };
 
   const drafts = useSelector(({ order: { draft } }) => draft);
@@ -48,6 +59,7 @@ const Dashboard = (props) => {
   const [searched, setSearched] = useState(false);
 
   useEffect(() => {
+    fetchDrafts();
     if (query.get('active') === null) {
       props.history.push(`/dashboard?active=${activeIndex}`);
       setActiveIndex(activeIndex);
@@ -183,7 +195,7 @@ const Dashboard = (props) => {
                             : 'text-white bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'
                         }`}
           />
-          {!isEmpty(drafts) && (
+          {isDraftpresent && (
             <Button
               id={4}
               onClick={() => handleDraft('saved-as-draft')}
@@ -271,7 +283,8 @@ const Dashboard = (props) => {
           body={
             <div className="flex flex-col  h-full w-auto sm:w-80">
               <SearchFilters
-                setOrderType={setOrderType} orderType={orderType}
+                setOrderType={setOrderType}
+                orderType={orderType}
                 filter={filters}
                 handleChange={_onChangeFilter}
               />

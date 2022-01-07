@@ -60,7 +60,9 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
     EnableAddAnother,
     DisableAddAnother,
     canAddAnother,
-    handleNotes
+    handleNotes,
+    saveAsDraft,
+    updateDraft
   } = UseNewOrder({ readOnly, selectedOrder, closeOrder });
 
   return (
@@ -247,7 +249,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                       ? 'bg-red-500 cursor-default'
                       : 'bg-red-600 hover:bg-red-700'
                   }
-									justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white focus:outline-none
+									justify-center border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white focus:outline-none 
 									`}>
                   Add Another
                 </button>
@@ -255,14 +257,17 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                   <button
                     disabled={readOnly ? true : false}
                     type="button"
-                    className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none">
-                    Save as Draft
+                    onClick={query.get('active') !== 'saved-as-draft' ? saveAsDraft : updateDraft}
+                    className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none ">
+                    {query.get('active') !== 'saved-as-draft' ? 'Save as Draft' : 'Update Draft'}
                   </button>
                   <button
                     disabled={readOnly ? true : false}
                     type="submit"
-                    className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none">
-                    {query.get('active') === 'new-order' && 'Submit Order'}
+                    className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none ">
+                    {(query.get('active') === 'new-order' ||
+                      query.get('active') === 'saved-as-draft') &&
+                      'Submit Order'}
                     {query.get('active') === 'open-order' && 'Update Order'}
                     {query.get('active') === 'closed-order' && ' Reorder'}
 

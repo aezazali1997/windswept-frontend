@@ -14,7 +14,9 @@ import { useLocation } from 'react-router-dom';
 import { Error } from '../constants/Errors';
 import { Item } from '../constants/Item';
 import { deserializeApiResponse } from '../utils/ApiResponse';
-
+import { deserializeDraftResponse } from '../utils/draftResponse';
+import { getQuantitySum } from '../utils/arraySum';
+import '../styles/custom-style.css';
 let fileArray = [];
 let fileObj = null;
 
@@ -49,35 +51,63 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
 
   useEffect(() => {
     if (selectedOrder) {
-      let { document_date, cf_opportunity_portal_notes, opp_line_items } =
-        selectedOrder['object_ref'];
-      let items = opp_line_items;
-      let date = document_date;
-      let notes = cf_opportunity_portal_notes;
+      console.log(selectedOrder);
+      let [date, notes] = ['', ''];
+      let items = [];
+      if (selectedOrder['object_ref']) {
+        let { document_date, cf_opportunity_portal_notes, opp_line_items } =
+          selectedOrder['object_ref'];
+        items = opp_line_items;
+        date = document_date;
+        notes = cf_opportunity_portal_notes;
+      } else {
+        items = selectedOrder.items;
+        for (let i = 0; i < items.length; i++) {
+          items[i] = JSON.parse(items[i]);
+        }
+        date = selectedOrder.date;
+        notes = selectedOrder.customer_notes;
+      }
       if (!isEmptyArray(items)) {
-        items.map((item) => {
-          item = item['object_ref'];
-          let product = item['product[refcode]'];
-          let material = item['material'];
-          let backing = item['backing'];
-          let pe = item['percentage_embroidery'];
-          let setQty = item['unit_quantity'];
-          if (product === '' || material === '' || backing === '' || pe === '' || setQty === '') {
-            DisableAddAnother();
-          } else {
-            EnableAddAnother();
+        let [product, material, backing, pe, setQty] = ['', '', '', '', ''];
+        if (items[0]['object_ref']) {
+          items.map((item) => {
+            item = item['object_ref'];
+            product = item['product[refcode]'];
+            material = item['material'];
+            backing = item['backing'];
+            pe = item['percentage_embroidery'];
+            setQty = item['unit_quantity'];
+            if (product === '' || material === '' || backing === '' || pe === '' || setQty === '') {
+              DisableAddAnother();
+            } else {
+              EnableAddAnother();
+            }
+            setDate(date);
+          });
+          items = deserializeApiResponse(items);
+          for (let i = 0; i < items.length; i++) {
+            setSelected([...items[i].setQty]);
           }
-          setDate(date);
-        });
-        // setImages(images);
-
-        let all_line_items = deserializeApiResponse(items);
-        for (let i = 0; i < all_line_items.length; i++) {
-          setSelected([...all_line_items[i].setQty]);
+        } else {
+          items.map((item) => {
+            product = item.product;
+            material = item.material;
+            backing = item.backing;
+            pe = item.percentage_embroidery;
+            setQty = item.quantity;
+            if (product === '' || material === '' || backing === '' || pe === '' || setQty === '') {
+              DisableAddAnother();
+            } else {
+              EnableAddAnother();
+            }
+            setDate(date);
+          });
+          items = deserializeDraftResponse(items);
         }
 
+        setValues(items);
         setNotes(notes);
-        setValues(all_line_items);
         setWeek(week);
         // setData([data]);
       }
@@ -90,10 +120,11 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   }, [images, values, errors, orderImages]);
 
   const initialValues = {
-    title: selectedOrder?.object_ref?.cf_opportunity_item_name || '',
-    reference: selectedOrder?.object_ref?.customer_ref || '',
+    title: selectedOrder?.object_ref?.cf_opportunity_item_name || selectedOrder?.title || '',
+    reference: selectedOrder?.object_ref?.customer_ref || selectedOrder?.reference || '',
     date: date || '',
-    shipAddress: selectedOrder?.object_ref?.cf_opportunity_ship_to_address || '',
+    shipAddress:
+      selectedOrder?.object_ref?.cf_opportunity_ship_to_address || selectedOrder?.shipAdress || '',
     customerNote: notes || ''
   };
 
@@ -205,43 +236,44 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   };
 
   let handleSize = (orderNo) => {
-    if (
-      values[orderNo].hLeft &&
-      values[orderNo].hRight &&
-      values[orderNo].wLeft &&
-      values[orderNo].wRight
-    ) {
-      let HResult = 0;
-      let WResult = 0;
-      let { hLeft, hRight, wLeft, wRight } = values[orderNo];
-      if (wRight !== '0') {
-        let newWidthCenter = wRight.split('/');
-        let WidthNum = parseInt(newWidthCenter[0]);
-        let WidthDen = parseInt(newWidthCenter[1]);
-        WResult = WidthNum / WidthDen;
-      }
-      //height
+    // seperate the logic of height and width
+    let [hLeft, hRight, HResult, wRight, WResult, wLeft] = [0, 0, 0, 0, 0, 0];
+
+    if (values[orderNo].hLeft && values[orderNo].hRight) {
+      hLeft = values[orderNo].hLeft;
+      hRight = values[orderNo].hRight;
       if (hRight !== '0') {
         let newHeightCenter = hRight.split('/');
         let HeightNum = parseInt(newHeightCenter[0]);
         let HeightDen = parseInt(newHeightCenter[1]);
         HResult = HeightNum / HeightDen;
       }
-      let size = (parseInt(wLeft) + WResult + (parseInt(hLeft) + HResult)) / 2;
-      let roundedhalf = Math.round(size * 2) / 2;
-
-      let CopyOriginal = [...values];
-
-      let UpdateArray = CopyOriginal.map((item, i) => {
-        if (i !== orderNo) return item;
-        item.wCenter = WResult;
-        item.hCenter = HResult;
-        item.size = roundedhalf;
-        return item;
-      });
-      setValues([...UpdateArray]);
-      callAPI();
     }
+    if (values[orderNo].wLeft && values[orderNo].wRight) {
+      wLeft = values[orderNo].wLeft;
+      wRight = values[orderNo].wRight;
+      if (wRight !== '0') {
+        let newWidthCenter = wRight.split('/');
+        let WidthNum = parseInt(newWidthCenter[0]);
+        let WidthDen = parseInt(newWidthCenter[1]);
+        WResult = WidthNum / WidthDen;
+      }
+    }
+
+    let size = (parseInt(wLeft) + WResult + (parseInt(hLeft) + HResult)) / 2;
+    let roundedhalf = Math.round(size * 2) / 2;
+
+    let CopyOriginal = [...values];
+
+    let UpdateArray = CopyOriginal.map((item, i) => {
+      if (i !== orderNo) return item;
+      item.wCenter = WResult;
+      item.hCenter = HResult;
+      item.size = roundedhalf;
+      return item;
+    });
+    setValues([...UpdateArray]);
+    callAPI();
   };
   let callAPI = async () => {
     const { product, material, backing, size, pe, freight, markup, pmsColors, setQty } =
@@ -477,11 +509,11 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       buttonsStyling: false,
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm',
+          'w-full inline-flex justify-center rounded-md border-none  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
         cancelButton:
-          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm',
+          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
         denyButton:
-          'w-full inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+          'w-full inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style '
       }
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -520,8 +552,54 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
               'w-full inline-flex justify-center rounded-md border-none btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
           }
         });
-        store.dispatch(SaveDraft(data));
+        // make api call
       }
+    });
+  };
+  const updateDraft = async () => {};
+  const saveAsDraft = async () => {
+    Swal.fire({
+      text: 'Your order is saved in drafts, waiting for your submission',
+      icon: 'info',
+      buttonsStyling: false,
+      showCancelButton: false,
+      confirmButtonText: 'Ok',
+      customClass: {
+        confirmButton:
+          'w-full inline-flex justify-center rounded-md border-none btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style'
+      }
+    }).then(async (result) => {
+      const data = {
+        title: formik.values.title,
+        reference: formik.values.reference,
+        date,
+        images: imageFiles,
+        notes: formik.values.customerNote,
+        purchaseOrders: orderImages,
+        shipAddress: formik.values.shipAddress,
+        items: []
+      };
+      for (let i = 0; i < values.length; i++) {
+        let item = {
+          product: values[i].product,
+          material: values[i].material,
+          backing: values[i].backing,
+          percentage_embroidery: values[i].pe,
+          border: values[i].border,
+          shape: values[i].cut,
+          quantity: getQuantitySum(values[i].setQty),
+          optional_item: values[i].optionalItem,
+          markup: values[i].markup,
+          width: values[i].wCenter,
+          height: values[i].hCenter,
+          size: values[i].size,
+          colors: values[i].colors
+        };
+        data.items.push(item);
+      }
+      try {
+        let res = await axiosInstance.saveDraft(data);
+      } catch (error) {}
     });
   };
 
@@ -546,9 +624,27 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         errors: [...errors]
       };
 
+      if (selectedOrder?.order_id) {
+        data.id = selectedOrder.order_id;
+      }
       if (values.length === 1) {
         const { product, material, backing, pe, setQty } = values[0];
-        if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
+
+        if (
+          product === '' ||
+          product === null ||
+          product === undefined ||
+          material === '' ||
+          material === null ||
+          material === undefined ||
+          backing === '' ||
+          backing === null ||
+          backing === undefined ||
+          pe === '' ||
+          pe === null ||
+          pe === undefined ||
+          isEmpty(setQty)
+        ) {
           Swal.fire({
             text: 'Select atleast one item to submit order',
             icon: 'info',
@@ -561,7 +657,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
             }
           });
         } else {
-          query.get('active') === 'new-order' ? ConfirmSubmit(data) : updateData(data);
+          (query.get('active') === 'new-order' || query.get('active') === 'saved-as-draft') &&
+            ConfirmSubmit(data);
+          query.get('active') === 'open-order' && updateData(data);
         }
       } else if (values.length > 1) {
         let empty = false;
@@ -714,7 +812,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     orderNo,
     orderUpload,
     upload,
-    canAddAnother
+    canAddAnother,
+    saveAsDraft,
+    updateDraft
   };
 };
 

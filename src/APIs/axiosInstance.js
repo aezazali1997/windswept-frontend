@@ -97,6 +97,32 @@ class AxiosInstance {
     }
   
   }
+  async checkDraftExist () {
+   return await axios.get(`${BASE_URL}/draft?proc=1`);
+  }
+  async saveDraft(data) {
+    let formData=new FormData();
+    formData.append('name',data.title);
+    formData.append('customer_ref',data.reference);
+    formData.append('in_hands_date',data.date);
+    formData.append('customer_notes',data.notes);
+    formData.append('ship_to_address',data.shipAddress);
+    formData.append('purchase_order',data.purchaseOrders);
+    formData.append('image_length',data.images.length);
+    formData.append('items',JSON.stringify(data.items));
+    for (let i = 0; i < data.images.length; i++) {
+      formData.append(`image${i}`, data.images[i]);
+    }
+      try {
+        return await axios.post(`${BASE_URL}/draft`, formData);
+      } catch (error) {
+        console.log(error);
+        
+      }
+  }
+  async getAllDraft () {
+    return await axios.get(`${BASE_URL}/draft?proc=2`)
+  }
   // async getUserType() {
   //   return await axios.get(BASE_URL + '/api/verify', this.getAuthHeader());
   // getAuthHeader() {
