@@ -3,6 +3,7 @@ export const deserializeApiResponse = (items) => {
   let allItems = [];
 
   for (let i = 0; i < items.length; i++) {
+    let line_item_id = items[i]['object_ref']['line_item_id'];
     let backing = items[i]['object_ref']['backing'];
     let border = items[i]['object_ref']['border'];
     let colors = items[i]['object_ref']['colors'];
@@ -19,6 +20,7 @@ export const deserializeApiResponse = (items) => {
     let setQty = arrayGenerator(quantitySum);
     let size = items[i]['object_ref']['cf_opportunity_line_item_size'];
     let data = {
+      line_item_id,
       backing,
       border,
       colors,

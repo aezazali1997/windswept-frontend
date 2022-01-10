@@ -40,6 +40,7 @@ export const deserializeItems = (items)=>{
         let colors = items[i].colors;
         let unit_cost = '2.333 USD';
         let unit_price = '3.3333 USD';
+        let line_item_id = items[i].line_item_id;
         itemDetails.push({
           product_refcode,
           material,
@@ -56,7 +57,8 @@ export const deserializeItems = (items)=>{
           size,
           colors,
           unit_cost,
-          unit_price
+          unit_price,
+          line_item_id
         });
 
     }

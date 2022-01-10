@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { isEmpty } from 'lodash';
-import { useSelector } from 'react-redux';
 import NewOrder from './newOrder';
 import AxiosInstance from '../../APIs/axiosInstance';
 import { Spinner } from '../../components/spinner/Spinner';
@@ -32,11 +31,12 @@ const Draft = () => {
   };
   let goBacktoDetail = () => {
     setSelectedOrder(undefined);
+    getDraftOrder();
   };
 
-  let toggleEdit = () => {
-    setReadOnly(!readOnly);
-  };
+  // let toggleEdit = () => {
+  //   setReadOnly(!readOnly);
+  // };
 
   return selectedOrder ? (
     <>
@@ -117,5 +117,5 @@ const Draft = () => {
       )}
     </div>
   );
-};
+};;
 export default Draft;

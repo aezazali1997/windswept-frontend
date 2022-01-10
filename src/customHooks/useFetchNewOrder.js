@@ -3,7 +3,7 @@ import moment from 'moment';
 import { isEmptyArray, useFormik } from 'formik';
 import { isEmpty } from 'lodash';
 import store from '../store';
-import { storeOrder, storeOrderCache, SaveDraft } from '../actions';
+import { storeOrderCache } from '../actions';
 import { updateErrors, updateValues } from '../utils/helpers';
 import axiosInstance from '../APIs/axiosInstance';
 import Swal from 'sweetalert2';
@@ -51,7 +51,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
 
   useEffect(() => {
     if (selectedOrder) {
-      console.log(selectedOrder);
       let [date, notes] = ['', ''];
       let items = [];
       if (selectedOrder['object_ref']) {
@@ -195,9 +194,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     const NewErrors = [...errors];
     let updatedErrorArray = [];
     let updatedArray = [];
-    // if (!NewArray[0]['object_ref']) {
-    //   setValues([]);
-    // }
 
     if (name === 'product' || name === 'material' || name === 'pe' || name === 'backing') {
       if (value === '') {
@@ -362,7 +358,13 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     }
     return options.filter(({ label }) => label && label.includes(filter));
   };
-
+  const deleteFromDraft = async (id) => {
+    try {
+      let res = await axiosInstance.deleteFromDraft(id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   let handleQty = (valuess, index) => {
     const NewErrors = [...errors];
     let updatedErrorArray = [];
@@ -502,7 +504,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       title: 'Are you sure?',
       icon: 'question',
       showCancelButton: true,
-      showDenyButton: true,
+      showDenyButton: query.get('active') === 'new-order' ? true : false,
       cancelButtonText: 'No',
       confirmButtonText: 'Yes',
       denyButtonText: `Save as draft`,
@@ -518,7 +520,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: 'Your order has been submitted and will be reviewed later',
+          title: 'Your order will be submitted and reviewed later',
           text: 'You can find your order in open orders',
           icon: 'success',
           showCancelButton: false,
@@ -536,10 +538,12 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         enableLoading();
         try {
           let res = await axiosInstance.postOrder(data);
+          if (query.get('active') === 'saved-as-draft') {
+            deleteFromDraft(data.id);
+            history.push('/dashboard?active=saved-as-draft');
+          }
         } catch (error) {}
         disableLoading();
-        // changes by aezaz
-        // store.dispatch(storeOrder(data));
       } else if (result.isDenied) {
         Swal.fire({
           text: 'Your order is saved in drafts, waiting for your submission',
@@ -556,11 +560,63 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       }
     });
   };
-  const updateDraft = async () => {};
+  const updateDraft = async () => {
+    const data = {
+      title: formik.values.title,
+      reference: formik.values.reference,
+      date,
+      images: imageFiles,
+      notes: formik.values.customerNote,
+      purchaseOrders: orderImages,
+      shipAddress: formik.values.shipAddress,
+      items: []
+    };
+    for (let i = 0; i < values.length; i++) {
+      let item = {
+        item_id: values[i].item_id,
+        product: values[i].product,
+        material: values[i].material,
+        backing: values[i].backing,
+        percentage_embroidery: values[i].pe,
+        border: values[i].border,
+        shape: values[i].cut,
+        quantity: getQuantitySum(values[i].setQty),
+        optional_item: values[i].optionalItem,
+        markup: values[i].markup,
+        width: values[i].wCenter,
+        height: values[i].hCenter,
+        size: values[i].size,
+        colors: values[i].colors
+      };
+      data.items.push(item);
+    }
+
+    try {
+      await axiosInstance.updatadeDraft(data, selectedOrder.order_id);
+      Swal.fire({
+        text: 'Your draft is updated.',
+        icon: 'info',
+        timer: 3000,
+        buttonsStyling: false,
+        showCancelButton: false,
+        showConfirmButton: false
+      });
+    } catch (error) {
+      Swal.fire({
+        text: error.message,
+        icon: 'error',
+        timer: 2000,
+        buttonsStyling: false,
+        showCancelButton: false,
+        showConfirmButton: false
+      });
+    }
+  };
   const saveAsDraft = async () => {
     Swal.fire({
       text: 'Your order is saved in drafts, waiting for your submission',
       icon: 'info',
+      timer: 2000,
       buttonsStyling: false,
       showCancelButton: false,
       confirmButtonText: 'Ok',
@@ -598,7 +654,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         data.items.push(item);
       }
       try {
-        let res = await axiosInstance.saveDraft(data);
+        let res = await axiosInstance.createDraft(data);
       } catch (error) {}
     });
   };
@@ -623,7 +679,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         items: [...values],
         errors: [...errors]
       };
-
+      // when selected order is draft's order
       if (selectedOrder?.order_id) {
         data.id = selectedOrder.order_id;
       }
@@ -681,7 +737,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
                   'w-full inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
               }
             })
-          : query.get('active') === 'new-order'
+          : query.get('active') === 'new-order' || query.get('active') === 'saved-as-draft'
           ? ConfirmSubmit(data)
           : updateData(data);
       }

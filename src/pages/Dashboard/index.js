@@ -34,14 +34,14 @@ const Dashboard = (props) => {
     otherOpportunity: ''
   };
 
-  const fetchDrafts = async () => {
-    try {
-      let res = await axiosInstance.checkDraftExist();
-      if (res.data.count > 0) {
-        setIsDraftPresent(true);
-      }
-    } catch (error) {}
-  };
+  // const fetchDrafts = async () => {
+  //   try {
+  //     let res = await axiosInstance.checkDraftExist();
+  //     if (res.data.count > 0) {
+  //       setIsDraftPresent(true);
+  //     }
+  //   } catch (error) {}
+  // };
 
   const drafts = useSelector(({ order: { draft } }) => draft);
 
@@ -57,9 +57,10 @@ const Dashboard = (props) => {
   const [filters, setFilters] = useState(filter);
   const [isLoading, setIsLoading] = useState(false);
   const [searched, setSearched] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(undefined);
 
   useEffect(() => {
-    fetchDrafts();
+    // fetchDrafts();
     if (query.get('active') === null) {
       props.history.push(`/dashboard?active=${activeIndex}`);
       setActiveIndex(activeIndex);
@@ -117,6 +118,7 @@ const Dashboard = (props) => {
     props.history.push(`/dashboard?active=${id}`);
     setShowCloseOrder(false);
     setShowDraft(false);
+    setSelectedOrder(null);
     setShowNewOrder(false);
     setShowOpenOrder(true);
   };
@@ -124,6 +126,7 @@ const Dashboard = (props) => {
     setActiveIndex(id);
     props.history.push(`/dashboard?active=${id}`);
     setShowDraft(false);
+    setSelectedOrder(null);
     setShowNewOrder(false);
     setShowOpenOrder(false);
     setShowCloseOrder(true);
@@ -134,6 +137,7 @@ const Dashboard = (props) => {
     setShowCloseOrder(false);
     setShowNewOrder(false);
     setShowOpenOrder(false);
+    setSelectedOrder(null);
     setShowDraft(true);
   };
 
@@ -142,7 +146,15 @@ const Dashboard = (props) => {
       case 'new-order':
         return <NewOrder readOnly={false} />;
       case 'open-order':
-        return <OpenOrder filters={filters} searched={searched} setSearched={setSearched} />;
+        return (
+          <OpenOrder
+            filters={filters}
+            searched={searched}
+            setSearched={setSearched}
+            selectedOrder={selectedOrder}
+            setSelectedOrder={setSelectedOrder}
+          />
+        );
       case 'closed-order':
         return <ClosedOrder filters={filters} searched={searched} setSearched={setSearched} />;
       default:
@@ -195,19 +207,18 @@ const Dashboard = (props) => {
                             : 'text-white bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'
                         }`}
           />
-          {isDraftpresent && (
-            <Button
-              id={4}
-              onClick={() => handleDraft('saved-as-draft')}
-              label={'saved as draft'}
-              classNames={`w-56 h-20 uppercase border
+
+          <Button
+            id={4}
+            onClick={() => handleDraft('saved-as-draft')}
+            label={'saved as draft'}
+            classNames={`w-56 h-20 uppercase border
                         ${
                           activeIndex === 'saved-as-draft'
                             ? 'bg-white text-red-600 border-red-600'
                             : 'text-white bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'
                         }`}
-            />
-          )}
+          />
         </div>
         <div className="flex flex-col md:flex-row mt-8  md:w-3/5 lg:w-2/5 items-center">
           <div className="w-full flex ">

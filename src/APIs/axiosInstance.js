@@ -65,15 +65,17 @@ class AxiosInstance {
   //     return await axios.put(BASE_URL + `/opportunity?proc=2&opp_id=${ref}`);
   //   } catch (error) {}
   // }
-  async searchFilter(data,orderType) {
+  async searchFilter(data, orderType) {
     try {
       let id = localStorage.getItem('user_id');
-      return await axios.get(BASE_URL + `/search?id=${id}&data=${JSON.stringify(data)}&order=${orderType}`);
+      return await axios.get(
+        BASE_URL + `/search?id=${id}&data=${JSON.stringify(data)}&order=${orderType}`
+      );
     } catch (er) {
       console.log(er);
     }
   }
-  async updateOrder(data,opp_ref,id){
+  async updateOrder(data, opp_ref, id) {
     const formData = new FormData();
     formData.append('user_id', localStorage.getItem('user_id'));
     formData.append('opp_id', id);
@@ -95,33 +97,52 @@ class AxiosInstance {
     } catch (error) {
       console.log(error);
     }
-  
   }
-  async checkDraftExist () {
-   return await axios.get(`${BASE_URL}/draft?proc=1`);
-  }
-  async saveDraft(data) {
-    let formData=new FormData();
-    formData.append('name',data.title);
-    formData.append('customer_ref',data.reference);
-    formData.append('in_hands_date',data.date);
-    formData.append('customer_notes',data.notes);
-    formData.append('ship_to_address',data.shipAddress);
-    formData.append('purchase_order',data.purchaseOrders);
-    formData.append('image_length',data.images.length);
-    formData.append('items',JSON.stringify(data.items));
+  // async checkDraftExist() {
+  //   return await axios.get(`${BASE_URL}/draft?proc=1`);
+  // }
+  async createDraft(data) {
+    let formData = new FormData();
+    formData.append('name', data.title);
+    formData.append('customer_ref', data.reference);
+    formData.append('in_hands_date', data.date);
+    formData.append('customer_notes', data.notes);
+    formData.append('ship_to_address', data.shipAddress);
+    formData.append('purchase_order', data.purchaseOrders);
+    formData.append('image_length', data.images.length);
+    formData.append('items', JSON.stringify(data.items));
     for (let i = 0; i < data.images.length; i++) {
       formData.append(`image${i}`, data.images[i]);
     }
-      try {
-        return await axios.post(`${BASE_URL}/draft`, formData);
-      } catch (error) {
-        console.log(error);
-        
-      }
+    try {
+      return await axios.post(`${BASE_URL}/draft`, formData);
+    } catch (error) {
+      console.log(error);
+    }
   }
-  async getAllDraft () {
-    return await axios.get(`${BASE_URL}/draft?proc=2`)
+  async getAllDraft() {
+    return await axios.get(`${BASE_URL}/draft?proc=2`);
+  }
+  async deleteFromDraft(id) {
+    return await axios.delete(`${BASE_URL}/draft?id=${id}`);
+  }
+  async updatadeDraft(data, id) {
+    const formData = new FormData();
+    formData.append('order_id', id);
+    formData.append('name', data.title);
+    formData.append('customer_ref', data.reference);
+    formData.append('in_hands_date', data.date);
+    formData.append('customer_notes', data.notes);
+    formData.append('ship_to_address', data.shipAddress);
+    formData.append('items', JSON.stringify(data.items));
+    formData.append('purchase_order', data.purchaseOrders);
+    formData.append('image_length', data.images.length);
+    for (let i = 0; i < data.images.length; i++) {
+      formData.append(`image${i}`, data.images[i]);
+    }
+    try {
+      return await axios.put(`${BASE_URL}/draft`, formData);
+    } catch (error) {}
   }
   // async getUserType() {
   //   return await axios.get(BASE_URL + '/api/verify', this.getAuthHeader());

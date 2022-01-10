@@ -16,134 +16,154 @@ const getAllOrders = () => {
   return AxiosInstance.getAllOrders(id);
 };
 
-const OpenOrder = ({ filters, searched, setSearched }) => {
+const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedOrder }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [Orders, setOrders] = useState([]);
   const [images, setImages] = useState([]);
-  const [selectedOrder, setSelectedOrder] = useState(undefined);
   const [activeIndex, setActiveIndex] = useState(null);
-    const [readOnly, setReadOnly] = useState(true);
+  const [readOnly, setReadOnly] = useState(true);
 
-    let tempOrders = [];
-    let query = useQuery();
-    let history = useHistory();
-    const checkFilters = (filters) => {
-      if (
-        filters.date !== '' ||
-        filters.customerReference !== '' ||
-        filters.oppStage !== '' ||
-        filters.orderName !== ''
-      ) {
-        return true;
-      }
-      return false;
-    };
-    const getData = async () => {
-      if (checkFilters(filters) && searched) {
-        setSearched(false);
-        setIsLoading(true);
-        try {
-          let resp = await AxiosInstance.searchFilter(filters, 'open');
-          if (resp.status === 200) {
-            setOrders(resp.data);
-          }
-        } catch (error) {}
-        setIsLoading(false);
-      } else {
-        setIsLoading(true);
-        try {
-          const res = await getAllOrders();
-          if (res.status === 200) {
-            setOrders(res.data);
-          }
-        } catch (error) {}
-        setIsLoading(false);
-      }
-    };
-
-    // make a query to get all the open orders
-    useEffect(() => {
-      getData();
-    }, [searched]);
-    useEffect(() => {
-      if (query.get('item') !== null && !isEmpty(Orders)) {
-        const index = query.get('item');
-        let Order = Orders.filter((Order) => Order[index]);
-        if (!isEmpty(Order)) {
-          setSelectedOrder(Order);
-          setActiveIndex((activeIndex) => (activeIndex = index));
-        }
-      }
-    }, []);
-
-    let handleDetails = (order, index) => {
-      setActiveIndex(index);
-      setSelectedOrder(order);
-      history.push(`/dashboard?active=open-order&item=${index}`);
-    };
-    let toggleEdit = () => {
-      setReadOnly(!readOnly);
-    };
-
-    const handleApprove = async (index, ref) => {
-      setIsDeleting(true);
+  let tempOrders = [];
+  let query = useQuery();
+  let history = useHistory();
+  const checkFilters = (filters) => {
+    if (
+      filters.date !== '' ||
+      filters.customerReference !== '' ||
+      filters.oppStage !== '' ||
+      filters.orderName !== ''
+    ) {
+      return true;
+    }
+    return false;
+  };
+  const getData = async () => {
+    if (checkFilters(filters) && searched) {
+      setSearched(false);
+      setIsLoading(true);
       try {
-        let res = await AxiosInstance.approveOrder(ref);
-        setIsDeleting(false);
-      } catch (error) {
-        console.log(error);
+        let resp = await AxiosInstance.searchFilter(filters, 'open');
+        if (resp.status === 200) {
+          setOrders(resp.data);
+        }
+      } catch (error) {}
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+      try {
+        const res = await getAllOrders();
+        if (res.status === 200) {
+          setOrders(res.data);
+        }
+      } catch (error) {}
+      setIsLoading(false);
+    }
+  };
+
+  // make a query to get all the open orders
+  useEffect(() => {
+    getData();
+  }, [searched]);
+  useEffect(() => {
+    if (query.get('item') !== null && !isEmpty(Orders)) {
+      const index = query.get('item');
+      let Order = Orders.filter((Order) => Order[index]);
+      if (!isEmpty(Order)) {
+        setSelectedOrder(Order);
+        setActiveIndex((activeIndex) => (activeIndex = index));
       }
-    };
+    }
+  }, []);
 
-    const handleDelete = (index, id, label) => {
-      Swal.fire({
-        title: `Are you sure you want to ${label} this Order?`,
-        icon: 'question',
-        showCancelButton: true,
-        cancelButtonText: 'No',
-        confirmButtonText: 'Yes',
-        buttonsStyling: false,
-        customClass: {
-          confirmButton:
-            'w-full inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm',
-          cancelButton:
-            'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
-        }
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          setIsDeleting(true);
+  let handleDetails = (order, index) => {
+    setActiveIndex(index);
+    setSelectedOrder(order);
+    history.push(`/dashboard?active=open-order&item=${index}`);
+  };
+  let toggleEdit = () => {
+    setReadOnly(!readOnly);
+  };
 
-          try {
-            let res = await AxiosInstance.deleteOrder(id);
-            if (res.status === 200) {
-              tempOrders = [...Orders];
-              tempOrders.splice(index, 1);
-              setOrders(tempOrders);
-              setIsDeleting(false);
-            }
-          } catch (error) {}
-        } else {
-          console.log('not deleted');
-        }
-      });
-    };
+  const handleApprove = async (index, ref) => {
+    setIsDeleting(true);
+    try {
+      let res = await AxiosInstance.approveOrder(ref);
+      setIsDeleting(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    let goBacktoDetail = async () => {
-      setSelectedOrder(undefined);
-      setActiveIndex(null);
-      history.push(`/dashboard?active=open-order`);
-      getData();
-    };
+  const handleDelete = (index, id, label) => {
+    Swal.fire({
+      title: `Are you sure you want to ${label} this Order?`,
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'No',
+      confirmButtonText: 'Yes',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton:
+          'w-full inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm',
+        cancelButton:
+          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
+      }
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setIsDeleting(true);
 
-    if (selectedOrder) {
-      return (
-        <>
-          <div className="flex flex-row w-full justify-between px-10">
+        try {
+          let res = await AxiosInstance.deleteOrder(id);
+          if (res.status === 200) {
+            tempOrders = [...Orders];
+            tempOrders.splice(index, 1);
+            setOrders(tempOrders);
+            setIsDeleting(false);
+          }
+        } catch (error) {}
+      } else {
+        console.log('not deleted');
+      }
+    });
+  };
+
+  let goBacktoDetail = async () => {
+    setSelectedOrder(undefined);
+    setActiveIndex(null);
+    history.push(`/dashboard?active=open-order`);
+    getData();
+  };
+
+  if (selectedOrder) {
+    return (
+      <>
+        <div className="flex flex-row w-full justify-between px-10">
+          <button
+            onClick={goBacktoDetail}
+            type="button"
+            className="inline-flex bg-red-600 justify-center w-auto items-center border border-gray-300  
+            shadow-sm px-4 py-2 rounded-md text-sm font-medium text-white hover:bg-red-700 focus:outline-none">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
+              />
+            </svg>{' '}
+            &nbsp; Back
+          </button>
+          {selectedOrder['object_ref'].cf_opportunity_status === 'Pending' ? (
             <button
-              onClick={goBacktoDetail}
+              onClick={toggleEdit}
               type="button"
-              className="inline-flex bg-red-600 justify-center w-auto items-center border border-gray-300  
+              className="inline-flex bg-red-600 justify-center w-auto items-center border border-gray-300 
             shadow-sm px-4 py-2 rounded-md text-sm font-medium text-white hover:bg-red-700 focus:outline-none">
               <svg
                 className="w-6 h-6"
@@ -155,161 +175,140 @@ const OpenOrder = ({ filters, searched, setSearched }) => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                 />
               </svg>{' '}
-              &nbsp; Back
+              &nbsp; Edit
             </button>
-            {selectedOrder['object_ref'].cf_opportunity_status === 'Pending' ? (
-              <button
-                onClick={toggleEdit}
-                type="button"
-                className="inline-flex bg-red-600 justify-center w-auto items-center border border-gray-300 
-            shadow-sm px-4 py-2 rounded-md text-sm font-medium text-white hover:bg-red-700 focus:outline-none">
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                  />
-                </svg>{' '}
-                &nbsp; Edit
-              </button>
-            ) : (
-              ''
-            )}
-          </div>
-
-          <NewOrder readOnly={readOnly} selectedOrder={selectedOrder} />
-        </>
-      );
-    } else {
-      return (
-        <>
-          {isDeleting ? (
-            <div className="flex justify-center">
-              <Spinner />
-            </div>
           ) : (
             ''
           )}
-          {isLoading ? (
-            <div className="flex justify-center">
-              <Spinner />
-            </div>
-          ) : (
-            <div className="flex flex-col w-full h-full mb-4 space-y-4 px-3">
-              {!isEmpty(Orders) ? (
-                Orders.map((Order, index) => {
-                  let {
-                    cf_opportunity_item_name,
-                    allow_edit,
-                    cf_opportunity_status,
-                    document_date,
-                    opportunity_id,
-                    cf_opportunity_box_image,
-                    customer_ref,
-                    id
-                  } = Order['object_ref'];
-                  return (
-                    <div
-                      key={index}
-                      className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card">
-                      <div className="flex flex-col w-full lg:w-1/4 py-2">
-                        <img
-                          src="https://bashooka.com/wp-content/uploads/2019/04/portrait-logo-design-4.jpg"
-                          alt="item"
-                          className="object-contain w-auto h-40"
-                        />
-                      </div>
-                      <div className="w-1 bg-red-500"></div>
-                      <div className="flex flex-col w-full lg:w-3/4 py-2 px-3 justify-between">
-                        <div className="flex flex-row h-full w-full items-center">
-                          <h1 className="font-bold text-lg text-gray-800">
-                            {cf_opportunity_item_name}
-                          </h1>
-                        </div>
-                        <div className="flex w-full h-full flex-col space-y-4 justify-end lg:justify-between">
-                          <p className="text-sm text-gray-500 break-all whitespace-pre-wrap">
-                            {customer_ref}
-                          </p>
+        </div>
 
-                          <div className="flex flex-col lg:flex-row justify-between">
-                            <div className="flex flex-row  lg:absolute lg:top-1 lg:right-1  space-x-2">
-                              {localStorage.getItem('role') === 'manager' &&
-                              cf_opportunity_status === 'Pending' ? (
-                                <>
-                                  <Button
-                                    label={'Approve'}
-                                    onClick={() => {
-                                      handleApprove(index, id);
-                                    }}
-                                    classNames={`px-2 sm:px-5 py-2 uppercase border w-full
+        <NewOrder readOnly={readOnly} selectedOrder={selectedOrder} />
+      </>
+    );
+  } else {
+    return (
+      <>
+        {isDeleting ? (
+          <div className="flex justify-center">
+            <Spinner />
+          </div>
+        ) : (
+          ''
+        )}
+        {isLoading ? (
+          <div className="flex justify-center">
+            <Spinner />
+          </div>
+        ) : (
+          <div className="flex flex-col w-full h-full mb-4 space-y-4 px-3">
+            {!isEmpty(Orders) ? (
+              Orders.map((Order, index) => {
+                let {
+                  cf_opportunity_item_name,
+                  allow_edit,
+                  cf_opportunity_status,
+                  document_date,
+                  opportunity_id,
+                  cf_opportunity_box_image,
+                  customer_ref,
+                  id
+                } = Order['object_ref'];
+                return (
+                  <div
+                    key={index}
+                    className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card">
+                    <div className="flex flex-col w-full lg:w-1/4 py-2">
+                      <img
+                        src="https://bashooka.com/wp-content/uploads/2019/04/portrait-logo-design-4.jpg"
+                        alt="item"
+                        className="object-contain w-auto h-40"
+                      />
+                    </div>
+                    <div className="w-1 bg-red-500"></div>
+                    <div className="flex flex-col w-full lg:w-3/4 py-2 px-3 justify-between">
+                      <div className="flex flex-row h-full w-full items-center">
+                        <h1 className="font-bold text-lg text-gray-800">
+                          {cf_opportunity_item_name}
+                        </h1>
+                      </div>
+                      <div className="flex w-full h-full flex-col space-y-4 justify-end lg:justify-between">
+                        <p className="text-sm text-gray-500 break-all whitespace-pre-wrap">
+                          {customer_ref}
+                        </p>
+
+                        <div className="flex flex-col lg:flex-row justify-between">
+                          <div className="flex flex-row  lg:absolute lg:top-1 lg:right-1  space-x-2">
+                            {localStorage.getItem('role') === 'manager' &&
+                            cf_opportunity_status === 'Pending' ? (
+                              <>
+                                <Button
+                                  label={'Approve'}
+                                  onClick={() => {
+                                    handleApprove(index, id);
+                                  }}
+                                  classNames={`px-2 sm:px-5 py-2 uppercase border w-full
                                         ${'text-white text-sm bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'}`}
-                                  />
-                                  <Button
-                                    label={'Disapprove'}
-                                    onClick={() => {
-                                      handleDelete(index, id, 'Disapprove');
-                                    }}
-                                    classNames={`px-2 sm:px-5 py-2 uppercase border w-full
+                                />
+                                <Button
+                                  label={'Disapprove'}
+                                  onClick={() => {
+                                    handleDelete(index, id, 'Disapprove');
+                                  }}
+                                  classNames={`px-2 sm:px-5 py-2 uppercase border w-full
                                                 ${'text-white text-sm bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'}`}
-                                  />
-                                </>
-                              ) : (
-                                ''
-                              )}
-                              <Button
-                                onClick={() => {
-                                  handleDetails(Order, index);
-                                }}
-                                label={'Details'}
-                                classNames={`px-2 sm:px-5 py-2 uppercase border w-full
+                                />
+                              </>
+                            ) : (
+                              ''
+                            )}
+                            <Button
+                              onClick={() => {
+                                handleDetails(Order, index);
+                              }}
+                              label={'Details'}
+                              classNames={`px-2 sm:px-5 py-2 uppercase border w-full
                                                 ${'text-white text-sm bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'}`}
-                              />{' '}
-                              {localStorage.getItem('role') === 'employee' &&
-                              cf_opportunity_status === 'Pending' ? (
-                                <>
-                                  <Button
-                                    onClick={() => {
-                                      handleDelete(index, id, 'Delete');
-                                    }}
-                                    label={'Delete'}
-                                    classNames={`px-2 sm:px-5 py-2 uppercase border w-full
+                            />{' '}
+                            {localStorage.getItem('role') === 'employee' &&
+                            cf_opportunity_status === 'Pending' ? (
+                              <>
+                                <Button
+                                  onClick={() => {
+                                    handleDelete(index, id, 'Delete');
+                                  }}
+                                  label={'Delete'}
+                                  classNames={`px-2 sm:px-5 py-2 uppercase border w-full
                                                 ${'text-white text-sm bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'}`}
-                                  />
-                                </>
-                              ) : (
-                                ''
-                              )}
-                            </div>
-                            <p className="uppercase text-xs text-gray-500"></p>
-                            <p className="uppercase text-xs text-gray-500 text-right mt-2 sm:text-left sm:mt-0">
-                              {document_date}
-                            </p>
+                                />
+                              </>
+                            ) : (
+                              ''
+                            )}
                           </div>
+                          <p className="uppercase text-xs text-gray-500"></p>
+                          <p className="uppercase text-xs text-gray-500 text-right mt-2 sm:text-left sm:mt-0">
+                            {document_date}
+                          </p>
                         </div>
                       </div>
                     </div>
-                  );
-                })
-              ) : (
-                <p className="w-full flex justify-center items-center text-lg font-semibold">
-                  {' '}
-                  No Orders Yet{' '}
-                </p>
-              )}
-            </div>
-          )}
-        </>
-      );
-    }
+                  </div>
+                );
+              })
+            ) : (
+              <p className="w-full flex justify-center items-center text-lg font-semibold">
+                {' '}
+                No Orders Yet{' '}
+              </p>
+            )}
+          </div>
+        )}
+      </>
+    );
+  }
 };
 
 export default OpenOrder;
