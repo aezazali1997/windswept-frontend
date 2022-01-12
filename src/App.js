@@ -7,7 +7,8 @@ import { PriceSheet } from './pages/AdminDashboard';
 import { OrderEstimate, Dashboard, Contact, ToggleTutorials, TermsOfServices } from './pages';
 
 function App() {
-
+  
+  
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userType, setUserType] = useState();
@@ -26,8 +27,14 @@ function App() {
   }, []);
 
   const handleLogout = () => {
+    if (localStorage.getItem('role')==='admin'){
+      window.location = '/admin/login';
+    }
+    else{
+      window.location = '/login';
+
+    }
     localStorage.clear();
-    window.location = '/login';
   };
   return (
     !loading && (
@@ -53,7 +60,8 @@ function App() {
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/admin/login" component={AdminLogin} />
-              <Redirect from="/" to="/login" />
+              <Redirect from="/admin" to="/admin/login" />
+              <Redirect exact from="/" to="/login" />
               <Redirect to="/login" />
             </Switch>
           )}

@@ -9,7 +9,6 @@ import axiosInstance from '../APIs/axiosInstance';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
 import { OrderFormSchema } from '../utils/validation_schema';
-import { arrayGenerator } from '../utils/arrayGenerator';
 import { useLocation } from 'react-router-dom';
 import { Error } from '../constants/Errors';
 import { Item } from '../constants/Item';
@@ -17,6 +16,9 @@ import { deserializeApiResponse } from '../utils/ApiResponse';
 import { deserializeDraftResponse } from '../utils/draftResponse';
 import { getQuantitySum } from '../utils/arraySum';
 import '../styles/custom-style.css';
+import swal from 'sweetalert';
+import { getpercentage } from '../utils/percentageCalculator';
+
 let fileArray = [];
 let fileObj = null;
 
@@ -274,81 +276,79 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   let callAPI = async () => {
     const { product, material, backing, size, pe, freight, markup, pmsColors, setQty } =
       values[orderNo];
-
-    if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
-      // swal({
-      //     text: 'Fill Mandatory Fields',
-      //     icon: 'error',
-      //     dangerMode: true,
-      //     buttons: false,
-      //     timer: 3000,
-      // })
-    } else {
+    // if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
+    //   swal({
+    //     text: 'Fill Mandatory Fields',
+    //     icon: 'error',
+    //     dangerMode: true,
+    //     buttons: false,
+    //     timer: 3000
+    //   });
+    // } else {
+    if (product !== '' && material !== '' && backing !== '' && pe !== '' && !isEmpty(setQty)) {
       const data = {
         product: product,
         material: material,
         backing: backing,
         size: size,
-        pc: parseInt(pe),
+        pc: getpercentage(pe),
+        selectedQuantity: getQuantitySum(setQty),
         addColor: pmsColors?.length,
-        freight: freight || 0,
-        markup: markup || 1
+        markup: markup || 0
       };
-      //  commented by aezaz ali
-      //  it calls the data from backend to get estimated rates
-      // axiosInstance
-      //   .ordereEstimate(data)
-      //   .then(({ data: { data, message } }) => {
-      //     if (message === 'Failed' && data[0].error === 'Custom') {
-      //       // swal({
-      //       // 	text: 'Custom Quote will be given in 1-2 days',
-      //       // 	icon: 'info',
-      //       // 	dangerMode: true,
-      //       // 	buttons: false,
-      //       // 	timer: 3000,
-      //       // })
-      //       setAPIError('Custom Quote will be given in 1 - 2 days');
-      //       setTotal(0);
-      //       setGrandTotal(0);
-      //       setData([]);
-      //     } else if (message === 'Failed' && data[0].error === 'Not Found') {
-      //       swal({
-      //         text: 'Data Not Found',
-      //         icon: 'info',
-      //         dangerMode: true,
-      //         buttons: false,
-      //         timer: 3000
-      //       });
-      //       setAPIError('');
-      //       setData([]);
-      //     } else {
-      //       swal({
-      //         text: 'Data Successfully Fetched',
-      //         icon: 'success',
-      //         dangerMode: true,
-      //         buttons: false,
-      //         timer: 3000
-      //       });
-      //       setAPIError('');
-      //       setData(data);
-      //       let UpdateArray = [...values].map((item, i) => {
-      //         if (i !== orderNo) return item;
-      //         item.data = data;
-      //         return item;
-      //       });
-      //       setValues([...UpdateArray]);
-      //       disableLoading();
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     swal({
-      //       text: error,
-      //       icon: 'error',
-      //       dangerMode: true,
-      //       buttons: false,
-      //       timer: 3000
-      //     });
-      //   });
+      axiosInstance
+        .ordereEstimate(data)
+        .then(({ data: { data, message } }) => {
+          if (message === 'Failed' && data[0].error === 'Custom') {
+            swal({
+              text: 'Custom Quote will be given in 1-2 days',
+              icon: 'info',
+              dangerMode: true,
+              buttons: false,
+              timer: 3000
+            });
+            setAPIError('Custom Quote will be given in 1 - 2 days');
+            setTotal(0);
+            setGrandTotal(0);
+            setData([]);
+          } else if (message === 'Failed' && data[0].error === 'Not Found') {
+            swal({
+              text: 'Data Not Found',
+              icon: 'info',
+              dangerMode: true,
+              buttons: false,
+              timer: 3000
+            });
+            setAPIError('');
+            setData([]);
+          } else {
+            swal({
+              text: 'Data Successfully Fetched',
+              icon: 'success',
+              dangerMode: true,
+              buttons: false,
+              timer: 3000
+            });
+            setAPIError('');
+            setData(data);
+            let UpdateArray = [...values].map((item, i) => {
+              if (i !== orderNo) return item;
+              item.data = data;
+              return item;
+            });
+            setValues([...UpdateArray]);
+            disableLoading();
+          }
+        })
+        .catch((error) => {
+          swal({
+            text: error,
+            icon: 'error',
+            dangerMode: true,
+            buttons: false,
+            timer: 3000
+          });
+        });
     }
   };
 

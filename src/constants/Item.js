@@ -8,7 +8,7 @@ export const Item = {
   packaging: '',
   setQty: [],
   optionalItem: '',
-  markup: '',
+  markup: '0',
   discountApply: false,
   wLeft: '1',
   wRight: '0',

@@ -5,6 +5,7 @@ import Modal from '../Modal';
 import PMSschema from '../../utils/PMSschema.json';
 import Threadschema from '../../utils/thread-schema.json';
 import products from './ProductMaterial.json';
+import { useLocation } from 'react-router-dom';
 
 const From = ({
   handleChange,
@@ -24,6 +25,10 @@ const From = ({
   showThread,
   showPMS
 }) => {
+  let useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+  };
+  const query = useQuery();
   let { product, material, pe, backing, qty } = errors;
   if (values) {
     if (values.product) {
@@ -44,6 +49,9 @@ const From = ({
   }
 
   let handleFormDisable = (value) => {
+    if (value === false && query.get('active') === 'closed-order') {
+      return;
+    }
     let form = document.getElementById('orderForm');
     let elements = form.elements;
     let len = elements.length;
@@ -258,7 +266,7 @@ const From = ({
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
             <MultiSelect
-              disabled={readOnly ? true : false}
+              disabled={readOnly ? (query.get('active') === 'closed-order' ? true : false) : false}
               className={`border rounded-md ${qty ? 'border-red-500' : 'border-gray-50'}`}
               value={values.setQty}
               options={multiQty}
@@ -423,7 +431,13 @@ const From = ({
               <input
                 value={color}
                 type="text"
-                disabled={values.colors.length === 12 || readOnly ? true : false}
+                disabled={
+                  values.colors.length === 12 ||
+                  (values.colors.length < 1 && query.get('active') === 'closed-order') ||
+                  readOnly
+                    ? true
+                    : false
+                }
                 placeholder="Enter Color Code"
                 onChange={(e) => {
                   setColor(e.target.value);
@@ -433,9 +447,20 @@ const From = ({
 
               <button
                 type="button"
-                disabled={values.colors.length === 12 || readOnly ? true : false}
+                disabled={
+                  values.colors.length === 12 ||
+                  (values.colors.length < 1 && query.get('active') === 'closed-order') ||
+                  readOnly
+                    ? true
+                    : false
+                }
                 onClick={handleColors}
-                className=" bg-red-600 hover:bg-red-700 text-white p-2 w-1/4">
+                className={`text-white p-2 w-1/4
+                  ${
+                    values.colors.length < 1 && query.get('active') === 'closed-order'
+                      ? 'bg-red-500 cursor-default'
+                      : 'bg-red-600 hover:bg-red-700'
+                  }`}>
                 <p className="font-medium text-sm">
                   {values.colors.length === 12 ? 'No more colors allowed' : 'Add Color'}
                 </p>
@@ -445,15 +470,39 @@ const From = ({
               <button
                 onClick={() => handlePMSModal()}
                 type="button"
-                disabled={values.colors.length === 12 || readOnly ? true : false}
-                className="inline-flex bg-red-600 justify-center w-full border-r border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none">
+                disabled={
+                  values.colors.length === 12 ||
+                  (values.colors.length < 1 && query.get('active') === 'closed-order') ||
+                  readOnly
+                    ? true
+                    : false
+                }
+                className={`inline-flex  justify-center w-full border-r border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white  focus:outline-none
+                  ${
+                    values.colors.length < 1 && query.get('active') === 'closed-order'
+                      ? 'bg-red-500 cursor-default'
+                      : 'bg-red-600 hover:bg-red-700'
+                  }
+                  `}>
                 PMS
               </button>
               <button
                 onClick={() => handleThreadModal()}
                 type="button"
-                disabled={values.colors.length === 12 || readOnly ? true : false}
-                className="inline-flex bg-red-600 justify-center w-full  border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium hover:bg-red-700 focus:outline-none">
+                disabled={
+                  values.colors.length === 12 ||
+                  (values.colors.length < 1 && query.get('active') === 'closed-order') ||
+                  readOnly
+                    ? true
+                    : false
+                }
+                className={`inline-flex justify-center w-full  border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium  focus:outline-none
+                  ${
+                    values.colors.length < 1 && query.get('active') === 'closed-order'
+                      ? 'bg-red-500 cursor-default'
+                      : 'bg-red-600 hover:bg-red-700'
+                  }
+                      `}>
                 Thread
               </button>
             </div>

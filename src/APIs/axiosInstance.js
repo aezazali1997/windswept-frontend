@@ -7,15 +7,15 @@ class AxiosInstance {
   //e.g. proc 1 will call the get open orders i.e pending or client invoiced
   // e.g. proc 2 will get closed orders i.e. delivered
   async ordereEstimate(payload) {
-    return await axios.post(BASE_URL + '/api/wimpie', payload);
+    return await axios.post(`${BASE_URL}/wimpie`, payload);
   }
 
   async login(credentials) {
-    return await axios.post(BASE_URL + '/signin', credentials);
+    return await axios.post(`${BASE_URL}/signin`, credentials);
   }
 
   async adminLogin(credentials) {
-    return await axios.post(BASE_URL + '/api/admin/signin', credentials);
+    return await axios.post(`${BASE_URL}/admin/signin`, credentials);
   }
 
   async postOrder(data) {

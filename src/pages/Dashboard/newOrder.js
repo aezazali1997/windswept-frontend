@@ -118,7 +118,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                 </ReactTooltip>
               </span>
               <input
-                disabled={readOnly ? true : false}
+                disabled={readOnly || query.get('active') === 'closed-order' ? true : false}
                 className={`input ${getInputClasses(formik, 'reference')}`}
                 placeholder="Enter Customer Reference..."
                 type="text"
@@ -152,7 +152,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                 value={date}
                 placeholder="In hands date"
                 onFocus={_onFocus}
-                disabled={readOnly ? true : false}
+                disabled={readOnly || query.get('active') === 'closed-order' ? true : false}
                 onBlur={_onBlur}
                 className={`input ${isEmpty(date) ? 'border-red-600' : ''}`}
                 onChange={_HandleChange}
@@ -295,11 +295,12 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                   accept="image/*"
                   ref={orderUpload}
                   className="hidden"
+                  disabled={query.get('active') === 'closed-order' || !readOnly ? false : true}
                   onChange={onChangeOrderFile}
                 />
                 <Button
                   type="button"
-                  disabled={readOnly ? true : false}
+                  disabled={query.get('active') === 'closed-order' || readOnly ? true : false}
                   onClick={OrderUploadClick}
                   label={
                     <>
@@ -319,7 +320,11 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                       </svg>
                     </>
                   }
-                  classNames="p-2 w-auto flex items-center bg-red-600 text-white hover:bg-red-700 "
+                  classNames={`p-2 w-auto flex items-center text-white  ${
+                    query.get('active') === 'closed-order' || readOnly
+                      ? 'bg-red-500 cursor-default'
+                      : 'bg-red-600 hover:bg-red-700'
+                  } `}
                 />
               </div>
               <div
@@ -407,7 +412,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                 />
                 <Button
                   type="button"
-                  disabled={readOnly ? true : false}
+                  disabled={query.get('active') === 'closed-order' || readOnly ? true : false}
                   onClick={handleClick}
                   label={
                     <>
@@ -427,7 +432,12 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                       </svg>
                     </>
                   }
-                  classNames="p-2 w-auto flex mb-8 items-center bg-red-600 text-white hover:bg-red-700 "
+                  classNames={`p-2 w-auto flex mb-8 items-center text-white  
+                    ${
+                      query.get('active') === 'closed-order' || readOnly
+                        ? 'bg-red-500 cursor-default'
+                        : 'bg-red-600 hover:bg-red-700'
+                    }`}
                 />
               </div>
             </div>
