@@ -273,7 +273,7 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
                                                 ${'text-white text-sm bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'}`}
                             />{' '}
                             {localStorage.getItem('role') === 'employee' &&
-                            cf_opportunity_status === 'Pending' ? (
+                            cf_opportunity_status === 'Tracking Received' ? (
                               <>
                                 <Button
                                   onClick={() => {

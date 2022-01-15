@@ -298,10 +298,9 @@ const From = ({
             <p className="text-left sm:text-right text-sm align-top">Your Customer Markup</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-            <inputmarkup
-              value={values.markup}
+            <input
+              value={localStorage.getItem('markup') ? localStorage.getItem('markup') : 0}
               disabled={true}
-              onChange={(e) => handleChange(e, orderNo)}
               className="input"
               name="markup"
               type="text"

@@ -18,6 +18,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 
   const {
     _onBlur,
+    setGrandTotal,
     _onFocus,
     showFormDetails,
     onCancleOrder,
@@ -269,7 +270,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                       query.get('active') === 'saved-as-draft') &&
                       'Submit Order'}
                     {query.get('active') === 'open-order' && 'Update Order'}
-                    {query.get('active') === 'closed-order' && ' Reorder'}
+                    {query.get('active') === 'closed-order' && 'Re Order'}
 
                     {loading && query.get('active') !== 'open-order' && (
                       <div className=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>
@@ -453,7 +454,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                 <thead>
                   <tr>
                     <td className="left-estimate-table text-right font-medium">Total:</td>
-                    <td className="left-estimate-table">{total}</td>
+                    <td className="left-estimate-table">{total.toFixed(2)}</td>
                   </tr>
                   <tr>
                     <td className="left-estimate-table text-right font-medium">Fee:</td>
@@ -471,13 +472,23 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                   </tr>
                   <tr>
                     <td className=" left-estimate-table text-right font-medium">Grand Total:</td>
-                    <td className=" left-estimate-table">{grandTotal}</td>
+                    <td className=" left-estimate-table">
+                    {date === ''
+                        ? (0).toFixed(2)
+                        : week < 1
+                        ? (total+total*0.75).toFixed(2)
+                        : week >= 1 && week < 2
+                        ? (total+total*0.5).toFixed(2)
+                        : week >= 2 && week < 3
+                        ? (total+total*0.30).toFixed(2)
+                        : total.toFixed(2)
+                        }</td>
                   </tr>
                   <tr>
                     <td className=" left-estimate-table text-right font-medium">
                       Grand Total(including markup):
                     </td>
-                    <td className=" left-estimate-table">{gTotalWithMarkup}</td>
+                    <td className=" left-estimate-table">{gTotalWithMarkup.toFixed(2)}</td>
                   </tr>
                 </thead>
               </table>

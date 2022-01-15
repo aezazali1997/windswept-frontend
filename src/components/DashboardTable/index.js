@@ -66,8 +66,9 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 											<p className="text-center font-medium">Grand Total (including markup)</p>
 										</div>  */}
                   </div>
-                  {/*  data
-                    ? values.setQty.map(({ value }) =>
+                  {  
+										data
+                    	? values.setQty.map(({ value }) =>
                         data.map(({ count, unitPrice }, index) =>
                           value === count.toString() ? (
                             <div key={index} className="flex w-full justify-center">
@@ -80,7 +81,7 @@ const DashboardChart = ({ values, data, apiError, week }) => {
                               <div className="flex-col w-1/3 border">
                                 <p className="text-center ">{(unitPrice * count).toFixed(3)}</p>
                               </div>
-                              {/* <div className="flex-col w-1/3 border">
+                               {/* <div className="flex-col w-1/3 border">
                     						<p className="text-center ">
                     							{
                     								week < 1 ? (
@@ -98,8 +99,8 @@ const DashboardChart = ({ values, data, apiError, week }) => {
                     											("Standard")
                     							}
                     						</p>
-                    					</div>
-                    					<div className="flex-col w-1/3 border">
+                    					</div> */}
+                    					{/* <div className="flex-col w-1/3 border">
                     						<p className="text-center ">
                     							{
                     								week < 1 ? (
@@ -117,8 +118,8 @@ const DashboardChart = ({ values, data, apiError, week }) => {
                     											parseFloat((unitPrice * count)).toFixed(3)
                     							}
                     						</p>
-                    					</div>
-                    					<div className="flex-col w-1/3 border">
+                    					</div> */}
+                    					{/* <div className="flex-col w-1/3 border">
                     						<p className="text-center ">
                     							{
                     								week < 1 ? (
@@ -136,14 +137,15 @@ const DashboardChart = ({ values, data, apiError, week }) => {
                     											((((unitPrice * count))) * values.markup).toFixed(3)
                     							}
                     						</p>
-                    					</div> 
+                    					</div>  */}
                             </div>
                           ) : (
                             ''
                           )
                         )
                       )
-                    : '' */}
+                    : ''
+									}
                 </>
               </div>
             )}

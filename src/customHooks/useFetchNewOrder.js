@@ -10,11 +10,11 @@ import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
 import { OrderFormSchema } from '../utils/validation_schema';
 import { useLocation } from 'react-router-dom';
-import { Error } from '../constants/Errors';
-import { Item } from '../constants/Item';
+import { Error,ERROR,ITEM,Item } from '../constants/Order.constants';
 import { deserializeApiResponse } from '../utils/ApiResponse';
 import { deserializeDraftResponse } from '../utils/draftResponse';
 import { getQuantitySum } from '../utils/arraySum';
+import {singleArray } from '../utils/singleArray'
 import '../styles/custom-style.css';
 import swal from 'sweetalert';
 import { getpercentage } from '../utils/percentageCalculator';
@@ -110,15 +110,28 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         setValues(items);
         setNotes(notes);
         setWeek(week);
-        // setData([data]);
+        // if(selectedOrder && values){
+        //   callAPI();
+        // }
+        
+        // setData([items]);
       }
     }
   }, []);
   useEffect(() => {
-    _Total();
+    // _Total();
+    return ()=> setTotal(0);
+  }, [values]);
+  // images
+  // orderImages
+  useEffect(()=>{
     _grandTotal();
-    _GrandTotalWithMarkup();
-  }, [images, values, errors, orderImages]);
+    return ()=>setGrandTotal(0);
+  },[total])
+  useEffect(()=>{
+ _GrandTotalWithMarkup();
+ return ()=>setGrandTotalWithMarkup(0);
+  },[grandTotal])
 
   const initialValues = {
     title: selectedOrder?.object_ref?.cf_opportunity_item_name || selectedOrder?.title || '',
@@ -190,6 +203,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   };
 
   const _HandleChange = (e, index) => {
+
     const { name, value, checked } = e.target;
 
     const NewArray = [...values];
@@ -220,11 +234,14 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       let updatedArray = updateValues(NewArray, name, checked, index);
       setValues([...updatedArray]);
     } else if (name === 'date') {
+
       let now = moment(new Date()); //todays date
       let end = moment(value); // end date
       let weeks = end.diff(now, 'weeks');
       setDate(value);
       setWeek(weeks);
+      setTotal(0);
+      // setGrandTotal(0);
     } else {
       let updatedArray = updateValues(NewArray, name, value, index);
 
@@ -274,8 +291,12 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     callAPI();
   };
   let callAPI = async () => {
-    const { product, material, backing, size, pe, freight, markup, pmsColors, setQty } =
+    console.log("api called");
+    console.log("order no",orderNo);
+    console.log("values",values);
+    const { product, material, backing, size, pe, markup, colors, setQty } =
       values[orderNo];
+    console.log(product, material, backing, size, pe, markup, colors, setQty);
     // if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
     //   swal({
     //     text: 'Fill Mandatory Fields',
@@ -292,63 +313,43 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         backing: backing,
         size: size,
         pc: getpercentage(pe),
-        selectedQuantity: getQuantitySum(setQty),
-        addColor: pmsColors?.length,
-        markup: markup || 0
+        selectedQuantity:singleArray(setQty),
+        addColor: colors?.length,
+        markup: markup
       };
-      axiosInstance
-        .ordereEstimate(data)
-        .then(({ data: { data, message } }) => {
-          if (message === 'Failed' && data[0].error === 'Custom') {
-            swal({
+    console.log(data);
+      try {
+      let res= await axiosInstance.ordereEstimate(data)
+      if(res.data[0].error){
+        swal({
               text: 'Custom Quote will be given in 1-2 days',
               icon: 'info',
               dangerMode: true,
               buttons: false,
               timer: 3000
             });
-            setAPIError('Custom Quote will be given in 1 - 2 days');
             setTotal(0);
             setGrandTotal(0);
             setData([]);
-          } else if (message === 'Failed' && data[0].error === 'Not Found') {
-            swal({
-              text: 'Data Not Found',
-              icon: 'info',
-              dangerMode: true,
-              buttons: false,
-              timer: 3000
-            });
+            setAPIError('Custom Quote will be given in 1 - 2 days');
+      }else{
+        setAPIError('');
+            setData(res.data);
+            for (let i=0; i<values.length; i++){
+              values[i].data=res.data
+            }
+            // values.forEach((value)=>{
+            //   value.data=res.data
+            // })
+            _Total();
+            // _grandTotal();
+            
+      }
+      } catch (error) {
             setAPIError('');
             setData([]);
-          } else {
-            swal({
-              text: 'Data Successfully Fetched',
-              icon: 'success',
-              dangerMode: true,
-              buttons: false,
-              timer: 3000
-            });
-            setAPIError('');
-            setData(data);
-            let UpdateArray = [...values].map((item, i) => {
-              if (i !== orderNo) return item;
-              item.data = data;
-              return item;
-            });
-            setValues([...UpdateArray]);
-            disableLoading();
-          }
-        })
-        .catch((error) => {
-          swal({
-            text: error,
-            icon: 'error',
-            dangerMode: true,
-            buttons: false,
-            timer: 3000
-          });
-        });
+        console.log(error);
+      }   
     }
   };
 
@@ -431,10 +432,13 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   };
 
   let addAnother = () => {
+  
+
     let CopyOriginalValues = [...values];
     let CopyOriginalErrors = [...errors];
-    let newErrorArray = [...CopyOriginalErrors, Error];
-    let newValueArray = [...CopyOriginalValues, Item];
+
+    let newErrorArray = [...CopyOriginalErrors, ERROR];
+    let newValueArray = [...CopyOriginalValues, ITEM];
     setOrderNo(orderNo + 1);
     setErrors(newErrorArray);
     setValues(newValueArray);
@@ -569,7 +573,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       notes: formik.values.customerNote,
       purchaseOrders: orderImages,
       shipAddress: formik.values.shipAddress,
-      items: []
+      items: [],
     };
     for (let i = 0; i < values.length; i++) {
       let item = {
@@ -613,19 +617,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     }
   };
   const saveAsDraft = async () => {
-    Swal.fire({
-      text: 'Your order is saved in drafts, waiting for your submission',
-      icon: 'info',
-      timer: 2000,
-      buttonsStyling: false,
-      showCancelButton: false,
-      confirmButtonText: 'Ok',
-      customClass: {
-        confirmButton:
-          'w-full inline-flex justify-center rounded-md border-none btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style'
-      }
-    }).then(async (result) => {
-      const data = {
+
+    const data = {
         title: formik.values.title,
         reference: formik.values.reference,
         date,
@@ -653,12 +646,24 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         };
         data.items.push(item);
       }
+
       try {
         let res = await axiosInstance.createDraft(data);
+        Swal.fire({
+      text: 'Your order is saved in drafts, waiting for your submission',
+      icon: 'info',
+      timer: 1000,
+      buttonsStyling: false,
+      showCancelButton: false,
+      confirmButtonText: 'Ok',
+      customClass: {
+        confirmButton:
+          'w-full inline-flex justify-center rounded-md border-none btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style'
+      }
+    })
       } catch (error) {}
-    });
   };
-
+  
   const formik = useFormik({
     enableReinitialize: selectedOrder ? true : false,
     initialValues,
@@ -666,7 +671,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     validateOnBlur: true,
     onSubmit: ({ title, reference, shipAddress, customerNote }, { setSubmitting }) => {
       setSubmitting(true);
-
       const data = {
         title,
         reference,
@@ -682,6 +686,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       // when selected order is draft's order
       if (selectedOrder?.order_id) {
         data.id = selectedOrder.order_id;
+      }
+      if(query.get('active')==='closed-order'){
+        data.reorder=true;
       }
       if (values.length === 1) {
         const { product, material, backing, pe, setQty } = values[0];
@@ -713,7 +720,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
             }
           });
         } else {
-          (query.get('active') === 'new-order' || query.get('active') === 'saved-as-draft') &&
+          (query.get('active') === 'new-order' || query.get('active') === 'saved-as-draft' || query.get('active') === 'closed-order') &&
             ConfirmSubmit(data);
           query.get('active') === 'open-order' && updateData(data);
         }
@@ -745,6 +752,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   });
 
   let showFormDetails = (index) => {
+
     if (values?.length === 1) {
       const { product, material, backing, pe, setQty } = values[index];
       if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
@@ -756,6 +764,11 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     }
 
     setOrderNo(index);
+    callAPI();
+    _Total();
+    _grandTotal();
+    _GrandTotalWithMarkup();
+      
   };
 
   let _onFocus = (e) => {
@@ -772,16 +785,29 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   };
 
   let _Total = () => {
-    // const CopyOriginal = [...values];
-    // var Total = 0;
-    // CopyOriginal.map((item, i) =>
-    //   item.data.map(({ unitPrice, count }) => (Total = Total + count * unitPrice))
-    // );
-    // setTotal((total) => (total = Total));
+    const CopyOriginal = [...values];
+  
+    let Total = 0;
+    for (let i=0; i< CopyOriginal.length; i++){
+      for (let j=0; j<CopyOriginal[i].data.length; j++){
+        Total +=(CopyOriginal[i].data[j].count*CopyOriginal[i].data[j].unitPrice)
+      }   
+    }
+    setTotal((total)=>total=Total);
+    // return Total;
   };
   let _grandTotal = () => {
-    // const CopyOriginal = [...values];
-    // var GrandTotal = 0;
+    let GrandTotal = total;
+        if (week < 1) {
+          GrandTotal = GrandTotal + GrandTotal * 0.75;
+        } else if (week >= 1 && week < 2) {
+          GrandTotal = GrandTotal + GrandTotal * 0.5;
+        } else if (week >= 2 && week < 3) {
+          GrandTotal = GrandTotal + GrandTotal * 0.3;
+        } else {
+          GrandTotal = GrandTotal
+        }
+    setGrandTotal(GrandTotal);
     // CopyOriginal.map((item, i) =>
     //   item.data.map(({ unitPrice, count }) => {
     //     if (week < 1) {
@@ -795,9 +821,11 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     //     }
     //   })
     // );
-    // setGrandTotal((grandTotal) => (grandTotal = GrandTotal));
   };
   let _GrandTotalWithMarkup = () => {
+    let gTotalMark=(grandTotal*Number(localStorage.getItem('markup')))
+    
+    setGrandTotalWithMarkup((gTotalWithMarkup) => (gTotalWithMarkup = gTotalMark))
     // const CopyOriginal = [...values];
     // var GrandTotalWithMarkup = 0;
     // CopyOriginal.map((item, i) =>
@@ -823,6 +851,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   return {
     _GrandTotalWithMarkup,
     _grandTotal,
+    setGrandTotal,
     _Total,
     _onBlur,
     _onFocus,

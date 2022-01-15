@@ -38,7 +38,7 @@ const Login = () => {
   const _OnSubmit = async (email, password, setStatus, setSubmitting) => {
     try {
       const {
-        data: { email_id, first_name, user_id, person_ref, role, message }
+        data: { email_id, first_name, user_id, person_ref, role,markup, message }
       } = await AxiosInstance.login({
         email,
         password
@@ -47,7 +47,7 @@ const Login = () => {
       setError(false);
       setStatus(message);
       setShowAlert(true);
-      setLocalStorage(email_id, user_id, first_name, person_ref, role, message);
+      setLocalStorage(email_id, user_id, first_name, person_ref, role,markup);
       window.location = '/dashboard';
     } catch ({ response: { data } }) {
       setError(true);
