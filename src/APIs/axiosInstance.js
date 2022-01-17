@@ -28,10 +28,17 @@ class AxiosInstance {
     formData.append('ship_address', data.shipAddress);
     formData.append('customer_notes', data.notes);
     formData.append('purchase_order', data.purchaseOrders);
-    formData.append('images_length', data.images.length);
+    // formData.append('images_length', data.images.length);
     formData.append('reorder',data.reorder);
-    for (let i = 0; i < data.images.length; i++) {
-      formData.append(`image${i}`, data.images[i]);
+    // for (let i = 0; i < data.images.length; i++) {
+      // formData.append(`image${i}`, data.images[i]);
+    // }
+    for (let i=0; i<data.items.length; i++){
+      let item=`item${i}`;
+      for (let j=0; j<data.items[i].images.length; j++){
+        let image=`image${j}`;
+        formData.append(item+"_"+image,data.items[i].images[j])
+      }
     }
     formData.append('item_details', JSON.stringify(deserializeItems(data.items)));
     await axios.post(BASE_URL + '/opportunity', formData);

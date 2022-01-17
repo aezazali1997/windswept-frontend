@@ -18,6 +18,7 @@ export const updateErrors = (originalArray, name, value, index) => {
 }
 
 export const deserializeItems = (items)=>{
+    
     let itemDetails=[]
     for (let i=0; i<items.length; i++){
         let sumQuantity=0;
@@ -38,6 +39,9 @@ export const deserializeItems = (items)=>{
         let height = items[i].hCenter;
         let size = items[i].size;
         let colors = items[i].colors;
+
+        
+        
         let unit_cost = '2.333 USD';
         let unit_price = '3.3333 USD';
         let line_item_id = items[i].line_item_id;
@@ -58,13 +62,20 @@ export const deserializeItems = (items)=>{
           colors,
           unit_cost,
           unit_price,
-          line_item_id
+          line_item_id,
         });
 
     }
     return itemDetails;
 
 }
+// const deserializeImages= (images) =>{
+//     let formData = new FormData();
+//     for (let i=0; i<images.length; i++){
+//     formData.append(`image${i}`,images[i]);
+//     }
+//     return JSON.stringify(formData);
+// }
 export const getInputClasses = (formik, fieldname) => {
     if (formik.touched[fieldname] && formik.errors[fieldname]) {
         return "border-red-500";

@@ -49,7 +49,7 @@ const From = ({
   }
 
   let handleFormDisable = (value) => {
-    if (value === false && query.get('active') === 'closed-order') {
+    if (value === false && values?.line_item_id) {
       return;
     }
     let form = document.getElementById('orderForm');
@@ -65,7 +65,7 @@ const From = ({
     } else {
       handleFormDisable(false);
     }
-  }, [readOnly]);
+  }, [readOnly,orderNo]);
 
   return (
     <>

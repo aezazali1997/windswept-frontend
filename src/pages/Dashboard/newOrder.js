@@ -9,7 +9,7 @@ import Button from './button';
 import { useLocation } from 'react-router-dom';
 import { Spinner } from '../../components/spinner/Spinner';
 
-const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
+const NewOrder = ({ readOnly,selectedOrder, closeOrder }) => {
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
@@ -153,7 +153,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                 value={date}
                 placeholder="In hands date"
                 onFocus={_onFocus}
-                disabled={readOnly || query.get('active') === 'closed-order' ? true : false}
+                disabled={readOnly ? true : false}
                 onBlur={_onBlur}
                 className={`input ${isEmpty(date) ? 'border-red-600' : ''}`}
                 onChange={_HandleChange}
@@ -196,17 +196,11 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
                                       className={`text-sm ${
                                         index === orderNo ? 'text-white' : 'text-black'
                                       }`}>
-                                      {item['object_ref']?.product
-                                        ? item['object_ref']?.product
-                                        : item.product}
+                                      {item.product}
                                       ,{' '}
-                                      {item['object_ref']?.material
-                                        ? item['object_ref']?.material
-                                        : item.material}
+                                      {item.material}
                                       ,{' '}
-                                      {item['object_ref']?.backing
-                                        ? item['object_ref']?.backing
-                                        : item.backing}
+                                      {item.backing}
                                     </div>
                                   </div>
                                 </div>
@@ -357,16 +351,16 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
             <div className="flex flex-col w-full px-3 py-4 sm:w-2/3 border rounded-md space-y-3">
               <div
                 className={`${
-                  isEmpty(images) !== true
+                  isEmpty(values[orderNo].blobImages) !== true
                     ? 'grid grid-cols-3 sm:grid-cols-4 gap-2'
                     : 'flex justify-center'
                 } w-full`}>
-                {!isEmpty(images) ? (
-                  images.map((image, index) => (
+                {!isEmpty(values[orderNo].blobImages) ? (
+                  values[orderNo].blobImages.map((image, index) => (
                     <div key={index} className="relative">
                       <img src={image} alt="img" className="w-30 h-30 rounded-lg object-cover" />
                       <div
-                        onClick={() => handleRemoveImg(index)}
+                        onClick={() => handleRemoveImg(index,orderNo)}
                         className="absolute flex top-0 right-0 border-1 rounded-full text-red-600 hover:ring-2 hover:ring-red-500  w-5 h-5 shadow-md z-50 bg-white items-center justify-center">
                         <svg
                           className="w-6 h-6"
@@ -404,6 +398,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
               </div>
               <div className="flex flex-row justify-center">
                 <input
+                  id="mul_images"
                   type="file"
                   multiple={true}
                   accept="image/*"
@@ -530,7 +525,7 @@ const NewOrder = ({ readOnly, selectedOrder, closeOrder }) => {
 										}
 									</div>
 									<div className="flex flex-row justify-center">
-										<input
+										<inputsetReadOnly
 											type="file"
 											multiple={true}
 											accept='image/*'

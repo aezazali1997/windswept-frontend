@@ -19,7 +19,9 @@ export const Item = {
   size: 1,
   data: [],
   colors: [],
-  pmsColors: []
+  pmsColors: [],
+  images:[],
+  blobImages:[]
 };
 export const Error = {
   qty: true,
@@ -56,6 +58,8 @@ export const Error = {
   size: 1,
   data: [],
   colors: [],
-  pmsColors: []
+  pmsColors: [],
+  images:[],
+  blobImages:[]
 };
 

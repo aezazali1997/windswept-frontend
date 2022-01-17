@@ -36,7 +36,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   const [week, setWeek] = useState(0);
 
   const [images, setImages] = useState([]);
-  const [imageFiles, setImageFiles] = useState([]);
+  const [ImageFiles, setImageFiles] = useState([]);
   const [orderImages, setOrderImages] = useState('');
   const [selected, setSelected] = useState([]);
   const [color, setColor] = useState('');
@@ -119,12 +119,12 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     }
   }, []);
   useEffect(() => {
+    //  in case of open orders and closed orders. it created an issue which needs to be resolved
     // _Total();
     return ()=> setTotal(0);
   }, [values]);
-  // images
-  // orderImages
-  useEffect(()=>{
+  
+    useEffect(()=>{
     _grandTotal();
     return ()=>setGrandTotal(0);
   },[total])
@@ -132,6 +132,16 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
  _GrandTotalWithMarkup();
  return ()=>setGrandTotalWithMarkup(0);
   },[grandTotal])
+
+  // useEffect(()=>{
+  //   // for referencing as values which is not working with [...values]
+    
+    // let tmpValues = JSON.parse(JSON.stringify(values))
+    // tmpValues[orderNo].images=   [...ImageFiles]
+    // tmpValues[orderNo].blobImages=[...images]
+    // setValues([...tmpValues])
+    // these states needs to be cleared because they store the current values so the previos state needs to be cleared out
+  // },[images.length])
 
   const initialValues = {
     title: selectedOrder?.object_ref?.cf_opportunity_item_name || selectedOrder?.title || '',
@@ -151,20 +161,27 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       imageFiles.push(fileObj[i]);
       fileArray.push(URL.createObjectURL(fileObj[i]));
     }
-    setImageFiles(imageFiles);
-    setImages(fileArray); /// if you want to upload latter
+    let tmpValues = JSON.parse(JSON.stringify(values))
+    tmpValues[orderNo].images=   [...imageFiles]
+    tmpValues[orderNo].blobImages=[...fileArray]
+    setValues([...tmpValues])
+    // setImageFiles([...imageFiles]);
+    // setImages([...fileArray]);
   };
 
   let handleClick = () => {
     upload.current.click();
   };
 
-  let handleRemoveImg = (index) => {
+  let handleRemoveImg = (index,orderIndex) => {
     if (!readOnly) {
-      let CopyOriginal = [...images];
-      CopyOriginal.splice(index, 1);
-      fileArray.splice(index, 1);
-      setImages(CopyOriginal);
+      let tmpValues = [...values];
+      tmpValues[orderIndex].blobImages.splice(index, 1)
+      tmpValues[orderIndex].images.splice(index, 1)
+      // CopyOriginal.splice(index,1);
+      // fileArray.splice(index, 1);
+      // setImages(CopyOriginal);
+      setValues([...tmpValues]);
     }
   };
   let orderUpload = useRef();
@@ -248,6 +265,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       setValues([...updatedArray]);
     }
     handleSize(orderNo);
+    
   };
 
   let handleSize = (orderNo) => {
@@ -291,12 +309,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     callAPI();
   };
   let callAPI = async () => {
-    console.log("api called");
-    console.log("order no",orderNo);
-    console.log("values",values);
     const { product, material, backing, size, pe, markup, colors, setQty } =
       values[orderNo];
-    console.log(product, material, backing, size, pe, markup, colors, setQty);
     // if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
     //   swal({
     //     text: 'Fill Mandatory Fields',
@@ -317,7 +331,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         addColor: colors?.length,
         markup: markup
       };
-    console.log(data);
       try {
       let res= await axiosInstance.ordereEstimate(data)
       if(res.data[0].error){
@@ -432,8 +445,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   };
 
   let addAnother = () => {
-  
-
     let CopyOriginalValues = [...values];
     let CopyOriginalErrors = [...errors];
 
@@ -443,6 +454,10 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     setErrors(newErrorArray);
     setValues(newValueArray);
     DisableAddAnother();
+    // setImageFiles([]);
+    upload.current.files=null
+    fileArray=[];
+    // setImages([]);
   };
 
   let removeItem = (index) => {
@@ -569,7 +584,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       title: formik.values.title,
       reference: formik.values.reference,
       date,
-      images: imageFiles,
+      images: ImageFiles,
       notes: formik.values.customerNote,
       purchaseOrders: orderImages,
       shipAddress: formik.values.shipAddress,
@@ -622,7 +637,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         title: formik.values.title,
         reference: formik.values.reference,
         date,
-        images: imageFiles,
+        // images: ImageFiles,
+        // needs correction
         notes: formik.values.customerNote,
         purchaseOrders: orderImages,
         shipAddress: formik.values.shipAddress,
@@ -675,7 +691,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
         title,
         reference,
         date,
-        images: imageFiles,
         week,
         notes: customerNote,
         purchaseOrders: orderImages,
@@ -752,7 +767,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   });
 
   let showFormDetails = (index) => {
-
+    
     if (values?.length === 1) {
       const { product, material, backing, pe, setQty } = values[index];
       if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
@@ -762,7 +777,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       }
     } else {
     }
-
     setOrderNo(index);
     callAPI();
     _Total();
@@ -785,6 +799,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   };
 
   let _Total = () => {
+    // In closed order, when we change selections, it generates an error because values values are not present
+    if (query.get('active')!=='closed-order'){
+
     const CopyOriginal = [...values];
   
     let Total = 0;
@@ -794,6 +811,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       }   
     }
     setTotal((total)=>total=Total);
+    }
     // return Total;
   };
   let _grandTotal = () => {

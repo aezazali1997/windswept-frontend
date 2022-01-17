@@ -109,7 +109,7 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
           &nbsp; Edit
         </button>
       </div>
-      <NewOrder closeOrder={'closeOrder'} readOnly={readOnly} selectedOrder={selectedOrder} />
+      <NewOrder closeOrder={'closeOrder'} readOnly={readOnly} setReadOnly={setReadOnly} selectedOrder={selectedOrder} />
     </>
   ) : (
     <>
