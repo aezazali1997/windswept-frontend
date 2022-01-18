@@ -9,7 +9,7 @@ import Button from './button';
 import { useLocation } from 'react-router-dom';
 import { Spinner } from '../../components/spinner/Spinner';
 
-const NewOrder = ({ readOnly,selectedOrder, closeOrder }) => {
+const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
@@ -64,7 +64,7 @@ const NewOrder = ({ readOnly,selectedOrder, closeOrder }) => {
     handleNotes,
     saveAsDraft,
     updateDraft
-  } = UseNewOrder({ readOnly, selectedOrder, closeOrder });
+  } = UseNewOrder({ readOnly,setReadOnly, selectedOrder, closeOrder });
 
   return (
     <>

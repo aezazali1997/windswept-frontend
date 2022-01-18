@@ -35,6 +35,7 @@ class AxiosInstance {
     // }
     for (let i=0; i<data.items.length; i++){
       let item=`item${i}`;
+      formData.append(item+'_length',data.items[i].images.length)
       for (let j=0; j<data.items[i].images.length; j++){
         let image=`image${j}`;
         formData.append(item+"_"+image,data.items[i].images[j])

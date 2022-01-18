@@ -49,7 +49,9 @@ const From = ({
   }
 
   let handleFormDisable = (value) => {
-    if (value === false && values?.line_item_id) {
+
+
+    if (values?.line_item_id && value === false) {
       return;
     }
     let form = document.getElementById('orderForm');
@@ -60,6 +62,7 @@ const From = ({
     }
   };
   useEffect(() => {
+
     if (readOnly === true) {
       handleFormDisable(true);
     } else {

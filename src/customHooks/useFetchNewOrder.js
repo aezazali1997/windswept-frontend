@@ -20,9 +20,10 @@ import swal from 'sweetalert';
 import { getpercentage } from '../utils/percentageCalculator';
 
 let fileArray = [];
+let serverImages=[];
 let fileObj = null;
 
-const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
+const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly }) => {
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
@@ -155,16 +156,18 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   let upload = useRef();
 
   let onChangeFile = (event) => {
+    console.log("event files",event.target.files);
     let imageFiles = [];
+    let blobImagesArray=[];
     fileObj = event.target.files;
     for (let i = 0; i < fileObj.length; i++) {
       imageFiles.push(fileObj[i]);
-      fileArray.push(URL.createObjectURL(fileObj[i]));
+      blobImagesArray.push(URL.createObjectURL(fileObj[i]));
     }
-    let tmpValues = JSON.parse(JSON.stringify(values))
-    tmpValues[orderNo].images=   [...imageFiles]
-    tmpValues[orderNo].blobImages=[...fileArray]
-    setValues([...tmpValues])
+    let tmpValues = [...values]
+    tmpValues[orderNo].images= [...imageFiles] 
+    tmpValues[orderNo].blobImages=[...blobImagesArray]
+     setValues([...tmpValues])
     // setImageFiles([...imageFiles]);
     // setImages([...fileArray]);
   };
@@ -261,11 +264,10 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
       // setGrandTotal(0);
     } else {
       let updatedArray = updateValues(NewArray, name, value, index);
-
       setValues([...updatedArray]);
     }
     handleSize(orderNo);
-    
+     
   };
 
   let handleSize = (orderNo) => {
@@ -401,6 +403,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     }
     setValues([...updatedArray]);
     callAPI();
+   
   };
 
   let handleColors = () => {
@@ -445,6 +448,10 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   };
 
   let addAnother = () => {
+    if (query.get('active')==='closed-order'){
+      setReadOnly(false);
+    }
+  
     let CopyOriginalValues = [...values];
     let CopyOriginalErrors = [...errors];
 
@@ -454,10 +461,18 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     setErrors(newErrorArray);
     setValues(newValueArray);
     DisableAddAnother();
+   
+
+      // DNRC
     // setImageFiles([]);
-    upload.current.files=null
-    fileArray=[];
     // setImages([]);
+    
+    // this working
+    // upload.current.files=null
+    fileArray=[];
+    serverImages=[]
+    
+    
   };
 
   let removeItem = (index) => {
@@ -767,7 +782,16 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
   });
 
   let showFormDetails = (index) => {
-    
+    // serverImages=[];
+    // fileArray=[];
+    if (query.get('active')==='closed-order' ){
+      if( values[index]?.line_item_id){
+      setReadOnly(true);
+      }
+      else{
+      setReadOnly(false)
+      }
+    }
     if (values?.length === 1) {
       const { product, material, backing, pe, setQty } = values[index];
       if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
@@ -778,6 +802,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly }) => {
     } else {
     }
     setOrderNo(index);
+    
     callAPI();
     _Total();
     _grandTotal();
