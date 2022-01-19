@@ -165,22 +165,22 @@ const Login = () => {
             <div className="text-red-700 text-sm mb-4">{formik.errors.password}</div>
           )}
 
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-center">
             {/* <div className="text-sm">
                             <Link to="/forget-password" className="font-medium text-gray-600 hover:text-red-500 hover:underline">
                                 Forgot your password?
                             </Link>
                         </div> */}
-
+            {/*   justify-center border  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style    */}
             <button
               type="submit"
-              className={`flex items-center text-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
+              className={`flex justify-center bg-red-600 text-base font-medium text-white  text-center item-center w-24 py-2 border border-transparent hover:text-red-600 hover:border-red-500    ${
                 formik.isSubmitting
                   ? 'bg-red-500 pointer-events-none cursor-not-allowed'
-                  : ' bg-red-600 hover:bg-red-700 '
+                  : ' bg-red-600 hover:bg-transparent '
               } focus:outline-none`}
               disabled={formik.isSubmitting}>
-              Log in
+              Login
               {loading && (
                 <div className=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>
               )}

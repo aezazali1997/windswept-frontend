@@ -36,8 +36,8 @@ const Navbar = ({ toggle, isOpen, login, handleLogout }) => {
                                     ))
                             }
                             <button type="button" onClick={handleLogout}
-                                className="p-4 font-weight: 600px;
-                                uppercase font-sans text-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none ">
+                                className="p-4
+                                uppercase font-sans text-center py-2 px-4 border border-transparent text-sm  rounded-md text-black hover:text-red-600 nav-link nav-link-ltr">
                                 Logout
                             </button>
                         </>

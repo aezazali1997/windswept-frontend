@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import React from 'react';
+import React,{useState} from 'react';
 import ReactTooltip from 'react-tooltip';
 import { InfoSVG } from '../../assets/SVGs';
 import { DashboardChart, Form } from '../../components';
@@ -9,10 +9,12 @@ import Button from './button';
 import { useLocation } from 'react-router-dom';
 import { Spinner } from '../../components/spinner/Spinner';
 
-const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
+const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityModal,setShowQuantityModal }) => {
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
+  const [customMarkup,setCustomMarkup] = useState(0);
+  
 
   let query = useQuery();
 
@@ -64,7 +66,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
     handleNotes,
     saveAsDraft,
     updateDraft
-  } = UseNewOrder({ readOnly,setReadOnly, selectedOrder, closeOrder });
+  } = UseNewOrder({ readOnly,setReadOnly, selectedOrder, closeOrder,customMarkup,showQuantityModal,setShowQuantityModal });
 
   return (
     <>
@@ -96,11 +98,12 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
               </span>
               <input
                 disabled={readOnly ? true : false}
-                className={`input ${getInputClasses(formik, 'title')}`}
+                className={`input ${!readOnly  ? getInputClasses(formik, 'title') : 'border' }`}
                 placeholder="Enter a name for your order..."
                 type="text"
                 id="title"
                 name="title"
+                
                 {...formik.getFieldProps('title')}
               />
               <p className="font-semibold text-red-600">*</p>
@@ -120,7 +123,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
               </span>
               <input
                 disabled={readOnly || query.get('active') === 'closed-order' ? true : false}
-                className={`input ${getInputClasses(formik, 'reference')}`}
+                className={`input ${!readOnly ? getInputClasses(formik, 'reference') : 'border'}`}
                 placeholder="Enter Customer Reference..."
                 type="text"
                 id="reference"
@@ -249,17 +252,26 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
                   Add Another
                 </button>
                 <div className="flex flex-row mt-4 w-full ">
-                  <button
+                  {
+                  !(query.get('active')=='closed-order' || query.get('active')=='open-order' || query.get('active')==='saved-as-draft') ?  <button
                     disabled={readOnly ? true : false}
                     type="button"
                     onClick={query.get('active') !== 'saved-as-draft' ? saveAsDraft : updateDraft}
                     className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none ">
                     {query.get('active') !== 'saved-as-draft' ? 'Save as Draft' : 'Update Draft'}
-                  </button>
+                  </button> : '' 
+                  } 
+                    
+                  
                   <button
-                    disabled={readOnly ? true : false}
+                    disabled={ query.get('active')==='closed-order' ? false : true}
                     type="submit"
-                    className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none ">
+                    className={`inline-flex justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white 
+                    ${
+                      query.get('active')==='closed-order' ? 'bg-red-600 hover:bg-red-700 focus:outline-none' : 'bg-red-500 cursor-default' 
+                    }
+                    `}  
+                    >
                     {(query.get('active') === 'new-order' ||
                       query.get('active') === 'saved-as-draft') &&
                       'Submit Order'}
@@ -275,7 +287,13 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
                   disabled={readOnly ? true : false}
                   onClick={onCancleOrder}
                   type="button"
-                  className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none">
+                  className={`inline-flex justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white focus:outline-none 	${
+                    readOnly
+                      ? 'bg-red-500 cursor-default'
+                      : canAddAnother
+                      ? 'bg-red-500 cursor-default'
+                      : 'bg-red-600 hover:bg-red-700'
+                  } `}>
                   Cancel
                 </button>
               </div>
@@ -290,12 +308,10 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
                   accept="image/*"
                   ref={orderUpload}
                   className="hidden"
-                  disabled={query.get('active') === 'closed-order' || !readOnly ? false : true}
                   onChange={onChangeOrderFile}
                 />
                 <Button
                   type="button"
-                  disabled={query.get('active') === 'closed-order' || readOnly ? true : false}
                   onClick={OrderUploadClick}
                   label={
                     <>
@@ -315,11 +331,8 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
                       </svg>
                     </>
                   }
-                  classNames={`p-2 w-auto flex items-center text-white  ${
-                    query.get('active') === 'closed-order' || readOnly
-                      ? 'bg-red-500 cursor-default'
-                      : 'bg-red-600 hover:bg-red-700'
-                  } `}
+                  classNames={`p-2 w-auto flex items-center text-white   bg-red-600 hover:bg-red-700'
+                   `}
                 />
               </div>
               <div
@@ -348,7 +361,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
               </div>
             </div>
 
-            <div className="flex flex-col w-full px-3 py-4 sm:w-2/3 border rounded-md space-y-3">
+            <div id="image-container" className="flex flex-col w-full px-3 py-4 sm:w-2/3 border border-solid transition duration-300 rounded-md space-y-3">
               <div
                 className={`${
                   isEmpty(values[orderNo].blobImages) !== true
@@ -408,7 +421,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
                 />
                 <Button
                   type="button"
-                  disabled={query.get('active') === 'closed-order' || readOnly ? true : false}
+                  disabled={false}
                   onClick={handleClick}
                   label={
                     <>
@@ -429,11 +442,8 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
                     </>
                   }
                   classNames={`p-2 w-auto flex mb-8 items-center text-white  
-                    ${
-                      query.get('active') === 'closed-order' || readOnly
-                        ? 'bg-red-500 cursor-default'
-                        : 'bg-red-600 hover:bg-red-700'
-                    }`}
+                     bg-red-600 hover:bg-red-700'
+                    `}
                 />
               </div>
             </div>
@@ -571,6 +581,8 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
                 handleThreadModal={handleThreadModal}
                 handleChange={_HandleChange}
                 filterOptions={filterOptions}
+                markup={customMarkup}
+                setmarkup={setCustomMarkup}
               />
             )}
             {/* <div className="flex flex-col sm:flex-row">
@@ -668,7 +680,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
             <textarea
               rows={4}
               disabled={readOnly ? true : false}
-              className={`input ${getInputClasses(formik, 'shipAddress')}`}
+              className={`input  ${ !readOnly ? getInputClasses(formik, 'shipAddress') : 'border' }`}
               placeholder="Shipping Address..."
               type="text"
               id="shipAddress"
@@ -683,7 +695,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder }) => {
             <textarea
               rows={4}
               disabled={readOnly ? true : false}
-              className={`input ${getInputClasses(formik, 'customerNote')}`}
+              className={`input ${ !readOnly ? getInputClasses(formik, 'customerNote') : 'border'}`}
               placeholder="Please add any additional information needed for this order"
               type="text"
               id="customerNote"

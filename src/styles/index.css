@@ -106,7 +106,7 @@
 
 .nav-link-ltr::before {
   width: 0%;
-  bottom: 10px;
+  bottom: 13px;
 }
 
 .nav-link-ltr:hover::before {
@@ -117,7 +117,7 @@
 }
 .active::before {
   width: 100%;
-  bottom: 10px;
+  bottom: 13px;
 }
 th[colspan='2'] {
   text-align: center;

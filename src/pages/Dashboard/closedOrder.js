@@ -6,6 +6,7 @@ import AxiosInstance from '../../APIs/axiosInstance';
 import { Spinner } from '../../components/spinner/Spinner';
 const ClosedOrder = ({ filters, searched, setSearched }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showQuantityModal,setShowQuantityModal]=useState(true);
   const checkFilters = (filters) => {
     if (
       filters.date !== '' ||
@@ -109,7 +110,7 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
           &nbsp; Edit
         </button>
       </div>
-      <NewOrder closeOrder={'closeOrder'} readOnly={readOnly} setReadOnly={setReadOnly} selectedOrder={selectedOrder} />
+      <NewOrder closeOrder={'closeOrder'} readOnly={readOnly} setReadOnly={setReadOnly} selectedOrder={selectedOrder} showQuantityModal={showQuantityModal} setShowQuantityModal={setShowQuantityModal} />
     </>
   ) : (
     <>
@@ -151,9 +152,13 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
                       </div>
                       <div className="flex w-full h-full flex-col space-y-4 justify-end lg:justify-between">
                         <p className="text-sm text-gray-500 break-all whitespace-pre-wrap">
-                          status: {cf_opportunity_status}
+                          <b>Status</b> : {cf_opportunity_status}
+                          
                         </p>
-
+                        <p className="text-sm text-gray-500 break-all whitespace-pre-wrap">
+                          
+                          <b>Opportunity No</b> : {opportunity_id}
+                        </p>
                         <div className="flex flex-col lg:flex-row justify-between">
                           <div className="flex flex-row  lg:absolute lg:top-1 lg:right-1  space-x-2">
                             <Button

@@ -7,6 +7,7 @@ import { storeOrderCache } from '../actions';
 import { updateErrors, updateValues } from '../utils/helpers';
 import axiosInstance from '../APIs/axiosInstance';
 import Swal from 'sweetalert2';
+import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
 import { OrderFormSchema } from '../utils/validation_schema';
 import { useLocation } from 'react-router-dom';
@@ -16,14 +17,13 @@ import { deserializeDraftResponse } from '../utils/draftResponse';
 import { getQuantitySum } from '../utils/arraySum';
 import {singleArray } from '../utils/singleArray'
 import '../styles/custom-style.css';
-import swal from 'sweetalert';
 import { getpercentage } from '../utils/percentageCalculator';
 
 let fileArray = [];
 let serverImages=[];
 let fileObj = null;
 
-const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly }) => {
+const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,showQuantityModal,setShowQuantityModal }) => {
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
@@ -51,7 +51,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly }) => {
   const [apiError, setAPIError] = useState('');
   const [showPMSModal, setShowPMSModal] = useState(false);
   const [showThreadModal, setShowThreadModal] = useState(false);
-
+  
+  
   useEffect(() => {
     if (selectedOrder) {
       let [date, notes] = ['', ''];
@@ -132,17 +133,10 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly }) => {
   useEffect(()=>{
  _GrandTotalWithMarkup();
  return ()=>setGrandTotalWithMarkup(0);
-  },[grandTotal])
+  },[grandTotal,customMarkup])
 
-  // useEffect(()=>{
-  //   // for referencing as values which is not working with [...values]
-    
-    // let tmpValues = JSON.parse(JSON.stringify(values))
-    // tmpValues[orderNo].images=   [...ImageFiles]
-    // tmpValues[orderNo].blobImages=[...images]
-    // setValues([...tmpValues])
-    // these states needs to be cleared because they store the current values so the previos state needs to be cleared out
-  // },[images.length])
+     
+  
 
   const initialValues = {
     title: selectedOrder?.object_ref?.cf_opportunity_item_name || selectedOrder?.title || '',
@@ -154,9 +148,18 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly }) => {
   };
 
   let upload = useRef();
-
+  const quanityChangeModelPopUp =() =>{
+    swal({
+      text: 'You have changed something in this order therefore Windswept will review this and get back to you via email',
+      icon: 'info',
+      dangerMode: true,
+      buttons: false,
+      timer: 5000
+    });
+    setShowQuantityModal(false);
+  }
   let onChangeFile = (event) => {
-    console.log("event files",event.target.files);
+    
     let imageFiles = [];
     let blobImagesArray=[];
     fileObj = event.target.files;
@@ -382,6 +385,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly }) => {
     }
   };
   let handleQty = (valuess, index) => {
+     showQuantityModal && quanityChangeModelPopUp()
+    setShowQuantityModal(false)
     const NewErrors = [...errors];
     let updatedErrorArray = [];
 
@@ -534,7 +539,63 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly }) => {
     // this function will call the update method in backend
   };
   const ConfirmSubmit = async (data) => {
-    Swal.fire({
+    if (query.get('active')==='closed-order'){
+      Swal.fire({
+      title: 'Do you want to current images to be carried out?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'No',
+      confirmButtonText: 'Yes, Reorder',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton:
+          'w-full inline-flex justify-center rounded-md border-none  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
+        cancelButton:
+          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
+        }
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Your order will be submitted and reviewed later',
+          text: 'You can find your order in open orders',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'Ok',
+          buttonsStyling: false,
+          customClass: {
+            confirmButton:
+              'w-full inline-flex justify-center rounded-md border-none btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+          }
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            // history.push('/dashboard?active=open-order')
+          }
+        });
+        enableLoading();
+        try {
+          await axiosInstance.postOrder(data);
+        } catch (error) {
+          console.log(error);
+        }
+        disableLoading();
+      }
+      else if (result.isDismissed) {
+        let img_container= document.getElementById('image-container');
+        img_container.scrollIntoView({
+          behavious:"smooth",
+          block:'center'
+        })
+        img_container.classList.add('border-blue-500')
+        setTimeout(()=>{
+        img_container.classList.remove('border-blue-500')
+        },1500)
+
+      } 
+    });
+
+    }
+    else{
+      Swal.fire({
       title: 'Are you sure?',
       icon: 'question',
       showCancelButton: true,
@@ -593,6 +654,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly }) => {
         // make api call
       }
     });
+
+    }    
   };
   const updateDraft = async () => {
     const data = {
@@ -866,7 +929,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly }) => {
     // );
   };
   let _GrandTotalWithMarkup = () => {
-    let gTotalMark=(grandTotal*Number(localStorage.getItem('markup')))
+    let gTotalMark=(grandTotal*customMarkup)
     
     setGrandTotalWithMarkup((gTotalWithMarkup) => (gTotalWithMarkup = gTotalMark))
     // const CopyOriginal = [...values];

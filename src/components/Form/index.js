@@ -23,7 +23,9 @@ const From = ({
   handlePMSModal,
   handleThreadModal,
   showThread,
-  showPMS
+  showPMS,
+  markup,
+  setmarkup
 }) => {
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -302,11 +304,13 @@ const From = ({
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
             <input
-              value={localStorage.getItem('markup') ? localStorage.getItem('markup') : 0}
-              disabled={true}
+              value={markup}
               className="input"
               name="markup"
-              type="text"
+              type="number"
+              onChange={(event)=>{
+                setmarkup(Number(event.target.value))
+              }}
             />
           </div>
         </div>

@@ -52,7 +52,7 @@ const AdminLogin = () => {
         email,
         password
       });
-      console.log(data);
+
       disableLoading();
       setError(data.error);
       setStatus(data.message);

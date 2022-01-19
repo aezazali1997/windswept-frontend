@@ -8,7 +8,7 @@ export const Item = {
   packaging: '',
   setQty: [],
   optionalItem: '',
-  markup: Number(localStorage.getItem('markup')) || '0',
+  markup: Number(localStorage.getItem('markup')),
   discountApply: false,
   wLeft: '1',
   wRight: '0',
