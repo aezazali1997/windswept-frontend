@@ -385,8 +385,11 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     }
   };
   let handleQty = (valuess, index) => {
-     showQuantityModal && quanityChangeModelPopUp()
-    setShowQuantityModal(false)
+     if ( query.get('active')==='closed-order'){
+      showQuantityModal && quanityChangeModelPopUp()
+      setShowQuantityModal(false)
+
+     }
     const NewErrors = [...errors];
     let updatedErrorArray = [];
 
@@ -482,7 +485,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
 
   let removeItem = (index) => {
     if (!readOnly) {
-      if (values.length < 2 && errors.length < 2) {
+      // (values.length < 2 && errors.length < 2)
+      if (values.length < 2 || errors.length < 2) {
         return;
       }
       let currValues = [...values];
@@ -662,7 +666,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       title: formik.values.title,
       reference: formik.values.reference,
       date,
-      images: ImageFiles,
       notes: formik.values.customerNote,
       purchaseOrders: orderImages,
       shipAddress: formik.values.shipAddress,
@@ -683,7 +686,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
         width: values[i].wCenter,
         height: values[i].hCenter,
         size: values[i].size,
-        colors: values[i].colors
+        colors: values[i].colors,
+        images:values[i].images
       };
       data.items.push(item);
     }
@@ -710,13 +714,10 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     }
   };
   const saveAsDraft = async () => {
-
     const data = {
         title: formik.values.title,
         reference: formik.values.reference,
         date,
-        // images: ImageFiles,
-        // needs correction
         notes: formik.values.customerNote,
         purchaseOrders: orderImages,
         shipAddress: formik.values.shipAddress,
@@ -736,7 +737,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
           width: values[i].wCenter,
           height: values[i].hCenter,
           size: values[i].size,
-          colors: values[i].colors
+          colors: values[i].colors,
+          images: values[i].images
         };
         data.items.push(item);
       }
@@ -888,7 +890,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
 
   let _Total = () => {
     // In closed order, when we change selections, it generates an error because values values are not present
-    if (query.get('active')!=='closed-order'){
+    if (query.get('active')==='new-order'){
 
     const CopyOriginal = [...values];
   

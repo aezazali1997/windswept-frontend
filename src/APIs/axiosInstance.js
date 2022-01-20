@@ -109,9 +109,6 @@ class AxiosInstance {
       console.log(error);
     }
   }
-  // async checkDraftExist() {
-  //   return await axios.get(`${BASE_URL}/draft?proc=1`);
-  // }
   async createDraft(data) {
     let formData = new FormData();
     formData.append('name', data.title);
@@ -120,10 +117,16 @@ class AxiosInstance {
     formData.append('customer_notes', data.notes);
     formData.append('ship_to_address', data.shipAddress);
     formData.append('purchase_order', data.purchaseOrders);
-    formData.append('image_length', data.images.length);
     formData.append('items', JSON.stringify(data.items));
-    for (let i = 0; i < data.images.length; i++) {
-      formData.append(`image${i}`, data.images[i]);
+     for (let i=0; i<data.items.length; i++){
+      if ( data.items[i].images){
+        let item=`item${i}`;
+        formData.append(item+'_length',data.items[i].images.length)
+        for (let j=0; j<data.items[i].images.length; j++){
+        let image=`image${j}`;
+        formData.append(item+"_"+image,data.items[i].images[j])
+        }
+      }
     }
     try {
       return await axios.post(`${BASE_URL}/draft`, formData);
@@ -132,7 +135,7 @@ class AxiosInstance {
     }
   }
   async getAllDraft() {
-    return await axios.get(`${BASE_URL}/draft?proc=2`);
+    return await axios.get(`${BASE_URL}/draft`);
   }
   async deleteFromDraft(id) {
     return await axios.delete(`${BASE_URL}/draft?id=${id}`);
@@ -147,9 +150,15 @@ class AxiosInstance {
     formData.append('ship_to_address', data.shipAddress);
     formData.append('items', JSON.stringify(data.items));
     formData.append('purchase_order', data.purchaseOrders);
-    formData.append('image_length', data.images.length);
-    for (let i = 0; i < data.images.length; i++) {
-      formData.append(`image${i}`, data.images[i]);
+    for (let i=0; i<data.items.length; i++){
+      if ( data.items[i].images){
+        let item=`item${i}`;
+        formData.append(item+'_length',data.items[i].images.length)
+        for (let j=0; j<data.items[i].images.length; j++){
+        let image=`image${j}`;
+        formData.append(item+"_"+image,data.items[i].images[j])
+        }
+      }
     }
     try {
       return await axios.put(`${BASE_URL}/draft`, formData);

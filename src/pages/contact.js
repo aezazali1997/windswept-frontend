@@ -75,7 +75,7 @@ const Contact = () => {
                             error={formik.touched.name && formik.errors.name}
                             inputClass={`${getInputClasses(formik,
                                 "name"
-                            )} border bg-gray-50 border-gray-200 shadow-md focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-16`}
+                            )} border bg-gray-50 border-gray-500  focus:outline-none rounded-md w-full p-3 h-14`}
                             label={'Full Name'}
                         />
                         {formik.touched.name && formik.errors.name &&
@@ -91,7 +91,7 @@ const Contact = () => {
                             error={formik.touched.email && formik.errors.email}
                             inputClass={`${getInputClasses(formik,
                                 "email"
-                            )} border bg-gray-50 border-gray-200 focus:outline-none shadow-md rounded-md focus:shadow-sm w-full p-3 h-16`}
+                            )} border bg-gray-50 border-gray-500  focus:outline-none rounded-md w-full p-3 h-14`}
                             label={'Email'}
                         />
                         {formik.touched.email && formik.errors.email &&
@@ -107,7 +107,7 @@ const Contact = () => {
                             error={formik.touched.subject && formik.errors.subject}
                             inputClass={`${getInputClasses(formik,
                                 "subject"
-                            )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md shadow-md focus:shadow-sm w-full p-3 h-16`}
+                            )} border bg-gray-50 border-gray-500  focus:outline-none rounded-md w-full p-3 h-14`}
                             label={'Subject'}
                         />
                         {formik.touched.subject && formik.errors.subject &&
@@ -148,7 +148,7 @@ const Contact = () => {
                             </div>
                         </div>
                         <div className="flex items-center justify-end">
-                            <button type="submit" className="flex items-center text-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none ">
+                            <button type="submit" className="flex items-center text-center py-2 px-4 border border-transparent text-sm font-medium text-white hover:text-red-600 hover:border-red-600  bg-red-600 hover:bg-transparent focus:outline-none ">
                                 Submit
                                 {loading &&
                                     <div className=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>}

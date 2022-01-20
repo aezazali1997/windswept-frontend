@@ -15,7 +15,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
   };
   const [customMarkup,setCustomMarkup] = useState(0);
   
-
+  
   let query = useQuery();
 
   const {
@@ -245,7 +245,8 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                       ? 'bg-red-500 cursor-default'
                       : canAddAnother
                       ? 'bg-red-500 cursor-default'
-                      : 'bg-red-600 hover:bg-red-700'
+                      :'bg-red-600 border hover:bg-transparent hover:text-red-600 hover:border-red-600'
+                      
                   }
 									justify-center border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white focus:outline-none 
 									`}>
@@ -253,23 +254,25 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                 </button>
                 <div className="flex flex-row mt-4 w-full ">
                   {
-                  !(query.get('active')=='closed-order' || query.get('active')=='open-order' || query.get('active')==='saved-as-draft') ?  <button
-                    disabled={readOnly ? true : false}
+                  !(query.get('active')==='closed-order' || query.get('active')==='open-order')  ?  
+                  <button
+                    disabled={readOnly && !query.get('active')==='new-order' ? true : false}
                     type="button"
                     onClick={query.get('active') !== 'saved-as-draft' ? saveAsDraft : updateDraft}
-                    className="inline-flex bg-red-600 justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none ">
-                    {query.get('active') !== 'saved-as-draft' ? 'Save as Draft' : 'Update Draft'}
+                    className=" inline-flex bg-red-600 hover:bg-transparent justify-center w-full border border-white hover:border-red-600 shadow-sm px-2 py-2 text-sm font-medium text-white hover:text-red-600 focus:outline-none ">
+                    {query.get('active') === 'saved-as-draft' ? 'Update Draft' : 'Save as Draft'}
                   </button> : '' 
                   } 
                     
                   
                   <button
-                    disabled={ query.get('active')==='closed-order' ? false : true}
+                    disabled={  false }
                     type="submit"
                     className={`inline-flex justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white 
-                    ${
-                      query.get('active')==='closed-order' ? 'bg-red-600 hover:bg-red-700 focus:outline-none' : 'bg-red-500 cursor-default' 
+                    ${  
+                       'bg-red-600 hover:bg-transparent focus:outline-none border border-white hover:border-red-600 text-white hover:text-red-600'  
                     }
+                    
                     `}  
                     >
                     {(query.get('active') === 'new-order' ||
@@ -287,12 +290,12 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                   disabled={readOnly ? true : false}
                   onClick={onCancleOrder}
                   type="button"
-                  className={`inline-flex justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white focus:outline-none 	${
+                  className={`inline-flex justify-center w-full  shadow-sm px-2 py-2 text-sm font-medium text-white focus:outline-none 	${
                     readOnly
-                      ? 'bg-red-500 cursor-default'
+                      ? 'text-gray-500 cursor-default'
                       : canAddAnother
-                      ? 'bg-red-500 cursor-default'
-                      : 'bg-red-600 hover:bg-red-700'
+                      ? 'text-gray-500 cursor-default'
+                      : 'text-gray-600 hover:text-red-600 hover:underline'
                   } `}>
                   Cancel
                 </button>
@@ -331,7 +334,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                       </svg>
                     </>
                   }
-                  classNames={`p-2 w-auto flex items-center text-white   bg-red-600 hover:bg-red-700'
+                  classNames={`p-2 w-auto flex items-center border hover:border-red-600 text-white hover:text-red-600  bg-red-600 hover:bg-transparent '
                    `}
                 />
               </div>
@@ -441,8 +444,8 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                       </svg>
                     </>
                   }
-                  classNames={`p-2 w-auto flex mb-8 items-center text-white  
-                     bg-red-600 hover:bg-red-700'
+                  classNames={`p-2 w-auto flex mb-8 items-center border hover:border-red-600 bg-red-600 hover:bg-transparent text-white hover:text-red-600  
+                    '
                     `}
                 />
               </div>

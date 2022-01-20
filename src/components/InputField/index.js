@@ -13,7 +13,7 @@ const InputField = ({ label, inputClass, svg, name, type, value, onChange, onBlu
                 autoComplete="on" />
             <label
                 htmlFor="username"
-                className="absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
+                className="absolute text-sm top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
                 {label}
             </label>
             <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">

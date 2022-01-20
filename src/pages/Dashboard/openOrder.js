@@ -105,9 +105,9 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
       buttonsStyling: false,
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm',
+          'w-full inline-flex justify-center  border border-red-600 px-4 py-2 btn  text-base font-medium text-white hover:text-red-600  focus:outline-none sm:ml-3 sm:w-auto sm:text-sm hover:bg-transparent',
         cancelButton:
-          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
+          'mt-3 w-full text-gray-500 hover:text-red-600 inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
       }
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -142,8 +142,8 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
           <button
             onClick={goBacktoDetail}
             type="button"
-            className="inline-flex bg-red-600 justify-center w-auto items-center border border-gray-300  
-            shadow-sm px-4 py-2 rounded-md text-sm font-medium text-white hover:bg-red-700 focus:outline-none">
+            className="inline-flex bg-red-600 hover:bg-transparent justify-center w-auto items-center border border-gray-300 hover:border-red-600  
+            shadow-sm px-4 py-2  text-sm font-medium text-white hover:text-red-600 focus:outline-none">
             <svg
               className="w-6 h-6"
               fill="none"
@@ -159,12 +159,15 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
             </svg>{' '}
             &nbsp; Back
           </button>
-          {selectedOrder['object_ref'].cf_opportunity_status === 'Pending' ? (
+
+          { 
+          selectedOrder['object_ref'].cf_opportunity_status === 'Pending' ?
+          (
             <button
               onClick={toggleEdit}
               type="button"
-              className="inline-flex bg-red-600 justify-center w-auto items-center border border-gray-300 
-            shadow-sm px-4 py-2 rounded-md text-sm font-medium text-white hover:bg-red-700 focus:outline-none">
+              className="inline-flex bg-red-600 hover:bg-transparent justify-center w-auto items-center border border-gray-300 hover:border-red-600 
+            shadow-sm px-4 py-2 text-sm font-medium text-white hover:text-red-600 focus:outline-none">
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -180,9 +183,9 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
               </svg>{' '}
               &nbsp; Edit
             </button>
-          ) : (
-            ''
-          )}
+          ) 
+          : ''
+          }
         </div>
 
         <NewOrder readOnly={readOnly} selectedOrder={selectedOrder} />

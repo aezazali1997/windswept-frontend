@@ -44,8 +44,8 @@ const Draft = () => {
         <button
           onClick={goBacktoDetail}
           type="button"
-          className="inline-flex bg-red-600 justify-center w-auto items-center
-            border border-gray-300  shadow-sm px-4 py-2 rounded-md text-sm font-medium text-white hover:bg-red-700 focus:outline-none">
+          className="inline-flex bg-red-600 hover:bg-transparent justify-center w-auto items-center
+            border border-red-600  shadow-sm px-4 py-2 text-sm font-medium text-white hover:text-red-600 focus:outline-none">
           <svg
             className="w-6 h-6"
             fill="none"

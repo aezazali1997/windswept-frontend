@@ -59,14 +59,14 @@
 }
 
 .input {
-  @apply bg-gray-50 appearance-none border rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-400;
+  @apply bg-gray-50 appearance-none border rounded-md w-full py-2 px-2 text-gray-700 h-9 leading-tight focus:outline-none focus:bg-white focus:border-gray-400;
 }
 .custom-style{
   margin-right: 14px !important;
 }
 
 .select {
-  @apply w-full border bg-gray-50 rounded-md py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white sm:text-sm;
+  @apply w-full border bg-gray-50 rounded-md py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white ;
 }
 /* Spinner */
 
@@ -158,3 +158,18 @@ th[colspan='2'] {
   background: red;
   border-radius: 10px;
 }  */
+/* .multi::placeholder {
+  @apply text-red-700
+} */
+
+/* .multi::se */
+.multi div  div  div span {
+  color:rgb(55, 65, 81) !important;
+    font-size: 1rem !important;
+}
+.multi div svg{
+    color:rgb(55, 65, 81) !important;
+}
+/* .multi div svg path {
+
+} */

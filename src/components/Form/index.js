@@ -4,7 +4,6 @@ import { multiQty, size } from '../../utils/consts';
 import Modal from '../Modal';
 import PMSschema from '../../utils/PMSschema.json';
 import Threadschema from '../../utils/thread-schema.json';
-import products from './ProductMaterial.json';
 import { useLocation } from 'react-router-dom';
 
 const From = ({
@@ -91,7 +90,7 @@ const From = ({
                 </div> */}
 
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
             <p className="text-left sm:text-right text-sm align-top">
               Product <span className="text-red-600 font-bold">*</span>
             </p>
@@ -102,19 +101,8 @@ const From = ({
               value={values.product}
               onChange={(e) => handleChange(e, orderNo)}
               name="product"
-              className={`select ${product ? 'border-red-500' : 'border-gray-500'}`}>
+              className={`select  ${product ? 'border-red-500' : 'border-gray-500'}`}>
               <option value="">select</option>
-              {/* {Object.keys(products).map((key, index) => {
-                if (products[key]['type'] === 'dynamic') {
-                  return Object.keys(products[key]).map((key2) => {
-                    return key2 === 'name' ? (
-                      <option value={key}>{products[key][key2]}</option>
-                    ) : (
-                      ''
-                    );
-                  });
-                }
-              })} */}
               <option value="EMB">Emblems</option>
               {/* <option value="Peel-N-Stick Embroidery">Peel-N-Stick Embroidery</option> */}
               <option value="Embroidered KeyFobs">Embroidered KeyFobs</option>
@@ -128,7 +116,7 @@ const From = ({
           </div>
         </div>
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
             <p className="text-left sm:text-right text-sm align-top">
               Material <span className="text-red-600 font-bold">*</span>
             </p>
@@ -157,7 +145,7 @@ const From = ({
           </div>
         </div>
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
             <p className="text-left sm:text-right text-sm align-top">
               Backing <span className="text-red-600 font-bold">*</span>
             </p>
@@ -182,7 +170,7 @@ const From = ({
           </div>
         </div>
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
             <p className="text-left sm:text-right text-sm align-top">
               Percent Embriodery <span className="text-red-600 font-bold">*</span>
             </p>
@@ -205,7 +193,7 @@ const From = ({
           </div>
         </div>
         <div className="flex flex-col sm:flex-row w-full">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
             <p className="text-left sm:text-right text-sm align-top">Border</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
@@ -214,7 +202,7 @@ const From = ({
               name="border"
               value={values.border}
               onChange={(e) => handleChange(e, orderNo)}
-              className=" select">
+              className=" select border-gray-500">
               <option value="select">select...</option>
               <option value="EMB/BOR: Merrowed">Merrowed</option>
               <option value="EMB/BOR: Heat Cut">Heat Cut</option>
@@ -222,7 +210,7 @@ const From = ({
           </div>
         </div>
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4 justify-start  ">
             <p className="text-left sm:text-right text-sm align-top">Shape</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
@@ -231,7 +219,7 @@ const From = ({
               name="cut"
               value={values.cut}
               onChange={(e) => handleChange(e, orderNo)}
-              className="select">
+              className="select border-gray-500">
               <option value="select">select...</option>
               <option value="EMB/CUT: Round">Round</option>
               <option value="EMB/CUT: Square">Square</option>
@@ -244,7 +232,7 @@ const From = ({
         </div>
 
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
             <p className="text-left sm:text-right text-sm align-top">Packaging</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
@@ -253,7 +241,7 @@ const From = ({
               name="packaging"
               value={values.packaging}
               onChange={(e) => handleChange(e, orderNo)}
-              className=" select">
+              className=" select border-gray-500">
               <option value="select">select...</option>
               <option value="None">None</option>
               <option value="Backer Card">Backer Card</option>
@@ -264,15 +252,15 @@ const From = ({
           </div>
         </div>
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
             <p className="text-left sm:text-right text-sm align-top">
               Select Quantity <span className="text-red-600 font-bold">*</span>
             </p>
           </div>
-          <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+          <div className="flex flex-col w-full sm:w-9/12 px-3 py-1">
             <MultiSelect
               disabled={readOnly ? (query.get('active') === 'closed-order' ? true : false) : false}
-              className={`border rounded-md ${qty ? 'border-red-500' : 'border-gray-50'}`}
+              className={`multi border rounded-md ${qty ? 'border-red-500' : 'border-gray-500 '}`}
               value={values.setQty}
               options={multiQty}
               selected={selected}
@@ -281,31 +269,33 @@ const From = ({
               }}
               labelledBy={'Select'}
               filterOptions={filterOptions}
+              
             />
           </div>
         </div>
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
             <p className="text-left sm:text-right text-sm align-top">Optional item #</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
             <input
+            
               value={values.optionalItem}
               onChange={(e) => handleChange(e, orderNo)}
-              className="input"
+              className="input border-gray-500"
               name="optionalItem"
               type="text"
             />
           </div>
         </div>
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-            <p className="text-left sm:text-right text-sm align-top">Your Customer Markup</p>
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
+            <p className="text-center  text-sm align-top">Your Customer Markup</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
             <input
               value={markup}
-              className="input"
+              className="input border-gray-500"
               name="markup"
               type="number"
               onChange={(event)=>{
@@ -328,17 +318,17 @@ const From = ({
                     </div>
                 </div> */}
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
             <p className="text-left sm:text-right text-sm align-top">Width</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-            <div className="flex flex-row border border-gray-400 w-full sm:w-1/2">
+            <div className="flex flex-row border border-gray-500 w-full sm:w-1/2">
               <select
                 id="wLeft"
                 value={values?.wLeft}
                 name="wLeft"
                 onChange={(e) => handleChange(e, orderNo)}
-                className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
+                className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer  sm:text-sm ">
                 <option value="1">1"</option>
                 <option value="2">2"</option>
                 <option value="3">3"</option>
@@ -361,7 +351,7 @@ const From = ({
                 value={values?.wRight}
                 name="wRight"
                 onChange={(e) => handleChange(e, orderNo)}
-                className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
+                className="w-auto py-2  text-white hover:text-red-600 bg-red-600 hover:bg-transparent shadow-sm focus:outline-none focus:border-red-600 cursor-pointer sm:text-sm border border-red-600">
                 {size &&
                   size.map((value, index) => (
                     <option
@@ -374,17 +364,17 @@ const From = ({
           </div>
         </div>
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
             <p className="text-left sm:text-right text-sm align-top">Height</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-            <div className="flex flex-row border border-gray-400 w-full sm:w-1/2">
+            <div className="flex flex-row border border-gray-500 w-full sm:w-1/2">
               <select
                 id="hLeft"
                 value={values?.hLeft}
                 onChange={(e) => handleChange(e, orderNo)}
                 name="hLeft"
-                className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
+                className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer sm:text-sm">
                 <option value="1">1"</option>
                 <option value="2">2"</option>
                 <option value="3">3"</option>
@@ -407,7 +397,7 @@ const From = ({
                 value={values?.hRight}
                 name="hRight"
                 onChange={(e) => handleChange(e, orderNo)}
-                className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
+                className="w-auto py-2  text-white hover:text-red-600 bg-red-600 hover:bg-transparent shadow-sm focus:outline-none focus:border-red-600 cursor-pointer sm:text-sm border border-red-600">
                 {size &&
                   size.map((value, index) => (
                     <option
@@ -429,11 +419,11 @@ const From = ({
         </div>
 
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-2 justify-start">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4 justify-start">
             <p className="text-left sm:text-right text-sm align-top">Colors</p>
           </div>
-          <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-            <div className="flex w-full border-gray-400 border">
+          <div className="flex flex-col w-full sm:w-9/12 px-3 py-2 ">
+            <div className="flex w-full  border rounded-md">
               <input
                 value={color}
                 type="text"
@@ -448,7 +438,7 @@ const From = ({
                 onChange={(e) => {
                   setColor(e.target.value);
                 }}
-                className="w-full p-2 focus:outline-none"
+                className="w-full p-2 border border-gray-500  focus:outline-none"
               />
 
               <button
@@ -461,11 +451,11 @@ const From = ({
                     : false
                 }
                 onClick={handleColors}
-                className={`text-white p-2 w-1/4
+                className={`text-white  p-2 w-1/4
                   ${
                     values.colors.length < 1 && query.get('active') === 'closed-order'
                       ? 'bg-red-500 cursor-default'
-                      : 'bg-red-600 hover:bg-red-700'
+                      : 'bg-red-600 hover:bg-transparent text-white hover:text-red-600 border border-red-600'
                   }`}>
                 <p className="font-medium text-sm">
                   {values.colors.length === 12 ? 'No more colors allowed' : 'Add Color'}
@@ -487,7 +477,7 @@ const From = ({
                   ${
                     values.colors.length < 1 && query.get('active') === 'closed-order'
                       ? 'bg-red-500 cursor-default'
-                      : 'bg-red-600 hover:bg-red-700'
+                      : 'bg-red-600 hover:bg-transparent text-white hover:text-red-600  border border-white hover:border-red-600'
                   }
                   `}>
                 PMS
@@ -506,7 +496,7 @@ const From = ({
                   ${
                     values.colors.length < 1 && query.get('active') === 'closed-order'
                       ? 'bg-red-500 cursor-default'
-                      : 'bg-red-600 hover:bg-red-700'
+                      : 'bg-red-600 hover:bg-transparent text-white hover:text-red-600  border border-white hover:border-red-600'
                   }
                       `}>
                 Thread

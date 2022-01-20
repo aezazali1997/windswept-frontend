@@ -123,7 +123,7 @@ const Login = () => {
             inputClass={`${getInputClasses(
               formik,
               'email'
-            )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-16`}
+            )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 py-4 h-14`}
             label={'Email'}
           />
           {formik.touched.email && formik.errors.email && (
@@ -141,7 +141,7 @@ const Login = () => {
               className={`${getInputClasses(
                 formik,
                 'password'
-              )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-16`}
+              )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -150,7 +150,7 @@ const Login = () => {
             />
             <label
               htmlFor="username"
-              className="absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
+              className="absolute text-sm top-1 left-0 px-3 py-4 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
               Password
             </label>
             <div
