@@ -150,7 +150,7 @@ const Login = () => {
             />
             <label
               htmlFor="username"
-              className="absolute text-sm top-1 left-0 px-3 py-4 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
+              className="absolute text-gray-700 text-sm top-1 left-0 px-3 py-4 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
               Password
             </label>
             <div

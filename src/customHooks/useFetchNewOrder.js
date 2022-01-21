@@ -314,7 +314,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     callAPI();
   };
   let callAPI = async () => {
-    const { product, material, backing, size, pe, markup, colors, setQty } =
+    const { product, material, backing, size, pe, colors, setQty } =
       values[orderNo];
     // if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
     //   swal({
@@ -334,7 +334,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
         pc: getpercentage(pe),
         selectedQuantity:singleArray(setQty),
         addColor: colors?.length,
-        markup: markup
+        markup: Number(localStorage.getItem('markup'))
       };
       try {
       let res= await axiosInstance.ordereEstimate(data)
@@ -508,6 +508,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   };
 
   let onCancleOrder = () => {
+    console.log('called')
     if (!readOnly) {
       setErrors([Error]);
       setOrderNo(0);
@@ -748,7 +749,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
         Swal.fire({
       text: 'Your order is saved in drafts, waiting for your submission',
       icon: 'info',
-      timer: 1000,
+      timer: 3000,
       buttonsStyling: false,
       showCancelButton: false,
       confirmButtonText: 'Ok',

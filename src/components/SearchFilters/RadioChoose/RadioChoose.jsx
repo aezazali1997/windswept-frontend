@@ -16,7 +16,7 @@ export const RadioChoose = ({ setOrderType, orderType }) => {
           value="open"
           checked={orderType === 'open' ? true : false}
         />{' '}
-        <label>Open</label>
+        <label className='text-gray-700'>Open</label>
       </div>
       <div>
         <input
@@ -28,7 +28,7 @@ export const RadioChoose = ({ setOrderType, orderType }) => {
           value="closed"
           checked={orderType === 'closed' ? true : false}
         />{' '}
-        <label>Close</label>
+        <label className='text-gray-700'>Close</label>
       </div>
       <div>
         <InfoSVG name={'search'} />

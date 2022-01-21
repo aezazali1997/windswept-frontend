@@ -70,6 +70,10 @@ const From = ({
       handleFormDisable(false);
     }
   }, [readOnly,orderNo]);
+  useEffect(()=>{
+  let multselect = document.querySelector('.multi');
+  multselect.childNodes[0].childNodes[0].childNodes[0].firstChild.textContent="select..."
+  },[1])
 
   return (
     <>
@@ -102,7 +106,7 @@ const From = ({
               onChange={(e) => handleChange(e, orderNo)}
               name="product"
               className={`select  ${product ? 'border-red-500' : 'border-gray-500'}`}>
-              <option value="">select</option>
+              <option value="">select...</option>
               <option value="EMB">Emblems</option>
               {/* <option value="Peel-N-Stick Embroidery">Peel-N-Stick Embroidery</option> */}
               <option value="Embroidered KeyFobs">Embroidered KeyFobs</option>
@@ -260,14 +264,15 @@ const From = ({
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-1">
             <MultiSelect
               disabled={readOnly ? (query.get('active') === 'closed-order' ? true : false) : false}
-              className={`multi border rounded-md ${qty ? 'border-red-500' : 'border-gray-500 '}`}
+              className={`multi border ${qty ? 'border-red-500' : 'border-gray-500 '}`}
               value={values.setQty}
               options={multiQty}
               selected={selected}
               onChange={(values) => {
                 handleQty(values, orderNo);
               }}
-              labelledBy={'Select'}
+              
+              labelledBy={'select'}
               filterOptions={filterOptions}
               
             />
@@ -322,13 +327,13 @@ const From = ({
             <p className="text-left sm:text-right text-sm align-top">Width</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-            <div className="flex flex-row border border-gray-500 w-full sm:w-1/2">
+            <div className="flex flex-row  w-full sm:w-1/2">
               <select
                 id="wLeft"
                 value={values?.wLeft}
                 name="wLeft"
                 onChange={(e) => handleChange(e, orderNo)}
-                className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer  sm:text-sm ">
+                className=" w-auto py-2 border border-gray-500 bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer  sm:text-sm ">
                 <option value="1">1"</option>
                 <option value="2">2"</option>
                 <option value="3">3"</option>
@@ -340,7 +345,7 @@ const From = ({
                 <option value="9">9"</option>
               </select>
               <input
-                className="py-2 px-3 w-full focus:outline-none"
+                className="py-2 px-3 mx-1 border border-gray-500 rounded-md w-full focus:outline-none"
                 name="wCenter"
                 value={values.wCenter}
                 readOnly
@@ -368,13 +373,13 @@ const From = ({
             <p className="text-left sm:text-right text-sm align-top">Height</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-            <div className="flex flex-row border border-gray-500 w-full sm:w-1/2">
+            <div className="flex flex-row  w-full sm:w-1/2">
               <select
                 id="hLeft"
                 value={values?.hLeft}
                 onChange={(e) => handleChange(e, orderNo)}
                 name="hLeft"
-                className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer sm:text-sm">
+                className="border w-auto py-2 border-gray-500 bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer sm:text-sm">
                 <option value="1">1"</option>
                 <option value="2">2"</option>
                 <option value="3">3"</option>
@@ -386,7 +391,7 @@ const From = ({
                 <option value="9">9"</option>
               </select>
               <input
-                className="py-2 px-3 w-full focus:outline-none"
+                className="py-2 px-3 mx-1 rounded-md border border-gray-500 w-full focus:outline-none"
                 readOnly
                 name="hCenter"
                 value={values.hCenter}
@@ -438,7 +443,7 @@ const From = ({
                 onChange={(e) => {
                   setColor(e.target.value);
                 }}
-                className="w-full p-2 border border-gray-500  focus:outline-none"
+                className="color-place-holder rounded-md mr-1 w-full p-2 border border-gray-500  focus:outline-none"
               />
 
               <button
@@ -503,7 +508,7 @@ const From = ({
               </button>
             </div>
 
-            <div className="h-56 w-full border overflow-y-scroll border-gray-400">
+            <div className="h-56 w-full border overflow-auto rounded-b-md border-gray-400">
               <div className="align-middle inline-block min-w-full">
                 <div className="">
                   <table className="min-w-full divide-y divide-gray-200">

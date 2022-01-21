@@ -37,7 +37,12 @@
 .floating-input > textarea:not(:placeholder-shown) ~ label {
   @apply opacity-75 scale-75 -translate-y-10 translate-x-1;
 }
-
+.floating-input > input[type="date"]{
+  @apply text-gray-700
+}
+.floating-input > input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.013);
+}
 .signup-field {
   @apply border bg-gray-100 border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16;
 }
@@ -60,6 +65,15 @@
 
 .input {
   @apply bg-gray-50 appearance-none border rounded-md w-full py-2 px-2 text-gray-700 h-9 leading-tight focus:outline-none focus:bg-white focus:border-gray-400;
+}
+.txt-area{
+  @apply h-24
+}
+.input::placeholder{
+  @apply text-gray-700
+}
+.input::placeholder{
+  font-size: .9rem;
 }
 .custom-style{
   margin-right: 14px !important;
@@ -163,12 +177,26 @@ th[colspan='2'] {
 } */
 
 /* .multi::se */
+.multi{
+  border-radius: 5px !important;
+}
+.multi div{
+  background-color: rgba(249, 250, 251,1) !important;
+  border:none !important;
+}
 .multi div  div  div span {
-  color:rgb(55, 65, 81) !important;
-    font-size: 1rem !important;
+  color: rgba(55, 65, 81, 1) !important;
+  font-size: 1rem !important;
+}
+.multi div div button{
+    margin-left: 3.5rem;
 }
 .multi div svg{
-    color:rgb(55, 65, 81) !important;
+   color:rgb(55, 65, 81) !important;
+}
+.multi div div{
+  padding-right: 0 !important;
+  border-radius: .375rem !important;
 }
 /* .multi div svg path {
 

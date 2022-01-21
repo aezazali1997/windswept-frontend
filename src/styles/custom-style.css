@@ -4,4 +4,17 @@ margin: 10px 0 !important;
 width: 80% !important;
 }
 }
-  
+
+.custom-place-holder::placeholder{
+  @apply text-gray-700
+}
+.custom-place-holder::placeholder{
+  font-size: .9rem;
+}
+.color-place-holder::placeholder{
+  @apply text-gray-700
+}
+.price-sheet-container:last-child{
+  border-bottom-left-radius: .375rem !important;
+  border-bottom-right-radius: .375rem !important;
+} 

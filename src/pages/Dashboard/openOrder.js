@@ -161,7 +161,7 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
           </button>
 
           { 
-          selectedOrder['object_ref'].cf_opportunity_status === 'Pending' ?
+          selectedOrder['object_ref'].cf_opportunity_status !== 'Artwork Approved' ?
           (
             <button
               onClick={toggleEdit}

@@ -13,7 +13,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
-  const [customMarkup,setCustomMarkup] = useState(0);
+  const [customMarkup,setCustomMarkup] = useState(1);
   
   
   let query = useQuery();
@@ -682,13 +682,15 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
           <div className="flex flex-col w-full ">
             <textarea
               rows={4}
+              
               disabled={readOnly ? true : false}
-              className={`input  ${ !readOnly ? getInputClasses(formik, 'shipAddress') : 'border' }`}
+              className={`input txt-area  ${ !readOnly ? getInputClasses(formik, 'shipAddress') : 'border' }`}
               placeholder="Shipping Address..."
               type="text"
               id="shipAddress"
               name="shipAddress"
               {...formik.getFieldProps('shipAddress')}
+              
             />
           </div>
         </div>
@@ -697,8 +699,9 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
           <div className="flex flex-col w-full ">
             <textarea
               rows={4}
+              
               disabled={readOnly ? true : false}
-              className={`input ${ !readOnly ? getInputClasses(formik, 'customerNote') : 'border'}`}
+              className={`input txt-area ${ !readOnly ? getInputClasses(formik, 'customerNote') : 'border'}`}
               placeholder="Please add any additional information needed for this order"
               type="text"
               id="customerNote"

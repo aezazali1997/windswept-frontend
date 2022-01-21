@@ -46,14 +46,14 @@ const DashboardChart = ({ values, data, apiError, week }) => {
             ) : (
               <div className="flex rounded-md flex-col justify-center items-center w-full ">
                 <>
-                  <div className="flex w-full justify-center">
-                    <div className="flex-col w-1/3 border">
+                  <div className="flex w-full justify-center border rounded-t-md">
+                    <div className="flex-col w-1/3 border-r">
                       <p className="text-center font-medium ">PC</p>
                     </div>
-                    <div className="flex-col w-1/3 border">
+                    <div className="flex-col w-1/3 border-r">
                       <p className="text-center font-medium ">Unit Price</p>
                     </div>
-                    <div className="flex-col w-1/3 border">
+                    <div className="flex-col w-1/3 ">
                       <p className="text-center font-medium">Total</p>
                     </div>
                     {/* <div className="flex-col w-1/3 border">
@@ -71,14 +71,14 @@ const DashboardChart = ({ values, data, apiError, week }) => {
                     	? values.setQty.map(({ value }) =>
                         data.map(({ count, unitPrice }, index) =>
                           value === count.toString() ? (
-                            <div key={index} className="flex w-full justify-center">
-                              <div className="flex-col w-1/3 border">
+                            <div key={index} className="flex w-full justify-center border price-sheet-container">
+                              <div className="flex-col w-1/3 border-r ">
                                 <p className="text-center ">{count}</p>
                               </div>
-                              <div className="flex-col w-1/3 border">
+                              <div className="flex-col w-1/3 border-r ">
                                 <p className="text-center ">{unitPrice}</p>
                               </div>
-                              <div className="flex-col w-1/3 border">
+                              <div className="flex-col w-1/3">
                                 <p className="text-center ">{(unitPrice * count).toFixed(3)}</p>
                               </div>
                                {/* <div className="flex-col w-1/3 border">

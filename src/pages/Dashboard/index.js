@@ -265,7 +265,7 @@ const Dashboard = (props) => {
                 value={search}
                 placeholder="Search by:"
                 onClick={_ToggleModal}
-                className="w-full px-4 text-md h-9 border focus:outline-none border-gray-300 bg-gray-50 md:rounded"
+                className="custom-place-holder w-full px-4 text-md h-9 border focus:outline-none border-gray-300 bg-gray-50 md:rounded"
               />
             </div>
             <button

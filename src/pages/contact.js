@@ -130,7 +130,7 @@ const Contact = () => {
                             />
                             <label
                                 htmlFor="message"
-                                className="absolute top-0 left-0 px-3 py-2 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
+                                className="absolute text-gray-700 top-0 left-0 px-3 py-2 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
                                 Message
                             </label>
 
