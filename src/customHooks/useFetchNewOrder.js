@@ -18,12 +18,13 @@ import { getQuantitySum } from '../utils/arraySum';
 import {singleArray } from '../utils/singleArray'
 import '../styles/custom-style.css';
 import { getpercentage } from '../utils/percentageCalculator';
+import { arrayGenerator } from '../utils/arrayGenerator';
 
 let fileArray = [];
 let serverImages=[];
 let fileObj = null;
 
-const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,showQuantityModal,setShowQuantityModal }) => {
+const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,showQuantityModal,setShowQuantityModal,setShowCustomOrderModel,showCustomOrderModel }) => {
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
@@ -31,7 +32,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   const history = useHistory();
 
   const [loading, setLoading] = useState(false);
-  const [canAddAnother, setDisableAddAnother] = useState(true);
+  const [canAddAnother, setCanAnother] = useState(true);
   const [orderNo, setOrderNo] = useState(0);
   const [date, setDate] = useState('');
   const [week, setWeek] = useState(0);
@@ -48,10 +49,11 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   const [total, setTotal] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
   const [gTotalWithMarkup, setGrandTotalWithMarkup] = useState(0);
+  const [lineItemUnitCost,setLineItemUnitCost]=useState(0);
+  const [lineItemUnitPrice,setLineItemUnitPrice]=useState(0);
   const [apiError, setAPIError] = useState('');
   const [showPMSModal, setShowPMSModal] = useState(false);
   const [showThreadModal, setShowThreadModal] = useState(false);
-  
   
   useEffect(() => {
     if (selectedOrder) {
@@ -61,38 +63,66 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
         let { document_date, cf_opportunity_portal_notes, opp_line_items } =
           selectedOrder['object_ref'];
         items = opp_line_items;
+
         date = document_date;
         notes = cf_opportunity_portal_notes;
       } else {
         items = selectedOrder.items;
         for (let i = 0; i < items.length; i++) {
-          items[i] = JSON.parse(items[i]);
+          items[i] = items[i];
+          // JSON.parse(items[i]);
+          
         }
-        date = selectedOrder.date;
+        date = selectedOrder.in_hands_date ? selectedOrder.in_hands_date : selectedOrder.date;
         notes = selectedOrder.customer_notes;
       }
       if (!isEmptyArray(items)) {
         let [product, material, backing, pe, setQty] = ['', '', '', '', ''];
         if (items[0]['object_ref']) {
-          items.map((item) => {
+          items.map((item,index) => {
+           
             item = item['object_ref'];
-            product = item['product[refcode]'];
+            
+            product = item['product'];
+            if(!isEmpty(product)){
+            let updatedErrorArray = updateErrors([...errors], 'product', false, index);
+              setErrors([...updatedErrorArray]);
+            }
             material = item['material'];
+            if(!isEmpty(material)){
+              let updatedErrorArray = updateErrors([...errors], 'material', false, index);
+              setErrors([...updatedErrorArray]);
+            }
             backing = item['backing'];
+            if(!isEmpty(backing)){
+              let updatedErrorArray = updateErrors([...errors], 'backing', false, index);
+              setErrors([...updatedErrorArray]);
+            }
             pe = item['percentage_embroidery'];
+            if(!isEmpty(pe)){
+              let updatedErrorArray = updateErrors([...errors], 'pe', false, index);
+              setErrors([...updatedErrorArray]);
+            }
             setQty = item['unit_quantity'];
+            if(setQty > 0){
+              let updatedErrorArray = updateErrors([...errors], 'qty', false, index);
+              setErrors([...updatedErrorArray]);
+            }
             if (product === '' || material === '' || backing === '' || pe === '' || setQty === '') {
               DisableAddAnother();
             } else {
               EnableAddAnother();
             }
             setDate(date);
+            setErrors([...errors,Error])
           });
           items = deserializeApiResponse(items);
           for (let i = 0; i < items.length; i++) {
             setSelected([...items[i].setQty]);
           }
+          
         } else {
+    
           items.map((item) => {
             product = item.product;
             material = item.material;
@@ -107,14 +137,15 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
             setDate(date);
           });
           items = deserializeDraftResponse(items);
+          
         }
 
         setValues(items);
         setNotes(notes);
         setWeek(week);
-        // if(selectedOrder && values){
-        //   callAPI();
-        // }
+        if(selectedOrder && values){
+          callAPI(selectedOrder);
+        }
         
         // setData([items]);
       }
@@ -122,7 +153,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   }, []);
   useEffect(() => {
     //  in case of open orders and closed orders. it created an issue which needs to be resolved
-    // _Total();
+    _Total();
     return ()=> setTotal(0);
   }, [values]);
   
@@ -148,6 +179,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   };
 
   let upload = useRef();
+
   const quanityChangeModelPopUp =() =>{
     swal({
       text: 'You have changed something in this order therefore Windswept will review this and get back to you via email',
@@ -246,6 +278,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
         updatedArray = updateValues(NewArray, name, value, index);
         setErrors([...updatedErrorArray]);
         setValues([...updatedArray]);
+        
+        callAPI();
       }
       const { product, material, backing, pe, setQty } = updatedArray[orderNo];
       if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
@@ -263,13 +297,16 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       let weeks = end.diff(now, 'weeks');
       setDate(value);
       setWeek(weeks);
-      setTotal(0);
+      // setTotal(0);
       // setGrandTotal(0);
     } else {
       let updatedArray = updateValues(NewArray, name, value, index);
       setValues([...updatedArray]);
     }
+    if(name==='wRight' || name==='wLeft' || name==='hRight' || name==='hLeft')
+   {
     handleSize(orderNo);
+   }
      
   };
 
@@ -313,9 +350,28 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     setValues([...UpdateArray]);
     callAPI();
   };
-  let callAPI = async () => {
-    const { product, material, backing, size, pe, colors, setQty } =
-      values[orderNo];
+  let callAPI = async (selectedOrder) => {
+    let [product,material,backing,size,pe,colors,setQty]=[null];
+    if(selectedOrder?.object_ref?.opp_line_items){
+      product=selectedOrder.object_ref.opp_line_items[orderNo].object_ref.product;
+      material = selectedOrder.object_ref.opp_line_items[orderNo].object_ref.material;
+      backing = selectedOrder.object_ref.opp_line_items[orderNo].object_ref.backing;
+      size = selectedOrder.object_ref.opp_line_items[orderNo].object_ref.cf_opportunity_line_item_size;
+      pe = selectedOrder.object_ref.opp_line_items[orderNo].object_ref.percentage_embroidery;
+      colors= selectedOrder.object_ref.opp_line_items[orderNo].object_ref.colors;
+      setQty = arrayGenerator(selectedOrder.object_ref.opp_line_items[orderNo].object_ref.unit_quantity); 
+    }
+    else{
+
+      product=values[orderNo].product;
+      material = values[orderNo].material;
+      backing = values[orderNo].backing;
+      size = values[orderNo].size;
+      pe = values[orderNo].pe;
+      colors= values[orderNo].colors;
+      setQty =values[orderNo].setQty;
+ 
+    }
     // if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
     //   swal({
     //     text: 'Fill Mandatory Fields',
@@ -337,8 +393,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
         markup: Number(localStorage.getItem('markup'))
       };
       try {
-      let res= await axiosInstance.ordereEstimate(data)
-      if(res.data[0].error){
+        let res= await axiosInstance.ordereEstimate(data)
+      if( res.data[0].error){
+          if(showCustomOrderModel){
         swal({
               text: 'Custom Quote will be given in 1-2 days',
               icon: 'info',
@@ -348,14 +405,27 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
             });
             setTotal(0);
             setGrandTotal(0);
+            setGrandTotal(0);
             setData([]);
-            setAPIError('Custom Quote will be given in 1 - 2 days');
-      }else{
+          }
+          setAPIError('Custom Quote will be given in 1-2 days');
+          setShowCustomOrderModel(false); 
+      } 
+      else {
         setAPIError('');
             setData(res.data);
             for (let i=0; i<values.length; i++){
               values[i].data=res.data
+              
             }
+            let unit_cost=0;
+            let unit_price=0;
+            for (let i=0; i< res.data.length; i++){
+              unit_price+=Number(res.data[i].unitPrice)
+              unit_cost+=Number(res.data[i].unitCost)
+            }
+            setLineItemUnitCost(Number(unit_cost.toFixed(4)));
+            setLineItemUnitPrice(Number(unit_price.toFixed(4)))
             // values.forEach((value)=>{
             //   value.data=res.data
             // })
@@ -364,6 +434,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
             
       }
       } catch (error) {
+          if (apiError==='Custom Quote will be given in 1-2 days'){
+            return;
+          }
             setAPIError('');
             setData([]);
         console.log(error);
@@ -384,8 +457,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       console.log(error);
     }
   };
-  let handleQty = (valuess, index) => {
-     if ( query.get('active')==='closed-order'){
+  let handleQty = (argValues, index) => {
+     if ( query.get('active')==='closed-order' && values[orderNo].line_item_id){
       showQuantityModal && quanityChangeModelPopUp()
       setShowQuantityModal(false)
 
@@ -393,16 +466,16 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     const NewErrors = [...errors];
     let updatedErrorArray = [];
 
-    if (isEmpty(valuess) === true) {
+    if (isEmpty(argValues) === true) {
       updatedErrorArray = updateErrors(NewErrors, 'qty', true, orderNo);
       setErrors([...updatedErrorArray]);
     } else {
       updatedErrorArray = updateErrors(NewErrors, 'qty', false, orderNo);
       setErrors([...updatedErrorArray]);
     }
-    let value = valuess.filter(({ value }) => value);
-    setSelected(valuess);
-    let updatedArray = updateValues(values, 'setQty', valuess, orderNo);
+    let value = argValues.filter(({ value }) => value);
+    setSelected(argValues);
+    let updatedArray = updateValues(values, 'setQty', argValues, orderNo);
     const { product, material, backing, pe, setQty } = updatedArray[orderNo];
     if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
       DisableAddAnother();
@@ -463,8 +536,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     let CopyOriginalValues = [...values];
     let CopyOriginalErrors = [...errors];
 
-    let newErrorArray = [...CopyOriginalErrors, ERROR];
-    let newValueArray = [...CopyOriginalValues, ITEM];
+    let newValueArray = [...CopyOriginalValues, {...ITEM}];
+    let newErrorArray = [...CopyOriginalErrors, {...ERROR}];
     setOrderNo(orderNo + 1);
     setErrors(newErrorArray);
     setValues(newValueArray);
@@ -506,14 +579,119 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       setValues(currValues);
     }
   };
+ 
 
   let onCancleOrder = () => {
-    console.log('called')
-    if (!readOnly) {
-      setErrors([Error]);
-      setOrderNo(0);
-      setValues([Item]);
+    if (query.get('active')==='closed-order'){
+  Swal.fire({
+      title: 'Do you want to clear all the Closed order line items?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'No',
+      confirmButtonText: 'Yes',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton:
+          'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
+        cancelButton:
+          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
+        }
+    }).then((result)=>{
+      if(result.isConfirmed){
+      if (!readOnly) {
+        setOrderNo(0);
+        setValues([ITEM]);
+        // need to Optimise it with Error as Error are false which needs to be true
+        setErrors([ERROR]);
+        DisableAddAnother();    
     }
+      }
+    })
+    }
+    else if (query.get('active')==='open-order')
+    {  Swal.fire({
+      title: 'Do you want to clear all the Open order line items?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'No',
+      confirmButtonText: 'Yes',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton:
+          'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
+        cancelButton:
+          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
+        }
+    }).then((result)=>{
+      if(result.isConfirmed){
+      if (!readOnly) {
+        setOrderNo(0);
+        setValues([ITEM]);
+        // need to Optimise it with Error as Error are false which needs to be true
+        setErrors([ERROR]);
+        DisableAddAnother();    
+    }
+      }
+    })
+
+    }
+    else if (query.get('active')==='save-as-order')
+    {
+        Swal.fire({
+      title: 'Do you want to clear all the Draft`s line items?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'No',
+      confirmButtonText: 'Yes',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton:
+          'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
+        cancelButton:
+          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
+        }
+    }).then((result)=>{
+      if(result.isConfirmed){
+      if (!readOnly) {
+        setOrderNo(0);
+        setValues([ITEM]);
+        // need to Optimise it with Error as Error are false which needs to be true
+        setErrors([ERROR]);
+        DisableAddAnother();    
+    }
+      }
+    })
+    }
+    else{
+      Swal.fire({
+      title: 'Do you want to clear all the line items?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'No',
+      confirmButtonText: 'Yes',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton:
+          'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
+        cancelButton:
+          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
+        }
+    }).then((result)=>{
+      if(result.isConfirmed){
+      if (!readOnly) {
+        setOrderNo(0);
+        setValues([ITEM]);
+        // need to Optimise it with Error as Error are false which needs to be true
+        setErrors([ERROR]);
+        DisableAddAnother();    
+    }
+      }
+    })
+      
+
+    }
+    // setDefaultErrors();
+  
   };
 
   const enableLoading = () => {
@@ -525,12 +703,14 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   };
 
   const EnableAddAnother = () => {
-    setDisableAddAnother(false);
+    setCanAnother(false);
   };
 
   const DisableAddAnother = () => {
-    setDisableAddAnother(true);
+    setCanAnother(true);
   };
+
+
   const updateData = async (data) => {
     enableLoading();
     try {
@@ -543,6 +723,10 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     disableLoading();
     // this function will call the update method in backend
   };
+
+
+
+
   const ConfirmSubmit = async (data) => {
     if (query.get('active')==='closed-order'){
       Swal.fire({
@@ -554,9 +738,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       buttonsStyling: false,
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center rounded-md border-none  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
+          'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
         cancelButton:
-          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
+          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
         }
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -569,7 +753,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
           buttonsStyling: false,
           customClass: {
             confirmButton:
-              'w-full inline-flex justify-center rounded-md border-none btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+              'w-full inline-flex justify-center btn hover:bg-transparent border border-red-600 hover:text-red-600 px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
           }
         }).then(async (result) => {
           if (result.isConfirmed) {
@@ -578,7 +762,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
         });
         enableLoading();
         try {
-          await axiosInstance.postOrder(data);
+          await axiosInstance.postOrder(data,lineItemUnitPrice,lineItemUnitCost);
         } catch (error) {
           console.log(error);
         }
@@ -590,9 +774,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
           behavious:"smooth",
           block:'center'
         })
-        img_container.classList.add('border-blue-500')
+        img_container.classList.add('border-red-600')
         setTimeout(()=>{
-        img_container.classList.remove('border-blue-500')
+        img_container.classList.remove('border-red-600')
         },1500)
 
       } 
@@ -611,11 +795,11 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       buttonsStyling: false,
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center rounded-md border-none  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
+          'w-full inline-flex justify-center border border-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style hover:bg-transparent hover:text-red-600',
         cancelButton:
-          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
+          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
         denyButton:
-          'w-full inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style '
+          'w-full inline-flex justify-center  border border-red-600 px-4 py-2 btn  text-base font-medium text-white sm:ml-3 sm:w-auto sm:text-sm custom-btn-style bg-red-600 hover:bg-transparent hover:text-red-600'
       }
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -628,7 +812,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
           buttonsStyling: false,
           customClass: {
             confirmButton:
-              'w-full inline-flex justify-center rounded-md border-none btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+              'w-full inline-flex justify-center  borde border-red-600 btn px-4 py-2  text-base font-medium text-white hover:text-red-600 hover:bg-transparent focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
           }
         }).then(async (result) => {
           if (result.isConfirmed) {
@@ -653,7 +837,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
           confirmButtonText: 'Ok',
           customClass: {
             confirmButton:
-              'w-full inline-flex justify-center rounded-md border-none btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+              'w-full inline-flex justify-center border border-red-600 btn px-4 py-2  text-base font-medium text-white hover:text-red-600 hover:bg-transparent focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
           }
         });
         // make api call
@@ -755,7 +939,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       confirmButtonText: 'Ok',
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center rounded-md border-none btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style'
+          'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600 btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style'
       }
     })
       } catch (error) {}
@@ -812,7 +996,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
             buttonsStyling: false,
             customClass: {
               confirmButton:
-                'w-full inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+                'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600 px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
             }
           });
         } else {
@@ -865,14 +1049,13 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       } else {
         EnableAddAnother();
       }
-    } else {
-    }
+    } 
     setOrderNo(index);
     
-    callAPI();
-    _Total();
-    _grandTotal();
-    _GrandTotalWithMarkup();
+    // callAPI();
+    // _Total();
+    // _grandTotal();
+    // _GrandTotalWithMarkup();
       
   };
 
@@ -890,18 +1073,20 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   };
 
   let _Total = () => {
-    // In closed order, when we change selections, it generates an error because values values are not present
-    if (query.get('active')==='new-order'){
-
     const CopyOriginal = [...values];
   
     let Total = 0;
+    if(CopyOriginal?.length){
+
     for (let i=0; i< CopyOriginal.length; i++){
+      if(CopyOriginal[i]?.data?.length){
       for (let j=0; j<CopyOriginal[i].data.length; j++){
         Total +=(CopyOriginal[i].data[j].count*CopyOriginal[i].data[j].unitPrice)
+        }
       }   
     }
     setTotal((total)=>total=Total);
+    
     }
     // return Total;
   };

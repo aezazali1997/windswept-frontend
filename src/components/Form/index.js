@@ -52,7 +52,7 @@ const From = ({
   let handleFormDisable = (value) => {
 
 
-    if (values?.line_item_id && value === false) {
+    if (values?.line_item_id && value === false && query.get('active')==='closed-order') {
       return;
     }
     let form = document.getElementById('orderForm');
@@ -294,8 +294,8 @@ const From = ({
           </div>
         </div>
         <div className="flex flex-col sm:flex-row w-full ">
-          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
-            <p className="text-center  text-sm align-top">Your Customer Markup</p>
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4   justify-start  ">
+            <p className="text-left md:text-right text-sm align-top ">Your Customer Markup</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
             <input
@@ -414,15 +414,33 @@ const From = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row w-full ">
+
+        {/* old code */}
+        {/* <div className="flex flex-col sm:flex-row w-full ">
           <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
             <p className="text-left sm:text-right text-sm align-top">Size</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
             <p className="text-sm ">{values.size}</p>
           </div>
+        </div> */}
+        {/* old code end */}
+    <div className="flex flex-col sm:flex-row w-full ">
+          <div className="flex flex-col w-full sm:w-3/12 px-3 py-4  justify-start  ">
+            <p className="text-left sm:text-right text-sm align-top">Size</p>
+          </div>
+          <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+            <input
+            
+              value={values.size}
+              disabled={true}
+              className="input border-gray-500 text-gray-600"
+              name="optionalItem"
+              type="text"
+              
+            />
+          </div>
         </div>
-
         <div className="flex flex-col sm:flex-row w-full ">
           <div className="flex flex-col w-full sm:w-3/12 px-3 py-4 justify-start">
             <p className="text-left sm:text-right text-sm align-top">Colors</p>
@@ -433,8 +451,8 @@ const From = ({
                 value={color}
                 type="text"
                 disabled={
-                  values.colors.length === 12 ||
-                  (values.colors.length < 1 && query.get('active') === 'closed-order') ||
+                  (values.colors?.length === 12 ||
+                  values.colors?.length < 1) && query.get('active') === 'closed-order' ||
                   readOnly
                     ? true
                     : false

@@ -66,9 +66,10 @@ const DashboardChart = ({ values, data, apiError, week }) => {
 											<p className="text-center font-medium">Grand Total (including markup)</p>
 										</div>  */}
                   </div>
+									
                   {  
-										data
-                    	? values.setQty.map(({ value }) =>
+										(data.length >0 && data[0].error!=='custom')
+                    	? values.setQty?.map(({ value }) =>
                         data.map(({ count, unitPrice }, index) =>
                           value === count.toString() ? (
                             <div key={index} className="flex w-full justify-center border price-sheet-container">
@@ -79,7 +80,7 @@ const DashboardChart = ({ values, data, apiError, week }) => {
                                 <p className="text-center ">{unitPrice}</p>
                               </div>
                               <div className="flex-col w-1/3">
-                                <p className="text-center ">{(unitPrice * count).toFixed(3)}</p>
+                                <p className="text-center ">{(unitPrice * count).toFixed(4)}</p>
                               </div>
                                {/* <div className="flex-col w-1/3 border">
                     						<p className="text-center ">

@@ -7,6 +7,8 @@ import Button from './button';
 import AxiosInstance from '../../APIs/axiosInstance';
 import { Spinner } from '../../components/spinner/Spinner';
 import Swal from 'sweetalert2';
+import moment from 'moment';
+import {decode as base64_decode, encode as base64_encode} from 'base-64';
 
 let useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -40,27 +42,31 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
   };
   const getData = async () => {
     if (checkFilters(filters) && searched) {
-      setSearched(false);
+      filters.date=moment(filters.date).format('D MMM YYYY')
       setIsLoading(true);
       try {
         let resp = await AxiosInstance.searchFilter(filters, 'open');
         if (resp.status === 200) {
           setOrders(resp.data);
+          setSearched(false);
         }
       } catch (error) {}
       setIsLoading(false);
-    } else {
+    } else if (!(checkFilters(filters)) && !searched) {
       setIsLoading(true);
       try {
         const res = await getAllOrders();
         if (res.status === 200) {
           setOrders(res.data);
         }
+
       } catch (error) {}
       setIsLoading(false);
     }
   };
-
+useEffect(()=>{
+  setSearched(false)
+},[1])
   // make a query to get all the open orders
   useEffect(() => {
     getData();
@@ -132,7 +138,9 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
     setSelectedOrder(undefined);
     setActiveIndex(null);
     history.push(`/dashboard?active=open-order`);
+    toggleEdit();
     getData();
+    setSearched(false);
   };
 
   if (selectedOrder) {
@@ -215,9 +223,10 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
                   cf_opportunity_status,
                   document_date,
                   opportunity_id,
-                  cf_opportunity_box_image,
                   customer_ref,
-                  id
+                  id,
+                  purchase_order,
+                  
                 } = Order['object_ref'];
                 return (
                   <div
@@ -225,7 +234,7 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
                     className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card">
                     <div className="flex flex-col w-full lg:w-1/4 py-2">
                       <img
-                        src="https://bashooka.com/wp-content/uploads/2019/04/portrait-logo-design-4.jpg"
+                        src= {`data:image/*;base64,${purchase_order}`}
                         alt="item"
                         className="object-contain w-auto h-40"
                       />
@@ -245,7 +254,12 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
                         <div className="flex flex-col lg:flex-row justify-between">
                           <div className="flex flex-row  lg:absolute lg:top-1 lg:right-1  space-x-2">
                             {localStorage.getItem('role') === 'manager' &&
-                            cf_opportunity_status === 'Pending' ? (
+                            (cf_opportunity_status === 'Sew-out scan at Factory' ||
+                            cf_opportunity_status === 'Waiting on sew-out approval' ||
+                            cf_opportunity_status === 'Revesions on sew-out' ||
+                            cf_opportunity_status === 'In Production (waiting on tracking)' ||
+                            cf_opportunity_status === 'Tracking Recieved'
+                            ) ? (
                               <>
                                 <Button
                                   label={'Approve'}
@@ -276,7 +290,7 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
                                                 ${'text-white text-sm bg-red-600 hover:bg-white hover:text-red-600 hover:border-red-600'}`}
                             />{' '}
                             {localStorage.getItem('role') === 'employee' &&
-                            cf_opportunity_status === 'Tracking Received' ? (
+                            cf_opportunity_status !== 'Artwork Approved' ? (
                               <>
                                 <Button
                                   onClick={() => {

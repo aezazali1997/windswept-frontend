@@ -2,6 +2,7 @@ import axios from "axios";
 import { deserializeItems } from '../utils/helpers';
 import { BOX_URL, BASE_URL } from '../constants/API.constant';
 
+
 class AxiosInstance {
   // proc param will be used to call specific functions on backend.
   //e.g. proc 1 will call the get open orders i.e pending or client invoiced
@@ -18,7 +19,7 @@ class AxiosInstance {
     return await axios.post(`${BASE_URL}/admin/signin`, credentials);
   }
 
-  async postOrder(data) {
+  async postOrder(data,lineItemUnitPrice,lineItemUnitCost) {
     const formData = new FormData();
     formData.append('id', localStorage.getItem('user_id'));
     formData.append('order_name', data.title);
@@ -43,11 +44,11 @@ class AxiosInstance {
         }
       }
     }
-    formData.append('item_details', JSON.stringify(deserializeItems(data.items)));
+    formData.append('item_details', JSON.stringify(deserializeItems(data.items,lineItemUnitPrice,lineItemUnitCost)));
     await axios.post(BASE_URL + '/opportunity', formData);
   }
   async getAllOrders(id) {
-    // extract the login params and pass them
+    
     return await axios.get(BASE_URL + `/opportunity?id=${id}&proc=1`);
   }
   async getClosedOrders(id) {
@@ -78,6 +79,8 @@ class AxiosInstance {
   // }
   async searchFilter(data, orderType) {
     try {
+
+    
       let id = localStorage.getItem('user_id');
       return await axios.get(
         BASE_URL + `/search?id=${id}&data=${JSON.stringify(data)}&order=${orderType}`
@@ -98,9 +101,16 @@ class AxiosInstance {
     formData.append('ship_address', data.shipAddress);
     formData.append('customer_notes', data.notes);
     formData.append('purchase_order', data.purchaseOrders);
-    formData.append('images_length', data.images.length);
-    for (let i = 0; i < data.images.length; i++) {
-      formData.append(`image${i}`, data.images[i]);
+    
+    for (let i=0; i<data.items.length; i++){
+      if ( data.items[i].images){
+        let item=`item${i}`;
+        formData.append(item+'_length',data.items[i].images.length)
+        for (let j=0; j<data.items[i].images.length; j++){
+        let image=`image${j}`;
+        formData.append(item+"_"+image,data.items[i].images[j])
+        }
+      }
     }
     formData.append('item_details', JSON.stringify(deserializeItems(data.items)));
     try {

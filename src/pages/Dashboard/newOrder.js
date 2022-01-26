@@ -8,12 +8,27 @@ import { getInputClasses } from '../../utils/helpers';
 import Button from './button';
 import { useLocation } from 'react-router-dom';
 import { Spinner } from '../../components/spinner/Spinner';
+import { useEffect } from 'react';
 
-const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityModal,setShowQuantityModal }) => {
+const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityModal,setShowQuantityModal,setShowCustomOrderModel,showCustomOrderModel }) => {
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
   const [customMarkup,setCustomMarkup] = useState(1);
+  // useEffect(()=>{
+  //   if (query.get('active')==='saved-as-draft'){
+        
+  //     const tmpData = {
+  //       title:selectedOrder?.name,
+  //       reference:selectedOrder?.customer_ref,
+  //       date: selectedOrder?.in_hands_date,
+  //       ship_address : selectedOrder?.ship_to_address,
+  //       customer_notes: selectedOrder?.customer_notes
+  //     }
+  //     formik.setStatus({...tmpData})
+  //     console.log(tmpData);
+  //   }
+  // },[1])
   
   
   let query = useQuery();
@@ -66,8 +81,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
     handleNotes,
     saveAsDraft,
     updateDraft
-  } = UseNewOrder({ readOnly,setReadOnly, selectedOrder, closeOrder,customMarkup,showQuantityModal,setShowQuantityModal });
-
+  } = UseNewOrder({ readOnly,setReadOnly, selectedOrder, closeOrder,customMarkup,showQuantityModal,setShowQuantityModal,setShowCustomOrderModel,showCustomOrderModel });
   return (
     <>
       {loading && query.get('active') === 'open-order' && <Spinner />}
@@ -287,7 +301,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                   </button>
                 </div>
                 <button
-                  disabled={readOnly ? true : false}
+                  disabled={readOnly ? true : canAddAnother ? true : false}
                   onClick={onCancleOrder}
                   type="button"
                   className={`inline-flex justify-center w-full  shadow-sm px-2 py-2 text-sm font-medium text-white focus:outline-none 	${
@@ -462,7 +476,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                 <thead>
                   <tr>
                     <td className="left-estimate-table text-right font-medium">Total:</td>
-                    <td className="left-estimate-table">{total.toFixed(2)}</td>
+                    <td className="left-estimate-table">{total ? total.toFixed(4) : (0).toFixed(4)}</td>
                   </tr>
                   <tr>
                     <td className="left-estimate-table text-right font-medium">Fee:</td>
@@ -482,21 +496,21 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                     <td className=" left-estimate-table text-right font-medium">Grand Total:</td>
                     <td className=" left-estimate-table">
                     {date === ''
-                        ? (0).toFixed(2)
+                        ? (0).toFixed(4)
                         : week < 1
-                        ? (total+total*0.75).toFixed(2)
+                        ? (total+total*0.75).toFixed(4)
                         : week >= 1 && week < 2
-                        ? (total+total*0.5).toFixed(2)
+                        ? (total+total*0.5).toFixed(4)
                         : week >= 2 && week < 3
-                        ? (total+total*0.30).toFixed(2)
-                        : total.toFixed(2)
+                        ? (total+total*0.30).toFixed(4)
+                        : total.toFixed(4)
                         }</td>
                   </tr>
                   <tr>
                     <td className=" left-estimate-table text-right font-medium">
                       Grand Total(including markup):
                     </td>
-                    <td className=" left-estimate-table">{gTotalWithMarkup.toFixed(2)}</td>
+                    <td className=" left-estimate-table">{gTotalWithMarkup ? gTotalWithMarkup.toFixed(4) : (0).toFixed(4)}</td>
                   </tr>
                 </thead>
               </table>
@@ -565,7 +579,6 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
 							</div>
 						</div> */}
 
-            {/* {console.log('errors', errors)} */}
             {values[orderNo] && errors[orderNo] && (
               <Form
                 color={color}

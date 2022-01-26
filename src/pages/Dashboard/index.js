@@ -58,6 +58,7 @@ const Dashboard = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(undefined);
+  const [showCustomOrderModel,setShowCustomOrderModel]=useState(true);
 
   useEffect(() => {
     // fetchDrafts();
@@ -144,7 +145,7 @@ const Dashboard = (props) => {
   const ActiveView = () => {
     switch (activeIndex) {
       case 'new-order':
-        return <NewOrder readOnly={false} />;
+        return <NewOrder readOnly={false} showCustomOrderModel={showCustomOrderModel} setShowCustomOrderModel={setShowCustomOrderModel} />;
       case 'open-order':
         return (
           <OpenOrder
@@ -277,7 +278,7 @@ const Dashboard = (props) => {
           <div className="text-larger md:text-sm md:ml-5 mt-3 md:mt-0">
             <p
               onClick={_ResetFilter}
-              className="font-medium text-sm text-gray-600 hover:text-red-500 hover:underline cursor-pointer">
+              className="font-medium text-sm text-gray-600 hover:text-red-600 hover:underline cursor-pointer">
               Reset
             </p>
           </div>

@@ -17,7 +17,7 @@ export const updateErrors = (originalArray, name, value, index) => {
     return abc
 }
 
-export const deserializeItems = (items)=>{
+export const deserializeItems = (items,lineItemUnitPrice,lineItemUnitCost)=>{
     
     let itemDetails=[]
     for (let i=0; i<items.length; i++){
@@ -40,8 +40,7 @@ export const deserializeItems = (items)=>{
         let size = items[i].size;
         let colors = items[i].colors;
 
-        
-        
+        // this needs to be optimise
         let unit_cost = '2.333 USD';
         let unit_price = '3.3333 USD';
         let line_item_id = items[i].line_item_id;

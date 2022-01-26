@@ -35,6 +35,7 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
         let id = localStorage.getItem('user_id');
         let res = await AxiosInstance.getClosedOrders(id);
         if (res.status === 200) {
+          console.log(res.data);
           setOrders(res.data);
           setIsLoading(false);
         }
@@ -60,6 +61,8 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
 
   let goBacktoDetail = () => {
     setSelectedOrder(undefined);
+    toggleEdit();
+    setShowQuantityModal(true);
   };
 
   let toggleEdit = () => {
@@ -127,7 +130,8 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
                   document_date,
                   cf_opportunity_status,
                   opportunity_id,
-                  id
+                  id,
+                  purchase_order
                 } = order['object_ref'];
 
                 return (
@@ -136,9 +140,8 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
                     className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card">
                     <div className="flex flex-col w-full lg:w-1/4 py-2">
                       <img
-                        src={
-                          'https://bashooka.com/wp-content/uploads/2019/04/portrait-logo-design-4.jpg'
-                        }
+                        src={`data:image/;base64,${purchase_order}`}
+                          
                         alt="item"
                         className="object-contain w-auto h-40"
                       />
