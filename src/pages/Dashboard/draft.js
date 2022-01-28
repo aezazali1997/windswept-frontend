@@ -16,6 +16,7 @@ const Draft = () => {
   }, [1]);
 
   const getDraftOrder = async () => {
+    
     setLoadingDraft(true);
     try {
       let res = await AxiosInstance.getAllDraft();
@@ -31,6 +32,7 @@ const Draft = () => {
   };
   let goBacktoDetail = () => {
     setSelectedOrder(undefined);
+    
     getDraftOrder();
   };
 
@@ -76,7 +78,7 @@ const Draft = () => {
           return (
             <div
               key={index}
-              className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card">
+              className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card w-2/4 lg:w-full">
               <div className="flex flex-col w-full lg:w-1/4 py-2">
                 <img
                   src={purchase_order?.url}

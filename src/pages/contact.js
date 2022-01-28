@@ -121,9 +121,9 @@ const Contact = () => {
                                 maxLength={500}
                                 id={'password'}
                                 name={'message'}
-                                className={`${getInputClasses(formik,
+                                className={`border border-gray-500 rounded-md ${getInputClasses(formik,
                                     "message"
-                                )} border bg-gray-50 border-gray-200 focus:outline-none shadow-md rounded-md focus:shadow-sm w-full p-3`}
+                                )} border bg-gray-50  focus:outline-none shadow-md rounded-md focus:shadow-sm w-full p-3`}
                                 placeholder="name@example.com"
                                 autoComplete="off"
                                 {...formik.getFieldProps('message')}
@@ -147,7 +147,7 @@ const Contact = () => {
                                 <div>{limit - formik.values.message.length} / {limit}</div>
                             </div>
                         </div>
-                        <div className="flex items-center justify-end">
+                        <div className="flex items-center justify-center">
                             <button type="submit" className="flex items-center text-center py-2 px-4 border border-transparent text-sm font-medium text-white hover:text-red-600 hover:border-red-600  bg-red-600 hover:bg-transparent focus:outline-none ">
                                 Submit
                                 {loading &&

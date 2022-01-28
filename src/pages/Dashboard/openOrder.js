@@ -111,9 +111,9 @@ useEffect(()=>{
       buttonsStyling: false,
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center  border border-red-600 px-4 py-2 btn  text-base font-medium text-white hover:text-red-600  focus:outline-none sm:ml-3 sm:w-auto sm:text-sm hover:bg-transparent',
+          'w-96 inline-flex justify-center  border border-red-600 px-4 py-2 btn  text-base font-medium text-white hover:text-red-600  focus:outline-none sm:ml-3 sm:w-auto sm:text-sm hover:bg-transparent',
         cancelButton:
-          'mt-3 w-full text-gray-500 hover:text-red-600 inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
+          'mt-3 w-96 text-gray-500 hover:text-red-600 inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
       }
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -231,10 +231,10 @@ useEffect(()=>{
                 return (
                   <div
                     key={index}
-                    className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card">
+                    className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card w-2/4 lg:w-full">
                     <div className="flex flex-col w-full lg:w-1/4 py-2">
                       <img
-                        src= {`data:image/*;base64,${purchase_order}`}
+                        src= {`data:image/png;base64,${purchase_order}`}
                         alt="item"
                         className="object-contain w-auto h-40"
                       />

@@ -54,6 +54,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   const [apiError, setAPIError] = useState('');
   const [showPMSModal, setShowPMSModal] = useState(false);
   const [showThreadModal, setShowThreadModal] = useState(false);
+  const [draftId,setDraftId]=useState(0);
   
   useEffect(() => {
     if (selectedOrder) {
@@ -66,15 +67,22 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
 
         date = document_date;
         notes = cf_opportunity_portal_notes;
+        setOrderImages(selectedOrder?.object_ref?.purchase_order_image);
       } else {
         items = selectedOrder.items;
-        for (let i = 0; i < items.length; i++) {
-          items[i] = items[i];
-          // JSON.parse(items[i]);
+
+        // for (let i = 0; i < items.length; i++) {
+        //   items[i] = items[i];
+        //   // JSON.parse(items[i]);
           
+        // }
+        if(query.get('active')==='saved-as-draft'){
+          setDraftId(selectedOrder.id);
         }
         date = selectedOrder.in_hands_date ? selectedOrder.in_hands_date : selectedOrder.date;
         notes = selectedOrder.customer_notes;
+        console.log("else",selectedOrder);
+
       }
       if (!isEmptyArray(items)) {
         let [product, material, backing, pe, setQty] = ['', '', '', '', ''];
@@ -125,12 +133,34 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     
           items.map((item) => {
             product = item.product;
+            if(!isEmpty(product)){
+            let updatedErrorArray = updateErrors([...errors], 'product', false, orderNo);
+              setErrors([...updatedErrorArray]);
+            }
             material = item.material;
+            if(!isEmpty(material)){
+            let updatedErrorArray = updateErrors([...errors], 'material', false, orderNo);
+              setErrors([...updatedErrorArray]);
+            }
             backing = item.backing;
+            if(!isEmpty(backing)){
+            let updatedErrorArray = updateErrors([...errors], 'backing', false, orderNo);
+              setErrors([...updatedErrorArray]);
+            }
             pe = item.percentage_embroidery;
+            if(!isEmpty(pe)){
+            let updatedErrorArray = updateErrors([...errors], 'pe', false, orderNo);
+              setErrors([...updatedErrorArray]);
+            }
             setQty = item.quantity;
+            if(setQty > 0){
+              let updatedErrorArray = updateErrors([...errors], 'qty', false, orderNo);
+              setErrors([...updatedErrorArray]);
+            }
             if (product === '' || material === '' || backing === '' || pe === '' || setQty === '') {
               DisableAddAnother();
+              let error = JSON.parse(JSON.stringify(Error));
+              
             } else {
               EnableAddAnother();
             }
@@ -143,6 +173,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
         setValues(items);
         setNotes(notes);
         setWeek(week);
+      
+          
         if(selectedOrder && values){
           callAPI(selectedOrder);
         }
@@ -151,6 +183,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       }
     }
   }, []);
+  useEffect(()=>{
+    callAPI();
+  },[orderNo])
   useEffect(() => {
     //  in case of open orders and closed orders. it created an issue which needs to be resolved
     _Total();
@@ -170,11 +205,11 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   
 
   const initialValues = {
-    title: selectedOrder?.object_ref?.cf_opportunity_item_name || selectedOrder?.title || '',
-    reference: selectedOrder?.object_ref?.customer_ref || selectedOrder?.reference || '',
+    title: selectedOrder?.object_ref?.cf_opportunity_item_name || selectedOrder?.title || selectedOrder?.name || '',
+    reference: selectedOrder?.object_ref?.customer_ref || selectedOrder?.reference || selectedOrder?.customer_ref ||  '',
     date: date || '',
     shipAddress:
-      selectedOrder?.object_ref?.cf_opportunity_ship_to_address || selectedOrder?.shipAdress || '',
+      selectedOrder?.object_ref?.cf_opportunity_ship_to_address || selectedOrder?.shipAdress || selectedOrder?.ship_to_address ||  '',
     customerNote: notes || ''
   };
 
@@ -362,7 +397,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       setQty = arrayGenerator(selectedOrder.object_ref.opp_line_items[orderNo].object_ref.unit_quantity); 
     }
     else{
-
       product=values[orderNo].product;
       material = values[orderNo].material;
       backing = values[orderNo].backing;
@@ -394,9 +428,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       };
       try {
         let res= await axiosInstance.ordereEstimate(data)
-      if( res.data[0].error){
+          if( res.data[0].error){
           if(showCustomOrderModel){
-        swal({
+            swal({
               text: 'Custom Quote will be given in 1-2 days',
               icon: 'info',
               dangerMode: true,
@@ -414,10 +448,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       else {
         setAPIError('');
             setData(res.data);
-            for (let i=0; i<values.length; i++){
-              values[i].data=res.data
-              
-            }
+            // for (let i=0; i<values.length; i++){
+            //   values[i].data=res.data
+            // }
             let unit_cost=0;
             let unit_price=0;
             for (let i=0; i< res.data.length; i++){
@@ -497,10 +530,14 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
           item.colors.push(color);
         } else if (color.includes('PMS')) {
           item.colors.push(color);
-          item.pmsColors.push(color);
+          if(!item?.line_item_id){
+            item.pmsColors.push(color);
+          }
         } else {
           item.colors.push(`PMS ${color}`);
-          item.pmsColors.push(`PMS ${color}`);
+          if(!item?.line_item_id){
+            item.pmsColors.push(color);
+          }
         }
         return item;
       });
@@ -514,10 +551,10 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     if (!readOnly) {
       let CopyOriginal = [...values];
       let colors = CopyOriginal[orderNo].colors;
-      let FilteredColors = colors.filter((color) => colors[index] !== color);
-      let updatedArray = updateValues(CopyOriginal, 'colors', FilteredColors, orderNo);
+      colors.splice(index,1);
+      let updatedArray = updateValues(CopyOriginal, 'colors', colors, orderNo);
       setValues(updatedArray);
-      handleSize(orderNo);
+      // handleSize(orderNo);
     }
   };
 
@@ -533,11 +570,15 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       setReadOnly(false);
     }
   
-    let CopyOriginalValues = [...values];
-    let CopyOriginalErrors = [...errors];
-
-    let newValueArray = [...CopyOriginalValues, {...ITEM}];
-    let newErrorArray = [...CopyOriginalErrors, {...ERROR}];
+    let CopyOriginalValues = JSON.parse(JSON.stringify(values));
+    let Item= JSON.parse(JSON.stringify(ITEM)); 
+    // [...values];
+    let CopyOriginalErrors = JSON.parse(JSON.stringify(errors));
+    //  [...errors];
+    let err =  JSON.parse(JSON.stringify(ERROR));
+  
+    let newValueArray = [...CopyOriginalValues, {...Item}];
+    let newErrorArray = [...CopyOriginalErrors, {...err}];
     setOrderNo(orderNo + 1);
     setErrors(newErrorArray);
     setValues(newValueArray);
@@ -578,6 +619,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       setErrors(currErrors);
       setValues(currValues);
     }
+    if(query.get('active')==='closed-order' && values[index-1]?.line_item_id){
+      setReadOnly(true);
+    }
   };
  
 
@@ -592,7 +636,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       buttonsStyling: false,
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
+          'w-96 inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
         cancelButton:
           'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
         }
@@ -600,6 +644,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       if(result.isConfirmed){
       if (!readOnly) {
         setOrderNo(0);
+        
         setValues([ITEM]);
         // need to Optimise it with Error as Error are false which needs to be true
         setErrors([ERROR]);
@@ -618,7 +663,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       buttonsStyling: false,
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
+          'w-96 inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
         cancelButton:
           'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
         }
@@ -646,7 +691,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       buttonsStyling: false,
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
+          'w-96 inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
         cancelButton:
           'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
         }
@@ -672,7 +717,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       buttonsStyling: false,
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
+          'w-96 inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
         cancelButton:
           'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
         }
@@ -738,9 +783,10 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       buttonsStyling: false,
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style',
+          'w-96 inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm  custom-btn-style',
         cancelButton:
           'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
+          title:'md:text-md'
         }
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -753,7 +799,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
           buttonsStyling: false,
           customClass: {
             confirmButton:
-              'w-full inline-flex justify-center btn hover:bg-transparent border border-red-600 hover:text-red-600 px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+              'w-96 inline-flex bg-red-600 justify-center border border-red-600 hover:bg-transparent  hover:text-red-600 px-4 py-2 text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
           }
         }).then(async (result) => {
           if (result.isConfirmed) {
@@ -795,9 +841,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       buttonsStyling: false,
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center border border-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style hover:bg-transparent hover:text-red-600',
+          'w-96 inline-flex justify-center border border-red-600  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style hover:bg-transparent hover:text-red-600',
         cancelButton:
-          'mt-3 w-full inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
+          'mt-3 w-96 inline-flex justify-center hover:underline  px-4 py-2 text-base font-medium text-gray-600 hover:text-red-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ',
         denyButton:
           'w-full inline-flex justify-center  border border-red-600 px-4 py-2 btn  text-base font-medium text-white sm:ml-3 sm:w-auto sm:text-sm custom-btn-style bg-red-600 hover:bg-transparent hover:text-red-600'
       }
@@ -812,7 +858,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
           buttonsStyling: false,
           customClass: {
             confirmButton:
-              'w-full inline-flex justify-center  borde border-red-600 btn px-4 py-2  text-base font-medium text-white hover:text-red-600 hover:bg-transparent focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+              'w-96 inline-flex justify-center  border border-red-600 btn px-4 py-2  text-base font-medium text-white hover:text-red-600 hover:bg-transparent focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
           }
         }).then(async (result) => {
           if (result.isConfirmed) {
@@ -823,8 +869,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
         try {
           let res = await axiosInstance.postOrder(data);
           if (query.get('active') === 'saved-as-draft') {
-            deleteFromDraft(data.id);
-            history.push('/dashboard?active=saved-as-draft');
+            deleteFromDraft(draftId);
+            setSelected(null);
           }
         } catch (error) {}
         disableLoading();
@@ -837,10 +883,10 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
           confirmButtonText: 'Ok',
           customClass: {
             confirmButton:
-              'w-full inline-flex justify-center border border-red-600 btn px-4 py-2  text-base font-medium text-white hover:text-red-600 hover:bg-transparent focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+              'w-96 inline-flex justify-center border border-red-600 btn px-4 py-2  text-base font-medium text-white hover:text-red-600 hover:bg-transparent focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
           }
         });
-        // make api call
+          saveAsDraft();
       }
     });
 
@@ -876,9 +922,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       };
       data.items.push(item);
     }
-
+      
     try {
-      await axiosInstance.updatadeDraft(data, selectedOrder.order_id);
+      await axiosInstance.updatadeDraft(data, selectedOrder.id);
       Swal.fire({
         text: 'Your draft is updated.',
         icon: 'info',
@@ -939,7 +985,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       confirmButtonText: 'Ok',
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600 btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style'
+          'w-96 inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600 btn px-4 py-2  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style'
       }
     })
       } catch (error) {}
@@ -996,7 +1042,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
             buttonsStyling: false,
             customClass: {
               confirmButton:
-                'w-full inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600 px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+                'w-96 inline-flex justify-center border border-red-600 hover:bg-transparent hover:text-red-600 px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
             }
           });
         } else {
@@ -1021,7 +1067,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
               buttonsStyling: false,
               customClass: {
                 confirmButton:
-                  'w-full inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+                  'w-96 inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
               }
             })
           : query.get('active') === 'new-order' || query.get('active') === 'saved-as-draft'
@@ -1034,6 +1080,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   let showFormDetails = (index) => {
     // serverImages=[];
     // fileArray=[];
+    // setData([]);
     if (query.get('active')==='closed-order' ){
       if( values[index]?.line_item_id){
       setReadOnly(true);
@@ -1051,8 +1098,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       }
     } 
     setOrderNo(index);
-    
-    // callAPI();
+
     // _Total();
     // _grandTotal();
     // _GrandTotalWithMarkup();
@@ -1193,7 +1239,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     upload,
     canAddAnother,
     saveAsDraft,
-    updateDraft
+    updateDraft,
+    setValues,
+    setErrors,
   };
 };
 

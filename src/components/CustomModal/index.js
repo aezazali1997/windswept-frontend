@@ -20,8 +20,8 @@ const Index = ({ _Toggle, title, body, ConfirmButton, type, onSubmit }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-gray-50 px-4 pb-3 pt-1 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button onClick={() => _Toggle()} type="button" className="mt-3 text-gray-500 hover:text-red-600 w-full inline-flex justify-center hover:underline px-4 py-2 text-base font-medium   sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    <div className="bg-gray-50 px-4 pb-3 pt-1 sm:px-6 flex flex-row-reverse justify-center">
+                        <button onClick={() => _Toggle()} type="button" className="mt-3 text-gray-500 hover:text-red-600 inline-flex justify-center hover:underline px-4 sm:py-2 text-base font-medium   sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                             Cancel
                         </button>
                         {
@@ -29,12 +29,12 @@ const Index = ({ _Toggle, title, body, ConfirmButton, type, onSubmit }) => {
                                 <button
                                     type="button"
                                     onClick={onSubmit}
-                                    className="w-full inline-flex justify-center border border-transparent px-4 py-2 bg-red-600  hover:text-red-600 hover:border-red-600  text-base font-medium text-white hover:bg-transparent focus:outline-none  sm:ml-3 sm:w-auto sm:text-sm"
+                                    className="inline-flex justify-center border border-transparent px-4 py-2 bg-red-600  hover:text-red-600 hover:border-red-600  text-base font-medium text-white hover:bg-transparent focus:outline-none  sm:ml-3 sm:w-auto sm:text-sm"
                                 >
                                     {ConfirmButton}
                                 </button>) :
                                 (
-                                    <button type="submit" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white  focus:outline-none  sm:ml-3 sm:w-auto sm:text-sm">
+                                    <button type="submit" className="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white  focus:outline-none  sm:ml-3 sm:w-auto sm:text-sm">
                                         {ConfirmButton}
                                     </button>
                                 )

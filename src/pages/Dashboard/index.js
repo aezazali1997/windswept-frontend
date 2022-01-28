@@ -113,6 +113,7 @@ const Dashboard = (props) => {
     setShowDraft(false);
     setShowOpenOrder(false);
     setShowNewOrder(true);
+    
   };
   let handleOpenOrder = (id) => {
     setActiveIndex(id);

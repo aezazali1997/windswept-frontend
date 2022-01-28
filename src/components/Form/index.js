@@ -29,25 +29,26 @@ const From = ({
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
+  
   const query = useQuery();
   let { product, material, pe, backing, qty } = errors;
-  if (values) {
-    if (values.product) {
-      product = false;
-    }
-    if (values.material) {
-      material = false;
-    }
-    if (values.pe) {
-      pe = false;
-    }
-    if (values.backing) {
-      backing = false;
-    }
-    if (values.setQty.length > 0) {
-      qty = false;
-    }
-  }
+  // if (values) {
+  //   if (values.product) {
+  //     product = false;
+  //   }
+  //   if (values.material) {
+  //     material = false;
+  //   }
+  //   if (values.pe) {
+  //     pe = false;
+  //   }
+  //   if (values.backing) {
+  //     backing = false;
+  //   }
+  //   if (values.setQty.length > 0) {
+  //     qty = false;
+  //   }
+  // }
 
   let handleFormDisable = (value) => {
 
@@ -263,7 +264,8 @@ const From = ({
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-1">
             <MultiSelect
-              disabled={readOnly ? (query.get('active') === 'closed-order' ? true : false) : false}
+              disabled={readOnly ? true : false }
+
               className={`multi border ${qty ? 'border-red-500' : 'border-gray-500 '}`}
               value={values.setQty}
               options={multiQty}
@@ -468,7 +470,7 @@ const From = ({
                 type="button"
                 disabled={
                   values.colors.length === 12 ||
-                  (values.colors.length < 1 && query.get('active') === 'closed-order') ||
+                  (values.colors.length < 1 && query.get('active') === 'closed-order' && values?.line_item_id) ||
                   readOnly
                     ? true
                     : false
@@ -476,8 +478,8 @@ const From = ({
                 onClick={handleColors}
                 className={`text-white  p-2 w-1/4
                   ${
-                    values.colors.length < 1 && query.get('active') === 'closed-order'
-                      ? 'bg-red-500 cursor-default'
+                    ((values.colors.length < 1 && query.get('active') === 'closed-order' && values?.line_item_id) || values.colors.length === 12 )
+                      ? 'bg-red-400 cursor-default'
                       : 'bg-red-600 hover:bg-transparent text-white hover:text-red-600 border border-red-600'
                   }`}>
                 <p className="font-medium text-sm">
@@ -491,15 +493,15 @@ const From = ({
                 type="button"
                 disabled={
                   values.colors.length === 12 ||
-                  (values.colors.length < 1 && query.get('active') === 'closed-order') ||
+                  (values.colors.length < 1 && query.get('active') === 'closed-order' && values?.line_item_id) ||
                   readOnly
                     ? true
                     : false
                 }
-                className={`inline-flex  justify-center w-full border-r border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white  focus:outline-none
+                className={` inline-flex  justify-center w-full border-r border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white  focus:outline-none
                   ${
-                    values.colors.length < 1 && query.get('active') === 'closed-order'
-                      ? 'bg-red-500 cursor-default'
+                    ((values.colors.length < 1 && query.get('active') === 'closed-order' && values?.line_item_id) || values.colors.length === 12)
+                      ? 'bg-red-400 cursor-default'
                       : 'bg-red-600 hover:bg-transparent text-white hover:text-red-600  border border-white hover:border-red-600'
                   }
                   `}>
@@ -517,8 +519,8 @@ const From = ({
                 }
                 className={`inline-flex justify-center w-full  border-gray-300 shadow-sm px-2 py-2 text-sm text-white font-medium  focus:outline-none
                   ${
-                    values.colors.length < 1 && query.get('active') === 'closed-order'
-                      ? 'bg-red-500 cursor-default'
+                    ((values.colors.length < 1 && query.get('active') === 'closed-order' && values?.line_item_id ) || values.colors.length === 12)
+                      ? 'bg-red-400 cursor-default'
                       : 'bg-red-600 hover:bg-transparent text-white hover:text-red-600  border border-white hover:border-red-600'
                   }
                       `}>

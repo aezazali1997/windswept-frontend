@@ -9,26 +9,14 @@ import Button from './button';
 import { useLocation } from 'react-router-dom';
 import { Spinner } from '../../components/spinner/Spinner';
 import { useEffect } from 'react';
+import {ERROR,ITEM,Error,Item} from '../../constants/Order.constants'
 
 const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityModal,setShowQuantityModal,setShowCustomOrderModel,showCustomOrderModel }) => {
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
   const [customMarkup,setCustomMarkup] = useState(1);
-  // useEffect(()=>{
-  //   if (query.get('active')==='saved-as-draft'){
-        
-  //     const tmpData = {
-  //       title:selectedOrder?.name,
-  //       reference:selectedOrder?.customer_ref,
-  //       date: selectedOrder?.in_hands_date,
-  //       ship_address : selectedOrder?.ship_to_address,
-  //       customer_notes: selectedOrder?.customer_notes
-  //     }
-  //     formik.setStatus({...tmpData})
-  //     console.log(tmpData);
-  //   }
-  // },[1])
+
   
   
   let query = useQuery();
@@ -80,11 +68,23 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
     canAddAnother,
     handleNotes,
     saveAsDraft,
+    setErrors,
+    setValues,
     updateDraft
   } = UseNewOrder({ readOnly,setReadOnly, selectedOrder, closeOrder,customMarkup,showQuantityModal,setShowQuantityModal,setShowCustomOrderModel,showCustomOrderModel });
+
+  useEffect(()=>{
+    if (query.get('active')==='new-order' ){
+      let copyItem= JSON.parse(JSON.stringify(Item));
+      let copyError = JSON.parse(JSON.stringify(Error));
+        setValues([copyItem]);
+        setErrors([copyError]);
+    }
+  },[1])
+
   return (
     <>
-      {loading && query.get('active') === 'open-order' && <Spinner />}
+          {loading && query.get('active') === 'open-order' && <Spinner />}
       <form onSubmit={formik.handleSubmit} className="form" noValidate="novalidate">
         <div className="flex flex-col justify-center items-center">
           <h1 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-light mb-10">
@@ -256,7 +256,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                   className={`inline-flex 
 									${
                     readOnly
-                      ? 'bg-red-500 cursor-default'
+                      ? 'bg-red-400 cursor-default'
                       : canAddAnother
                       ? 'bg-red-500 cursor-default'
                       :'bg-red-600 border hover:bg-transparent hover:text-red-600 hover:border-red-600'
@@ -274,18 +274,21 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                     type="button"
                     onClick={query.get('active') !== 'saved-as-draft' ? saveAsDraft : updateDraft}
                     className=" inline-flex bg-red-600 hover:bg-transparent justify-center w-full border border-white hover:border-red-600 shadow-sm px-2 py-2 text-sm font-medium text-white hover:text-red-600 focus:outline-none ">
+
+
                     {query.get('active') === 'saved-as-draft' ? 'Update Draft' : 'Save as Draft'}
                   </button> : '' 
                   } 
                     
                   
                   <button
-                    disabled={  false }
+                    disabled={ readOnly}
                     type="submit"
                     className={`inline-flex justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white 
-                    ${  
-                       'bg-red-600 hover:bg-transparent focus:outline-none border border-white hover:border-red-600 text-white hover:text-red-600'  
+                    ${ 
+                       '  focus:outline-none border  text-white '  
                     }
+                    ${readOnly ? 'bg-red-400 cursor-default ' : 'bg-red-600 hover:bg-transparent hover:text-red-600 border-white hover:border-red-600'}
                     
                     `}  
                     >
@@ -315,11 +318,14 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                 </button>
               </div>
             </div>
+            
+            
+            
             <div
               className={`flex flex-row w-full px-3 mt-6 mb-6 sm:w-2/3 space-x-2 ${
-                orderImages === '' ? 'justify-center' : 'justify-start'
+                 orderImages === '' ? 'justify-center' : 'justify-start'
               }`}>
-              <div className={`flex flex-row ${orderImages === '' ? '' : 'w-full'}`}>
+              <div className={`flex flex-row ${orderImages === ''  ? '' : 'w-full'}`}>
                 <input
                   type="file"
                   accept="image/*"
@@ -328,6 +334,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                   onChange={onChangeOrderFile}
                 />
                 <Button
+                disabled={readOnly}
                   type="button"
                   onClick={OrderUploadClick}
                   label={
@@ -348,8 +355,8 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                       </svg>
                     </>
                   }
-                  classNames={`p-2 w-auto flex items-center border hover:border-red-600 text-white hover:text-red-600  bg-red-600 hover:bg-transparent '
-                   `}
+                  classNames={`p-2 w-auto flex items-center text-white  border border-red-600 text-white ${readOnly ? 'bg-red-400 cursor-default' : 'bg-red-600 hover:text-red-600  hover:bg-transparent'} `
+                   }
                 />
               </div>
               <div
@@ -359,10 +366,12 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                     : 'flex  border pr-1 relative border-red-600 rounded-md p-1 w-full h-auto items-center'
                 }`}>
                 <p className="flex justify-between w-full">
-                  {orderImages?.name}
+                  {orderImages?.name || selectedOrder?.object_ref?.purchase_order_name}
                   <svg
-                    onClick={() => handleRemoveOrderImg()}
-                    className="w-6 h-6 rounded-md cursor-pointer hover:shadow-lg z-50"
+                    onClick={() => {
+                      
+                      handleRemoveOrderImg()}}
+                    className={`w-6 h-6 rounded-md hover:shadow-lg z-50 ${readOnly ? 'cursor-default' : 'cursor-pointer'}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -378,14 +387,14 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
               </div>
             </div>
 
-            <div id="image-container" className="flex flex-col w-full px-3 py-4 sm:w-2/3 border border-solid transition duration-300 rounded-md space-y-3">
+            <div id="image-container" className="flex flex-col w-80 px-3 py-4 sm:w-2/3 border border-solid transition duration-300 rounded-md space-y-3">
               <div
                 className={`${
-                  isEmpty(values[orderNo].blobImages) !== true
+                  isEmpty(values[orderNo]?.blobImages) !== true
                     ? 'grid grid-cols-3 sm:grid-cols-4 gap-2'
                     : 'flex justify-center'
                 } w-full`}>
-                {!isEmpty(values[orderNo].blobImages) ? (
+                {!isEmpty(values[orderNo]?.blobImages) ? (
                   values[orderNo].blobImages.map((image, index) => (
                     <div key={index} className="relative">
                       <img src={image} alt="img" className="w-30 h-30 rounded-lg object-cover" />
@@ -438,7 +447,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                 />
                 <Button
                   type="button"
-                  disabled={false}
+                  disabled={readOnly}
                   onClick={handleClick}
                   label={
                     <>
@@ -458,9 +467,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                       </svg>
                     </>
                   }
-                  classNames={`p-2 w-auto flex mb-8 items-center border hover:border-red-600 bg-red-600 hover:bg-transparent text-white hover:text-red-600  
-                    '
-                    `}
+                  classNames={`p-2 w-auto flex mb-8 items-center border text-white ${!readOnly ? 'hover:border-red-600 bg-red-600 hover:bg-transparent  hover:text-red-600' : 'bg-red-400 cursor-default' } `}
                 />
               </div>
             </div>
@@ -469,7 +476,6 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
               <DashboardChart
                 data={data}
                 apiError={apiError}
-                values={values[orderNo]}
                 week={week}
               />
               <table className="mt-10 md:mt-0 mx-auto">

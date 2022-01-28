@@ -33,11 +33,11 @@ function App() {
       icon: 'question',
       showCancelButton: true,
       cancelButtonText: 'No',
-      confirmButtonText: 'Logout',
+      confirmButtonText: 'Yes',
       buttonsStyling: false,
       customClass: {
         confirmButton:
-          'w-full inline-flex justify-center border  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style hover:text-red-600 hover:bg-transparent hover:border-red-600',
+          'w-96 inline-flex justify-center border  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style hover:text-red-600 hover:bg-transparent hover:border-red-600',
         cancelButton:
           'mt-3 w-full inline-flex justify-center hover:underline cursor-pointer px-4 py-2 text-sm font-medium text-gray-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm hover:underline hover:text-red-500',   
         }

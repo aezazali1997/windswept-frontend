@@ -36,8 +36,8 @@ const NavDropdown = ({ isOpen, toggle, handleLogout }) => {
                     <div>
                         <button type="button" onClick={handleLogout}
                             className="p-4 self-end 
-                        uppercase font-sans text-center py-2 px-4 w-44 border border-transparent text-sm font-medium
-                        rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none"
+                        uppercase font-sans text-center py-2 px-4 w-44  text-sm font-sm
+                         text-black"
                         >
                             Logout
                         </button>
