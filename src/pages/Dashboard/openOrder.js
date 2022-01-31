@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
 import NewOrder from './newOrder';
 import { useLocation, useHistory } from 'react-router-dom';
@@ -8,7 +8,8 @@ import AxiosInstance from '../../APIs/axiosInstance';
 import { Spinner } from '../../components/spinner/Spinner';
 import Swal from 'sweetalert2';
 import moment from 'moment';
-import {decode as base64_decode, encode as base64_encode} from 'base-64';
+import imgPlaceHolder from '../../assets/place.png'
+// import {decode as base64_decode, encode as base64_encode} from 'base-64';
 
 let useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -22,8 +23,8 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [Orders, setOrders] = useState([]);
-  const [images, setImages] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(null);
+  // const [images, setImages] = useState([]);
+  // const [activeIndex, setActiveIndex] = useState(null);
   const [readOnly, setReadOnly] = useState(true);
 
   let tempOrders = [];
@@ -77,13 +78,13 @@ useEffect(()=>{
       let Order = Orders.filter((Order) => Order[index]);
       if (!isEmpty(Order)) {
         setSelectedOrder(Order);
-        setActiveIndex((activeIndex) => (activeIndex = index));
+        // setActiveIndex((activeIndex) => (activeIndex = index));
       }
     }
   }, []);
 
   let handleDetails = (order, index) => {
-    setActiveIndex(index);
+    // setActiveIndex(index);
     setSelectedOrder(order);
     history.push(`/dashboard?active=open-order&item=${index}`);
   };
@@ -94,7 +95,7 @@ useEffect(()=>{
   const handleApprove = async (index, ref) => {
     setIsDeleting(true);
     try {
-      let res = await AxiosInstance.approveOrder(ref);
+       await AxiosInstance.approveOrder(ref);
       setIsDeleting(false);
     } catch (error) {
       console.log(error);
@@ -136,7 +137,7 @@ useEffect(()=>{
 
   let goBacktoDetail = async () => {
     setSelectedOrder(undefined);
-    setActiveIndex(null);
+    // setActiveIndex(null);
     history.push(`/dashboard?active=open-order`);
     toggleEdit();
     getData();
@@ -219,10 +220,9 @@ useEffect(()=>{
               Orders.map((Order, index) => {
                 let {
                   cf_opportunity_item_name,
-                  allow_edit,
+
                   cf_opportunity_status,
                   document_date,
-                  opportunity_id,
                   customer_ref,
                   id,
                   purchase_order,
@@ -234,7 +234,7 @@ useEffect(()=>{
                     className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card w-2/4 lg:w-full">
                     <div className="flex flex-col w-full lg:w-1/4 py-2">
                       <img
-                        src= {`data:image/png;base64,${purchase_order}`}
+                        src= { purchase_order ? ` data:image/png;base64,${purchase_order}`: 'https://res.cloudinary.com/portfoliov1mushaaf/image/upload/v1643627467/windswept/place-holder_q2ksof.png'}
                         alt="item"
                         className="object-contain w-auto h-40"
                       />

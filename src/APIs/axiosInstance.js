@@ -1,12 +1,15 @@
 import axios from "axios";
 import { deserializeItems } from '../utils/helpers';
-import { BOX_URL, BASE_URL } from '../constants/API.constant';
-
-
+import { BASE_URL } from '../constants/API.constant';
+import imgPlaceHolder from '../assets/place.png'
+import {} from 'base-64'
+import {fs} from 'fs'
+;
 class AxiosInstance {
   // proc param will be used to call specific functions on backend.
   //e.g. proc 1 will call the get open orders i.e pending or client invoiced
   // e.g. proc 2 will get closed orders i.e. delivered
+ 
   async ordereEstimate(payload) {
     return await axios.post(`${BASE_URL}/wimpie`, payload);
   }
@@ -20,6 +23,19 @@ class AxiosInstance {
   }
 
   async postOrder(data,lineItemUnitPrice,lineItemUnitCost) {
+    if((typeof data.purchaseOrders)==='string'){
+      console.log("image does not exists");
+      console.log(imgPlaceHolder)
+      const toDataURL = url => fetch(url)
+      .then(response => response.blob())
+      .then(blob => new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onloadend = () => resolve(reader.result)
+      reader.onerror = reject
+      reader.readAsDataURL(blob)
+     }))
+
+    }
     const formData = new FormData();
     formData.append('id', localStorage.getItem('user_id'));
     formData.append('order_name', data.title);
@@ -151,6 +167,7 @@ class AxiosInstance {
     return await axios.delete(`${BASE_URL}/draft?id=${id}`);
   }
   async updatadeDraft(data, id) {
+    console.log(data);
     const formData = new FormData();
     formData.append('order_id', id);
     formData.append('name', data.title);
@@ -160,7 +177,7 @@ class AxiosInstance {
     formData.append('ship_to_address', data.shipAddress);
     formData.append('items', JSON.stringify(data.items));
     formData.append('purchase_order', data.purchaseOrders);
-    for (let i=0; i<data.items.length; i++){
+ /*    for (let i=0; i<data.items.length; i++){
       if ( data.items[i].images){
         let item=`item${i}`;
         formData.append(item+'_length',data.items[i].images.length)
@@ -169,7 +186,7 @@ class AxiosInstance {
         formData.append(item+"_"+image,data.items[i].images[j])
         }
       }
-    }
+    } */
     try {
       return await axios.put(`${BASE_URL}/draft`, formData);
     } catch (error) {}

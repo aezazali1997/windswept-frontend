@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { isEmpty } from 'lodash';
 import NewOrder from './newOrder';
 import Button from './button';
+// import placeHolderImage from '../'
+// load the image
+//  convert it into file
+// if no image is sent to the draft then sent this image
+// if no image is present in update then sent this image
 import AxiosInstance from '../../APIs/axiosInstance';
 import { Spinner } from '../../components/spinner/Spinner';
 const ClosedOrder = ({ filters, searched, setSearched }) => {
@@ -35,7 +40,6 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
         let id = localStorage.getItem('user_id');
         let res = await AxiosInstance.getClosedOrders(id);
         if (res.status === 200) {
-          console.log(res.data);
           setOrders(res.data);
           setIsLoading(false);
         }
@@ -141,7 +145,7 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
                     className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card w-2/4 lg:w-full">
                     <div className="flex flex-col w-full lg:w-1/4 py-2">
                       <img
-                        src={`data:image/;base64,${purchase_order}`}
+                        src={purchase_order ? `data:image/;base64,${purchase_order}` : 'https://res.cloudinary.com/portfoliov1mushaaf/image/upload/v1643627467/windswept/place-holder_q2ksof.png'}
                           
                         alt="item"
                         className="object-contain w-auto h-40"

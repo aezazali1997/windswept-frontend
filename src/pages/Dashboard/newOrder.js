@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import React,{useState} from 'react';
+import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import { InfoSVG } from '../../assets/SVGs';
 import { DashboardChart, Form } from '../../components';
@@ -9,13 +9,13 @@ import Button from './button';
 import { useLocation } from 'react-router-dom';
 import { Spinner } from '../../components/spinner/Spinner';
 import { useEffect } from 'react';
-import {ERROR,ITEM,Error,Item} from '../../constants/Order.constants'
+import {Error,Item} from '../../constants/Order.constants'
 
 const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityModal,setShowQuantityModal,setShowCustomOrderModel,showCustomOrderModel }) => {
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
-  const [customMarkup,setCustomMarkup] = useState(1);
+  
 
   
   
@@ -23,7 +23,6 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
 
   const {
     _onBlur,
-    setGrandTotal,
     _onFocus,
     showFormDetails,
     onCancleOrder,
@@ -47,11 +46,10 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
     date,
     week,
     total,
-    grandTotal,
     gTotalWithMarkup,
     loading,
-    images,
     orderImages,
+    setOrderImages,
     apiError,
     showPMSModal,
     showThreadModal,
@@ -63,15 +61,13 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
     orderNo,
     orderUpload,
     upload,
-    EnableAddAnother,
-    DisableAddAnother,
     canAddAnother,
-    handleNotes,
+    setCanAnother,
     saveAsDraft,
     setErrors,
     setValues,
     updateDraft
-  } = UseNewOrder({ readOnly,setReadOnly, selectedOrder, closeOrder,customMarkup,showQuantityModal,setShowQuantityModal,setShowCustomOrderModel,showCustomOrderModel });
+  } = UseNewOrder({ readOnly,setReadOnly, selectedOrder, closeOrder,showQuantityModal,setShowQuantityModal,setShowCustomOrderModel,showCustomOrderModel });
 
   useEffect(()=>{
     if (query.get('active')==='new-order' ){
@@ -81,6 +77,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
         setErrors([copyError]);
     }
   },[1])
+
 
   return (
     <>
@@ -221,7 +218,9 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                                     </div>
                                   </div>
                                 </div>
-                                <div
+                                {
+                                  query.get('active')==='new-order' ? 
+                                   <div
                                   onClick={() => removeItem(index)}
                                   className="flex flex-col w-1/12 px-5 cursor-pointer">
                                   <svg
@@ -240,6 +239,9 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                                     />
                                   </svg>
                                 </div>
+                                : null
+                                }
+                               
                               </div>
                             ))
                           : ''}
@@ -250,15 +252,14 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
               </div>
               <div className="flex flex-col w-full ">
                 <button
-                  disabled={readOnly ? true : canAddAnother}
+                  disabled={readOnly  ? true : ((query.get('active')==='closed-order')
+                   && (query.get('active')==='open-order')) ? true : canAddAnother}
                   onClick={addAnother}
                   type="button"
                   className={`inline-flex 
 									${
-                    readOnly
-                      ? 'bg-red-400 cursor-default'
-                      : canAddAnother
-                      ? 'bg-red-500 cursor-default'
+                    readOnly || ((query.get('active')==='closed-order') || (query.get('active')==='open-order')) || canAddAnother ?
+                       'bg-red-400 cursor-default'
                       :'bg-red-600 border hover:bg-transparent hover:text-red-600 hover:border-red-600'
                       
                   }
@@ -366,7 +367,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                     : 'flex  border pr-1 relative border-red-600 rounded-md p-1 w-full h-auto items-center'
                 }`}>
                 <p className="flex justify-between w-full">
-                  {orderImages?.name || selectedOrder?.object_ref?.purchase_order_name}
+                  {orderImages ? orderImages.name : selectedOrder?.object_ref?.purchase_order_name}
                   <svg
                     onClick={() => {
                       
@@ -603,8 +604,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                 handleThreadModal={handleThreadModal}
                 handleChange={_HandleChange}
                 filterOptions={filterOptions}
-                markup={customMarkup}
-                setmarkup={setCustomMarkup}
+
               />
             )}
             {/* <div className="flex flex-col sm:flex-row">

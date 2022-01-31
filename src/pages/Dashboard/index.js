@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+// import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 // import _ from 'lodash';
 import { Helmet } from 'react-helmet';
@@ -11,10 +11,10 @@ import Draft from './draft';
 import ReactTooltip from "react-tooltip";
 import { CustomModal, SearchFilters } from '../../components';
 import { InfoSVG } from '../../assets/SVGs';
-import moment from 'moment';
-import { useSelector } from 'react-redux';
-import { isEmpty } from 'lodash';
-import axiosInstance from '../../APIs/axiosInstance';
+// import moment from 'moment';
+// import { useSelector } from 'react-redux';
+// import { isEmpty } from 'lodash';
+// import axiosInstance from '../../APIs/axiosInstance';
 
 let useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -23,7 +23,7 @@ let useQuery = () => {
 const Dashboard = (props) => {
   let query = useQuery();
   const [orderType, setOrderType] = useState('open');
-  const [isDraftpresent, setIsDraftPresent] = useState(false);
+  // const [isDraftpresent, setIsDraftPresent] = useState(false);
 
   const filter = {
     date: '',
@@ -43,9 +43,9 @@ const Dashboard = (props) => {
   //   } catch (error) {}
   // };
 
-  const drafts = useSelector(({ order: { draft } }) => draft);
+  // const drafts = useSelector(({ order: { draft } }) => draft);
 
-  const [color, setColor] = useState('');
+  // const [color, setColor] = useState('');
   const [colors, setColors] = useState([]);
   const [showNewOrder, setShowNewOrder] = useState(true);
   const [showOpenOrder, setShowOpenOrder] = useState(false);
@@ -60,16 +60,16 @@ const Dashboard = (props) => {
   const [selectedOrder, setSelectedOrder] = useState(undefined);
   const [showCustomOrderModel,setShowCustomOrderModel]=useState(true);
 
-  useEffect(() => {
-    // fetchDrafts();
-    if (query.get('active') === null) {
-      props.history.push(`/dashboard?active=${activeIndex}`);
-      setActiveIndex(activeIndex);
-    } else {
-      const active = query.get('active');
-      setActiveIndex(active);
-    }
-  }, [colors, activeIndex, drafts]);
+  // useEffect(() => {
+  //   // fetchDrafts();
+  //   if (query.get('active') === null) {
+  //     props.history.push(`/dashboard?active=${activeIndex}`);
+  //     setActiveIndex(activeIndex);
+  //   } else {
+  //     const active = query.get('active');
+  //     setActiveIndex(active);
+  //   }
+  // }, [activeIndex]);
 
   let _ToggleModal = () => {
     setShowSearchModal(!showSearchModal);

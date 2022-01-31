@@ -2,7 +2,6 @@
 import { useFormik } from "formik";
 import React, {  useState } from "react";
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import { InputField } from "../components";
 import { ContactFormSchema } from "../utils/validation_schema";
 import { getInputClasses } from "../utils/helpers";
@@ -16,15 +15,15 @@ const initialValues = {
 
 const Contact = () => {
     const [loading, setLoading] = useState(false);
-    const [limit, setLimit] = useState(500);
+    let limit=500;
 
     const enableLoading = () => {
         setLoading(true);
     };
 
-    const disableLoading = () => {
-        setLoading(false);
-    };
+    // const disableLoading = () => {
+    //     setLoading(false);
+    // };
 
     const formik = useFormik({
         initialValues,

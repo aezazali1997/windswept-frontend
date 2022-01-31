@@ -35,7 +35,11 @@ const Modal = ({ handleModal, title, schema, setColor }) => {
                       schema.map(({ colorNo, colorName, colorCode }, index) => (
                         <div
                           key={index}
-                          onClick={() => (_SelectColor(colorNo, colorName), handleModal())}
+                          onClick={() => 
+                          {
+                          _SelectColor(colorNo, colorName);
+                           handleModal()
+                          }}
                           className="w-24 h-28 bg-white flex flex-col cursor-pointer hover:shadow-md">
                           <div className="flex text-sm w-full justify-evenly">{colorNo}</div>
                           <div className="flex text-sm w-full justify-evenly">{colorName}</div>

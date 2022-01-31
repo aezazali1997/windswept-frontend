@@ -8,7 +8,9 @@ import { updateErrors, updateValues } from '../utils/helpers';
 import axiosInstance from '../APIs/axiosInstance';
 import Swal from 'sweetalert2';
 import swal from 'sweetalert';
-import { useHistory } from 'react-router-dom';
+import imgPlaceHolder from '../assets/place.png'
+
+// import { useHistory } from 'react-router-dom';
 import { OrderFormSchema } from '../utils/validation_schema';
 import { useLocation } from 'react-router-dom';
 import { Error,ERROR,ITEM,Item } from '../constants/Order.constants';
@@ -20,25 +22,25 @@ import '../styles/custom-style.css';
 import { getpercentage } from '../utils/percentageCalculator';
 import { arrayGenerator } from '../utils/arrayGenerator';
 
-let fileArray = [];
-let serverImages=[];
+// let fileArray = [];
+// let serverImages=[];
 let fileObj = null;
 
-const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,showQuantityModal,setShowQuantityModal,setShowCustomOrderModel,showCustomOrderModel }) => {
+const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModal,setShowQuantityModal,setShowCustomOrderModel,showCustomOrderModel }) => {
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
   const query = useQuery();
-  const history = useHistory();
+  // const history = useHistory();
 
   const [loading, setLoading] = useState(false);
   const [canAddAnother, setCanAnother] = useState(true);
   const [orderNo, setOrderNo] = useState(0);
   const [date, setDate] = useState('');
-  const [week, setWeek] = useState(0);
+  const [week, setWeek] = useState(36);
 
   const [images, setImages] = useState([]);
-  const [ImageFiles, setImageFiles] = useState([]);
+  // const [ImageFiles, setImageFiles] = useState([]);
   const [orderImages, setOrderImages] = useState('');
   const [selected, setSelected] = useState([]);
   const [color, setColor] = useState('');
@@ -64,16 +66,27 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
         let { document_date, cf_opportunity_portal_notes, opp_line_items } =
           selectedOrder['object_ref'];
         items = opp_line_items;
+         for (let i=1; i<items.length; i++){
+              let tmp=errors
+              tmp.push({...Error})
+              setErrors([...tmp])
+          }
 
         date = document_date;
         notes = cf_opportunity_portal_notes;
         setOrderImages(selectedOrder?.object_ref?.purchase_order_image);
       } else {
         items = selectedOrder.items;
+         for (let i=1; i<items.length; i++){
+              let tmp=errors
+              tmp.push({...Error})
+              setErrors([...tmp])
+          }
+        
 
         // for (let i = 0; i < items.length; i++) {
         //   items[i] = items[i];
-        //   // JSON.parse(items[i]);
+        // //   // JSON.parse(items[i]);
           
         // }
         if(query.get('active')==='saved-as-draft'){
@@ -81,7 +94,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
         }
         date = selectedOrder.in_hands_date ? selectedOrder.in_hands_date : selectedOrder.date;
         notes = selectedOrder.customer_notes;
-        console.log("else",selectedOrder);
 
       }
       if (!isEmptyArray(items)) {
@@ -122,13 +134,13 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
               EnableAddAnother();
             }
             setDate(date);
-            setErrors([...errors,Error])
+            
           });
           items = deserializeApiResponse(items);
           for (let i = 0; i < items.length; i++) {
             setSelected([...items[i].setQty]);
           }
-          
+         
         } else {
     
           items.map((item) => {
@@ -167,8 +179,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
             setDate(date);
           });
           items = deserializeDraftResponse(items);
-          
         }
+        
 
         setValues(items);
         setNotes(notes);
@@ -190,16 +202,17 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     //  in case of open orders and closed orders. it created an issue which needs to be resolved
     _Total();
     return ()=> setTotal(0);
-  }, [values]);
+  }, [data]);
+
   
     useEffect(()=>{
     _grandTotal();
     return ()=>setGrandTotal(0);
-  },[total])
+  },[total,week])
   useEffect(()=>{
  _GrandTotalWithMarkup();
  return ()=>setGrandTotalWithMarkup(0);
-  },[grandTotal,customMarkup])
+  },[grandTotal,week,values[orderNo].markup])
 
      
   
@@ -293,9 +306,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   };
 
   const _HandleChange = (e, index) => {
+    
 
     const { name, value, checked } = e.target;
-
     const NewArray = [...values];
     const NewErrors = [...errors];
     let updatedErrorArray = [];
@@ -313,6 +326,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
         updatedArray = updateValues(NewArray, name, value, index);
         setErrors([...updatedErrorArray]);
         setValues([...updatedArray]);
+        
         
         callAPI();
       }
@@ -448,9 +462,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       else {
         setAPIError('');
             setData(res.data);
-            // for (let i=0; i<values.length; i++){
-            //   values[i].data=res.data
-            // }
+            for (let i=0; i<values.length; i++){
+              values[i].data=res.data
+            }
             let unit_cost=0;
             let unit_price=0;
             for (let i=0; i< res.data.length; i++){
@@ -485,7 +499,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   };
   const deleteFromDraft = async (id) => {
     try {
-      let res = await axiosInstance.deleteFromDraft(id);
+       await axiosInstance.deleteFromDraft(id);
     } catch (error) {
       console.log(error);
     }
@@ -506,7 +520,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
       updatedErrorArray = updateErrors(NewErrors, 'qty', false, orderNo);
       setErrors([...updatedErrorArray]);
     }
-    let value = argValues.filter(({ value }) => value);
+    // let value = argValues.filter(({ value }) => value);
     setSelected(argValues);
     let updatedArray = updateValues(values, 'setQty', argValues, orderNo);
     const { product, material, backing, pe, setQty } = updatedArray[orderNo];
@@ -591,8 +605,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     
     // this working
     // upload.current.files=null
-    fileArray=[];
-    serverImages=[]
+    // fileArray=[];
+    // serverImages=[]
     
     
   };
@@ -892,17 +906,48 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
 
     }    
   };
+  const toDataURL = url => fetch(url)
+      .then(response => response.blob())
+      .then(blob => new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onloadend = () => resolve(reader.result)
+      reader.onerror = reject
+      reader.readAsDataURL(blob)
+     }))
+
+  function dataURLtoFile(dataurl, filename) {
+     var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+     bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+     while(n--){
+     u8arr[n] = bstr.charCodeAt(n);
+     }
+   return new File([u8arr], filename, {type:mime});
+  }
   const updateDraft = async () => {
+    let DataUrl=null;
+    let file=null;
+      let url = 'https://res.cloudinary.com/portfoliov1mushaaf/image/upload/v1643627467/windswept/place-holder_q2ksof.png'
     const data = {
       title: formik.values.title,
       reference: formik.values.reference,
       date,
       notes: formik.values.customerNote,
-      purchaseOrders: orderImages,
       shipAddress: formik.values.shipAddress,
       items: [],
     };
-    for (let i = 0; i < values.length; i++) {
+
+    if (orderImages===''){
+      const dataUrl=await toDataURL(url)
+      DataUrl=dataUrl
+      file = dataURLtoFile(dataUrl, "default.jpg");
+      console.log(file)
+      data.purchaseOrders=file
+    }
+    else{
+      data.purchaseOrders=orderImages
+    }
+    
+        for (let i = 0; i < values.length; i++) {
       let item = {
         item_id: values[i].item_id,
         product: values[i].product,
@@ -945,15 +990,28 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     }
   };
   const saveAsDraft = async () => {
-    const data = {
+    console.log("saved as draft called");
+      let DataUrl=null;
+    let file=null;
+      let url = 'https://res.cloudinary.com/portfoliov1mushaaf/image/upload/v1643627467/windswept/place-holder_q2ksof.png'
+      const data = {
         title: formik.values.title,
         reference: formik.values.reference,
         date,
         notes: formik.values.customerNote,
-        purchaseOrders: orderImages,
         shipAddress: formik.values.shipAddress,
         items: []
       };
+     if (orderImages===''){
+      const dataUrl=await toDataURL(url)
+      DataUrl=dataUrl
+      file = dataURLtoFile(dataUrl, "default.jpg");
+      data.purchaseOrders=file
+    }
+    else{
+      data.purchaseOrders=orderImages
+    }
+
       for (let i = 0; i < values.length; i++) {
         let item = {
           product: values[i].product,
@@ -1119,15 +1177,13 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
   };
 
   let _Total = () => {
-    const CopyOriginal = [...values];
-  
+    const copyOriginal =  [...values];
     let Total = 0;
-    if(CopyOriginal?.length){
-
-    for (let i=0; i< CopyOriginal.length; i++){
-      if(CopyOriginal[i]?.data?.length){
-      for (let j=0; j<CopyOriginal[i].data.length; j++){
-        Total +=(CopyOriginal[i].data[j].count*CopyOriginal[i].data[j].unitPrice)
+    if(copyOriginal?.length){
+    for (let i=0; i< copyOriginal.length; i++){
+      if(copyOriginal[i]?.data?.length){
+      for (let j=0; j<copyOriginal[i].data.length; j++){
+        Total +=(copyOriginal[i].data[j].count*copyOriginal[i].data[j].unitPrice)
         }
       }   
     }
@@ -1163,9 +1219,17 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     // );
   };
   let _GrandTotalWithMarkup = () => {
-    let gTotalMark=(grandTotal*customMarkup)
+    let markTotal=0;
+    for (let i=0; i<values.length; i++){
+     markTotal+=Number(values[i].markup);
+    }
+
+
+    markTotal*=grandTotal;
+    // console.log(markTotal);
+    // let gTotalMark=(grandTotal*values[orderNo].markup)
     
-    setGrandTotalWithMarkup((gTotalWithMarkup) => (gTotalWithMarkup = gTotalMark))
+    setGrandTotalWithMarkup((gTotalWithMarkup) => (gTotalWithMarkup = markTotal))
     // const CopyOriginal = [...values];
     // var GrandTotalWithMarkup = 0;
     // CopyOriginal.map((item, i) =>
@@ -1225,6 +1289,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     loading,
     images,
     orderImages,
+    setOrderImages,
     apiError,
     showPMSModal,
     showThreadModal,
@@ -1242,6 +1307,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,customMarkup,sho
     updateDraft,
     setValues,
     setErrors,
+    setCanAnother
   };
 };
 
