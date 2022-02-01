@@ -1126,7 +1126,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
                   'w-96 inline-flex justify-center rounded-md border-none px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
               }
             })
-          : query.get('active') === 'new-order' || query.get('active') === 'saved-as-draft'
+          : query.get('active') === 'new-order' || query.get('active') === 'saved-as-draft' || query.get('active') === 'closed-order'
           ? ConfirmSubmit(data)
           : updateData(data);
       }
