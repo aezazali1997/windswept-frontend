@@ -865,7 +865,10 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
         enableLoading();
         try {
           await axiosInstance.postOrder(data,lineItemUnitPrice,lineItemUnitCost);
+          if(query.get('active')!=='closed-order'){
           clearAllFormData();
+
+          }
        
 
         } catch (error) {

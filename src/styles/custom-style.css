@@ -12,7 +12,7 @@ width: 80% !important;
   font-size: .9rem;
 }
 .color-place-holder::placeholder{
-  @apply text-gray-700
+  @apply text-gray-700 shadow-md
 }
 .price-sheet-container:last-child{
   border-bottom-left-radius: .375rem !important;
