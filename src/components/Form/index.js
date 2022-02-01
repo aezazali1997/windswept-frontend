@@ -299,7 +299,7 @@ const From = ({
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
             <input
-              value={values.markup}
+              value={values.markup }
               className="input border-gray-500"
               name="markup"
               type="number"

@@ -106,7 +106,7 @@ const Draft = () => {
                     </div>
                     <p className="uppercase text-xs text-gray-500"></p>
                     <p className="uppercase text-xs text-gray-500 text-right mt-2 sm:text-left sm:mt-0">
-                      {in_hands_date}
+                      {in_hands_date  }
                     </p>
                   </div>
                 </div>

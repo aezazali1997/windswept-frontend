@@ -74,7 +74,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
 
         date = document_date;
         notes = cf_opportunity_portal_notes;
-        setOrderImages(selectedOrder?.object_ref?.purchase_order_image);
+        // setOrderImages(selectedOrder?.object_ref?.purchase_order_image);
       } else {
         items = selectedOrder.items;
          for (let i=1; i<items.length; i++){
@@ -940,7 +940,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
       const dataUrl=await toDataURL(url)
       DataUrl=dataUrl
       file = dataURLtoFile(dataUrl, "default.jpg");
-      console.log(file)
       data.purchaseOrders=file
     }
     else{
@@ -990,7 +989,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
     }
   };
   const saveAsDraft = async () => {
-    console.log("saved as draft called");
       let DataUrl=null;
     let file=null;
       let url = 'https://res.cloudinary.com/portfoliov1mushaaf/image/upload/v1643627467/windswept/place-holder_q2ksof.png'

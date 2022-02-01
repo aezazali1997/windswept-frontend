@@ -252,13 +252,12 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
               </div>
               <div className="flex flex-col w-full ">
                 <button
-                  disabled={readOnly  ? true : ((query.get('active')==='closed-order')
-                   && (query.get('active')==='open-order')) ? true : canAddAnother}
+                  disabled={readOnly  ? true : (query.get('active')==='open-order') ? true : canAddAnother}
                   onClick={addAnother}
                   type="button"
                   className={`inline-flex 
 									${
-                    readOnly || ((query.get('active')==='closed-order') || (query.get('active')==='open-order')) || canAddAnother ?
+                    readOnly || (query.get('active')==='open-order') || canAddAnother ?
                        'bg-red-400 cursor-default'
                       :'bg-red-600 border hover:bg-transparent hover:text-red-600 hover:border-red-600'
                       
@@ -356,7 +355,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                       </svg>
                     </>
                   }
-                  classNames={`p-2 w-auto flex items-center text-white  border border-red-600 text-white ${readOnly ? 'bg-red-400 cursor-default' : 'bg-red-600 hover:text-red-600  hover:bg-transparent'} `
+                  classNames={`p-2 w-auto flex items-center text-white  border  text-white ${readOnly ? 'bg-red-400 cursor-default border-red-400' : 'bg-red-600 border-red-600 hover:text-red-600  hover:bg-transparent'} `
                    }
                 />
               </div>
@@ -367,7 +366,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                     : 'flex  border pr-1 relative border-red-600 rounded-md p-1 w-full h-auto items-center'
                 }`}>
                 <p className="flex justify-between w-full">
-                  {orderImages ? orderImages.name : selectedOrder?.object_ref?.purchase_order_name}
+                  {orderImages?.name}
                   <svg
                     onClick={() => {
                       
