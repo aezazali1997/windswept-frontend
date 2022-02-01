@@ -48,7 +48,7 @@ const Login = () => {
       setStatus(message);
       setShowAlert(true);
       setLocalStorage(email_id, user_id, first_name, person_ref, role,markup);
-      window.location = '/dashboard';
+      window.location = '/dashboard?active=new-order';
     } catch ({ response: { data } }) {
       setError(true);
       disableLoading();

@@ -60,16 +60,16 @@ const Dashboard = (props) => {
   const [selectedOrder, setSelectedOrder] = useState(undefined);
   const [showCustomOrderModel,setShowCustomOrderModel]=useState(true);
 
-  // useEffect(() => {
+  useEffect(() => {
   //   // fetchDrafts();
-  //   if (query.get('active') === null) {
-  //     props.history.push(`/dashboard?active=${activeIndex}`);
-  //     setActiveIndex(activeIndex);
+    if (query.get('active') === null) {
+      props.history.push(`/dashboard?active=${activeIndex}`);
+      // setActiveIndex(activeIndex);
   //   } else {
-  //     const active = query.get('active');
-  //     setActiveIndex(active);
-  //   }
-  // }, [activeIndex]);
+      // const active = query.get('active');
+      // setActiveIndex(active);
+    }
+  }, [1]);
 
   let _ToggleModal = () => {
     setShowSearchModal(!showSearchModal);
@@ -107,8 +107,8 @@ const Dashboard = (props) => {
   };
 
   let handleNewOrder = (id) => {
-    props.history.push(`/dashboard?active=${id}`);
     setActiveIndex(id);
+    props.history.push(`/dashboard?active=${id}`);
     setShowCloseOrder(false);
     setShowDraft(false);
     setShowOpenOrder(false);
@@ -265,7 +265,7 @@ const Dashboard = (props) => {
                 type="text"
                 readOnly={true}
                 value={search}
-                placeholder="Search by:"
+                placeholder="Search by"
                 onClick={_ToggleModal}
                 className="custom-place-holder w-full px-4 text-md h-9 border focus:outline-none border-gray-300 bg-gray-50 md:rounded"
               />

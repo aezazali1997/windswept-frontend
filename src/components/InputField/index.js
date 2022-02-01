@@ -1,6 +1,6 @@
 const InputField = ({ label, inputClass, svg, name, type, value, onChange, onBlur, error }) => {
     return (
-        <div className={`floating-input ${error ? "mb-1" : "mb-5"} relative`}>
+        <div className={`floating-input ${error ? "mb-1" : "mb-3"} relative`}>
             <input
                 type={type}
                 id={name}

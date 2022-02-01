@@ -52,10 +52,10 @@ const Contact = () => {
 
 
     return (
-        <div className='flex flex-col px-3 py-5'>
+        <div className='flex flex-col px-3 pt-5 pb-5'>
             <h1 className='text-2xl text-center uppercase font-bold'>Contact</h1>
 
-            <div className="min-h-screen flex items-center justify-center bg-white py-3 px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-center bg-white py-3 px-4 sm:px-6 lg:px-8">
                 {/*SEO Support*/}
                 <Helmet>
                     <title>Contact | Windswept</title>
@@ -63,7 +63,7 @@ const Contact = () => {
                 {/*SEO Support End */}
 
                 <div className="max-w-md w-full space-y-8">
-                    <form className="mt-8" onSubmit={formik.handleSubmit}>
+                    <form className="" onSubmit={formik.handleSubmit}>
 
                         <InputField
                             name={"name"}
@@ -78,7 +78,7 @@ const Contact = () => {
                             label={'Full Name'}
                         />
                         {formik.touched.name && formik.errors.name &&
-                            <div className="text-red-700 text-sm mb-4" >{formik.errors.name}</div>
+                            <div className="text-red-700 text-sm mb-2" >{formik.errors.name}</div>
                         }
 
                         <InputField
@@ -94,7 +94,7 @@ const Contact = () => {
                             label={'Email'}
                         />
                         {formik.touched.email && formik.errors.email &&
-                            <div className="text-red-700 text-sm mb-4" >{formik.errors.email}</div>
+                            <div className="text-red-700 text-sm mb-2" >{formik.errors.email}</div>
                         }
 
                         <InputField
@@ -110,7 +110,7 @@ const Contact = () => {
                             label={'Subject'}
                         />
                         {formik.touched.subject && formik.errors.subject &&
-                            <div className="text-red-700 text-sm mb-4" >{formik.errors.subject}</div>
+                            <div className="text-red-700 text-sm mb-2" >{formik.errors.subject}</div>
                         }
 
                         <div className={`floating-input ${formik.touched.message && formik.errors.message ? "mb-1" : "mb-5"} relative`}>
@@ -135,7 +135,7 @@ const Contact = () => {
 
                             <div className="flex text-sm justify-between">
                                 {formik.touched.message && formik.errors.message &&
-                                    <div className="text-red-700 text-sm mb-4" >{formik.errors.message}</div>
+                                    <div className="text-red-700 text-sm mb-2" >{formik.errors.message}</div>
                                 }
                                 <div>
                                     {

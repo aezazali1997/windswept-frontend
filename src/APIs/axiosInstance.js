@@ -24,8 +24,6 @@ class AxiosInstance {
 
   async postOrder(data,lineItemUnitPrice,lineItemUnitCost) {
     if((typeof data.purchaseOrders)==='string'){
-      console.log("image does not exists");
-      console.log(imgPlaceHolder)
       const toDataURL = url => fetch(url)
       .then(response => response.blob())
       .then(blob => new Promise((resolve, reject) => {

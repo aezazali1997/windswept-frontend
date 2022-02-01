@@ -229,13 +229,18 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
   let upload = useRef();
 
   const quanityChangeModelPopUp =() =>{
-    swal({
-      text: 'You have changed something in this order therefore Windswept will review this and get back to you via email',
-      icon: 'info',
-      dangerMode: true,
-      buttons: false,
-      timer: 5000
-    });
+    // 
+     Swal.fire({
+          text:"You have changed something in this order therefore Windswept will review this and get back to you via email",
+          icon: 'info',
+          showCancelButton: false,
+          confirmButtonText: 'Ok',
+          buttonsStyling: false,
+          customClass: {
+            confirmButton:
+              'w-96 inline-flex bg-red-600 justify-center border border-red-600 hover:bg-transparent  hover:text-red-600 px-4 py-2 text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+          }
+        })
     setShowQuantityModal(false);
   }
   let onChangeFile = (event) => {
@@ -617,13 +622,28 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
       if (values.length < 2 || errors.length < 2) {
         return;
       }
-      let currValues = [...values];
-      let currErrors = [...errors];
-      currValues.splice(index, 1);
-      currErrors.splice(index, 1);
-
-      currValues.map(({ product, material, backing, pe, setQty }) => {
-        if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
+      Swal.fire({
+      title: `Are you sure you want to remove item ${index+1}`,
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'No',
+      confirmButtonText: 'Yes',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton:
+          'w-96 inline-flex justify-center border  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style hover:text-red-600 hover:bg-transparent hover:border-red-600',
+        cancelButton:
+          'mt-3 w-full inline-flex justify-center hover:underline cursor-pointer px-4 py-2 text-sm font-medium text-gray-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm hover:underline hover:text-red-500',   
+        }
+    }).then((res)=>{
+      if(res.isConfirmed){
+        
+        let currValues = [...values];
+        let currErrors = [...errors];
+        currValues.splice(index, 1);
+        currErrors.splice(index, 1);
+        currValues.map(({ product, material, backing, pe, setQty }) => {
+          if (product === '' || material === '' || backing === '' || pe === '' || isEmpty(setQty)) {
           DisableAddAnother();
         } else {
           EnableAddAnother();
@@ -632,6 +652,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
       setOrderNo((currentValue) => currentValue - 1);
       setErrors(currErrors);
       setValues(currValues);
+      }
+    });
     }
     if(query.get('active')==='closed-order' && values[index-1]?.line_item_id){
       setReadOnly(true);
@@ -771,16 +793,34 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
 
 
   const updateData = async (data) => {
-    enableLoading();
-    try {
-      let res = await axiosInstance.updateOrder(
-        data,
-        selectedOrder['object_ref']['opportunity_id'],
-        selectedOrder['object_ref']['id']
-      );
-    } catch (error) {}
+     Swal.fire({
+      title: `Are you sure you want to update`,
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'No',
+      confirmButtonText: 'Yes',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton:
+          'w-96 inline-flex justify-center border  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style hover:text-red-600 hover:bg-transparent hover:border-red-600',
+        cancelButton:
+          'mt-3 w-full inline-flex justify-center hover:underline cursor-pointer px-4 py-2 text-sm font-medium text-gray-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm hover:underline hover:text-red-500',   
+        }
+    }).then(async(res)=>{
+      if(res.isConfirmed){
+        enableLoading();
+        try {
+             await axiosInstance.updateOrder(
+              data,
+              selectedOrder['object_ref']['opportunity_id'],
+              selectedOrder['object_ref']['id']
+            );
+    } catch (error) {
+      console.log(error);
+    }
     disableLoading();
-    // this function will call the update method in backend
+      }
+    });
   };
 
 
@@ -816,6 +856,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
               'w-96 inline-flex bg-red-600 justify-center border border-red-600 hover:bg-transparent  hover:text-red-600 px-4 py-2 text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
           }
         }).then(async (result) => {
+             
+
           if (result.isConfirmed) {
             // history.push('/dashboard?active=open-order')
           }
@@ -823,6 +865,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
         enableLoading();
         try {
           await axiosInstance.postOrder(data,lineItemUnitPrice,lineItemUnitCost);
+          clearAllFormData();
+       
+
         } catch (error) {
           console.log(error);
         }
@@ -862,6 +907,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
           'w-full inline-flex justify-center  border border-red-600 px-4 py-2 btn  text-base font-medium text-white sm:ml-3 sm:w-auto sm:text-sm custom-btn-style bg-red-600 hover:bg-transparent hover:text-red-600'
       }
     }).then(async (result) => {
+       
+          
       if (result.isConfirmed) {
         Swal.fire({
           title: 'Your order will be submitted and reviewed later',
@@ -881,11 +928,14 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
         });
         enableLoading();
         try {
-          let res = await axiosInstance.postOrder(data);
+          await axiosInstance.postOrder(data);
           if (query.get('active') === 'saved-as-draft') {
             deleteFromDraft(draftId);
             setSelected(null);
           }
+          clearAllFormData();
+          
+          
         } catch (error) {}
         disableLoading();
       } else if (result.isDenied) {
@@ -988,7 +1038,33 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
       });
     }
   };
+  const clearAllFormData = ()=> {
+    const copyValues={...Item}
+          const copyErrors={...Error}
+          setValues([copyValues]);
+          setErrors([copyErrors]);
+          setDate('')
+          setOrderImages('')
+          setOrderNo(0);
+          formik.resetForm();
+          DisableAddAnother();
+  }
   const saveAsDraft = async () => {
+    let {pe,backing,material,product,setQty}=values[orderNo];
+    if (pe==='' || backing==='' || product=='' || material==='' || setQty.length===0 || date===''){
+      Swal.fire({
+              text: 'Fill mandatory Fields',
+              icon: 'error',
+              showCancelButton: false,
+              confirmButtonText: 'OK',
+              buttonsStyling: false,
+              customClass: {
+                confirmButton:
+                  'w-96 inline-flex justify-center px-4 py-2 btn  text-base font-medium text-white hover:text-red-600 border border-red-600 hover:bg-transparent focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+              }
+            });
+            return;
+    }
       let DataUrl=null;
     let file=null;
       let url = 'https://res.cloudinary.com/portfoliov1mushaaf/image/upload/v1643627467/windswept/place-holder_q2ksof.png'
@@ -1031,11 +1107,11 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
       }
 
       try {
-        let res = await axiosInstance.createDraft(data);
+        await axiosInstance.createDraft(data);
+        clearAllFormData();
         Swal.fire({
       text: 'Your order is saved in drafts, waiting for your submission',
       icon: 'info',
-      timer: 3000,
       buttonsStyling: false,
       showCancelButton: false,
       confirmButtonText: 'Ok',

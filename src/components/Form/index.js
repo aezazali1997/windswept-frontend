@@ -333,7 +333,7 @@ const From = ({
                 value={values?.wLeft}
                 name="wLeft"
                 onChange={(e) => handleChange(e, orderNo)}
-                className=" w-auto py-2 border border-gray-500 bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer  sm:text-sm ">
+                className=" rounded-md w-auto py-2 border border-gray-500 bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer  sm:text-sm ">
                 <option value="1">1"</option>
                 <option value="2">2"</option>
                 <option value="3">3"</option>
@@ -356,7 +356,7 @@ const From = ({
                 value={values?.wRight}
                 name="wRight"
                 onChange={(e) => handleChange(e, orderNo)}
-                className="w-auto py-2  text-white hover:text-red-600 bg-red-600 hover:bg-transparent shadow-sm focus:outline-none focus:border-red-600 cursor-pointer sm:text-sm border border-red-600">
+                className="rounded-md w-auto py-2  text-white hover:text-red-600 bg-red-600 hover:bg-transparent shadow-sm focus:outline-none focus:border-red-600 cursor-pointer sm:text-sm border border-red-600">
                 {size &&
                   size.map((value, index) => (
                     <option
@@ -379,7 +379,7 @@ const From = ({
                 value={values?.hLeft}
                 onChange={(e) => handleChange(e, orderNo)}
                 name="hLeft"
-                className="border w-auto py-2 border-gray-500 bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer sm:text-sm">
+                className="border rounded-md w-auto py-2 border-gray-500 bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer sm:text-sm">
                 <option value="1">1"</option>
                 <option value="2">2"</option>
                 <option value="3">3"</option>
@@ -402,7 +402,7 @@ const From = ({
                 value={values?.hRight}
                 name="hRight"
                 onChange={(e) => handleChange(e, orderNo)}
-                className="w-auto py-2  text-white hover:text-red-600 bg-red-600 hover:bg-transparent shadow-sm focus:outline-none focus:border-red-600 cursor-pointer sm:text-sm border border-red-600">
+                className="w-auto rounded-md py-2  text-white hover:text-red-600 bg-red-600 hover:bg-transparent shadow-sm focus:outline-none focus:border-red-600 cursor-pointer sm:text-sm border border-red-600">
                 {size &&
                   size.map((value, index) => (
                     <option
@@ -481,7 +481,7 @@ const From = ({
                       : 'bg-red-600 hover:bg-transparent text-white hover:text-red-600 border border-red-600'
                   }`}>
                 <p className="font-medium text-sm">
-                  {values.colors.length === 12 ? 'No more colors allowed' : 'Add Color'}
+                  {values.colors.length === 12 ? 'Max Quantity Reach' : 'Add Color'}
                 </p>
               </button>
             </div>
@@ -496,7 +496,7 @@ const From = ({
                     ? true
                     : false
                 }
-                className={` inline-flex  justify-center w-full border-r border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white  focus:outline-none
+                className={` inline-flex mr-1  justify-center w-full border-r border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white  focus:outline-none
                   ${
                     ((values.colors.length < 1 && query.get('active') === 'closed-order' && values?.line_item_id) || values.colors.length === 12)
                       ? 'bg-red-400 cursor-default'
@@ -526,7 +526,7 @@ const From = ({
               </button>
             </div>
 
-            <div className="h-56 w-full border overflow-auto rounded-b-md border-gray-400">
+            <div className="h-56 w-full border overflow-auto rounded-md border-gray-400">
               <div className="align-middle inline-block min-w-full">
                 <div className="">
                   <table className="min-w-full divide-y divide-gray-200">
@@ -534,16 +534,16 @@ const From = ({
                       {values.colors.map((color, index) => (
                         <div
                           key={index}
-                          className="flex flex-row border-b hover:bg-red-600 group-hover:text-white w-full py-2 px-3  items-center">
+                          className="flex flex-row border-b hover:bg-red-600 group w-full py-2 px-3  items-center">
                           <div className="flex flex-col w-1/12 text-center">
-                            <div className="text-sm text-gray-900">{index + 1}</div>
+                            <div className="text-sm text-gray-900 group-hover:text-white">{index + 1}</div>
                           </div>
                           <div className="flex flex-col w-9/12 px-10">
-                            <div className="text-sm text-gray-900">{color}</div>
+                            <div className="text-sm text-gray-900 group-hover:text-white">{color}</div>
                           </div>
                           <div
                             onClick={() => removeColor(index)}
-                            className="flex flex-col w-2/12 px-10 cursor-pointer">
+                            className="flex flex-col w-2/12 px-10 cursor-pointer group-hover:text-white">
                             <svg
                               className="w-6 h-6"
                               fill="none"
