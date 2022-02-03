@@ -7,7 +7,7 @@ const Index = ({ _Toggle, title, body, ConfirmButton, type, onSubmit }) => {
             <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div onClick={() => _Toggle()} className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle max-w-md ">
+                <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all  sm:align-middle max-w-md ">
                     <div className="bg-gray-50 px-4 pt-5  sm:p-6 sm:px-1 sm:pb-2 ">
                         <div className="sm:flex sm:items-start">
                             <div className="mt-3 text-center sm:mt-0 mx-2 sm:text-left ">

@@ -10,7 +10,7 @@ import store from './store';
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-<App />      
+      <App />
     </Router>
   </Provider>,
   document.getElementById('root')

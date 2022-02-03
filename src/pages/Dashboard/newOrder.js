@@ -9,16 +9,22 @@ import Button from './button';
 import { useLocation } from 'react-router-dom';
 import { Spinner } from '../../components/spinner/Spinner';
 import { useEffect } from 'react';
-import {Error,ERROR,Item} from '../../constants/Order.constants'
+import { ERROR, Item } from '../../constants/Order.constants';
 
-const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityModal,setShowQuantityModal,setShowCustomOrderModel,showCustomOrderModel }) => {
+const NewOrder = ({
+  readOnly,
+  setReadOnly,
+  selectedOrder,
+  closeOrder,
+  showQuantityModal,
+  setShowQuantityModal,
+  setShowCustomOrderModel,
+  showCustomOrderModel
+}) => {
   let useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
-  
 
-  
-  
   let query = useQuery();
 
   const {
@@ -66,22 +72,31 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
     saveAsDraft,
     setErrors,
     setValues,
-    updateDraft
-  } = UseNewOrder({ readOnly,setReadOnly, selectedOrder, closeOrder,showQuantityModal,setShowQuantityModal,setShowCustomOrderModel,showCustomOrderModel });
+    updateDraft,
+    canSubmit,
+  } = UseNewOrder({
+    readOnly,
+    setReadOnly,
+    selectedOrder,
+    closeOrder,
+    showQuantityModal,
+    setShowQuantityModal,
+    setShowCustomOrderModel,
+    showCustomOrderModel
+  });
 
-  useEffect(()=>{
-    if (query.get('active')==='new-order' ){
-      let copyItem= JSON.parse(JSON.stringify(Item));
+  useEffect(() => {
+    if (query.get('active') === 'new-order') {
+      let copyItem = JSON.parse(JSON.stringify(Item));
       let copyError = JSON.parse(JSON.stringify(ERROR));
-        setValues([copyItem]);
-        setErrors([copyError]);
+      setValues([copyItem]);
+      setErrors([copyError]);
     }
-  },[1])
-
+  }, [1]);
 
   return (
     <>
-          {loading && query.get('active') === 'open-order' && <Spinner />}
+      {loading && query.get('active') === 'open-order' && <Spinner />}
       <form onSubmit={formik.handleSubmit} className="form" noValidate="novalidate">
         <div className="flex flex-col justify-center items-center">
           <h1 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-light mb-10">
@@ -109,12 +124,11 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
               </span>
               <input
                 disabled={readOnly ? true : false}
-                className={`input ${!readOnly  ? getInputClasses(formik, 'title') : 'border' }`}
+                className={`input ${formik.values.title==='' ? 'border border-red-600' : 'border'} ${!readOnly ? getInputClasses(formik, 'title') : 'border'}`}
                 placeholder="Enter a name for your order..."
                 type="text"
                 id="title"
                 name="title"
-                
                 {...formik.getFieldProps('title')}
               />
               <p className="font-semibold text-red-600">*</p>
@@ -134,7 +148,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
               </span>
               <input
                 disabled={readOnly || query.get('active') === 'closed-order' ? true : false}
-                className={`input ${!readOnly ? getInputClasses(formik, 'reference') : 'border'}`}
+                className={`input ${formik.values.reference==='' ? 'border border-red-500' : 'border'}  ${!readOnly ? getInputClasses(formik, 'reference') : 'border'}`}
                 placeholder="Enter Customer Reference..."
                 type="text"
                 id="reference"
@@ -210,38 +224,31 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                                       className={`text-sm ${
                                         index === orderNo ? 'text-white' : 'text-black'
                                       }`}>
-                                      {item.product}
-                                      ,{' '}
-                                      {item.material}
-                                      ,{' '}
-                                      {item.backing}
+                                      {item.product}, {item.material}, {item.backing}
                                     </div>
                                   </div>
                                 </div>
-                                {
-                                  query.get('active')==='new-order' ? 
-                                   <div
-                                  onClick={() => removeItem(index)}
-                                  className="flex flex-col w-1/12 px-5 cursor-pointer">
-                                  <svg
-                                    className={`w-4 h-4 ${
-                                      index === orderNo ? 'text-white' : 'text-black'
-                                    }`}
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M6 18L18 6M6 6l12 12"
-                                    />
-                                  </svg>
-                                </div>
-                                : null
-                                }
-                               
+                                {query.get('active') === 'new-order' ? (
+                                  <div
+                                    onClick={() => removeItem(index)}
+                                    className="flex flex-col w-1/12 px-5 cursor-pointer">
+                                    <svg
+                                      className={`w-4 h-4 ${
+                                        index === orderNo ? 'text-white' : 'text-black'
+                                      }`}
+                                      fill="none"
+                                      stroke="currentColor"
+                                      viewBox="0 0 24 24"
+                                      xmlns="http://www.w3.org/2000/svg">
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M6 18L18 6M6 6l12 12"
+                                      />
+                                    </svg>
+                                  </div>
+                                ) : null}
                               </div>
                             ))
                           : ''}
@@ -252,46 +259,48 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
               </div>
               <div className="flex flex-col w-full ">
                 <button
-                  disabled={readOnly  ? true : (query.get('active')==='open-order') ? true : canAddAnother}
+                  disabled={
+                    readOnly ? true : query.get('active') === 'open-order' ? true : canAddAnother
+                  }
                   onClick={addAnother}
                   type="button"
                   className={`inline-flex 
 									${
-                    readOnly || (query.get('active')==='open-order') || canAddAnother ?
-                       'bg-red-400 cursor-default'
-                      :'bg-red-600 border hover:bg-transparent hover:text-red-600 hover:border-red-600'
-                      
+                    readOnly || query.get('active') === 'open-order' || canAddAnother
+                      ? 'bg-red-400 cursor-default'
+                      : 'bg-red-600 border hover:bg-transparent hover:text-red-600 hover:border-red-600'
                   }
 									justify-center border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white focus:outline-none 
 									`}>
                   Add Another
                 </button>
                 <div className="flex flex-row mt-4 w-full ">
-                  {
-                  !(query.get('active')==='closed-order' || query.get('active')==='open-order')  ?  
-                  <button
-                    disabled={readOnly && !query.get('active')==='new-order' ? true : false}
-                    type="button"
-                    onClick={query.get('active') !== 'saved-as-draft' ? saveAsDraft : updateDraft}
-                    className=" inline-flex bg-red-600 hover:bg-transparent justify-center w-full border border-white hover:border-red-600 shadow-sm mr-1 px-2 py-2 text-sm font-medium text-white hover:text-red-600 focus:outline-none ">
+                  {!(
+                    query.get('active') === 'closed-order' || query.get('active') === 'open-order'
+                  ) ? (
+                    <button
+                      disabled={readOnly && !query.get('active') === 'new-order' || !canSubmit ? (!(formik.isValid && formik.dirty)) : false}
+                      type="button"
+                      onClick={query.get('active') !== 'saved-as-draft' ? saveAsDraft : updateDraft}
+                      className={` text-white inline-flex  justify-center w-full border border-white shadow-sm mr-1 px-2 py-2 text-sm font-medium  focus:outline-none  ${ !canSubmit || (!(formik.isValid && formik.dirty)) ? 'bg-red-400 cursor-default' : 'bg-red-600 hover:bg-transparent  hover:text-red-600  border-red-600' }`}>
+                      {query.get('active') === 'saved-as-draft' ? 'Update Draft' : 'Save as Draft'}
+                    </button>
+                  ) : (
+                    ''
+                  )}
 
-
-                    {query.get('active') === 'saved-as-draft' ? 'Update Draft' : 'Save as Draft'}
-                  </button> : '' 
-                  } 
-                    
-                  
                   <button
-                    disabled={ readOnly}
+                    disabled={!canSubmit || (!(formik.isValid && formik.dirty)) || readOnly}
                     type="submit"
                     className={`inline-flex justify-center w-full border border-gray-300 shadow-sm px-2 py-2 text-sm font-medium text-white 
-                    ${ 
-                       '  focus:outline-none border  text-white '  
+                    ${'  focus:outline-none border  text-white '}
+                    ${
+                      !canSubmit || (!(formik.isValid && formik.dirty))  || readOnly
+                        ? 'bg-red-400 cursor-default '
+                        : 'bg-red-600 hover:bg-transparent hover:text-red-600 border-white hover:border-red-600'
                     }
-                    ${readOnly ? 'bg-red-400 cursor-default ' : 'bg-red-600 hover:bg-transparent hover:text-red-600 border-white hover:border-red-600'}
                     
-                    `}  
-                    >
+                    `}>
                     {(query.get('active') === 'new-order' ||
                       query.get('active') === 'saved-as-draft') &&
                       'Submit Order'}
@@ -318,14 +327,12 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                 </button>
               </div>
             </div>
-            
-            
-            
+
             <div
               className={`flex flex-row w-full px-3 mt-6 mb-6 sm:w-2/3 space-x-2 ${
-                 orderImages === '' ? 'justify-center' : 'justify-start'
+                orderImages === '' ? 'justify-center' : 'justify-start'
               }`}>
-              <div className={`flex flex-row ${orderImages === ''  ? '' : 'w-full'}`}>
+              <div className={`flex flex-row ${orderImages === '' ? '' : 'w-full'}`}>
                 <input
                   type="file"
                   accept="image/*"
@@ -334,7 +341,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                   onChange={onChangeOrderFile}
                 />
                 <Button
-                disabled={readOnly}
+                  disabled={readOnly}
                   type="button"
                   onClick={OrderUploadClick}
                   label={
@@ -355,8 +362,11 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                       </svg>
                     </>
                   }
-                  classNames={`p-2 w-auto flex items-center text-white  border  text-white ${readOnly ? 'bg-red-400 cursor-default border-red-400' : 'bg-red-600 border-red-600 hover:text-red-600  hover:bg-transparent'} `
-                   }
+                  classNames={`p-2 w-auto flex items-center text-white  border  text-white ${
+                    readOnly
+                      ? 'bg-red-400 cursor-default border-red-400'
+                      : 'bg-red-600 border-red-600 hover:text-red-600  hover:bg-transparent'
+                  } `}
                 />
               </div>
               <div
@@ -369,9 +379,11 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                   {orderImages?.name}
                   <svg
                     onClick={() => {
-                      
-                      handleRemoveOrderImg()}}
-                    className={`w-6 h-6 rounded-md hover:shadow-lg z-50 ${readOnly ? 'cursor-default' : 'cursor-pointer'}`}
+                      handleRemoveOrderImg();
+                    }}
+                    className={`w-6 h-6 rounded-md hover:shadow-lg z-50 ${
+                      readOnly ? 'cursor-default' : 'cursor-pointer'
+                    }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -387,7 +399,9 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
               </div>
             </div>
 
-            <div id="image-container" className="flex flex-col w-80 px-3 py-4 sm:w-2/3 border border-solid transition duration-300 rounded-md space-y-3">
+            <div
+              id="image-container"
+              className="flex flex-col w-72 px-3 py-4 sm:w-2/3 border border-solid transition duration-300 rounded-md space-y-3">
               <div
                 className={`${
                   isEmpty(values[orderNo]?.blobImages) !== true
@@ -399,7 +413,7 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                     <div key={index} className="relative">
                       <img src={image} alt="img" className="w-30 h-30 rounded-lg object-cover" />
                       <div
-                        onClick={() => handleRemoveImg(index,orderNo)}
+                        onClick={() => handleRemoveImg(index, orderNo)}
                         className="absolute flex top-0 right-0 border-1 rounded-full text-red-600 hover:ring-2 hover:ring-red-500  w-5 h-5 shadow-md z-50 bg-white items-center justify-center">
                         <svg
                           className="w-6 h-6"
@@ -467,22 +481,24 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                       </svg>
                     </>
                   }
-                  classNames={`p-2 w-auto flex mb-8 items-center border text-white ${!readOnly ? 'hover:border-red-600 bg-red-600 hover:bg-transparent  hover:text-red-600' : 'bg-red-400 cursor-default' } `}
+                  classNames={`p-2 w-auto flex mb-8 items-center border text-white ${
+                    !readOnly
+                      ? 'hover:border-red-600 bg-red-600 hover:bg-transparent  hover:text-red-600'
+                      : 'bg-red-400 cursor-default'
+                  } `}
                 />
               </div>
             </div>
 
             <div className="flex flex-col w-full h-full pt-5 space-y-8">
-              <DashboardChart
-                data={data}
-                apiError={apiError}
-                week={week}
-              />
+              <DashboardChart data={data} apiError={apiError} week={week} />
               <table className="mt-10 md:mt-0 mx-auto">
                 <thead>
                   <tr>
                     <td className="left-estimate-table text-right font-medium">Total:</td>
-                    <td className="left-estimate-table">{total ? total.toFixed(4) : (0).toFixed(4)}</td>
+                    <td className="left-estimate-table">
+                      {total ? total.toFixed(4) : (0).toFixed(4)}
+                    </td>
                   </tr>
                   <tr>
                     <td className="left-estimate-table text-right font-medium">Fee:</td>
@@ -501,22 +517,24 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                   <tr>
                     <td className=" left-estimate-table text-right font-medium">Grand Total:</td>
                     <td className=" left-estimate-table">
-                    {date === ''
+                      {date === ''
                         ? (0).toFixed(4)
                         : week < 1
-                        ? (total+total*0.75).toFixed(4)
+                        ? (total + total * 0.75).toFixed(4)
                         : week >= 1 && week < 2
-                        ? (total+total*0.5).toFixed(4)
+                        ? (total + total * 0.5).toFixed(4)
                         : week >= 2 && week < 3
-                        ? (total+total*0.30).toFixed(4)
-                        : total.toFixed(4)
-                        }</td>
+                        ? (total + total * 0.3).toFixed(4)
+                        : total.toFixed(4)}
+                    </td>
                   </tr>
                   <tr>
                     <td className=" left-estimate-table text-right font-medium">
                       Grand Total(including markup):
                     </td>
-                    <td className=" left-estimate-table">{gTotalWithMarkup ? gTotalWithMarkup.toFixed(4) : (0).toFixed(4)}</td>
+                    <td className=" left-estimate-table">
+                      {gTotalWithMarkup ? gTotalWithMarkup.toFixed(4) : (0).toFixed(4)}
+                    </td>
                   </tr>
                 </thead>
               </table>
@@ -603,7 +621,6 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
                 handleThreadModal={handleThreadModal}
                 handleChange={_HandleChange}
                 filterOptions={filterOptions}
-
               />
             )}
             {/* <div className="flex flex-col sm:flex-row">
@@ -700,15 +717,15 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
           <div className="flex flex-col w-full ">
             <textarea
               rows={4}
-              
               disabled={readOnly ? true : false}
-              className={`input txt-area  ${ !readOnly ? getInputClasses(formik, 'shipAddress') : 'border' }`}
+              className={`input txt-area ${formik.values.shipAddress==='' ? 'border border-red-600' : 'border'}  ${
+                !readOnly ? getInputClasses(formik, 'shipAddress') : 'border'
+              }`}
               placeholder="Shipping Address..."
               type="text"
               id="shipAddress"
               name="shipAddress"
               {...formik.getFieldProps('shipAddress')}
-              
             />
           </div>
         </div>
@@ -717,9 +734,10 @@ const NewOrder = ({ readOnly,setReadOnly,selectedOrder, closeOrder,showQuantityM
           <div className="flex flex-col w-full ">
             <textarea
               rows={4}
-              
               disabled={readOnly ? true : false}
-              className={`input txt-area ${ !readOnly ? getInputClasses(formik, 'customerNote') : 'border'}`}
+              className={`input txt-area ${
+                !readOnly ? getInputClasses(formik, 'customerNote') : 'border'
+              }`}
               placeholder="Please add any additional information needed for this order"
               type="text"
               id="customerNote"

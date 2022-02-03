@@ -16,7 +16,6 @@ const Draft = () => {
   }, [1]);
 
   const getDraftOrder = async () => {
-    
     setLoadingDraft(true);
     try {
       let res = await AxiosInstance.getAllDraft();
@@ -32,7 +31,7 @@ const Draft = () => {
   };
   let goBacktoDetail = () => {
     setSelectedOrder(undefined);
-    
+
     getDraftOrder();
   };
 
@@ -74,15 +73,14 @@ const Draft = () => {
         orders.map((order, index) => {
           let { name, customer_ref, in_hands_date, purchase_order } = order;
 
-
           return (
             <div
               key={index}
               className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card w-2/4 lg:w-full">
               <div className="flex flex-col w-full lg:w-1/4 py-2">
                 <img
-                  src={purchase_order?.url}
-                  // "https://bashooka.com/wp-content/uploads/2019/04/portrait-logo-design-4.jpg"
+                  src={purchase_order.url ? purchase_order.url : 'https://res.cloudinary.com/portfoliov1mushaaf/image/upload/v1643627467/windswept/place-holder_q2ksof.png'}
+                  
                   alt="item"
                   className="object-contain w-auto h-40"
                 />
@@ -93,7 +91,9 @@ const Draft = () => {
                   <h1 className="font-bold text-lg text-gray-800">{name}</h1>
                 </div>
                 <div className="flex w-full h-full flex-col space-y-4 justify-end lg:justify-between">
-                  <p className="text-sm text-gray-500 break-all whitespace-pre-wrap">{customer_ref}</p>
+                  <p className="text-sm text-gray-500 break-all whitespace-pre-wrap">
+                    {customer_ref}
+                  </p>
 
                   <div className="flex flex-col lg:flex-row justify-between">
                     <div className="flex flex-row  lg:absolute lg:top-1 lg:right-1  space-x-2">
@@ -106,7 +106,7 @@ const Draft = () => {
                     </div>
                     <p className="uppercase text-xs text-gray-500"></p>
                     <p className="uppercase text-xs text-gray-500 text-right mt-2 sm:text-left sm:mt-0">
-                      {in_hands_date  }
+                      {in_hands_date}
                     </p>
                   </div>
                 </div>
@@ -122,5 +122,5 @@ const Draft = () => {
       )}
     </div>
   );
-};;
+};
 export default Draft;

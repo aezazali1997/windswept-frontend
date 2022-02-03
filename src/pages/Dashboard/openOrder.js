@@ -8,7 +8,7 @@ import AxiosInstance from '../../APIs/axiosInstance';
 import { Spinner } from '../../components/spinner/Spinner';
 import Swal from 'sweetalert2';
 import moment from 'moment';
-import imgPlaceHolder from '../../assets/place.png'
+import imgPlaceHolder from '../../assets/place.png';
 // import {decode as base64_decode, encode as base64_encode} from 'base-64';
 
 let useQuery = () => {
@@ -43,7 +43,7 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
   };
   const getData = async () => {
     if (checkFilters(filters) && searched) {
-      filters.date=moment(filters.date).format('D MMM YYYY')
+      filters.date = moment(filters.date).format('D MMM YYYY');
       setIsLoading(true);
       try {
         let resp = await AxiosInstance.searchFilter(filters, 'open');
@@ -53,21 +53,20 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
         }
       } catch (error) {}
       setIsLoading(false);
-    } else if (!(checkFilters(filters)) && !searched) {
+    } else if (!checkFilters(filters) && !searched) {
       setIsLoading(true);
       try {
         const res = await getAllOrders();
         if (res.status === 200) {
           setOrders(res.data);
         }
-
       } catch (error) {}
       setIsLoading(false);
     }
   };
-useEffect(()=>{
-  setSearched(false)
-},[1])
+  useEffect(() => {
+    setSearched(false);
+  }, [1]);
   // make a query to get all the open orders
   useEffect(() => {
     getData();
@@ -95,7 +94,7 @@ useEffect(()=>{
   const handleApprove = async (index, ref) => {
     setIsDeleting(true);
     try {
-       await AxiosInstance.approveOrder(ref);
+      await AxiosInstance.approveOrder(ref);
       setIsDeleting(false);
     } catch (error) {
       console.log(error);
@@ -169,9 +168,7 @@ useEffect(()=>{
             &nbsp; Back
           </button>
 
-          { 
-          selectedOrder['object_ref'].cf_opportunity_status !== 'Artwork Approved' ?
-          (
+          {selectedOrder['object_ref'].cf_opportunity_status !== 'Artwork Approved' ? (
             <button
               onClick={toggleEdit}
               type="button"
@@ -192,9 +189,9 @@ useEffect(()=>{
               </svg>{' '}
               &nbsp; Edit
             </button>
-          ) 
-          : ''
-          }
+          ) : (
+            ''
+          )}
         </div>
 
         <NewOrder readOnly={readOnly} selectedOrder={selectedOrder} />
@@ -225,8 +222,7 @@ useEffect(()=>{
                   document_date,
                   customer_ref,
                   id,
-                  purchase_order,
-                  
+                  purchase_order
                 } = Order['object_ref'];
                 return (
                   <div
@@ -234,7 +230,11 @@ useEffect(()=>{
                     className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card w-2/4 lg:w-full">
                     <div className="flex flex-col w-full lg:w-1/4 py-2">
                       <img
-                        src= { purchase_order ? ` data:image/png;base64,${purchase_order}`: 'https://res.cloudinary.com/portfoliov1mushaaf/image/upload/v1643627467/windswept/place-holder_q2ksof.png'}
+                        src={
+                          purchase_order
+                            ? ` data:image/png;base64,${purchase_order}`
+                            : 'https://res.cloudinary.com/portfoliov1mushaaf/image/upload/v1643627467/windswept/place-holder_q2ksof.png'
+                        }
                         alt="item"
                         className="object-contain w-auto h-40"
                       />
@@ -255,11 +255,10 @@ useEffect(()=>{
                           <div className="flex flex-row  lg:absolute lg:top-1 lg:right-1  space-x-2">
                             {localStorage.getItem('role') === 'manager' &&
                             (cf_opportunity_status === 'Sew-out scan at Factory' ||
-                            cf_opportunity_status === 'Waiting on sew-out approval' ||
-                            cf_opportunity_status === 'Revesions on sew-out' ||
-                            cf_opportunity_status === 'In Production (waiting on tracking)' ||
-                            cf_opportunity_status === 'Tracking Recieved'
-                            ) ? (
+                              cf_opportunity_status === 'Waiting on sew-out approval' ||
+                              cf_opportunity_status === 'Revesions on sew-out' ||
+                              cf_opportunity_status === 'In Production (waiting on tracking)' ||
+                              cf_opportunity_status === 'Tracking Recieved') ? (
                               <>
                                 <Button
                                   label={'Approve'}

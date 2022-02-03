@@ -1,958 +1,958 @@
 [
- {
-   "colorName": "G520",
-   "colorCode": "#efebce"
- },
- {
-   "colorName": "G5205",
-   "colorCode": "#f6eeb0"
- },
- {
-   "colorName": "G521",
-   "colorCode": "#f9e55e"
- },
- {
-   "colorName": "G522",
-   "colorCode": "#f4d82d"
- },
- {
-   "colorName": "G523",
-   "colorCode": "#f6b40b"
- },
- {
-   "colorName": "G524",
-   "colorCode": "#e89e07"
- },
- {
-   "colorName": "G525",
-   "colorCode": "#e88a07"
- },
- {
-   "colorName": "G783",
-   "colorCode": "#a9642d"
- },
- {
-   "colorName": "G784",
-   "colorCode": "#b2663a"
- },
- {
-   "colorName": "G785",
-   "colorCode": "#853417"
- },
- {
-   "colorName": "G786",
-   "colorCode": "#8c361d"
- },
- {
-   "colorName": "G370",
-   "colorCode": "#7ac4eb"
- },
- {
-   "colorName": "G371",
-   "colorCode": "#3caee4"
- },
- {
-   "colorName": "G372",
-   "colorCode": "#245cb0"
- },
- {
-   "colorName": "G373",
-   "colorCode": "#064088"
- },
- {
-   "colorName": "G721",
-   "colorCode": "#d0ac76"
- },
- {
-   "colorName": "G722",
-   "colorCode": "#b68b5d"
- },
- {
-   "colorName": "G723",
-   "colorCode": "#976b2c"
- },
- {
-   "colorName": "G117",
-   "colorCode": "#edbbc0"
- },
- {
-   "colorName": "G119",
-   "colorCode": "#be5565"
- },
- {
-   "colorName": "G121",
-   "colorCode": "#aa4648"
- },
- {
-   "colorName": "G100",
-   "colorCode": "#f0ebef"
- },
- {
-   "colorName": "G101",
-   "colorCode": "#eec8db"
- },
- {
-   "colorName": "G102",
-   "colorCode": "#e297b8"
- },
- {
-   "colorName": "G103",
-   "colorCode": "#e489af"
- },
- {
-   "colorName": "G104",
-   "colorCode": "#ec6ea1"
- },
- {
-   "colorName": "G105",
-   "colorCode": "#d6457c"
- },
- {
-   "colorName": "G106",
-   "colorCode": "#e43a78"
- },
- {
-   "colorName": "G260",
-   "colorCode": "#becec1"
- },
- {
-   "colorName": "G261",
-   "colorCode": "#9fd0b3"
- },
- {
-   "colorName": "G262",
-   "colorCode": "#85be8b"
- },
- {
-   "colorName": "G263",
-   "colorCode": "#29a164"
- },
- {
-   "colorName": "G264",
-   "colorCode": "#118b4e"
- },
- {
-   "colorName": "G265",
-   "colorCode": "#016126"
- },
- {
-   "colorName": "G200",
-   "colorCode": "#016a32"
- },
- {
-   "colorName": "G361",
-   "colorCode": "#b5c1d1"
- },
- {
-   "colorName": "G362",
-   "colorCode": "#a4b4db"
- },
- {
-   "colorName": "G363",
-   "colorCode": "#92b0de"
- },
- {
-   "colorName": "G364",
-   "colorCode": "#6382c4"
- },
- {
-   "colorName": "G365",
-   "colorCode": "#395aa7"
- },
- {
-   "colorName": "G366",
-   "colorCode": "#253189"
- },
- {
-   "colorName": "G367",
-   "colorCode": "#131b5c"
- },
- {
-   "colorName": "G140",
-   "colorCode": "#efbdc1"
- },
- {
-   "colorName": "G141",
-   "colorCode": "#e395a2"
- },
- {
-   "colorName": "G142",
-   "colorCode": "#e2756c"
- },
- {
-   "colorName": "G143",
-   "colorCode": "#d96660"
- },
- {
-   "colorName": "G144",
-   "colorCode": "#d2513d"
- },
- {
-   "colorName": "G145",
-   "colorCode": "#a52f1d"
- },
- {
-   "colorName": "G810",
-   "colorCode": "#dacec2"
- },
- {
-   "colorName": "G811",
-   "colorCode": "#b49e86"
- },
- {
-   "colorName": "G813",
-   "colorCode": "#967c6b"
- },
- {
-   "colorName": "G814",
-   "colorCode": "#80604b"
- },
- {
-   "colorName": "G815",
-   "colorCode": "#70574d"
- },
- {
-   "colorName": "G201",
-   "colorCode": "#6d9d6b"
- },
- {
-   "colorName": "G202",
-   "colorCode": "#618a5c"
- },
- {
-   "colorName": "G203",
-   "colorCode": "#396b3c"
- },
- {
-   "colorName": "G204",
-   "colorCode": "#2a5f59"
- },
- {
-   "colorName": "G205",
-   "colorCode": "#17473b"
- },
- {
-   "colorName": "G206",
-   "colorCode": "#1f3930"
- },
- {
-   "colorName": "G700",
-   "colorCode": "#d81425"
- },
- {
-   "colorName": "G701",
-   "colorCode": "#990910"
- },
- {
-   "colorName": "G800",
-   "colorCode": "#f0f0f0"
- },
- {
-   "colorName": "G900",
-   "colorCode": "#1f161c"
- },
- {
-   "colorName": "G228",
-   "colorCode": "#8dba2c"
- },
- {
-   "colorName": "G229",
-   "colorCode": "#64a82d"
- },
- {
-   "colorName": "G231",
-   "colorCode": "#44963b"
- },
- {
-   "colorName": "G232",
-   "colorCode": "#248636"
- },
- {
-   "colorName": "G233",
-   "colorCode": "#126e29"
- },
- {
-   "colorName": "G483",
-   "colorCode": "#cecbd2"
- },
- {
-   "colorName": "G484",
-   "colorCode": "#aea8b2"
- },
- {
-   "colorName": "G485",
-   "colorCode": "#8a7f8f"
- },
- {
-   "colorName": "G486",
-   "colorCode": "#5a495b"
- },
- {
-   "colorName": "G487",
-   "colorCode": "#604e5e"
- },
- {
-   "colorName": "G488",
-   "colorCode": "#332530"
- },
- {
-   "colorName": "G501",
-   "colorCode": "#f9ed97"
- },
- {
-   "colorName": "G502",
-   "colorCode": "#ecd425"
- },
- {
-   "colorName": "G503",
-   "colorCode": "#ecb11b"
- },
- {
-   "colorName": "G512",
-   "colorCode": "#ca940d"
- },
- {
-   "colorName": "G514",
-   "colorCode": "#ac6d14"
- },
- {
-   "colorName": "G516",
-   "colorCode": "#a26a21"
- },
- {
-   "colorName": "G741",
-   "colorCode": "#bc917e"
- },
- {
-   "colorName": "G743",
-   "colorCode": "#916353"
- },
- {
-   "colorName": "G744",
-   "colorCode": "#784a3b"
- },
- {
-   "colorName": "G745",
-   "colorCode": "#6f4434"
- },
- {
-   "colorName": "G123",
-   "colorCode": "#f1bed5"
- },
- {
-   "colorName": "G124",
-   "colorCode": "#de6f9e"
- },
- {
-   "colorName": "G125",
-   "colorCode": "#dc4d81"
- },
- {
-   "colorName": "G126",
-   "colorCode": "#e83c84"
- },
- {
-   "colorName": "G127",
-   "colorCode": "#db2b62"
- },
- {
-   "colorName": "G128",
-   "colorCode": "#c2183d"
- },
- {
-   "colorName": "G129",
-   "colorCode": "#a52e4d"
- },
- {
-   "colorName": "G210",
-   "colorCode": "#9eb539"
- },
- {
-   "colorName": "G212",
-   "colorCode": "#798d27"
- },
- {
-   "colorName": "G214",
-   "colorCode": "#5b7d2a"
- },
- {
-   "colorName": "G216",
-   "colorCode": "#3a531e"
- },
- {
-   "colorName": "G218",
-   "colorCode": "#374b1b"
- },
- {
-   "colorName": "G180",
-   "colorCode": "#d7b4a6"
- },
- {
-   "colorName": "G182",
-   "colorCode": "#e69178"
- },
- {
-   "colorName": "G184",
-   "colorCode": "#ef5f54"
- },
- {
-   "colorName": "G186",
-   "colorCode": "#df3726"
- },
- {
-   "colorName": "G751",
-   "colorCode": "#ecb176"
- },
- {
-   "colorName": "G752",
-   "colorCode": "#dfa667"
- },
- {
-   "colorName": "G753",
-   "colorCode": "#f48f35"
- },
- {
-   "colorName": "G754",
-   "colorCode": "#ca4c11"
- },
- {
-   "colorName": "G755",
-   "colorCode": "#921012"
- },
- {
-   "colorName": "G672",
-   "colorCode": "#dbaacc"
- },
- {
-   "colorName": "G673",
-   "colorCode": "#a9659d"
- },
- {
-   "colorName": "G674",
-   "colorCode": "#9a4798"
- },
- {
-   "colorName": "G675",
-   "colorCode": "#893087"
- },
- {
-   "colorName": "G676",
-   "colorCode": "#601d67"
- },
- {
-   "colorName": "G765",
-   "colorCode": "#d09783"
- },
- {
-   "colorName": "G766",
-   "colorCode": "#c97863"
- },
- {
-   "colorName": "G767",
-   "colorCode": "#875446"
- },
- {
-   "colorName": "G768",
-   "colorCode": "#87342d"
- },
- {
-   "colorName": "G769",
-   "colorCode": "#6f322f"
- },
- {
-   "colorName": "G310",
-   "colorCode": "#a8c5e5"
- },
- {
-   "colorName": "G312",
-   "colorCode": "#7b8dbb"
- },
- {
-   "colorName": "G314",
-   "colorCode": "#607298"
- },
- {
-   "colorName": "G316",
-   "colorCode": "#45567d"
- },
- {
-   "colorName": "G318",
-   "colorCode": "#202e53"
- },
- {
-   "colorName": "G243",
-   "colorCode": "#869f82"
- },
- {
-   "colorName": "G244",
-   "colorCode": "#5c916d"
- },
- {
-   "colorName": "G245",
-   "colorCode": "#2a492a"
- },
- {
-   "colorName": "G246",
-   "colorCode": "#152b14"
- },
- {
-   "colorName": "G247",
-   "colorCode": "#1c2d1a"
- },
- {
-   "colorName": "G850",
-   "colorCode": "#f2f3ee"
- },
- {
-   "colorName": "G219",
-   "colorCode": "#9ad2c3"
- },
- {
-   "colorName": "G220",
-   "colorCode": "#5cb7ab"
- },
- {
-   "colorName": "G221",
-   "colorCode": "#26a39e"
- },
- {
-   "colorName": "G222",
-   "colorCode": "#127f7f"
- },
- {
-   "colorName": "G223",
-   "colorCode": "#056b6b"
- },
- {
-   "colorName": "G540",
-   "colorCode": "#e0dc75"
- },
- {
-   "colorName": "G541",
-   "colorCode": "#f6e647"
- },
- {
-   "colorName": "G542",
-   "colorCode": "#dccc02"
- },
- {
-   "colorName": "G543",
-   "colorCode": "#ecd403"
- },
- {
-   "colorName": "G544",
-   "colorCode": "#e8cf06"
- },
- {
-   "colorName": "G546",
-   "colorCode": "#efcc01"
- },
- {
-   "colorName": "G273",
-   "colorCode": "#6c8d3e"
- },
- {
-   "colorName": "G274",
-   "colorCode": "#558b48"
- },
- {
-   "colorName": "G275",
-   "colorCode": "#406d2c"
- },
- {
-   "colorName": "G276",
-   "colorCode": "#2f5923"
- },
- {
-   "colorName": "G277",
-   "colorCode": "#0b1c09"
- },
- {
-   "colorName": "G411",
-   "colorCode": "#9f8d7f"
- },
- {
-   "colorName": "G412",
-   "colorCode": "#948686"
- },
- {
-   "colorName": "G413",
-   "colorCode": "#65524e"
- },
- {
-   "colorName": "G414",
-   "colorCode": "#463640"
- },
- {
-   "colorName": "G415",
-   "colorCode": "#2d1d20"
- },
- {
-   "colorName": "G731",
-   "colorCode": "#cab597"
- },
- {
-   "colorName": "G733",
-   "colorCode": "#b69d7f"
- },
- {
-   "colorName": "G734",
-   "colorCode": "#a07c5d"
- },
- {
-   "colorName": "G735",
-   "colorCode": "#9b7350"
- },
- {
-   "colorName": "G736",
-   "colorCode": "#7a4e29"
- },
- {
-   "colorName": "G737",
-   "colorCode": "#7e4d2c"
- },
- {
-   "colorName": "G738",
-   "colorCode": "#462111"
- },
- {
-   "colorName": "G739",
-   "colorCode": "#361715"
- },
- {
-   "colorName": "G111",
-   "colorCode": "#eecba1"
- },
- {
-   "colorName": "G169",
-   "colorCode": "#e3954b"
- },
- {
-   "colorName": "G170",
-   "colorCode": "#f07722"
- },
- {
-   "colorName": "G171",
-   "colorCode": "#eb4d10"
- },
- {
-   "colorName": "G172",
-   "colorCode": "#ea4918"
- },
- {
-   "colorName": "G173",
-   "colorCode": "#e33110"
- },
- {
-   "colorName": "G174",
-   "colorCode": "#e23825"
- },
- {
-   "colorName": "G175",
-   "colorCode": "#b91f15"
- },
- {
-   "colorName": "G163",
-   "colorCode": "#d7ac9c"
- },
- {
-   "colorName": "G166",
-   "colorCode": "#cc9a9b"
- },
- {
-   "colorName": "G801",
-   "colorCode": "#62c7dc"
- },
- {
-   "colorName": "G802",
-   "colorCode": "#0f9fbc"
- },
- {
-   "colorName": "G803",
-   "colorCode": "#1482bd"
- },
- {
-   "colorName": "G383",
-   "colorCode": "#7fbcbd"
- },
- {
-   "colorName": "G384",
-   "colorCode": "#47689b"
- },
- {
-   "colorName": "G385",
-   "colorCode": "#134f7a"
- },
- {
-   "colorName": "G621",
-   "colorCode": "#a493bb"
- },
- {
-   "colorName": "G622",
-   "colorCode": "#77507c"
- },
- {
-   "colorName": "G623",
-   "colorCode": "#66517f"
- },
- {
-   "colorName": "G625",
-   "colorCode": "#7a5193"
- },
- {
-   "colorName": "G331",
-   "colorCode": "#c2ccd5"
- },
- {
-   "colorName": "G332",
-   "colorCode": "#345398"
- },
- {
-   "colorName": "G333",
-   "colorCode": "#12397e"
- },
- {
-   "colorName": "G334",
-   "colorCode": "#0c235e"
- },
- {
-   "colorName": "G335",
-   "colorCode": "#0e1a3c"
- },
- {
-   "colorName": "G358",
-   "colorCode": "#0f0f29"
- },
- {
-   "colorName": "G324",
-   "colorCode": "#0d0b10"
- },
- {
-   "colorName": "G421",
-   "colorCode": "#f9f6f0"
- },
- {
-   "colorName": "G422",
-   "colorCode": "#9c8e75"
- },
- {
-   "colorName": "G561",
-   "colorCode": "#e2d64c"
- },
- {
-   "colorName": "G562",
-   "colorCode": "#ccbb25"
- },
- {
-   "colorName": "G563",
-   "colorCode": "#dab114"
- },
- {
-   "colorName": "G564",
-   "colorCode": "#827821"
- },
- {
-   "colorName": "G565",
-   "colorCode": "#473f14"
- },
- {
-   "colorName": "G251",
-   "colorCode": "#9ab882"
- },
- {
-   "colorName": "G253",
-   "colorCode": "#6b977e"
- },
- {
-   "colorName": "G255",
-   "colorCode": "#154a26"
- },
- {
-   "colorName": "G257",
-   "colorCode": "#0c3d1f"
- },
- {
-   "colorName": "G190",
-   "colorCode": "#a2121b"
- },
- {
-   "colorName": "G192",
-   "colorCode": "#70100c"
- },
- {
-   "colorName": "G194",
-   "colorCode": "#52140c"
- },
- {
-   "colorName": "G196",
-   "colorCode": "#381212"
- },
- {
-   "colorName": "G198",
-   "colorCode": "#240e10"
- },
- {
-   "colorName": "G390",
-   "colorCode": "#87a2ae"
- },
- {
-   "colorName": "G391",
-   "colorCode": "#3788ac"
- },
- {
-   "colorName": "G392",
-   "colorCode": "#12567d"
- },
- {
-   "colorName": "G393",
-   "colorCode": "#4b5972"
- },
- {
-   "colorName": "G531",
-   "colorCode": "#cba240"
- },
- {
-   "colorName": "G533",
-   "colorCode": "#ec8a08"
- },
- {
-   "colorName": "G535",
-   "colorCode": "#e46b0a"
- },
- {
-   "colorName": "G283",
-   "colorCode": "#b8ba0b"
- },
- {
-   "colorName": "G285",
-   "colorCode": "#403c0f"
- },
- {
-   "colorName": "G236",
-   "colorCode": "#bab679"
- },
- {
-   "colorName": "G237",
-   "colorCode": "#5c5e1d"
- },
- {
-   "colorName": "G238",
-   "colorCode": "#615b20"
- },
- {
-   "colorName": "G131",
-   "colorCode": "#e0b3cd"
- },
- {
-   "colorName": "G132",
-   "colorCode": "#e097c1"
- },
- {
-   "colorName": "G133",
-   "colorCode": "#d772ad"
- },
- {
-   "colorName": "G134",
-   "colorCode": "#7a1261"
- },
- {
-   "colorName": "G135",
-   "colorCode": "#7a0e5b"
- },
- {
-   "colorName": "G137",
-   "colorCode": "#601529"
- },
- {
-   "colorName": "G841",
-   "colorCode": "#b3a473"
- },
- {
-   "colorName": "G843",
-   "colorCode": "#92814d"
- },
- {
-   "colorName": "G844",
-   "colorCode": "#654f28"
- },
- {
-   "colorName": "G845",
-   "colorCode": "#785b34"
- },
- {
-   "colorName": "G711",
-   "colorCode": "#e3b43d"
- },
- {
-   "colorName": "G712",
-   "colorCode": "#c8752a"
- },
- {
-   "colorName": "G713",
-   "colorCode": "#742d11"
- },
- {
-   "colorName": "G714",
-   "colorCode": "#6e3218"
- },
- {
-   "colorName": "G155",
-   "colorCode": "#d10933"
- },
- {
-   "colorName": "G1051",
-   "colorCode": "#e2291b"
- },
- {
-   "colorName": "G1052",
-   "colorCode": "#e01914"
- },
- {
-   "colorName": "G1053",
-   "colorCode": "#dc1923"
- },
- {
-   "colorName": "G451",
-   "colorCode": "#aea5a0"
- },
- {
-   "colorName": "G452",
-   "colorCode": "#948b86"
- },
- {
-   "colorName": "G453",
-   "colorCode": "#6d5b57"
- },
- {
-   "colorName": "G342",
-   "colorCode": "#7aa19f"
- },
- {
-   "colorName": "G343",
-   "colorCode": "#2c5569"
- },
- {
-   "colorName": "G344",
-   "colorCode": "#0d2122"
- },
- {
-   "colorName": "G287",
-   "colorCode": "#838e55"
- },
- {
-   "colorName": "G288",
-   "colorCode": "#6f7946"
- },
- {
-   "colorName": "G289",
-   "colorCode": "#404729"
- },
- {
-   "colorName": "G901",
-   "colorCode": "#dbc37c"
- },
- {
-   "colorName": "G903",
-   "colorCode": "#a2a199"
- }
+  {
+    "colorName": "G520",
+    "colorCode": "#efebce"
+  },
+  {
+    "colorName": "G5205",
+    "colorCode": "#f6eeb0"
+  },
+  {
+    "colorName": "G521",
+    "colorCode": "#f9e55e"
+  },
+  {
+    "colorName": "G522",
+    "colorCode": "#f4d82d"
+  },
+  {
+    "colorName": "G523",
+    "colorCode": "#f6b40b"
+  },
+  {
+    "colorName": "G524",
+    "colorCode": "#e89e07"
+  },
+  {
+    "colorName": "G525",
+    "colorCode": "#e88a07"
+  },
+  {
+    "colorName": "G783",
+    "colorCode": "#a9642d"
+  },
+  {
+    "colorName": "G784",
+    "colorCode": "#b2663a"
+  },
+  {
+    "colorName": "G785",
+    "colorCode": "#853417"
+  },
+  {
+    "colorName": "G786",
+    "colorCode": "#8c361d"
+  },
+  {
+    "colorName": "G370",
+    "colorCode": "#7ac4eb"
+  },
+  {
+    "colorName": "G371",
+    "colorCode": "#3caee4"
+  },
+  {
+    "colorName": "G372",
+    "colorCode": "#245cb0"
+  },
+  {
+    "colorName": "G373",
+    "colorCode": "#064088"
+  },
+  {
+    "colorName": "G721",
+    "colorCode": "#d0ac76"
+  },
+  {
+    "colorName": "G722",
+    "colorCode": "#b68b5d"
+  },
+  {
+    "colorName": "G723",
+    "colorCode": "#976b2c"
+  },
+  {
+    "colorName": "G117",
+    "colorCode": "#edbbc0"
+  },
+  {
+    "colorName": "G119",
+    "colorCode": "#be5565"
+  },
+  {
+    "colorName": "G121",
+    "colorCode": "#aa4648"
+  },
+  {
+    "colorName": "G100",
+    "colorCode": "#f0ebef"
+  },
+  {
+    "colorName": "G101",
+    "colorCode": "#eec8db"
+  },
+  {
+    "colorName": "G102",
+    "colorCode": "#e297b8"
+  },
+  {
+    "colorName": "G103",
+    "colorCode": "#e489af"
+  },
+  {
+    "colorName": "G104",
+    "colorCode": "#ec6ea1"
+  },
+  {
+    "colorName": "G105",
+    "colorCode": "#d6457c"
+  },
+  {
+    "colorName": "G106",
+    "colorCode": "#e43a78"
+  },
+  {
+    "colorName": "G260",
+    "colorCode": "#becec1"
+  },
+  {
+    "colorName": "G261",
+    "colorCode": "#9fd0b3"
+  },
+  {
+    "colorName": "G262",
+    "colorCode": "#85be8b"
+  },
+  {
+    "colorName": "G263",
+    "colorCode": "#29a164"
+  },
+  {
+    "colorName": "G264",
+    "colorCode": "#118b4e"
+  },
+  {
+    "colorName": "G265",
+    "colorCode": "#016126"
+  },
+  {
+    "colorName": "G200",
+    "colorCode": "#016a32"
+  },
+  {
+    "colorName": "G361",
+    "colorCode": "#b5c1d1"
+  },
+  {
+    "colorName": "G362",
+    "colorCode": "#a4b4db"
+  },
+  {
+    "colorName": "G363",
+    "colorCode": "#92b0de"
+  },
+  {
+    "colorName": "G364",
+    "colorCode": "#6382c4"
+  },
+  {
+    "colorName": "G365",
+    "colorCode": "#395aa7"
+  },
+  {
+    "colorName": "G366",
+    "colorCode": "#253189"
+  },
+  {
+    "colorName": "G367",
+    "colorCode": "#131b5c"
+  },
+  {
+    "colorName": "G140",
+    "colorCode": "#efbdc1"
+  },
+  {
+    "colorName": "G141",
+    "colorCode": "#e395a2"
+  },
+  {
+    "colorName": "G142",
+    "colorCode": "#e2756c"
+  },
+  {
+    "colorName": "G143",
+    "colorCode": "#d96660"
+  },
+  {
+    "colorName": "G144",
+    "colorCode": "#d2513d"
+  },
+  {
+    "colorName": "G145",
+    "colorCode": "#a52f1d"
+  },
+  {
+    "colorName": "G810",
+    "colorCode": "#dacec2"
+  },
+  {
+    "colorName": "G811",
+    "colorCode": "#b49e86"
+  },
+  {
+    "colorName": "G813",
+    "colorCode": "#967c6b"
+  },
+  {
+    "colorName": "G814",
+    "colorCode": "#80604b"
+  },
+  {
+    "colorName": "G815",
+    "colorCode": "#70574d"
+  },
+  {
+    "colorName": "G201",
+    "colorCode": "#6d9d6b"
+  },
+  {
+    "colorName": "G202",
+    "colorCode": "#618a5c"
+  },
+  {
+    "colorName": "G203",
+    "colorCode": "#396b3c"
+  },
+  {
+    "colorName": "G204",
+    "colorCode": "#2a5f59"
+  },
+  {
+    "colorName": "G205",
+    "colorCode": "#17473b"
+  },
+  {
+    "colorName": "G206",
+    "colorCode": "#1f3930"
+  },
+  {
+    "colorName": "G700",
+    "colorCode": "#d81425"
+  },
+  {
+    "colorName": "G701",
+    "colorCode": "#990910"
+  },
+  {
+    "colorName": "G800",
+    "colorCode": "#f0f0f0"
+  },
+  {
+    "colorName": "G900",
+    "colorCode": "#1f161c"
+  },
+  {
+    "colorName": "G228",
+    "colorCode": "#8dba2c"
+  },
+  {
+    "colorName": "G229",
+    "colorCode": "#64a82d"
+  },
+  {
+    "colorName": "G231",
+    "colorCode": "#44963b"
+  },
+  {
+    "colorName": "G232",
+    "colorCode": "#248636"
+  },
+  {
+    "colorName": "G233",
+    "colorCode": "#126e29"
+  },
+  {
+    "colorName": "G483",
+    "colorCode": "#cecbd2"
+  },
+  {
+    "colorName": "G484",
+    "colorCode": "#aea8b2"
+  },
+  {
+    "colorName": "G485",
+    "colorCode": "#8a7f8f"
+  },
+  {
+    "colorName": "G486",
+    "colorCode": "#5a495b"
+  },
+  {
+    "colorName": "G487",
+    "colorCode": "#604e5e"
+  },
+  {
+    "colorName": "G488",
+    "colorCode": "#332530"
+  },
+  {
+    "colorName": "G501",
+    "colorCode": "#f9ed97"
+  },
+  {
+    "colorName": "G502",
+    "colorCode": "#ecd425"
+  },
+  {
+    "colorName": "G503",
+    "colorCode": "#ecb11b"
+  },
+  {
+    "colorName": "G512",
+    "colorCode": "#ca940d"
+  },
+  {
+    "colorName": "G514",
+    "colorCode": "#ac6d14"
+  },
+  {
+    "colorName": "G516",
+    "colorCode": "#a26a21"
+  },
+  {
+    "colorName": "G741",
+    "colorCode": "#bc917e"
+  },
+  {
+    "colorName": "G743",
+    "colorCode": "#916353"
+  },
+  {
+    "colorName": "G744",
+    "colorCode": "#784a3b"
+  },
+  {
+    "colorName": "G745",
+    "colorCode": "#6f4434"
+  },
+  {
+    "colorName": "G123",
+    "colorCode": "#f1bed5"
+  },
+  {
+    "colorName": "G124",
+    "colorCode": "#de6f9e"
+  },
+  {
+    "colorName": "G125",
+    "colorCode": "#dc4d81"
+  },
+  {
+    "colorName": "G126",
+    "colorCode": "#e83c84"
+  },
+  {
+    "colorName": "G127",
+    "colorCode": "#db2b62"
+  },
+  {
+    "colorName": "G128",
+    "colorCode": "#c2183d"
+  },
+  {
+    "colorName": "G129",
+    "colorCode": "#a52e4d"
+  },
+  {
+    "colorName": "G210",
+    "colorCode": "#9eb539"
+  },
+  {
+    "colorName": "G212",
+    "colorCode": "#798d27"
+  },
+  {
+    "colorName": "G214",
+    "colorCode": "#5b7d2a"
+  },
+  {
+    "colorName": "G216",
+    "colorCode": "#3a531e"
+  },
+  {
+    "colorName": "G218",
+    "colorCode": "#374b1b"
+  },
+  {
+    "colorName": "G180",
+    "colorCode": "#d7b4a6"
+  },
+  {
+    "colorName": "G182",
+    "colorCode": "#e69178"
+  },
+  {
+    "colorName": "G184",
+    "colorCode": "#ef5f54"
+  },
+  {
+    "colorName": "G186",
+    "colorCode": "#df3726"
+  },
+  {
+    "colorName": "G751",
+    "colorCode": "#ecb176"
+  },
+  {
+    "colorName": "G752",
+    "colorCode": "#dfa667"
+  },
+  {
+    "colorName": "G753",
+    "colorCode": "#f48f35"
+  },
+  {
+    "colorName": "G754",
+    "colorCode": "#ca4c11"
+  },
+  {
+    "colorName": "G755",
+    "colorCode": "#921012"
+  },
+  {
+    "colorName": "G672",
+    "colorCode": "#dbaacc"
+  },
+  {
+    "colorName": "G673",
+    "colorCode": "#a9659d"
+  },
+  {
+    "colorName": "G674",
+    "colorCode": "#9a4798"
+  },
+  {
+    "colorName": "G675",
+    "colorCode": "#893087"
+  },
+  {
+    "colorName": "G676",
+    "colorCode": "#601d67"
+  },
+  {
+    "colorName": "G765",
+    "colorCode": "#d09783"
+  },
+  {
+    "colorName": "G766",
+    "colorCode": "#c97863"
+  },
+  {
+    "colorName": "G767",
+    "colorCode": "#875446"
+  },
+  {
+    "colorName": "G768",
+    "colorCode": "#87342d"
+  },
+  {
+    "colorName": "G769",
+    "colorCode": "#6f322f"
+  },
+  {
+    "colorName": "G310",
+    "colorCode": "#a8c5e5"
+  },
+  {
+    "colorName": "G312",
+    "colorCode": "#7b8dbb"
+  },
+  {
+    "colorName": "G314",
+    "colorCode": "#607298"
+  },
+  {
+    "colorName": "G316",
+    "colorCode": "#45567d"
+  },
+  {
+    "colorName": "G318",
+    "colorCode": "#202e53"
+  },
+  {
+    "colorName": "G243",
+    "colorCode": "#869f82"
+  },
+  {
+    "colorName": "G244",
+    "colorCode": "#5c916d"
+  },
+  {
+    "colorName": "G245",
+    "colorCode": "#2a492a"
+  },
+  {
+    "colorName": "G246",
+    "colorCode": "#152b14"
+  },
+  {
+    "colorName": "G247",
+    "colorCode": "#1c2d1a"
+  },
+  {
+    "colorName": "G850",
+    "colorCode": "#f2f3ee"
+  },
+  {
+    "colorName": "G219",
+    "colorCode": "#9ad2c3"
+  },
+  {
+    "colorName": "G220",
+    "colorCode": "#5cb7ab"
+  },
+  {
+    "colorName": "G221",
+    "colorCode": "#26a39e"
+  },
+  {
+    "colorName": "G222",
+    "colorCode": "#127f7f"
+  },
+  {
+    "colorName": "G223",
+    "colorCode": "#056b6b"
+  },
+  {
+    "colorName": "G540",
+    "colorCode": "#e0dc75"
+  },
+  {
+    "colorName": "G541",
+    "colorCode": "#f6e647"
+  },
+  {
+    "colorName": "G542",
+    "colorCode": "#dccc02"
+  },
+  {
+    "colorName": "G543",
+    "colorCode": "#ecd403"
+  },
+  {
+    "colorName": "G544",
+    "colorCode": "#e8cf06"
+  },
+  {
+    "colorName": "G546",
+    "colorCode": "#efcc01"
+  },
+  {
+    "colorName": "G273",
+    "colorCode": "#6c8d3e"
+  },
+  {
+    "colorName": "G274",
+    "colorCode": "#558b48"
+  },
+  {
+    "colorName": "G275",
+    "colorCode": "#406d2c"
+  },
+  {
+    "colorName": "G276",
+    "colorCode": "#2f5923"
+  },
+  {
+    "colorName": "G277",
+    "colorCode": "#0b1c09"
+  },
+  {
+    "colorName": "G411",
+    "colorCode": "#9f8d7f"
+  },
+  {
+    "colorName": "G412",
+    "colorCode": "#948686"
+  },
+  {
+    "colorName": "G413",
+    "colorCode": "#65524e"
+  },
+  {
+    "colorName": "G414",
+    "colorCode": "#463640"
+  },
+  {
+    "colorName": "G415",
+    "colorCode": "#2d1d20"
+  },
+  {
+    "colorName": "G731",
+    "colorCode": "#cab597"
+  },
+  {
+    "colorName": "G733",
+    "colorCode": "#b69d7f"
+  },
+  {
+    "colorName": "G734",
+    "colorCode": "#a07c5d"
+  },
+  {
+    "colorName": "G735",
+    "colorCode": "#9b7350"
+  },
+  {
+    "colorName": "G736",
+    "colorCode": "#7a4e29"
+  },
+  {
+    "colorName": "G737",
+    "colorCode": "#7e4d2c"
+  },
+  {
+    "colorName": "G738",
+    "colorCode": "#462111"
+  },
+  {
+    "colorName": "G739",
+    "colorCode": "#361715"
+  },
+  {
+    "colorName": "G111",
+    "colorCode": "#eecba1"
+  },
+  {
+    "colorName": "G169",
+    "colorCode": "#e3954b"
+  },
+  {
+    "colorName": "G170",
+    "colorCode": "#f07722"
+  },
+  {
+    "colorName": "G171",
+    "colorCode": "#eb4d10"
+  },
+  {
+    "colorName": "G172",
+    "colorCode": "#ea4918"
+  },
+  {
+    "colorName": "G173",
+    "colorCode": "#e33110"
+  },
+  {
+    "colorName": "G174",
+    "colorCode": "#e23825"
+  },
+  {
+    "colorName": "G175",
+    "colorCode": "#b91f15"
+  },
+  {
+    "colorName": "G163",
+    "colorCode": "#d7ac9c"
+  },
+  {
+    "colorName": "G166",
+    "colorCode": "#cc9a9b"
+  },
+  {
+    "colorName": "G801",
+    "colorCode": "#62c7dc"
+  },
+  {
+    "colorName": "G802",
+    "colorCode": "#0f9fbc"
+  },
+  {
+    "colorName": "G803",
+    "colorCode": "#1482bd"
+  },
+  {
+    "colorName": "G383",
+    "colorCode": "#7fbcbd"
+  },
+  {
+    "colorName": "G384",
+    "colorCode": "#47689b"
+  },
+  {
+    "colorName": "G385",
+    "colorCode": "#134f7a"
+  },
+  {
+    "colorName": "G621",
+    "colorCode": "#a493bb"
+  },
+  {
+    "colorName": "G622",
+    "colorCode": "#77507c"
+  },
+  {
+    "colorName": "G623",
+    "colorCode": "#66517f"
+  },
+  {
+    "colorName": "G625",
+    "colorCode": "#7a5193"
+  },
+  {
+    "colorName": "G331",
+    "colorCode": "#c2ccd5"
+  },
+  {
+    "colorName": "G332",
+    "colorCode": "#345398"
+  },
+  {
+    "colorName": "G333",
+    "colorCode": "#12397e"
+  },
+  {
+    "colorName": "G334",
+    "colorCode": "#0c235e"
+  },
+  {
+    "colorName": "G335",
+    "colorCode": "#0e1a3c"
+  },
+  {
+    "colorName": "G358",
+    "colorCode": "#0f0f29"
+  },
+  {
+    "colorName": "G324",
+    "colorCode": "#0d0b10"
+  },
+  {
+    "colorName": "G421",
+    "colorCode": "#f9f6f0"
+  },
+  {
+    "colorName": "G422",
+    "colorCode": "#9c8e75"
+  },
+  {
+    "colorName": "G561",
+    "colorCode": "#e2d64c"
+  },
+  {
+    "colorName": "G562",
+    "colorCode": "#ccbb25"
+  },
+  {
+    "colorName": "G563",
+    "colorCode": "#dab114"
+  },
+  {
+    "colorName": "G564",
+    "colorCode": "#827821"
+  },
+  {
+    "colorName": "G565",
+    "colorCode": "#473f14"
+  },
+  {
+    "colorName": "G251",
+    "colorCode": "#9ab882"
+  },
+  {
+    "colorName": "G253",
+    "colorCode": "#6b977e"
+  },
+  {
+    "colorName": "G255",
+    "colorCode": "#154a26"
+  },
+  {
+    "colorName": "G257",
+    "colorCode": "#0c3d1f"
+  },
+  {
+    "colorName": "G190",
+    "colorCode": "#a2121b"
+  },
+  {
+    "colorName": "G192",
+    "colorCode": "#70100c"
+  },
+  {
+    "colorName": "G194",
+    "colorCode": "#52140c"
+  },
+  {
+    "colorName": "G196",
+    "colorCode": "#381212"
+  },
+  {
+    "colorName": "G198",
+    "colorCode": "#240e10"
+  },
+  {
+    "colorName": "G390",
+    "colorCode": "#87a2ae"
+  },
+  {
+    "colorName": "G391",
+    "colorCode": "#3788ac"
+  },
+  {
+    "colorName": "G392",
+    "colorCode": "#12567d"
+  },
+  {
+    "colorName": "G393",
+    "colorCode": "#4b5972"
+  },
+  {
+    "colorName": "G531",
+    "colorCode": "#cba240"
+  },
+  {
+    "colorName": "G533",
+    "colorCode": "#ec8a08"
+  },
+  {
+    "colorName": "G535",
+    "colorCode": "#e46b0a"
+  },
+  {
+    "colorName": "G283",
+    "colorCode": "#b8ba0b"
+  },
+  {
+    "colorName": "G285",
+    "colorCode": "#403c0f"
+  },
+  {
+    "colorName": "G236",
+    "colorCode": "#bab679"
+  },
+  {
+    "colorName": "G237",
+    "colorCode": "#5c5e1d"
+  },
+  {
+    "colorName": "G238",
+    "colorCode": "#615b20"
+  },
+  {
+    "colorName": "G131",
+    "colorCode": "#e0b3cd"
+  },
+  {
+    "colorName": "G132",
+    "colorCode": "#e097c1"
+  },
+  {
+    "colorName": "G133",
+    "colorCode": "#d772ad"
+  },
+  {
+    "colorName": "G134",
+    "colorCode": "#7a1261"
+  },
+  {
+    "colorName": "G135",
+    "colorCode": "#7a0e5b"
+  },
+  {
+    "colorName": "G137",
+    "colorCode": "#601529"
+  },
+  {
+    "colorName": "G841",
+    "colorCode": "#b3a473"
+  },
+  {
+    "colorName": "G843",
+    "colorCode": "#92814d"
+  },
+  {
+    "colorName": "G844",
+    "colorCode": "#654f28"
+  },
+  {
+    "colorName": "G845",
+    "colorCode": "#785b34"
+  },
+  {
+    "colorName": "G711",
+    "colorCode": "#e3b43d"
+  },
+  {
+    "colorName": "G712",
+    "colorCode": "#c8752a"
+  },
+  {
+    "colorName": "G713",
+    "colorCode": "#742d11"
+  },
+  {
+    "colorName": "G714",
+    "colorCode": "#6e3218"
+  },
+  {
+    "colorName": "G155",
+    "colorCode": "#d10933"
+  },
+  {
+    "colorName": "G1051",
+    "colorCode": "#e2291b"
+  },
+  {
+    "colorName": "G1052",
+    "colorCode": "#e01914"
+  },
+  {
+    "colorName": "G1053",
+    "colorCode": "#dc1923"
+  },
+  {
+    "colorName": "G451",
+    "colorCode": "#aea5a0"
+  },
+  {
+    "colorName": "G452",
+    "colorCode": "#948b86"
+  },
+  {
+    "colorName": "G453",
+    "colorCode": "#6d5b57"
+  },
+  {
+    "colorName": "G342",
+    "colorCode": "#7aa19f"
+  },
+  {
+    "colorName": "G343",
+    "colorCode": "#2c5569"
+  },
+  {
+    "colorName": "G344",
+    "colorCode": "#0d2122"
+  },
+  {
+    "colorName": "G287",
+    "colorCode": "#838e55"
+  },
+  {
+    "colorName": "G288",
+    "colorCode": "#6f7946"
+  },
+  {
+    "colorName": "G289",
+    "colorCode": "#404729"
+  },
+  {
+    "colorName": "G901",
+    "colorCode": "#dbc37c"
+  },
+  {
+    "colorName": "G903",
+    "colorCode": "#a2a199"
+  }
 ]

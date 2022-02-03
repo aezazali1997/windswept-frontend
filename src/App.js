@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 import CustomLayout from './Layout';
@@ -8,8 +8,6 @@ import { PriceSheet } from './pages/AdminDashboard';
 import { OrderEstimate, Dashboard, Contact, ToggleTutorials, TermsOfServices } from './pages';
 
 function App() {
-  
-  
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userType, setUserType] = useState();
@@ -39,27 +37,25 @@ function App() {
         confirmButton:
           'w-96 inline-flex justify-center border  px-4 py-2 btn  text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm custom-btn-style hover:text-red-600 hover:bg-transparent hover:border-red-600',
         cancelButton:
-          'mt-3 w-full inline-flex justify-center hover:underline cursor-pointer px-4 py-2 text-sm font-medium text-gray-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm hover:underline hover:text-red-500',   
-        }
+          'mt-3 w-full inline-flex justify-center hover:underline cursor-pointer px-4 py-2 text-sm font-medium text-gray-600  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm hover:underline hover:text-red-500'
+      }
     }).then(async (result) => {
-      if(result.isConfirmed){
-        if (localStorage.getItem('role')==='admin'){
+      if (result.isConfirmed) {
+        if (localStorage.getItem('role') === 'admin') {
           window.location = '/admin/login';
-        }
-        else{
+        } else {
           window.location = '/login';
         }
         localStorage.clear();
       }
-    })
-    
+    });
   };
   return (
     !loading && (
       <>
         <CustomLayout handleLogout={handleLogout} login={authorized}>
           {authorized ? (
-            (userType === 'manager' || userType==='employee')  ? (
+            userType === 'manager' || userType === 'employee' ? (
               <Switch>
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/contact" component={Contact} />

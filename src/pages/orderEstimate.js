@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import _ from 'lodash';
 import swal from 'sweetalert';
 import { useReactToPrint } from 'react-to-print';
@@ -7,6 +7,10 @@ import Form from './Dashboard/estimateForm';
 import AxiosInstance from '../APIs/axiosInstance';
 import EstimateChart from '../components/EstimateTable';
 // import CopyToClipboard from 'react-copy-to-clipboard';
+import Swal from 'sweetalert2';
+import { singleArray } from '../utils/singleArray';
+import { productName } from '../utils/productNameGenerator';
+
 import moment from 'moment';
 let ColorsArray = [];
 
@@ -18,6 +22,7 @@ const OrderEstimate = () => {
   const [selected, setSelected] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [heightClicked, setHeightClicked] = useState(false);
+  const [dataFetched, setDataFetched] = useState(false);
   // const [rightWidth, setRightWidth] = useState('');
   // const [rightHeight, setRightHeight] = useState('');
   const [color, setColor] = useState('');
@@ -53,8 +58,8 @@ const OrderEstimate = () => {
     hRight: '0',
     size: 1,
     colorPick: '',
-    freight: '',
-    custom: '7',
+    // freight: '',
+    // custom: '7',
     color: ''
   });
   let PDF = useRef();
@@ -92,9 +97,13 @@ const OrderEstimate = () => {
         });
       });
       navigator.clipboard.writeText(
-        `Backing: ${backing}, Date: ${moment().format(
+        `Backing: ${backing.split(':')[1]}, Date: ${moment().format(
           'MMMM Do YYYY'
-        )}, Markup: ${markup}, Unit Price: ${price}, Unit Cost: ${cost}, Product: ${product}, Border: ${border}, Percent Embriodery: ${pe}, Shape: ${cut}, Size: ${size}`
+        )}, Markup: ${markup}, Unit Price: ${price}, Unit Cost: ${cost}, Product: ${productName(
+          product
+        )}, Border: ${border.split(':')[1]}, Percent Embriodery: ${pe.split(':')[1]}, Shape: ${
+          cut.split(':')[1]
+        }, Size: ${size}`
       );
       setIsCopied(true);
       setTimeout(() => {
@@ -112,6 +121,7 @@ const OrderEstimate = () => {
         setErrors({ ...errors, [name]: false });
       }
     }
+
     let updatedObj = { ...values, [name]: value };
     const size = await handleSize(updatedObj);
     setValues({ ...size });
@@ -176,8 +186,7 @@ const OrderEstimate = () => {
   };
 
   let handleSubmit = async () => {
-    const { product, material, backing, pe } = values;
-
+    const { product, material, backing, size, pe, freight, markup, color } = values;
     if (
       product === '' ||
       material === '' ||
@@ -185,74 +194,107 @@ const OrderEstimate = () => {
       pe === '' ||
       _.isEmpty(selected) === true
     ) {
-      // swal({
-      //     text: 'Fill Mandatory Fields',
-      //     icon: 'error',
-      //     dangerMode: true,
-      //     buttons: false,
-      //     timer: 3000,
-      // })
-    } else {
-      const { product, material, backing, size, pe, freight, markup, color } = values;
-      enableLoading();
-      const data = {
-        product: product,
-        material: material,
-        backing: backing,
-        size: size,
-        pc: parseInt(pe),
-        // addColor: ColorsArray.length,
-        color: parseInt(color),
-        freight: freight || 0,
-        markup: markup || 1
-      };
-      AxiosInstance.ordereEstimate(data)
-        .then(({ data: { data, message } }) => {
-          if (message === 'Failed' && data[0].error === 'Custom') {
-            swal({
-              text: 'Custom Quote will be given in 1-2 days',
-              icon: 'info',
-              dangerMode: true,
-              buttons: false,
-              timer: 3000
-            });
-            setAPIError('Custom Quote will be given in 1 - 2 days');
-            setData([]);
-            disableLoading();
-          } else if (message === 'Failed' && data[0].error === 'Not Found') {
-            swal({
-              text: 'Data Not Found',
-              icon: 'info',
-              dangerMode: true,
-              buttons: false,
-              timer: 3000
-            });
-            setAPIError('');
-            setData([]);
-            disableLoading();
-          } else {
-            swal({
-              text: 'Data Successfully Fetched',
-              icon: 'success',
-              dangerMode: true,
-              buttons: false,
-              timer: 3000
-            });
-            setAPIError('');
-            setData(data);
-            disableLoading();
+      return;
+    }
+    enableLoading();
+    const data = {
+      product: product,
+      material: material,
+      backing: backing,
+      size: size,
+      pc: pe,
+      selectedQuantity: singleArray(selected),
+      addColor: parseInt(color),
+      markup: markup === '' ? 1 : markup
+    };
+    try {
+      let res = await AxiosInstance.wimpieEstimate(data);
+      if (res.data[0].error) {
+        Swal.fire({
+          text: 'Custom Quote will be given in 1-2 days',
+          icon: 'info',
+          showCancelButton: false,
+          confirmButtonText: 'Ok',
+          buttonsStyling: false,
+          customClass: {
+            confirmButton:
+              'w-96 inline-flex bg-red-600 justify-center border border-red-600 hover:bg-transparent  hover:text-red-600 px-4 py-2 text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
           }
         })
-        .catch((error) => {
+        
+        setAPIError('Custom Quote will be given in 1-2 days');
+        setData([]);
+        disableLoading();
+      } else {
+        setAPIError('');
+        setData(res.data);
+        if (!dataFetched) {
           swal({
-            text: error,
-            icon: 'error',
+            text: 'Data Successfully Fetched',
+            icon: 'success',
             dangerMode: true,
             buttons: false,
             timer: 3000
           });
-        });
+          setDataFetched(true);
+        }
+
+        disableLoading();
+      }
+    } catch (error) {
+      if (apiError === 'Custom Quote will be given in 1-2 days') {
+        return;
+      }
+      setAPIError('');
+      setData([]);
+      console.log(error);
     }
+
+    // .then(({ data: { data, message } }) => {
+    //   if (message === 'Failed' && data[0].error === 'Custom') {
+    //     swal({
+    //       text: 'Custom Quote will be given in 1-2 days',
+    //       icon: 'info',
+    //       dangerMode: true,
+    //       buttons: false,
+    //       timer: 3000
+    //     });
+    //     setAPIError('Custom Quote will be given in 1 - 2 days');
+    //     setData([]);
+    //     disableLoading();
+    //   } else if (message === 'Failed' && data[0].error === 'Not Found') {
+    //     swal({
+    //       text: 'Data Not Found',
+    //       icon: 'info',
+    //       dangerMode: true,
+    //       buttons: false,
+    //       timer: 3000
+    //     });
+    //     setAPIError('');
+    //     setData([]);
+    //     disableLoading();
+    //   } else {
+    //     swal({
+    //       text: 'Data Successfully Fetched',
+    //       icon: 'success',
+    //       dangerMode: true,
+    //       buttons: false,
+    //       timer: 3000
+    //     });
+    //     setAPIError('');
+    //     setData(data);
+    //     disableLoading();
+    //   }
+    // })
+    // .catch((error) => {
+    //   swal({
+    //     text: error,
+    //     icon: 'error',
+    //     dangerMode: true,
+    //     buttons: false,
+    //     timer: 3000
+    //   });
+    // });
   };
 
   const { backing, markup, product, border, pe, cut, size } = values;
@@ -353,4 +395,4 @@ const OrderEstimate = () => {
   );
 };
 
-export default OrderEstimate
+export default OrderEstimate;

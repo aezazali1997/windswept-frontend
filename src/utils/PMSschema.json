@@ -1,3970 +1,3970 @@
 [
-    {
-        "colorName": "Process Yellow",
-        "colorCode": "#f7e214"
-    },
-    {
-        "colorName": "PMS 100",
-        "colorCode": "#f4ed7c"
-    },
-    {
-        "colorName": "PMS 101",
-        "colorCode": "#f4ed47"
-    },
-    {
-        "colorName": "PMS 102",
-        "colorCode": "#f9e814"
-    },
-    {
-        "colorName": "Pantone Yellow",
-        "colorCode": "#fce016"
-    },
-    {
-        "colorName": "PMS 103",
-        "colorCode": "#c6ad0f"
-    },
-    {
-        "colorName": "PMS 104",
-        "colorCode": "#ad9b0c"
-    },
-    {
-        "colorName": "PMS 105",
-        "colorCode": "#82750f"
-    },
-    {
-        "colorName": "PMS 106",
-        "colorCode": "#f7e859"
-    },
-    {
-        "colorName": "PMS 107",
-        "colorCode": "#f9e526"
-    },
-    {
-        "colorName": "PMS 108",
-        "colorCode": "#f7dd16"
-    },
-    {
-        "colorName": "PMS 109",
-        "colorCode": "#f9d616"
-    },
-    {
-        "colorName": "PMS 110",
-        "colorCode": "#d8b511"
-    },
-    {
-        "colorName": "PMS 111",
-        "colorCode": "#aa930a"
-    },
-    {
-        "colorName": "PMS 112",
-        "colorCode": "#99840a"
-    },
-    {
-        "colorName": "PMS 113",
-        "colorCode": "#f9e55b"
-    },
-    {
-        "colorName": "PMS 114",
-        "colorCode": "#f9e24c"
-    },
-    {
-        "colorName": "PMS 115",
-        "colorCode": "#f9e04c"
-    },
-    {
-        "colorName": "PMS 116",
-        "colorCode": "#fcd116"
-    },
-    {
-        "colorName": "PMS 117",
-        "colorCode": "#c6a00c"
-    },
-    {
-        "colorName": "PMS 118",
-        "colorCode": "#aa8e0a"
-    },
-    {
-        "colorName": "PMS 119",
-        "colorCode": "#897719"
-    },
-    {
-        "colorName": "PMS 120",
-        "colorCode": "#f9e27f"
-    },
-    {
-        "colorName": "PMS 121",
-        "colorCode": "#f9e070"
-    },
-    {
-        "colorName": "PMS 122",
-        "colorCode": "#fcd856"
-    },
-    {
-        "colorName": "PMS 123",
-        "colorCode": "#ffc61e"
-    },
-    {
-        "colorName": "PMS 124",
-        "colorCode": "#e0aa0f"
-    },
-    {
-        "colorName": "PMS 125",
-        "colorCode": "#b58c0a"
-    },
-    {
-        "colorName": "PMS 1205",
-        "colorCode": "#f7e8aa"
-    },
-    {
-        "colorName": "PMS 1215",
-        "colorCode": "#f9e08c"
-    },
-    {
-        "colorName": "PMS 1225",
-        "colorCode": "#ffcc49"
-    },
-    {
-        "colorName": "PMS 1235",
-        "colorCode": "#fcb514"
-    },
-    {
-        "colorName": "PMS 1245",
-        "colorCode": "#bf910c"
-    },
-    {
-        "colorName": "PMS 1255",
-        "colorCode": "#a37f14"
-    },
-    {
-        "colorName": "PMS 1265",
-        "colorCode": "#7c6316"
-    },
-    {
-        "colorName": "PMS 127",
-        "colorCode": "#f4e287"
-    },
-    {
-        "colorName": "PMS 128",
-        "colorCode": "#f4db60"
-    },
-    {
-        "colorName": "PMS 129",
-        "colorCode": "#f2d13d"
-    },
-    {
-        "colorName": "PMS 130",
-        "colorCode": "#eaaf0f"
-    },
-    {
-        "colorName": "PMS 131",
-        "colorCode": "#c6930a"
-    },
-    {
-        "colorName": "PMS 132",
-        "colorCode": "#9e7c0a"
-    },
-    {
-        "colorName": "PMS 133",
-        "colorCode": "#705b0a"
-    },
-    {
-        "colorName": "PMS 134",
-        "colorCode": "#ffd87f"
-    },
-    {
-        "colorName": "PMS 135",
-        "colorCode": "#fcc963"
-    },
-    {
-        "colorName": "PMS 136",
-        "colorCode": "#fcbf49"
-    },
-    {
-        "colorName": "PMS 137",
-        "colorCode": "#fca311"
-    },
-    {
-        "colorName": "PMS 138",
-        "colorCode": "#d88c02"
-    },
-    {
-        "colorName": "PMS 139",
-        "colorCode": "#af7505"
-    },
-    {
-        "colorName": "PMS 140",
-        "colorCode": "#7a5b11"
-    },
-    {
-        "colorName": "PMS 1345",
-        "colorCode": "#ffd691"
-    },
-    {
-        "colorName": "PMS 1355",
-        "colorCode": "#fcce87"
-    },
-    {
-        "colorName": "PMS 1365",
-        "colorCode": "#fcba5e"
-    },
-    {
-        "colorName": "PMS 1375",
-        "colorCode": "#f99b0c"
-    },
-    {
-        "colorName": "PMS 1385",
-        "colorCode": "#cc7a02"
-    },
-    {
-        "colorName": "PMS 1395",
-        "colorCode": "#996007"
-    },
-    {
-        "colorName": "PMS 1405",
-        "colorCode": "#6b4714"
-    },
-    {
-        "colorName": "PMS 141",
-        "colorCode": "#f2ce68"
-    },
-    {
-        "colorName": "PMS 142",
-        "colorCode": "#f2bf49"
-    },
-    {
-        "colorName": "PMS 143",
-        "colorCode": "#efb22d"
-    },
-    {
-        "colorName": "PMS 144",
-        "colorCode": "#e28c05"
-    },
-    {
-        "colorName": "PMS 145",
-        "colorCode": "#c67f07"
-    },
-    {
-        "colorName": "PMS 146",
-        "colorCode": "#9e6b05"
-    },
-    {
-        "colorName": "PMS 147",
-        "colorCode": "#725e26"
-    },
-    {
-        "colorName": "PMS 148",
-        "colorCode": "#ffd69b"
-    },
-    {
-        "colorName": "PMS 149",
-        "colorCode": "#fccc93"
-    },
-    {
-        "colorName": "PMS 150",
-        "colorCode": "#fcad56"
-    },
-    {
-        "colorName": "PMS 151",
-        "colorCode": "#f77f00"
-    },
-    {
-        "colorName": "PMS 152",
-        "colorCode": "#dd7500"
-    },
-    {
-        "colorName": "PMS 153",
-        "colorCode": "#bc6d0a"
-    },
-    {
-        "colorName": "PMS 154",
-        "colorCode": "#995905"
-    },
-    {
-        "colorName": "PMS 1485",
-        "colorCode": "#ffb777"
-    },
-    {
-        "colorName": "PMS 1495",
-        "colorCode": "#ff993f"
-    },
-    {
-        "colorName": "PMS 1505",
-        "colorCode": "#f47c00"
-    },
-    {
-        "colorName": "Orange 021",
-        "colorCode": "#ef6b00"
-    },
-    {
-        "colorName": "PMS 1525",
-        "colorCode": "#b55400"
-    },
-    {
-        "colorName": "PMS 1535",
-        "colorCode": "#8c4400"
-    },
-    {
-        "colorName": "PMS 1545",
-        "colorCode": "#4c280f"
-    },
-    {
-        "colorName": "PMS 155",
-        "colorCode": "#f4dbaa"
-    },
-    {
-        "colorName": "PMS 156",
-        "colorCode": "#f2c68c"
-    },
-    {
-        "colorName": "PMS 157",
-        "colorCode": "#eda04f"
-    },
-    {
-        "colorName": "PMS 158",
-        "colorCode": "#e87511"
-    },
-    {
-        "colorName": "PMS 159",
-        "colorCode": "#c66005"
-    },
-    {
-        "colorName": "PMS 160",
-        "colorCode": "#9e540a"
-    },
-    {
-        "colorName": "PMS 161",
-        "colorCode": "#633a11"
-    },
-    {
-        "colorName": "PMS 1555",
-        "colorCode": "#f9bf9e"
-    },
-    {
-        "colorName": "PMS 1565",
-        "colorCode": "#fca577"
-    },
-    {
-        "colorName": "PMS 1575",
-        "colorCode": "#fc8744"
-    },
-    {
-        "colorName": "PMS 1585",
-        "colorCode": "#f96b07"
-    },
-    {
-        "colorName": "PMS 1595",
-        "colorCode": "#d15b05"
-    },
-    {
-        "colorName": "PMS 1605",
-        "colorCode": "#a04f11"
-    },
-    {
-        "colorName": "PMS 1615",
-        "colorCode": "#843f0f"
-    },
-    {
-        "colorName": "PMS 162",
-        "colorCode": "#f9c6aa"
-    },
-    {
-        "colorName": "PMS 163",
-        "colorCode": "#fc9e70"
-    },
-    {
-        "colorName": "PMS 164",
-        "colorCode": "#fc7f3f"
-    },
-    {
-        "colorName": "PMS 165",
-        "colorCode": "#f96302"
-    },
-    {
-        "colorName": "PMS 166",
-        "colorCode": "#dd5900"
-    },
-    {
-        "colorName": "PMS 167",
-        "colorCode": "#bc4f07"
-    },
-    {
-        "colorName": "PMS 168",
-        "colorCode": "#6d3011"
-    },
-    {
-        "colorName": "PMS 1625",
-        "colorCode": "#f9a58c"
-    },
-    {
-        "colorName": "PMS 1635",
-        "colorCode": "#f98e6d"
-    },
-    {
-        "colorName": "PMS 1645",
-        "colorCode": "#f97242"
-    },
-    {
-        "colorName": "PMS 1655",
-        "colorCode": "#f95602"
-    },
-    {
-        "colorName": "PMS 1665",
-        "colorCode": "#f95602"
-    },
-    {
-        "colorName": "PMS 1675",
-        "colorCode": "#a53f0f"
-    },
-    {
-        "colorName": "PMS 1685",
-        "colorCode": "#843511"
-    },
-    {
-        "colorName": "PMS 169",
-        "colorCode": "#f9baaa"
-    },
-    {
-        "colorName": "PMS 170",
-        "colorCode": "#f98972"
-    },
-    {
-        "colorName": "PMS 171",
-        "colorCode": "#f9603a"
-    },
-    {
-        "colorName": "PMS 172",
-        "colorCode": "#f74902"
-    },
-    {
-        "colorName": "PMS 173",
-        "colorCode": "#d14414"
-    },
-    {
-        "colorName": "PMS 174",
-        "colorCode": "#933311"
-    },
-    {
-        "colorName": "PMS 175",
-        "colorCode": "#6d3321"
-    },
-    {
-        "colorName": "PMS 176",
-        "colorCode": "#f9afad"
-    },
-    {
-        "colorName": "PMS 177",
-        "colorCode": "#f9827f"
-    },
-    {
-        "colorName": "PMS 178",
-        "colorCode": "#f95e59"
-    },
-    {
-        "colorName": "Warm Red",
-        "colorCode": "#f93f26"
-    },
-    {
-        "colorName": "PMS 179",
-        "colorCode": "#e23d28"
-    },
-    {
-        "colorName": "PMS 180",
-        "colorCode": "#c13828"
-    },
-    {
-        "colorName": "PMS 181",
-        "colorCode": "#7c2d23"
-    },
-    {
-        "colorName": "PMS 1765",
-        "colorCode": "#f99ea3"
-    },
-    {
-        "colorName": "PMS 1775",
-        "colorCode": "#f9848e"
-    },
-    {
-        "colorName": "PMS 1785",
-        "colorCode": "#fc4f59"
-    },
-    {
-        "colorName": "PMS 1788",
-        "colorCode": "#ef2b2d"
-    },
-    {
-        "colorName": "PMS 1795",
-        "colorCode": "#d62828"
-    },
-    {
-        "colorName": "PMS 1805",
-        "colorCode": "#af2626"
-    },
-    {
-        "colorName": "PMS 1815",
-        "colorCode": "#7c211e"
-    },
-    {
-        "colorName": "PMS 1767",
-        "colorCode": "#f9b2b7"
-    },
-    {
-        "colorName": "PMS 1777",
-        "colorCode": "#fc6675"
-    },
-    {
-        "colorName": "PMS 1787",
-        "colorCode": "#f43f4f"
-    },
-    {
-        "colorName": "Red 032",
-        "colorCode": "#ef2b2d"
-    },
-    {
-        "colorName": "PMS 1797",
-        "colorCode": "#cc2d30"
-    },
-    {
-        "colorName": "PMS 1807",
-        "colorCode": "#a03033"
-    },
-    {
-        "colorName": "PMS 1817",
-        "colorCode": "#5b2d28"
-    },
-    {
-        "colorName": "PMS 182",
-        "colorCode": "#f9bfc1"
-    },
-    {
-        "colorName": "PMS 183",
-        "colorCode": "#fc8c99"
-    },
-    {
-        "colorName": "PMS 184",
-        "colorCode": "#fc5e72"
-    },
-    {
-        "colorName": "PMS 185",
-        "colorCode": "#e8112d"
-    },
-    {
-        "colorName": "PMS 186",
-        "colorCode": "#ce1126"
-    },
-    {
-        "colorName": "PMS 187",
-        "colorCode": "#af1e2d"
-    },
-    {
-        "colorName": "PMS 188",
-        "colorCode": "#7c2128"
-    },
-    {
-        "colorName": "PMS 189",
-        "colorCode": "#ffa3b2"
-    },
-    {
-        "colorName": "PMS 190",
-        "colorCode": "#fc758e"
-    },
-    {
-        "colorName": "PMS 191",
-        "colorCode": "#f4476b"
-    },
-    {
-        "colorName": "PMS 192",
-        "colorCode": "#e5053a"
-    },
-    {
-        "colorName": "PMS 193",
-        "colorCode": "#bf0a30"
-    },
-    {
-        "colorName": "PMS 194",
-        "colorCode": "#992135"
-    },
-    {
-        "colorName": "PMS 195",
-        "colorCode": "#772d35"
-    },
-    {
-        "colorName": "PMS 1895",
-        "colorCode": "#fcbfc9"
-    },
-    {
-        "colorName": "PMS 1905",
-        "colorCode": "#fc9bb2"
-    },
-    {
-        "colorName": "PMS 1915",
-        "colorCode": "#f4547c"
-    },
-    {
-        "colorName": "PMS 1925",
-        "colorCode": "#e00747"
-    },
-    {
-        "colorName": "PMS 1935",
-        "colorCode": "#c10538"
-    },
-    {
-        "colorName": "PMS 1945",
-        "colorCode": "#a80c35"
-    },
-    {
-        "colorName": "PMS 1955",
-        "colorCode": "#931638"
-    },
-    {
-        "colorName": "PMS 196",
-        "colorCode": "#f4c9c9"
-    },
-    {
-        "colorName": "PMS 197",
-        "colorCode": "#ef99a3"
-    },
-    {
-        "colorName": "PMS 198",
-        "colorCode": "#e5566d"
-    },
-    {
-        "colorName": "PMS 199",
-        "colorCode": "#d81c3f"
-    },
-    {
-        "colorName": "PMS 200",
-        "colorCode": "#c41e3a"
-    },
-    {
-        "colorName": "PMS 201",
-        "colorCode": "#a32638"
-    },
-    {
-        "colorName": "PMS 202",
-        "colorCode": "#8c2633"
-    },
-    {
-        "colorName": "PMS 203",
-        "colorCode": "#f2afc1"
-    },
-    {
-        "colorName": "PMS 204",
-        "colorCode": "#ed7a9e"
-    },
-    {
-        "colorName": "PMS 205",
-        "colorCode": "#e54c7c"
-    },
-    {
-        "colorName": "PMS 206",
-        "colorCode": "#d30547"
-    },
-    {
-        "colorName": "PMS 207",
-        "colorCode": "#af003d"
-    },
-    {
-        "colorName": "PMS 208",
-        "colorCode": "#8e2344"
-    },
-    {
-        "colorName": "PMS 209",
-        "colorCode": "#75263d"
-    },
-    {
-        "colorName": "PMS 210",
-        "colorCode": "#ffa0bf"
-    },
-    {
-        "colorName": "PMS 211",
-        "colorCode": "#ff77a8"
-    },
-    {
-        "colorName": "PMS 212",
-        "colorCode": "#f94f8e"
-    },
-    {
-        "colorName": "PMS 213",
-        "colorCode": "#ea0f6b"
-    },
-    {
-        "colorName": "PMS 214",
-        "colorCode": "#cc0256"
-    },
-    {
-        "colorName": "PMS 215",
-        "colorCode": "#a50544"
-    },
-    {
-        "colorName": "PMS 216",
-        "colorCode": "#7c1e3f"
-    },
-    {
-        "colorName": "PMS 217",
-        "colorCode": "#f4bfd1"
-    },
-    {
-        "colorName": "PMS 218",
-        "colorCode": "#ed72aa"
-    },
-    {
-        "colorName": "PMS 219",
-        "colorCode": "#e22882"
-    },
-    {
-        "colorName": "Rubine Red",
-        "colorCode": "#d10056"
-    },
-    {
-        "colorName": "PMS 220",
-        "colorCode": "#aa004f"
-    },
-    {
-        "colorName": "PMS 221",
-        "colorCode": "#930042"
-    },
-    {
-        "colorName": "PMS 222",
-        "colorCode": "#70193d"
-    },
-    {
-        "colorName": "PMS 223",
-        "colorCode": "#f993c4"
-    },
-    {
-        "colorName": "PMS 224",
-        "colorCode": "#f46baf"
-    },
-    {
-        "colorName": "PMS 225",
-        "colorCode": "#ed2893"
-    },
-    {
-        "colorName": "PMS 226",
-        "colorCode": "#d60270"
-    },
-    {
-        "colorName": "PMS 227",
-        "colorCode": "#ad005b"
-    },
-    {
-        "colorName": "PMS 228",
-        "colorCode": "#8c004c"
-    },
-    {
-        "colorName": "PMS 229",
-        "colorCode": "#6d213f"
-    },
-    {
-        "colorName": "PMS 230",
-        "colorCode": "#ffa0cc"
-    },
-    {
-        "colorName": "PMS 231",
-        "colorCode": "#fc70ba"
-    },
-    {
-        "colorName": "PMS 232",
-        "colorCode": "#f43fa5"
-    },
-    {
-        "colorName": "Rhodamine Red",
-        "colorCode": "#ed0091"
-    },
-    {
-        "colorName": "PMS 233",
-        "colorCode": "#ce007c"
-    },
-    {
-        "colorName": "PMS 234",
-        "colorCode": "#aa0066"
-    },
-    {
-        "colorName": "PMS 235",
-        "colorCode": "#8e0554"
-    },
-    {
-        "colorName": "PMS 236",
-        "colorCode": "#f9afd3"
-    },
-    {
-        "colorName": "PMS 237",
-        "colorCode": "#f484c4"
-    },
-    {
-        "colorName": "PMS 238",
-        "colorCode": "#ed4faf"
-    },
-    {
-        "colorName": "PMS 239",
-        "colorCode": "#e0219e"
-    },
-    {
-        "colorName": "PMS 240",
-        "colorCode": "#c40f89"
-    },
-    {
-        "colorName": "PMS 241",
-        "colorCode": "#ad0075"
-    },
-    {
-        "colorName": "PMS 242",
-        "colorCode": "#7c1c51"
-    },
-    {
-        "colorName": "PMS 2365",
-        "colorCode": "#f7c4d8"
-    },
-    {
-        "colorName": "PMS 2375",
-        "colorCode": "#ea6bbf"
-    },
-    {
-        "colorName": "PMS 2385",
-        "colorCode": "#db28a5"
-    },
-    {
-        "colorName": "PMS 2395",
-        "colorCode": "#c4008c"
-    },
-    {
-        "colorName": "PMS 2405",
-        "colorCode": "#a8007a"
-    },
-    {
-        "colorName": "PMS 2415",
-        "colorCode": "#9b0070"
-    },
-    {
-        "colorName": "PMS 2425",
-        "colorCode": "#87005b"
-    },
-    {
-        "colorName": "PMS 243",
-        "colorCode": "#f2bad8"
-    },
-    {
-        "colorName": "PMS 244",
-        "colorCode": "#eda0d3"
-    },
-    {
-        "colorName": "PMS 245",
-        "colorCode": "#e87fc9"
-    },
-    {
-        "colorName": "PMS 246",
-        "colorCode": "#cc00a0"
-    },
-    {
-        "colorName": "PMS 247",
-        "colorCode": "#b7008e"
-    },
-    {
-        "colorName": "PMS 248",
-        "colorCode": "#a3057f"
-    },
-    {
-        "colorName": "PMS 249",
-        "colorCode": "#7f2860"
-    },
-    {
-        "colorName": "PMS 250",
-        "colorCode": "#edc4dd"
-    },
-    {
-        "colorName": "PMS 251",
-        "colorCode": "#e29ed6"
-    },
-    {
-        "colorName": "PMS 252",
-        "colorCode": "#d36bc6"
-    },
-    {
-        "colorName": "Purple",
-        "colorCode": "#bf30b5"
-    },
-    {
-        "colorName": "PMS 253",
-        "colorCode": "#af23a5"
-    },
-    {
-        "colorName": "PMS 254",
-        "colorCode": "#a02d96"
-    },
-    {
-        "colorName": "PMS 255",
-        "colorCode": "#772d6b"
-    },
-    {
-        "colorName": "PMS 256",
-        "colorCode": "#e5c4d6"
-    },
-    {
-        "colorName": "PMS 257",
-        "colorCode": "#d3a5c9"
-    },
-    {
-        "colorName": "PMS 258",
-        "colorCode": "#9b4f96"
-    },
-    {
-        "colorName": "PMS 259",
-        "colorCode": "#72166b"
-    },
-    {
-        "colorName": "PMS 260",
-        "colorCode": "#681e5b"
-    },
-    {
-        "colorName": "PMS 261",
-        "colorCode": "#5e2154"
-    },
-    {
-        "colorName": "PMS 262",
-        "colorCode": "#542344"
-    },
-    {
-        "colorName": "PMS 2562",
-        "colorCode": "#d8a8d8"
-    },
-    {
-        "colorName": "PMS 2572",
-        "colorCode": "#c687d1"
-    },
-    {
-        "colorName": "PMS 2582",
-        "colorCode": "#aa47ba"
-    },
-    {
-        "colorName": "PMS 2592",
-        "colorCode": "#930fa5"
-    },
-    {
-        "colorName": "PMS 2602",
-        "colorCode": "#820c8e"
-    },
-    {
-        "colorName": "PMS 2612",
-        "colorCode": "#701e72"
-    },
-    {
-        "colorName": "PMS 2622",
-        "colorCode": "#602d59"
-    },
-    {
-        "colorName": "PMS 2563",
-        "colorCode": "#d1a0cc"
-    },
-    {
-        "colorName": "PMS 2573",
-        "colorCode": "#ba7cbc"
-    },
-    {
-        "colorName": "PMS 2583",
-        "colorCode": "#9e4fa5"
-    },
-    {
-        "colorName": "PMS 2593",
-        "colorCode": "#872b93"
-    },
-    {
-        "colorName": "PMS 2603",
-        "colorCode": "#70147a"
-    },
-    {
-        "colorName": "PMS 2613",
-        "colorCode": "#66116d"
-    },
-    {
-        "colorName": "PMS 2623",
-        "colorCode": "#5b195e"
-    },
-    {
-        "colorName": "PMS 2567",
-        "colorCode": "#bf93cc"
-    },
-    {
-        "colorName": "PMS 2577",
-        "colorCode": "#aa72bf"
-    },
-    {
-        "colorName": "PMS 2587",
-        "colorCode": "#8e47ad"
-    },
-    {
-        "colorName": "PMS 2597",
-        "colorCode": "#66008c"
-    },
-    {
-        "colorName": "PMS 2607",
-        "colorCode": "#5b027a"
-    },
-    {
-        "colorName": "PMS 2617",
-        "colorCode": "#560c70"
-    },
-    {
-        "colorName": "PMS 2627",
-        "colorCode": "#4c145e"
-    },
-    {
-        "colorName": "PMS 263",
-        "colorCode": "#e0cee0"
-    },
-    {
-        "colorName": "PMS 264",
-        "colorCode": "#c6aadb"
-    },
-    {
-        "colorName": "PMS 265",
-        "colorCode": "#9663c4"
-    },
-    {
-        "colorName": "PMS 266",
-        "colorCode": "#6d28aa"
-    },
-    {
-        "colorName": "PMS 267",
-        "colorCode": "#59118e"
-    },
-    {
-        "colorName": "PMS 268",
-        "colorCode": "#4f2170"
-    },
-    {
-        "colorName": "PMS 269",
-        "colorCode": "#442359"
-    },
-    {
-        "colorName": "PMS 2635",
-        "colorCode": "#c9add8"
-    },
-    {
-        "colorName": "PMS 2645",
-        "colorCode": "#b591d1"
-    },
-    {
-        "colorName": "PMS 2655",
-        "colorCode": "#9b6dc6"
-    },
-    {
-        "colorName": "PMS 2665",
-        "colorCode": "#894fbf"
-    },
-    {
-        "colorName": "Violet",
-        "colorCode": "#6607a5"
-    },
-    {
-        "colorName": "PMS 2685",
-        "colorCode": "#56008c"
-    },
-    {
-        "colorName": "PMS 2695",
-        "colorCode": "#44235e"
-    },
-    {
-        "colorName": "PMS 270",
-        "colorCode": "#baafd3"
-    },
-    {
-        "colorName": "PMS 271",
-        "colorCode": "#9e91c6"
-    },
-    {
-        "colorName": "PMS 272",
-        "colorCode": "#8977ba"
-    },
-    {
-        "colorName": "PMS 273",
-        "colorCode": "#38197a"
-    },
-    {
-        "colorName": "PMS 274",
-        "colorCode": "#2b1166"
-    },
-    {
-        "colorName": "PMS 275",
-        "colorCode": "#260f54"
-    },
-    {
-        "colorName": "PMS 276",
-        "colorCode": "#2b2147"
-    },
-    {
-        "colorName": "PMS 2705",
-        "colorCode": "#ad9ed3"
-    },
-    {
-        "colorName": "PMS 2715",
-        "colorCode": "#937acc"
-    },
-    {
-        "colorName": "PMS 2725",
-        "colorCode": "#7251bc"
-    },
-    {
-        "colorName": "PMS 2735",
-        "colorCode": "#4f0093"
-    },
-    {
-        "colorName": "PMS 2745",
-        "colorCode": "#3f0077"
-    },
-    {
-        "colorName": "PMS 2755",
-        "colorCode": "#35006d"
-    },
-    {
-        "colorName": "PMS 2765",
-        "colorCode": "#2b0c56"
-    },
-    {
-        "colorName": "PMS 2706",
-        "colorCode": "#d1cedd"
-    },
-    {
-        "colorName": "PMS 2716",
-        "colorCode": "#a5a0d6"
-    },
-    {
-        "colorName": "PMS 2726",
-        "colorCode": "#6656bc"
-    },
-    {
-        "colorName": "PMS 2736",
-        "colorCode": "#4930ad"
-    },
-    {
-        "colorName": "PMS 2746",
-        "colorCode": "#3f2893"
-    },
-    {
-        "colorName": "PMS 2756",
-        "colorCode": "#332875"
-    },
-    {
-        "colorName": "PMS 2766",
-        "colorCode": "#2b265b"
-    },
-    {
-        "colorName": "PMS 2707",
-        "colorCode": "#bfd1e5"
-    },
-    {
-        "colorName": "PMS 2717",
-        "colorCode": "#a5bae0"
-    },
-    {
-        "colorName": "PMS 2727",
-        "colorCode": "#5e68c4"
-    },
-    {
-        "colorName": "Blue 072",
-        "colorCode": "#380096"
-    },
-    {
-        "colorName": "PMS 2747",
-        "colorCode": "#1c146b"
-    },
-    {
-        "colorName": "PMS 2757",
-        "colorCode": "#141654"
-    },
-    {
-        "colorName": "PMS 2767",
-        "colorCode": "#14213d"
-    },
-    {
-        "colorName": "PMS 2708",
-        "colorCode": "#afbcdb"
-    },
-    {
-        "colorName": "PMS 2718",
-        "colorCode": "#5b77cc"
-    },
-    {
-        "colorName": "PMS 2728",
-        "colorCode": "#3044b5"
-    },
-    {
-        "colorName": "PMS 2738",
-        "colorCode": "#2d008e"
-    },
-    {
-        "colorName": "PMS 2748",
-        "colorCode": "#1e1c77"
-    },
-    {
-        "colorName": "PMS 2758",
-        "colorCode": "#192168"
-    },
-    {
-        "colorName": "PMS 2768",
-        "colorCode": "#112151"
-    },
-    {
-        "colorName": "PMS 277",
-        "colorCode": "#b5d1e8"
-    },
-    {
-        "colorName": "PMS 278",
-        "colorCode": "#99badd"
-    },
-    {
-        "colorName": "PMS 279",
-        "colorCode": "#6689cc"
-    },
-    {
-        "colorName": "Reflex Blue",
-        "colorCode": "#0c1c8c"
-    },
-    {
-        "colorName": "PMS 280",
-        "colorCode": "#002b7f"
-    },
-    {
-        "colorName": "PMS 281",
-        "colorCode": "#002868"
-    },
-    {
-        "colorName": "PMS 282",
-        "colorCode": "#002654"
-    },
-    {
-        "colorName": "PMS 283",
-        "colorCode": "#9bc4e2"
-    },
-    {
-        "colorName": "PMS 284",
-        "colorCode": "#75aadb"
-    },
-    {
-        "colorName": "PMS 285",
-        "colorCode": "#3a75c4"
-    },
-    {
-        "colorName": "PMS 286",
-        "colorCode": "#0038a8"
-    },
-    {
-        "colorName": "PMS 287",
-        "colorCode": "#003893"
-    },
-    {
-        "colorName": "PMS 288",
-        "colorCode": "#00337f"
-    },
-    {
-        "colorName": "PMS 289",
-        "colorCode": "#002649"
-    },
-    {
-        "colorName": "PMS 290",
-        "colorCode": "#c4d8e2"
-    },
-    {
-        "colorName": "PMS 291",
-        "colorCode": ""
-    },
-    {
-        "colorName": "PMS 292",
-        "colorCode": "#a8cee2"
-    },
-    {
-        "colorName": "PMS 293",
-        "colorCode": "#75b2dd"
-    },
-    {
-        "colorName": "PMS 294",
-        "colorCode": "#0051ba"
-    },
-    {
-        "colorName": "PMS 295",
-        "colorCode": "#003f87"
-    },
-    {
-        "colorName": "PMS 296",
-        "colorCode": "#00386b"
-    },
-    {
-        "colorName": "PMS 2905",
-        "colorCode": "#002d47"
-    },
-    {
-        "colorName": "PMS 2915",
-        "colorCode": "#93c6e0"
-    },
-    {
-        "colorName": "PMS 2925",
-        "colorCode": "#60afdd"
-    },
-    {
-        "colorName": "PMS 2935",
-        "colorCode": "#008ed6"
-    },
-    {
-        "colorName": "PMS 2945",
-        "colorCode": "#005bbf"
-    },
-    {
-        "colorName": "PMS 2955",
-        "colorCode": "#0054a0"
-    },
-    {
-        "colorName": "PMS 2965",
-        "colorCode": "#003d6b"
-    },
-    {
-        "colorName": "PMS 297",
-        "colorCode": "#00334c"
-    },
-    {
-        "colorName": "PMS 298",
-        "colorCode": "#82c6e2"
-    },
-    {
-        "colorName": "PMS 299",
-        "colorCode": "#51b5e0"
-    },
-    {
-        "colorName": "PMS 300",
-        "colorCode": "#00a3dd"
-    },
-    {
-        "colorName": "PMS 301",
-        "colorCode": "#0072c6"
-    },
-    {
-        "colorName": "PMS 302",
-        "colorCode": "#005b99"
-    },
-    {
-        "colorName": "PMS 303",
-        "colorCode": "#004f6d"
-    },
-    {
-        "colorName": "PMS 2975",
-        "colorCode": "#003f54"
-    },
-    {
-        "colorName": "PMS 2985",
-        "colorCode": "#bae0e2"
-    },
-    {
-        "colorName": "PMS 2995",
-        "colorCode": "#51bfe2"
-    },
-    {
-        "colorName": "PMS 3005",
-        "colorCode": "#00a5db"
-    },
-    {
-        "colorName": "PMS 3015",
-        "colorCode": "#0084c9"
-    },
-    {
-        "colorName": "PMS 3025",
-        "colorCode": "#00709e"
-    },
-    {
-        "colorName": "PMS 3035",
-        "colorCode": "#00546b"
-    },
-    {
-        "colorName": "PMS 304",
-        "colorCode": "#004454"
-    },
-    {
-        "colorName": "PMS 305",
-        "colorCode": "#a5dde2"
-    },
-    {
-        "colorName": "PMS 306",
-        "colorCode": "#70cee2"
-    },
-    {
-        "colorName": "Process Blue",
-        "colorCode": "#00bce2"
-    },
-    {
-        "colorName": "PMS 307",
-        "colorCode": "#0091c9"
-    },
-    {
-        "colorName": "PMS 308",
-        "colorCode": "#007aa5"
-    },
-    {
-        "colorName": "PMS 309",
-        "colorCode": "#00607c"
-    },
-    {
-        "colorName": "PMS 310",
-        "colorCode": "#003f49"
-    },
-    {
-        "colorName": "PMS 311",
-        "colorCode": "#72d1dd"
-    },
-    {
-        "colorName": "PMS 312",
-        "colorCode": "#28c4d8"
-    },
-    {
-        "colorName": "PMS 313",
-        "colorCode": "#00adc6"
-    },
-    {
-        "colorName": "PMS 314",
-        "colorCode": "#0099b5"
-    },
-    {
-        "colorName": "PMS 315",
-        "colorCode": "#00829b"
-    },
-    {
-        "colorName": "PMS 316",
-        "colorCode": "#006b77"
-    },
-    {
-        "colorName": "PMS 3105",
-        "colorCode": "#00494f"
-    },
-    {
-        "colorName": "PMS 3115",
-        "colorCode": "#7fd6db"
-    },
-    {
-        "colorName": "PMS 3125",
-        "colorCode": "#2dc6d6"
-    },
-    {
-        "colorName": "PMS 3135",
-        "colorCode": "#00b7c6"
-    },
-    {
-        "colorName": "PMS 3145",
-        "colorCode": "#009baa"
-    },
-    {
-        "colorName": "PMS 3155",
-        "colorCode": "#00848e"
-    },
-    {
-        "colorName": "PMS 3165",
-        "colorCode": "#006d75"
-    },
-    {
-        "colorName": "PMS 317",
-        "colorCode": "#00565b"
-    },
-    {
-        "colorName": "PMS 318",
-        "colorCode": "#c9e8dd"
-    },
-    {
-        "colorName": "PMS 319",
-        "colorCode": "#93dddb"
-    },
-    {
-        "colorName": "PMS 320",
-        "colorCode": "#4cced1"
-    },
-    {
-        "colorName": "PMS 321",
-        "colorCode": "#009ea0"
-    },
-    {
-        "colorName": "PMS 322",
-        "colorCode": "#008789"
-    },
-    {
-        "colorName": "PMS 323",
-        "colorCode": "#007272"
-    },
-    {
-        "colorName": "PMS 324",
-        "colorCode": "#006663"
-    },
-    {
-        "colorName": "PMS 325",
-        "colorCode": "#aaddd6"
-    },
-    {
-        "colorName": "PMS 326",
-        "colorCode": "#56c9c1"
-    },
-    {
-        "colorName": "PMS 327",
-        "colorCode": "#00b2aa"
-    },
-    {
-        "colorName": "PMS 328",
-        "colorCode": "#008c82"
-    },
-    {
-        "colorName": "PMS 329",
-        "colorCode": "#007770"
-    },
-    {
-        "colorName": "PMS 330",
-        "colorCode": "#006d66"
-    },
-    {
-        "colorName": "PMS 3242",
-        "colorCode": "#005951"
-    },
-    {
-        "colorName": "PMS 3252",
-        "colorCode": "#87ddd1"
-    },
-    {
-        "colorName": "PMS 3262",
-        "colorCode": "#56d6c9"
-    },
-    {
-        "colorName": "PMS 3272",
-        "colorCode": "#00c1b5"
-    },
-    {
-        "colorName": "PMS 3282",
-        "colorCode": "#00aa9e"
-    },
-    {
-        "colorName": "PMS 3292",
-        "colorCode": "#008c82"
-    },
-    {
-        "colorName": "PMS 3302",
-        "colorCode": "#006056"
-    },
-    {
-        "colorName": "PMS 3245",
-        "colorCode": "#00493f"
-    },
-    {
-        "colorName": "PMS 3255",
-        "colorCode": "#8ce0d1"
-    },
-    {
-        "colorName": "PMS 3265",
-        "colorCode": "#47d6c1"
-    },
-    {
-        "colorName": "PMS 3275",
-        "colorCode": "#00c6b2"
-    },
-    {
-        "colorName": "PMS 3285",
-        "colorCode": "#00b2a0"
-    },
-    {
-        "colorName": "PMS 3295",
-        "colorCode": "#009987"
-    },
-    {
-        "colorName": "PMS 3305",
-        "colorCode": "#008272"
-    },
-    {
-        "colorName": "PMS 3248",
-        "colorCode": "#004f42"
-    },
-    {
-        "colorName": "PMS 3258",
-        "colorCode": "#7ad3c1"
-    },
-    {
-        "colorName": "PMS 3268",
-        "colorCode": "#35c4af"
-    },
-    {
-        "colorName": "PMS 3278",
-        "colorCode": "#00af99"
-    },
-    {
-        "colorName": "PMS 3288",
-        "colorCode": "#009b84"
-    },
-    {
-        "colorName": "PMS 3298",
-        "colorCode": "#008270"
-    },
-    {
-        "colorName": "PMS 3308",
-        "colorCode": "#006b5b"
-    },
-    {
-        "colorName": "PMS 331",
-        "colorCode": "#004438"
-    },
-    {
-        "colorName": "PMS 332",
-        "colorCode": "#baead6"
-    },
-    {
-        "colorName": "PMS 333",
-        "colorCode": "#a0e5ce"
-    },
-    {
-        "colorName": "Green",
-        "colorCode": "#5eddc1"
-    },
-    {
-        "colorName": "PMS 334",
-        "colorCode": "#00af93"
-    },
-    {
-        "colorName": "PMS 335",
-        "colorCode": "#00997c"
-    },
-    {
-        "colorName": "PMS 336",
-        "colorCode": "#007c66"
-    },
-    {
-        "colorName": "PMS 337",
-        "colorCode": "#006854"
-    },
-    {
-        "colorName": "PMS 338",
-        "colorCode": "#9bdbc1"
-    },
-    {
-        "colorName": "PMS 339",
-        "colorCode": "#7ad1b5"
-    },
-    {
-        "colorName": "PMS 340",
-        "colorCode": "#00b28c"
-    },
-    {
-        "colorName": "PMS 341",
-        "colorCode": "#009977"
-    },
-    {
-        "colorName": "PMS 342",
-        "colorCode": "#007a5e"
-    },
-    {
-        "colorName": "PMS 343",
-        "colorCode": "#006b54"
-    },
-    {
-        "colorName": "PMS 3375",
-        "colorCode": "#00563f"
-    },
-    {
-        "colorName": "PMS 3385",
-        "colorCode": "#8ee2bc"
-    },
-    {
-        "colorName": "PMS 3395",
-        "colorCode": "#54d8a8"
-    },
-    {
-        "colorName": "PMS 3405",
-        "colorCode": "#00c993"
-    },
-    {
-        "colorName": "PMS 3415",
-        "colorCode": "#00b27a"
-    },
-    {
-        "colorName": "PMS 3425",
-        "colorCode": "#007c59"
-    },
-    {
-        "colorName": "PMS 3435",
-        "colorCode": "#006847"
-    },
-    {
-        "colorName": "PMS 344",
-        "colorCode": "#024930"
-    },
-    {
-        "colorName": "PMS 345",
-        "colorCode": "#b5e2bf"
-    },
-    {
-        "colorName": "PMS 346",
-        "colorCode": "#96d8af"
-    },
-    {
-        "colorName": "PMS 347",
-        "colorCode": "#70ce9b"
-    },
-    {
-        "colorName": "PMS 348",
-        "colorCode": "#009e60"
-    },
-    {
-        "colorName": "PMS 349",
-        "colorCode": "#008751"
-    },
-    {
-        "colorName": "PMS 350",
-        "colorCode": "#006b3f"
-    },
-    {
-        "colorName": "PMS 351",
-        "colorCode": "#234f33"
-    },
-    {
-        "colorName": "PMS 352",
-        "colorCode": "#b5e8bf"
-    },
-    {
-        "colorName": "PMS 353",
-        "colorCode": "#99e5b2"
-    },
-    {
-        "colorName": "PMS 354",
-        "colorCode": "#84e2a8"
-    },
-    {
-        "colorName": "PMS 355",
-        "colorCode": "#00b760"
-    },
-    {
-        "colorName": "PMS 356",
-        "colorCode": "#009e49"
-    },
-    {
-        "colorName": "PMS 357",
-        "colorCode": "#007a3d"
-    },
-    {
-        "colorName": "PMS 358",
-        "colorCode": "#215b33"
-    },
-    {
-        "colorName": "PMS 359",
-        "colorCode": "#aadd96"
-    },
-    {
-        "colorName": "PMS 360",
-        "colorCode": "#a0db8e"
-    },
-    {
-        "colorName": "PMS 361",
-        "colorCode": "#60c659"
-    },
-    {
-        "colorName": "PMS 362",
-        "colorCode": "#1eb53a"
-    },
-    {
-        "colorName": "PMS 363",
-        "colorCode": "#339e35"
-    },
-    {
-        "colorName": "PMS 364",
-        "colorCode": "#3d8e33"
-    },
-    {
-        "colorName": "PMS 365",
-        "colorCode": "#3a7728"
-    },
-    {
-        "colorName": "PMS 366",
-        "colorCode": "#d3e8a3"
-    },
-    {
-        "colorName": "PMS 367",
-        "colorCode": "#c4e58e"
-    },
-    {
-        "colorName": "PMS 368",
-        "colorCode": "#aadd6d"
-    },
-    {
-        "colorName": "PMS 369",
-        "colorCode": "#5bbf21"
-    },
-    {
-        "colorName": "PMS 370",
-        "colorCode": "#56aa1c"
-    },
-    {
-        "colorName": "PMS 371",
-        "colorCode": "#568e14"
-    },
-    {
-        "colorName": "PMS 372",
-        "colorCode": "#566b21"
-    },
-    {
-        "colorName": "PMS 373",
-        "colorCode": "#d8ed96"
-    },
-    {
-        "colorName": "PMS 374",
-        "colorCode": "#ceea82"
-    },
-    {
-        "colorName": "PMS 375",
-        "colorCode": "#bae860"
-    },
-    {
-        "colorName": "PMS 376",
-        "colorCode": "#8cd600"
-    },
-    {
-        "colorName": "PMS 377",
-        "colorCode": "#7fba00"
-    },
-    {
-        "colorName": "PMS 378",
-        "colorCode": "#709302"
-    },
-    {
-        "colorName": "PMS 379",
-        "colorCode": "#566314"
-    },
-    {
-        "colorName": "PMS 380",
-        "colorCode": "#e0ea68"
-    },
-    {
-        "colorName": "PMS 381",
-        "colorCode": "#d6e542"
-    },
-    {
-        "colorName": "PMS 382",
-        "colorCode": "#cce226"
-    },
-    {
-        "colorName": "PMS 383",
-        "colorCode": "#bad80a"
-    },
-    {
-        "colorName": "PMS 384",
-        "colorCode": "#a3af07"
-    },
-    {
-        "colorName": "PMS 385",
-        "colorCode": "#939905"
-    },
-    {
-        "colorName": "PMS 386",
-        "colorCode": "#707014"
-    },
-    {
-        "colorName": "PMS 387",
-        "colorCode": "#e8ed60"
-    },
-    {
-        "colorName": "PMS 388",
-        "colorCode": "#e0ed44"
-    },
-    {
-        "colorName": "PMS 389",
-        "colorCode": "#d6e80f"
-    },
-    {
-        "colorName": "PMS 390",
-        "colorCode": "#cee007"
-    },
-    {
-        "colorName": "PMS 391",
-        "colorCode": "#bac405"
-    },
-    {
-        "colorName": "PMS 392",
-        "colorCode": "#9e9e07"
-    },
-    {
-        "colorName": "PMS 393",
-        "colorCode": "#848205"
-    },
-    {
-        "colorName": "PMS 394",
-        "colorCode": "#f2ef87"
-    },
-    {
-        "colorName": "PMS 395",
-        "colorCode": "#eaed35"
-    },
-    {
-        "colorName": "PMS 396",
-        "colorCode": "#e5e811"
-    },
-    {
-        "colorName": "PMS 397",
-        "colorCode": "#e0e20c"
-    },
-    {
-        "colorName": "PMS 398",
-        "colorCode": "#c1bf0a"
-    },
-    {
-        "colorName": "PMS 399",
-        "colorCode": "#afa80a"
-    },
-    {
-        "colorName": "PMS 3935",
-        "colorCode": "#998e07"
-    },
-    {
-        "colorName": "PMS 3945",
-        "colorCode": "#f2ed6d"
-    },
-    {
-        "colorName": "PMS 3955",
-        "colorCode": "#efea07"
-    },
-    {
-        "colorName": "PMS 3965",
-        "colorCode": "#ede211"
-    },
-    {
-        "colorName": "PMS 3975",
-        "colorCode": "#e8dd11"
-    },
-    {
-        "colorName": "PMS 3985",
-        "colorCode": "#b5a80c"
-    },
-    {
-        "colorName": "PMS 3995",
-        "colorCode": "#998c0a"
-    },
-    {
-        "colorName": "PMS 400",
-        "colorCode": "#6d6002"
-    },
-    {
-        "colorName": "PMS 401",
-        "colorCode": "#d1c6b5"
-    },
-    {
-        "colorName": "PMS 402",
-        "colorCode": "#c1b5a5"
-    },
-    {
-        "colorName": "PMS 403",
-        "colorCode": "#afa593"
-    },
-    {
-        "colorName": "PMS 404",
-        "colorCode": "#998c7c"
-    },
-    {
-        "colorName": "PMS 405",
-        "colorCode": "#827566"
-    },
-    {
-        "colorName": "Black",
-        "colorCode": "#6b5e4f"
-    },
-    {
-        "colorName": "PMS 406",
-        "colorCode": "#3d332b"
-    },
-    {
-        "colorName": "PMS 407",
-        "colorCode": "#cec1b5"
-    },
-    {
-        "colorName": "PMS 408",
-        "colorCode": "#baaa9e"
-    },
-    {
-        "colorName": "PMS 409",
-        "colorCode": "#a8998c"
-    },
-    {
-        "colorName": "PMS 410",
-        "colorCode": "#99897c"
-    },
-    {
-        "colorName": "PMS 411",
-        "colorCode": "#7c6d63"
-    },
-    {
-        "colorName": "PMS 412",
-        "colorCode": "#66594c"
-    },
-    {
-        "colorName": "PMS 413",
-        "colorCode": "#3d3028"
-    },
-    {
-        "colorName": "PMS 414",
-        "colorCode": "#c6c1b2"
-    },
-    {
-        "colorName": "PMS 415",
-        "colorCode": "#b5afa0"
-    },
-    {
-        "colorName": "PMS 416",
-        "colorCode": "#a39e8c"
-    },
-    {
-        "colorName": "PMS 417",
-        "colorCode": "#8e8c7a"
-    },
-    {
-        "colorName": "PMS 418",
-        "colorCode": "#777263"
-    },
-    {
-        "colorName": "PMS 419",
-        "colorCode": "#605e4f"
-    },
-    {
-        "colorName": "PMS 420",
-        "colorCode": "#282821"
-    },
-    {
-        "colorName": "PMS 421",
-        "colorCode": "#d1ccbf"
-    },
-    {
-        "colorName": "PMS 422",
-        "colorCode": "#bfbaaf"
-    },
-    {
-        "colorName": "PMS 423",
-        "colorCode": "#afaaa3"
-    },
-    {
-        "colorName": "PMS 424",
-        "colorCode": "#96938e"
-    },
-    {
-        "colorName": "PMS 425",
-        "colorCode": "#827f77"
-    },
-    {
-        "colorName": "PMS 426",
-        "colorCode": "#60605b"
-    },
-    {
-        "colorName": "PMS 427",
-        "colorCode": "#2b2b28"
-    },
-    {
-        "colorName": "PMS 428",
-        "colorCode": "#dddbd1"
-    },
-    {
-        "colorName": "PMS 429",
-        "colorCode": "#d1cec6"
-    },
-    {
-        "colorName": "PMS 430",
-        "colorCode": "#adafaa"
-    },
-    {
-        "colorName": "PMS 431",
-        "colorCode": "#919693"
-    },
-    {
-        "colorName": "PMS 432",
-        "colorCode": "#666d70"
-    },
-    {
-        "colorName": "PMS 433",
-        "colorCode": "#444f51"
-    },
-    {
-        "colorName": "PMS 434",
-        "colorCode": "#30383a"
-    },
-    {
-        "colorName": "PMS 435",
-        "colorCode": "#e0d1c6"
-    },
-    {
-        "colorName": "PMS 436",
-        "colorCode": "#d3bfb7"
-    },
-    {
-        "colorName": "PMS 437",
-        "colorCode": "#bca59e"
-    },
-    {
-        "colorName": "PMS 438",
-        "colorCode": "#8c706b"
-    },
-    {
-        "colorName": "PMS 439",
-        "colorCode": "#593f3d"
-    },
-    {
-        "colorName": "PMS 440",
-        "colorCode": "#493533"
-    },
-    {
-        "colorName": "PMS 441",
-        "colorCode": "#3f302b"
-    },
-    {
-        "colorName": "PMS 442",
-        "colorCode": "#d1d1c6"
-    },
-    {
-        "colorName": "PMS 443",
-        "colorCode": "#babfb7"
-    },
-    {
-        "colorName": "PMS 444",
-        "colorCode": "#a3a8a3"
-    },
-    {
-        "colorName": "PMS 445",
-        "colorCode": "#898e8c"
-    },
-    {
-        "colorName": "PMS 446",
-        "colorCode": "#565959"
-    },
-    {
-        "colorName": "PMS 447",
-        "colorCode": "#494c49"
-    },
-    {
-        "colorName": "Warm Gray 1",
-        "colorCode": "#3f3f38"
-    },
-    {
-        "colorName": "Warm Gray 2",
-        "colorCode": "#e5dbcc"
-    },
-    {
-        "colorName": "Warm Gray 3",
-        "colorCode": "#ddd1c1"
-    },
-    {
-        "colorName": "Warm Gray 4",
-        "colorCode": "#ccc1b2"
-    },
-    {
-        "colorName": "Warm Gray 5",
-        "colorCode": "#c1b5a5"
-    },
-    {
-        "colorName": "Warm Gray 6",
-        "colorCode": "#b5a899"
-    },
-    {
-        "colorName": "Warm Gray 7",
-        "colorCode": "#afa393"
-    },
-    {
-        "colorName": "Warm Gray 8",
-        "colorCode": "#a39687"
-    },
-    {
-        "colorName": "Warm Gray 9",
-        "colorCode": "#96897a"
-    },
-    {
-        "colorName": "Warm Gray 10",
-        "colorCode": "#8c7f70"
-    },
-    {
-        "colorName": "Warm Gray 11",
-        "colorCode": "#827263"
-    },
-    {
-        "colorName": "Cool Gray 1",
-        "colorCode": "#6d5e51"
-    },
-    {
-        "colorName": "Cool Gray 2",
-        "colorCode": "#e8e2d6"
-    },
-    {
-        "colorName": "Cool Gray 3",
-        "colorCode": "#ddd8ce"
-    },
-    {
-        "colorName": "Cool Gray 4",
-        "colorCode": "#d3cec4"
-    },
-    {
-        "colorName": "Cool Gray 5",
-        "colorCode": "#c4c1ba"
-    },
-    {
-        "colorName": "Cool Gray 6",
-        "colorCode": "#bab7af"
-    },
-    {
-        "colorName": "Cool Gray 7",
-        "colorCode": "#b5b2aa"
-    },
-    {
-        "colorName": "Cool Gray 8",
-        "colorCode": "#a5a39e"
-    },
-    {
-        "colorName": "Cool Gray 9",
-        "colorCode": "#9b9993"
-    },
-    {
-        "colorName": "Cool Gray 10",
-        "colorCode": "#8c8984"
-    },
-    {
-        "colorName": "Cool Gray 11",
-        "colorCode": "#777772"
-    },
-    {
-        "colorName": "PMS 448",
-        "colorCode": "#686663"
-    },
-    {
-        "colorName": "PMS 449",
-        "colorCode": "#54472d"
-    },
-    {
-        "colorName": "PMS 450",
-        "colorCode": "#544726"
-    },
-    {
-        "colorName": "PMS 451",
-        "colorCode": "#60542b"
-    },
-    {
-        "colorName": "PMS 452",
-        "colorCode": "#ada07a"
-    },
-    {
-        "colorName": "PMS 453",
-        "colorCode": "#c4b796"
-    },
-    {
-        "colorName": "PMS 454",
-        "colorCode": "#d6ccaf"
-    },
-    {
-        "colorName": "PMS 4485",
-        "colorCode": "#e2d8bf"
-    },
-    {
-        "colorName": "PMS 4495",
-        "colorCode": "#604c11"
-    },
-    {
-        "colorName": "PMS 4505",
-        "colorCode": "#877530"
-    },
-    {
-        "colorName": "PMS 4515",
-        "colorCode": "#a09151"
-    },
-    {
-        "colorName": "PMS 4525",
-        "colorCode": "#bcad75"
-    },
-    {
-        "colorName": "PMS 4535",
-        "colorCode": "#ccbf8e"
-    },
-    {
-        "colorName": "PMS 4545",
-        "colorCode": "#dbcea5"
-    },
-    {
-        "colorName": "PMS 455",
-        "colorCode": "#e5dbba"
-    },
-    {
-        "colorName": "PMS 456",
-        "colorCode": "#665614"
-    },
-    {
-        "colorName": "PMS 457",
-        "colorCode": "#998714"
-    },
-    {
-        "colorName": "PMS 458",
-        "colorCode": "#b59b0c"
-    },
-    {
-        "colorName": "PMS 459",
-        "colorCode": "#ddcc6b"
-    },
-    {
-        "colorName": "PMS 460",
-        "colorCode": "#e2d67c"
-    },
-    {
-        "colorName": "PMS 461",
-        "colorCode": "#eadd96"
-    },
-    {
-        "colorName": "PMS 462",
-        "colorCode": "#ede5ad"
-    },
-    {
-        "colorName": "PMS 463",
-        "colorCode": "#5b4723"
-    },
-    {
-        "colorName": "PMS 464",
-        "colorCode": "#755426"
-    },
-    {
-        "colorName": "PMS 465",
-        "colorCode": "#876028"
-    },
-    {
-        "colorName": "PMS 466",
-        "colorCode": "#c1a875"
-    },
-    {
-        "colorName": "PMS 467",
-        "colorCode": "#d1bf91"
-    },
-    {
-        "colorName": "PMS 468",
-        "colorCode": "#ddcca5"
-    },
-    {
-        "colorName": "PMS 4625",
-        "colorCode": "#e2d6b5"
-    },
-    {
-        "colorName": "PMS 4635",
-        "colorCode": "#472311"
-    },
-    {
-        "colorName": "PMS 4645",
-        "colorCode": "#8c5933"
-    },
-    {
-        "colorName": "PMS 4655",
-        "colorCode": "#b28260"
-    },
-    {
-        "colorName": "PMS 4665",
-        "colorCode": "#c49977"
-    },
-    {
-        "colorName": "PMS 4675",
-        "colorCode": "#d8b596"
-    },
-    {
-        "colorName": "PMS 4685",
-        "colorCode": "#e5c6aa"
-    },
-    {
-        "colorName": "PMS 469",
-        "colorCode": "#edd3bc"
-    },
-    {
-        "colorName": "PMS 4695",
-        "colorCode": "#603311"
-    },
-    {
-        "colorName": "PMS 4705",
-        "colorCode": "#51261c"
-    },
-    {
-        "colorName": "PMS 4715",
-        "colorCode": "#7c513d"
-    },
-    {
-        "colorName": "PMS 4725",
-        "colorCode": "#99705b"
-    },
-    {
-        "colorName": "PMS 4735",
-        "colorCode": "#b5917c"
-    },
-    {
-        "colorName": "PMS 4745",
-        "colorCode": "#ccaf9b"
-    },
-    {
-        "colorName": "PMS 4755",
-        "colorCode": "#d8bfaa"
-    },
-    {
-        "colorName": "PMS 476",
-        "colorCode": "#e2ccba"
-    },
-    {
-        "colorName": "PMS 477",
-        "colorCode": "#593d2b"
-    },
-    {
-        "colorName": "PMS 478",
-        "colorCode": "#633826"
-    },
-    {
-        "colorName": "PMS 479",
-        "colorCode": "#7a3f28"
-    },
-    {
-        "colorName": "PMS 480",
-        "colorCode": "#af8970"
-    },
-    {
-        "colorName": "PMS 481",
-        "colorCode": "#d3b7a3"
-    },
-    {
-        "colorName": "PMS 482",
-        "colorCode": "#e0ccba"
-    },
-    {
-        "colorName": "PMS 483",
-        "colorCode": "#e5d3c1"
-    },
-    {
-        "colorName": "PMS 484",
-        "colorCode": "#6b3021"
-    },
-    {
-        "colorName": "PMS 485",
-        "colorCode": "#9b301c"
-    },
-    {
-        "colorName": "PMS 486",
-        "colorCode": "#d81e05"
-    },
-    {
-        "colorName": "PMS 487",
-        "colorCode": "#ed9e84"
-    },
-    {
-        "colorName": "PMS 488",
-        "colorCode": "#efb5a0"
-    },
-    {
-        "colorName": "PMS 489",
-        "colorCode": "#f2c4af"
-    },
-    {
-        "colorName": "PMS 490",
-        "colorCode": "#f2d1bf"
-    },
-    {
-        "colorName": "PMS 491",
-        "colorCode": "#5b2626"
-    },
-    {
-        "colorName": "PMS 492",
-        "colorCode": "#752828"
-    },
-    {
-        "colorName": "PMS 493",
-        "colorCode": "#913338"
-    },
-    {
-        "colorName": "PMS 494",
-        "colorCode": "#db828c"
-    },
-    {
-        "colorName": "PMS 495",
-        "colorCode": "#f2adb2"
-    },
-    {
-        "colorName": "PMS 496",
-        "colorCode": "#f4bcbf"
-    },
-    {
-        "colorName": "PMS 497",
-        "colorCode": "#f7c9c6"
-    },
-    {
-        "colorName": "PMS 498",
-        "colorCode": "#512826"
-    },
-    {
-        "colorName": "PMS 499",
-        "colorCode": "#6d332b"
-    },
-    {
-        "colorName": "PMS 500",
-        "colorCode": "#7a382d"
-    },
-    {
-        "colorName": "PMS 501",
-        "colorCode": "#ce898c"
-    },
-    {
-        "colorName": "PMS 502",
-        "colorCode": "#eab2b2"
-    },
-    {
-        "colorName": "PMS 503",
-        "colorCode": "#f2c6c4"
-    },
-    {
-        "colorName": "PMS 4975",
-        "colorCode": "#f4d1cc"
-    },
-    {
-        "colorName": "PMS 4985",
-        "colorCode": "#441e1c"
-    },
-    {
-        "colorName": "PMS 4995",
-        "colorCode": "#844949"
-    },
-    {
-        "colorName": "PMS 5005",
-        "colorCode": "#a56b6d"
-    },
-    {
-        "colorName": "PMS 5015",
-        "colorCode": "#bc8787"
-    },
-    {
-        "colorName": "PMS 5025",
-        "colorCode": "#d8ada8"
-    },
-    {
-        "colorName": "PMS 5035",
-        "colorCode": "#e2bcb7"
-    },
-    {
-        "colorName": "PMS 504",
-        "colorCode": "#edcec6"
-    },
-    {
-        "colorName": "PMS 505",
-        "colorCode": "#511e26"
-    },
-    {
-        "colorName": "PMS 506",
-        "colorCode": "#661e2b"
-    },
-    {
-        "colorName": "PMS 507",
-        "colorCode": "#7a2638"
-    },
-    {
-        "colorName": "PMS 508",
-        "colorCode": "#d8899b"
-    },
-    {
-        "colorName": "PMS 509",
-        "colorCode": "#e8a5af"
-    },
-    {
-        "colorName": "PMS 510",
-        "colorCode": "#f2babf"
-    },
-    {
-        "colorName": "PMS 511",
-        "colorCode": "#f4c6c9"
-    },
-    {
-        "colorName": "PMS 512",
-        "colorCode": "#602144"
-    },
-    {
-        "colorName": "PMS 513",
-        "colorCode": "#84216b"
-    },
-    {
-        "colorName": "PMS 514",
-        "colorCode": "#9e2387"
-    },
-    {
-        "colorName": "PMS 515",
-        "colorCode": "#d884bc"
-    },
-    {
-        "colorName": "PMS 516",
-        "colorCode": "#e8a3c9"
-    },
-    {
-        "colorName": "PMS 517",
-        "colorCode": "#f2bad3"
-    },
-    {
-        "colorName": "PMS 5115",
-        "colorCode": "#f4ccd8"
-    },
-    {
-        "colorName": "PMS 5125",
-        "colorCode": "#4f213a"
-    },
-    {
-        "colorName": "PMS 5135",
-        "colorCode": "#754760"
-    },
-    {
-        "colorName": "PMS 5145",
-        "colorCode": "#936b7f"
-    },
-    {
-        "colorName": "PMS 5155",
-        "colorCode": "#ad8799"
-    },
-    {
-        "colorName": "PMS 5165",
-        "colorCode": "#ccafb7"
-    },
-    {
-        "colorName": "PMS 5175",
-        "colorCode": "#e0c9cc"
-    },
-    {
-        "colorName": "PMS 518",
-        "colorCode": "#e8d6d1"
-    },
-    {
-        "colorName": "PMS 519",
-        "colorCode": "#512d44"
-    },
-    {
-        "colorName": "PMS 520",
-        "colorCode": "#63305e"
-    },
-    {
-        "colorName": "PMS 521",
-        "colorCode": "#703572"
-    },
-    {
-        "colorName": "PMS 522",
-        "colorCode": "#b58cb2"
-    },
-    {
-        "colorName": "PMS 523",
-        "colorCode": "#c6a3c1"
-    },
-    {
-        "colorName": "PMS 524",
-        "colorCode": "#d3b7cc"
-    },
-    {
-        "colorName": "PMS 5185",
-        "colorCode": "#e2ccd3"
-    },
-    {
-        "colorName": "PMS 5195",
-        "colorCode": "#472835"
-    },
-    {
-        "colorName": "PMS 5205",
-        "colorCode": "#593344"
-    },
-    {
-        "colorName": "PMS 5215",
-        "colorCode": "#8e6877"
-    },
-    {
-        "colorName": "PMS 5225",
-        "colorCode": "#b5939b"
-    },
-    {
-        "colorName": "PMS 5235",
-        "colorCode": "#ccadaf"
-    },
-    {
-        "colorName": "PMS 5245",
-        "colorCode": "#ddc6c4"
-    },
-    {
-        "colorName": "PMS 525",
-        "colorCode": "#e5d3cc"
-    },
-    {
-        "colorName": "PMS 526",
-        "colorCode": "#512654"
-    },
-    {
-        "colorName": "PMS 527",
-        "colorCode": "#68217a"
-    },
-    {
-        "colorName": "PMS 528",
-        "colorCode": "#7a1e99"
-    },
-    {
-        "colorName": "PMS 529",
-        "colorCode": "#af72c1"
-    },
-    {
-        "colorName": "PMS 530",
-        "colorCode": "#cea3d3"
-    },
-    {
-        "colorName": "PMS 531",
-        "colorCode": "#d6afd6"
-    },
-    {
-        "colorName": "PMS 5255",
-        "colorCode": "#e5c6db"
-    },
-    {
-        "colorName": "PMS 5265",
-        "colorCode": "#35264f"
-    },
-    {
-        "colorName": "PMS 5275",
-        "colorCode": "#493d63"
-    },
-    {
-        "colorName": "PMS 5285",
-        "colorCode": "#605677"
-    },
-    {
-        "colorName": "PMS 5295",
-        "colorCode": "#8c8299"
-    },
-    {
-        "colorName": "PMS 5305",
-        "colorCode": "#b2a8b5"
-    },
-    {
-        "colorName": "PMS 5315",
-        "colorCode": "#ccc1c6"
-    },
-    {
-        "colorName": "PMS 532",
-        "colorCode": "#dbd3d3"
-    },
-    {
-        "colorName": "PMS 533",
-        "colorCode": "#353842"
-    },
-    {
-        "colorName": "PMS 534",
-        "colorCode": "#353f5b"
-    },
-    {
-        "colorName": "PMS 535",
-        "colorCode": "#3a4972"
-    },
-    {
-        "colorName": "PMS 536",
-        "colorCode": "#9ba3b7"
-    },
-    {
-        "colorName": "PMS 537",
-        "colorCode": "#adb2c1"
-    },
-    {
-        "colorName": "PMS 538",
-        "colorCode": "#c4c6ce"
-    },
-    {
-        "colorName": "PMS 539",
-        "colorCode": "#d6d3d6"
-    },
-    {
-        "colorName": "PMS 540",
-        "colorCode": "#003049"
-    },
-    {
-        "colorName": "PMS 541",
-        "colorCode": "#00335b"
-    },
-    {
-        "colorName": "PMS 542",
-        "colorCode": "#003f77"
-    },
-    {
-        "colorName": "PMS 543",
-        "colorCode": "#6693bc"
-    },
-    {
-        "colorName": "PMS 544",
-        "colorCode": "#93b7d1"
-    },
-    {
-        "colorName": "PMS 545",
-        "colorCode": "#b7ccdb"
-    },
-    {
-        "colorName": "PMS 5395",
-        "colorCode": "#c4d3dd"
-    },
-    {
-        "colorName": "PMS 5405",
-        "colorCode": "#02283a"
-    },
-    {
-        "colorName": "PMS 5415",
-        "colorCode": "#3f6075"
-    },
-    {
-        "colorName": "PMS 5425",
-        "colorCode": "#607c8c"
-    },
-    {
-        "colorName": "PMS 5435",
-        "colorCode": "#8499a5"
-    },
-    {
-        "colorName": "PMS 5445",
-        "colorCode": "#afbcbf"
-    },
-    {
-        "colorName": "PMS 5455",
-        "colorCode": "#c4cccc"
-    },
-    {
-        "colorName": "PMS 546",
-        "colorCode": "#d6d8d3"
-    },
-    {
-        "colorName": "PMS 547",
-        "colorCode": "#0c3844"
-    },
-    {
-        "colorName": "PMS 548",
-        "colorCode": "#003f54"
-    },
-    {
-        "colorName": "PMS 549",
-        "colorCode": "#004459"
-    },
-    {
-        "colorName": "PMS 550",
-        "colorCode": "#5e99aa"
-    },
-    {
-        "colorName": "PMS 551",
-        "colorCode": "#87afbf"
-    },
-    {
-        "colorName": "PMS 552",
-        "colorCode": "#a3c1c9"
-    },
-    {
-        "colorName": "PMS 5463",
-        "colorCode": "#c4d6d6"
-    },
-    {
-        "colorName": "PMS 5473",
-        "colorCode": "#00353a"
-    },
-    {
-        "colorName": "PMS 5483",
-        "colorCode": "#26686d"
-    },
-    {
-        "colorName": "PMS 5493",
-        "colorCode": "#609191"
-    },
-    {
-        "colorName": "PMS 5503",
-        "colorCode": "#8cafad"
-    },
-    {
-        "colorName": "PMS 5513",
-        "colorCode": "#aac4bf"
-    },
-    {
-        "colorName": "PMS 5523",
-        "colorCode": "#ced8d1"
-    },
-    {
-        "colorName": "PMS 5467",
-        "colorCode": "#d6ddd6"
-    },
-    {
-        "colorName": "PMS 5477",
-        "colorCode": "#193833"
-    },
-    {
-        "colorName": "PMS 5487",
-        "colorCode": "#3a564f"
-    },
-    {
-        "colorName": "PMS 5497",
-        "colorCode": "#667c72"
-    },
-    {
-        "colorName": "PMS 5507",
-        "colorCode": "#91a399"
-    },
-    {
-        "colorName": "PMS 5517",
-        "colorCode": "#afbab2"
-    },
-    {
-        "colorName": "PMS 5527",
-        "colorCode": "#c9cec4"
-    },
-    {
-        "colorName": "PMS 553",
-        "colorCode": "#ced1c6"
-    },
-    {
-        "colorName": "PMS 554",
-        "colorCode": "#234435"
-    },
-    {
-        "colorName": "PMS 555",
-        "colorCode": "#195e47"
-    },
-    {
-        "colorName": "PMS 556",
-        "colorCode": "#076d54"
-    },
-    {
-        "colorName": "PMS 557",
-        "colorCode": "#7aa891"
-    },
-    {
-        "colorName": "PMS 558",
-        "colorCode": "#a3c1ad"
-    },
-    {
-        "colorName": "PMS 559",
-        "colorCode": "#b7cebc"
-    },
-    {
-        "colorName": "PMS 5535",
-        "colorCode": "#c6d6c4"
-    },
-    {
-        "colorName": "PMS 5545",
-        "colorCode": "#213d30"
-    },
-    {
-        "colorName": "PMS 5555",
-        "colorCode": "#4f6d5e"
-    },
-    {
-        "colorName": "PMS 5565",
-        "colorCode": "#779182"
-    },
-    {
-        "colorName": "PMS 5575",
-        "colorCode": "#96aa99"
-    },
-    {
-        "colorName": "PMS 5585",
-        "colorCode": "#afbfad"
-    },
-    {
-        "colorName": "PMS 5595",
-        "colorCode": "#c4cebf"
-    },
-    {
-        "colorName": "PMS 560",
-        "colorCode": "#d8dbcc"
-    },
-    {
-        "colorName": "PMS 561",
-        "colorCode": "#2b4c3f"
-    },
-    {
-        "colorName": "PMS 562",
-        "colorCode": "#266659"
-    },
-    {
-        "colorName": "PMS 563",
-        "colorCode": "#1e7a6d"
-    },
-    {
-        "colorName": "PMS 564",
-        "colorCode": "#7fbcaa"
-    },
-    {
-        "colorName": "PMS 565",
-        "colorCode": "#a0cebc"
-    },
-    {
-        "colorName": "PMS 566",
-        "colorCode": "#bcdbcc"
-    },
-    {
-        "colorName": "PMS 5605",
-        "colorCode": "#d1e2d3"
-    },
-    {
-        "colorName": "PMS 5615",
-        "colorCode": "#233a2d"
-    },
-    {
-        "colorName": "PMS 5625",
-        "colorCode": "#546856"
-    },
-    {
-        "colorName": "PMS 5635",
-        "colorCode": "#728470"
-    },
-    {
-        "colorName": "PMS 5645",
-        "colorCode": "#9eaa99"
-    },
-    {
-        "colorName": "PMS 5655",
-        "colorCode": "#bcc1b2"
-    },
-    {
-        "colorName": "PMS 568",
-        "colorCode": "#c6ccba"
-    },
-    {
-        "colorName": "PMS 569",
-        "colorCode": "#d6d6c6"
-    },
-    {
-        "colorName": "PMS 570",
-        "colorCode": "#05705e"
-    },
-    {
-        "colorName": "PMS 571",
-        "colorCode": "#008772"
-    },
-    {
-        "colorName": "PMS 572",
-        "colorCode": "#7fc6b2"
-    },
-    {
-        "colorName": "PMS 573",
-        "colorCode": "#aadbc6"
-    },
-    {
-        "colorName": "PMS 574",
-        "colorCode": "#bce2ce"
-    },
-    {
-        "colorName": "PMS 575",
-        "colorCode": "#cce5d6"
-    },
-    {
-        "colorName": "PMS 576",
-        "colorCode": "#495928"
-    },
-    {
-        "colorName": "PMS 577",
-        "colorCode": "#547730"
-    },
-    {
-        "colorName": "PMS 578",
-        "colorCode": "#608e3a"
-    },
-    {
-        "colorName": "PMS 579",
-        "colorCode": "#b5cc8e"
-    },
-    {
-        "colorName": "PMS 580",
-        "colorCode": "#c6d6a0"
-    },
-    {
-        "colorName": "PMS 5743",
-        "colorCode": "#c9d6a3"
-    },
-    {
-        "colorName": "PMS 5753",
-        "colorCode": "#d8ddb5"
-    },
-    {
-        "colorName": "PMS 5763",
-        "colorCode": "#3f4926"
-    },
-    {
-        "colorName": "PMS 5773",
-        "colorCode": "#5e663a"
-    },
-    {
-        "colorName": "PMS 5783",
-        "colorCode": "#777c4f"
-    },
-    {
-        "colorName": "PMS 5793",
-        "colorCode": "#9b9e72"
-    },
-    {
-        "colorName": "PMS 803",
-        "colorCode": "#b5b58e"
-    },
-    {
-        "colorName": "PMS 5747",
-        "colorCode": "#c6c6a5"
-    },
-    {
-        "colorName": "PMS 5757",
-        "colorCode": "#d8d6b7"
-    },
-    {
-        "colorName": "PMS 5767",
-        "colorCode": "#424716"
-    },
-    {
-        "colorName": "PMS 5777",
-        "colorCode": "#6b702b"
-    },
-    {
-        "colorName": "PMS 5787",
-        "colorCode": "#8c914f"
-    },
-    {
-        "colorName": "PMS 5797",
-        "colorCode": "#aaad75"
-    },
-    {
-        "colorName": "PMS 5807",
-        "colorCode": "#c6c699"
-    },
-    {
-        "colorName": "PMS 581",
-        "colorCode": "#d3d1aa"
-    },
-    {
-        "colorName": "PMS 582",
-        "colorCode": "#e0ddbc"
-    },
-    {
-        "colorName": "PMS 583",
-        "colorCode": "#605e11"
-    },
-    {
-        "colorName": "PMS 584",
-        "colorCode": "#878905"
-    },
-    {
-        "colorName": "PMS 585",
-        "colorCode": "#aaba0a"
-    },
-    {
-        "colorName": "PMS 586",
-        "colorCode": "#dbe06b"
-    },
-    {
-        "colorName": "PMS 587",
-        "colorCode": "#e2e584"
-    },
-    {
-        "colorName": "PMS 5815",
-        "colorCode": "#e8e89b"
-    },
-    {
-        "colorName": "PMS 5825",
-        "colorCode": "#494411"
-    },
-    {
-        "colorName": "PMS 5835",
-        "colorCode": "#75702b"
-    },
-    {
-        "colorName": "PMS 5845",
-        "colorCode": "#9e9959"
-    },
-    {
-        "colorName": "PMS 5855",
-        "colorCode": "#b2aa70"
-    },
-    {
-        "colorName": "PMS 5865",
-        "colorCode": "#ccc693"
-    },
-    {
-        "colorName": "PMS 5875",
-        "colorCode": "#d6cea3"
-    },
-    {
-        "colorName": "PMS 600",
-        "colorCode": "#e0dbb5"
-    },
-    {
-        "colorName": "PMS 601",
-        "colorCode": "#f4edaf"
-    },
-    {
-        "colorName": "PMS 602",
-        "colorCode": "#f2ed9e"
-    },
-    {
-        "colorName": "PMS 603",
-        "colorCode": "#f2ea87"
-    },
-    {
-        "colorName": "PMS 604",
-        "colorCode": "#ede85b"
-    },
-    {
-        "colorName": "PMS 605",
-        "colorCode": "#e8dd21"
-    },
-    {
-        "colorName": "PMS 606",
-        "colorCode": "#ddce11"
-    },
-    {
-        "colorName": "PMS 607",
-        "colorCode": "#d3bf11"
-    },
-    {
-        "colorName": "PMS 608",
-        "colorCode": "#f2eabc"
-    },
-    {
-        "colorName": "PMS 609",
-        "colorCode": "#efe8ad"
-    },
-    {
-        "colorName": "PMS 610",
-        "colorCode": "#eae596"
-    },
-    {
-        "colorName": "PMS 611",
-        "colorCode": "#e2db72"
-    },
-    {
-        "colorName": "PMS 612",
-        "colorCode": "#d6ce49"
-    },
-    {
-        "colorName": "PMS 613",
-        "colorCode": "#c4ba00"
-    },
-    {
-        "colorName": "PMS 614",
-        "colorCode": "#afa00c"
-    },
-    {
-        "colorName": "PMS 615",
-        "colorCode": "#eae2b7"
-    },
-    {
-        "colorName": "PMS 616",
-        "colorCode": "#e2dbaa"
-    },
-    {
-        "colorName": "PMS 617",
-        "colorCode": "#ddd69b"
-    },
-    {
-        "colorName": "PMS 618",
-        "colorCode": "#ccc47c"
-    },
-    {
-        "colorName": "PMS 619",
-        "colorCode": "#b5aa59"
-    },
-    {
-        "colorName": "PMS 620",
-        "colorCode": "#968c28"
-    },
-    {
-        "colorName": "PMS 621",
-        "colorCode": "#847711"
-    },
-    {
-        "colorName": "PMS 622",
-        "colorCode": "#d8ddce"
-    },
-    {
-        "colorName": "PMS 623",
-        "colorCode": "#c1d1bf"
-    },
-    {
-        "colorName": "PMS 624",
-        "colorCode": "#a5bfaa"
-    },
-    {
-        "colorName": "PMS 625",
-        "colorCode": "#7fa08c"
-    },
-    {
-        "colorName": "PMS 626",
-        "colorCode": "#5b8772"
-    },
-    {
-        "colorName": "PMS 627",
-        "colorCode": "#21543f"
-    },
-    {
-        "colorName": "PMS 628",
-        "colorCode": "#0c3026"
-    },
-    {
-        "colorName": "PMS 629",
-        "colorCode": "#cce2dd"
-    },
-    {
-        "colorName": "PMS 630",
-        "colorCode": "#b2d8d8"
-    },
-    {
-        "colorName": "PMS 631",
-        "colorCode": "#8cccd3"
-    },
-    {
-        "colorName": "PMS 632",
-        "colorCode": "#54b7c6"
-    },
-    {
-        "colorName": "PMS 633",
-        "colorCode": "#00a0ba"
-    },
-    {
-        "colorName": "PMS 634",
-        "colorCode": "#007f99"
-    },
-    {
-        "colorName": "PMS 635",
-        "colorCode": "#00667f"
-    },
-    {
-        "colorName": "PMS 636",
-        "colorCode": "#bae0e0"
-    },
-    {
-        "colorName": "PMS 637",
-        "colorCode": "#99d6dd"
-    },
-    {
-        "colorName": "PMS 638",
-        "colorCode": "#6bc9db"
-    },
-    {
-        "colorName": "PMS 639",
-        "colorCode": "#00b5d6"
-    },
-    {
-        "colorName": "PMS 640",
-        "colorCode": "#00a0c4"
-    },
-    {
-        "colorName": "PMS 641",
-        "colorCode": "#008cb2"
-    },
-    {
-        "colorName": "PMS 642",
-        "colorCode": "#007aa5"
-    },
-    {
-        "colorName": "PMS 643",
-        "colorCode": "#d1d8d8"
-    },
-    {
-        "colorName": "PMS 644",
-        "colorCode": "#c6d1d6"
-    },
-    {
-        "colorName": "PMS 645",
-        "colorCode": "#9bafc4"
-    },
-    {
-        "colorName": "PMS 646",
-        "colorCode": "#7796b2"
-    },
-    {
-        "colorName": "PMS 647",
-        "colorCode": "#5e82a3"
-    },
-    {
-        "colorName": "PMS 648",
-        "colorCode": "#26547c"
-    },
-    {
-        "colorName": "PMS 649",
-        "colorCode": "#00305e"
-    },
-    {
-        "colorName": "PMS 650",
-        "colorCode": "#d6d6d8"
-    },
-    {
-        "colorName": "PMS 651",
-        "colorCode": "#bfc6d1"
-    },
-    {
-        "colorName": "PMS 652",
-        "colorCode": "#9baabf"
-    },
-    {
-        "colorName": "PMS 653",
-        "colorCode": "#6d87a8"
-    },
-    {
-        "colorName": "PMS 654",
-        "colorCode": "#335687"
-    },
-    {
-        "colorName": "PMS 655",
-        "colorCode": "#0f2b5b"
-    },
-    {
-        "colorName": "PMS 656",
-        "colorCode": "#0c1c47"
-    },
-    {
-        "colorName": "PMS 657",
-        "colorCode": "#d6dbe0"
-    },
-    {
-        "colorName": "PMS 658",
-        "colorCode": "#c1c9dd"
-    },
-    {
-        "colorName": "PMS 659",
-        "colorCode": "#a5afd6"
-    },
-    {
-        "colorName": "PMS 660",
-        "colorCode": "#7f8cbf"
-    },
-    {
-        "colorName": "PMS 661",
-        "colorCode": "#5960a8"
-    },
-    {
-        "colorName": "PMS 662",
-        "colorCode": "#2d338e"
-    },
-    {
-        "colorName": "PMS 663",
-        "colorCode": "#0c1975"
-    },
-    {
-        "colorName": "PMS 664",
-        "colorCode": "#e2d3d6"
-    },
-    {
-        "colorName": "PMS 665",
-        "colorCode": "#d8ccd1"
-    },
-    {
-        "colorName": "PMS 666",
-        "colorCode": "#c6b5c4"
-    },
-    {
-        "colorName": "PMS 667",
-        "colorCode": "#a893ad"
-    },
-    {
-        "colorName": "PMS 668",
-        "colorCode": "#7f6689"
-    },
-    {
-        "colorName": "PMS 669",
-        "colorCode": "#664975"
-    },
-    {
-        "colorName": "PMS 670",
-        "colorCode": "#472b59"
-    },
-    {
-        "colorName": "PMS 671",
-        "colorCode": "#f2d6d8"
-    },
-    {
-        "colorName": "PMS 672",
-        "colorCode": "#efc6d3"
-    },
-    {
-        "colorName": "PMS 673",
-        "colorCode": "#eaaac4"
-    },
-    {
-        "colorName": "PMS 674",
-        "colorCode": "#e08cb2"
-    },
-    {
-        "colorName": "PMS 675",
-        "colorCode": "#d36b9e"
-    },
-    {
-        "colorName": "PMS 676",
-        "colorCode": "#bc3877"
-    },
-    {
-        "colorName": "PMS 677",
-        "colorCode": "#a00054"
-    },
-    {
-        "colorName": "PMS 678",
-        "colorCode": "#edd6d6"
-    },
-    {
-        "colorName": "PMS 679",
-        "colorCode": "#eaccce"
-    },
-    {
-        "colorName": "PMS 680",
-        "colorCode": "#e5bfc6"
-    },
-    {
-        "colorName": "PMS 681",
-        "colorCode": "#d39eaf"
-    },
-    {
-        "colorName": "PMS 682",
-        "colorCode": "#b7728e"
-    },
-    {
-        "colorName": "PMS 683",
-        "colorCode": "#a05175"
-    },
-    {
-        "colorName": "PMS 684",
-        "colorCode": "#7f284f"
-    },
-    {
-        "colorName": "PMS 685",
-        "colorCode": "#efccce"
-    },
-    {
-        "colorName": "PMS 686",
-        "colorCode": "#eabfc4"
-    },
-    {
-        "colorName": "PMS 687",
-        "colorCode": "#e0aaba"
-    },
-    {
-        "colorName": "PMS 688",
-        "colorCode": "#c9899e"
-    },
-    {
-        "colorName": "PMS 689",
-        "colorCode": "#b26684"
-    },
-    {
-        "colorName": "PMS 690",
-        "colorCode": "#934266"
-    },
-    {
-        "colorName": "PMS 691",
-        "colorCode": "#702342"
-    },
-    {
-        "colorName": "PMS 692",
-        "colorCode": "#efd1c9"
-    },
-    {
-        "colorName": "PMS 693",
-        "colorCode": "#e8bfba"
-    },
-    {
-        "colorName": "PMS 694",
-        "colorCode": "#dba8a5"
-    },
-    {
-        "colorName": "PMS 695",
-        "colorCode": "#c98c8c"
-    },
-    {
-        "colorName": "PMS 696",
-        "colorCode": "#b26b70"
-    },
-    {
-        "colorName": "PMS 697",
-        "colorCode": "#8e4749"
-    },
-    {
-        "colorName": "PMS 698",
-        "colorCode": "#7f383a"
-    },
-    {
-        "colorName": "PMS 699",
-        "colorCode": "#f7d1cc"
-    },
-    {
-        "colorName": "PMS 700",
-        "colorCode": "#f7bfbf"
-    },
-    {
-        "colorName": "PMS 701",
-        "colorCode": "#f2a5aa"
-    },
-    {
-        "colorName": "PMS 702",
-        "colorCode": "#e8878e"
-    },
-    {
-        "colorName": "PMS 703",
-        "colorCode": "#d6606d"
-    },
-    {
-        "colorName": "PMS 704",
-        "colorCode": "#b73844"
-    },
-    {
-        "colorName": "PMS 705",
-        "colorCode": "#9e2828"
-    },
-    {
-        "colorName": "PMS 706",
-        "colorCode": "#f9ddd6"
-    },
-    {
-        "colorName": "PMS 707",
-        "colorCode": "#fcc9c6"
-    },
-    {
-        "colorName": "PMS 708",
-        "colorCode": "#fcadaf"
-    },
-    {
-        "colorName": "PMS 709",
-        "colorCode": "#f98e99"
-    },
-    {
-        "colorName": "PMS 710",
-        "colorCode": "#f26877"
-    },
-    {
-        "colorName": "PMS 711",
-        "colorCode": "#e04251"
-    },
-    {
-        "colorName": "PMS 712",
-        "colorCode": "#d12d33"
-    },
-    {
-        "colorName": "PMS 713",
-        "colorCode": "#ffd3aa"
-    },
-    {
-        "colorName": "PMS 714",
-        "colorCode": "#f9c9a3"
-    },
-    {
-        "colorName": "PMS 715",
-        "colorCode": "#f9ba82"
-    },
-    {
-        "colorName": "PMS 716",
-        "colorCode": "#fc9e49"
-    },
-    {
-        "colorName": "PMS 717",
-        "colorCode": "#f28411"
-    },
-    {
-        "colorName": "PMS 718",
-        "colorCode": "#d36d00"
-    },
-    {
-        "colorName": "PMS 719",
-        "colorCode": "#bf5b00"
-    },
-    {
-        "colorName": "PMS 720",
-        "colorCode": "#f4d1af"
-    },
-    {
-        "colorName": "PMS 721",
-        "colorCode": "#efc49e"
-    },
-    {
-        "colorName": "PMS 722",
-        "colorCode": "#e8b282"
-    },
-    {
-        "colorName": "PMS 723",
-        "colorCode": "#d18e54"
-    },
-    {
-        "colorName": "PMS 724",
-        "colorCode": "#ba7530"
-    },
-    {
-        "colorName": "PMS 725",
-        "colorCode": "#8e4905"
-    },
-    {
-        "colorName": "PMS 726",
-        "colorCode": "#753802"
-    },
-    {
-        "colorName": "PMS 727",
-        "colorCode": "#edd3b5"
-    },
-    {
-        "colorName": "PMS 728",
-        "colorCode": "#e2bf9b"
-    },
-    {
-        "colorName": "PMS 729",
-        "colorCode": "#d3a87c"
-    },
-    {
-        "colorName": "PMS 730",
-        "colorCode": "#c18e60"
-    },
-    {
-        "colorName": "PMS 731",
-        "colorCode": "#aa753f"
-    },
-    {
-        "colorName": "PMS 732",
-        "colorCode": "#723f0a"
-    },
-    {
-        "colorName": "Yellow 2X",
-        "colorCode": "#60330a"
-    },
-    {
-        "colorName": "PMS 116 2X",
-        "colorCode": "#fce216"
-    },
-    {
-        "colorName": "PMS 130 2X",
-        "colorCode": "#f7b50c"
-    },
-    {
-        "colorName": "PMS 165 2X",
-        "colorCode": "#e29100"
-    },
-    {
-        "colorName": "Warm Red 2X",
-        "colorCode": "#ea4f00"
-    },
-    {
-        "colorName": "PMS 1788 2X",
-        "colorCode": "#e03a00"
-    },
-    {
-        "colorName": "PMS 1852 2X",
-        "colorCode": "#d62100"
-    },
-    {
-        "colorName": "PMS 485 2X",
-        "colorCode": "#d11600"
-    },
-    {
-        "colorName": "Rubine Red 2X",
-        "colorCode": "#cc0c00"
-    },
-    {
-        "colorName": "Rhodamine Red 2X",
-        "colorCode": "#c6003d"
-    },
-    {
-        "colorName": "PMS 239 2X",
-        "colorCode": "#d10572"
-    },
-    {
-        "colorName": "Purple 2X",
-        "colorCode": "#c4057c"
-    },
-    {
-        "colorName": "PMS 2592 2X",
-        "colorCode": "#aa0096"
-    },
-    {
-        "colorName": "Violet 2X",
-        "colorCode": "#720082"
-    },
-    {
-        "colorName": "Reflex Blue 2X",
-        "colorCode": "#59008e"
-    },
-    {
-        "colorName": "Process Blue 2X",
-        "colorCode": "#1c007a"
-    },
-    {
-        "colorName": "PMS 299 2X",
-        "colorCode": "#0077bf"
-    },
-    {
-        "colorName": "PMS 306 2X",
-        "colorCode": "#007fcc"
-    },
-    {
-        "colorName": "PMS 320 2X",
-        "colorCode": "#00a3d1"
-    },
-    {
-        "colorName": "PMS 327 2X",
-        "colorCode": "#007f82"
-    },
-    {
-        "colorName": "Green 2X",
-        "colorCode": "#008977"
-    },
-    {
-        "colorName": "PMS 354 2X",
-        "colorCode": "#009677"
-    },
-    {
-        "colorName": "PMS 368 2X",
-        "colorCode": "#009944"
-    },
-    {
-        "colorName": "PMS 375 2X",
-        "colorCode": "#009e0f"
-    },
-    {
-        "colorName": "PMS 382 2X",
-        "colorCode": "#54bc00"
-    },
-    {
-        "colorName": "PMS 471 2X",
-        "colorCode": "#9ec400"
-    },
-    {
-        "colorName": "PMS 464 2X",
-        "colorCode": "#a34402"
-    },
-    {
-        "colorName": "PMS 433 2X",
-        "colorCode": "#704214"
-    },
-    {
-        "colorName": "Black 2",
-        "colorCode": "#0a0c11"
-    },
-    {
-        "colorName": "Black 3",
-        "colorCode": "#3a3321"
-    },
-    {
-        "colorName": "Black 4",
-        "colorCode": "#282d26"
-    },
-    {
-        "colorName": "Black 5",
-        "colorCode": "#3d3023"
-    },
-    {
-        "colorName": "Black 6",
-        "colorCode": "#422d2d"
-    },
-    {
-        "colorName": "Black 7",
-        "colorCode": "#1c2630"
-    },
-    {
-        "colorName": "Black 2 2X",
-        "colorCode": "#443d38"
-    },
-    {
-        "colorName": "Black 3 2X",
-        "colorCode": "#111111"
-    },
-    {
-        "colorName": "Black 4 2X",
-        "colorCode": "#111114"
-    },
-    {
-        "colorName": "Black 5 2X",
-        "colorCode": "#0f0f0f"
-    },
-    {
-        "colorName": "Black 6 2X",
-        "colorCode": "#110c0f"
-    },
-    {
-        "colorName": "Black 7 2X",
-        "colorCode": "#070c0f"
-    },
-    {
-        "colorName": "PMS 801",
-        "colorCode": "#33302b"
-    },
-    {
-        "colorName": "PMS 802",
-        "colorCode": "#00aacc"
-    },
-    {
-        "colorName": "PMS 803",
-        "colorCode": "#60dd49"
-    },
-    {
-        "colorName": "PMS 804",
-        "colorCode": "#ffed38"
-    },
-    {
-        "colorName": "PMS 805",
-        "colorCode": "#ff9338"
-    },
-    {
-        "colorName": "PMS 806",
-        "colorCode": "#f95951"
-    },
-    {
-        "colorName": "PMS 807",
-        "colorCode": "#ff0093"
-    },
-    {
-        "colorName": "PMS 801 2X",
-        "colorCode": "#d6009e"
-    },
-    {
-        "colorName": "PMS 802 2X",
-        "colorCode": "#0089af"
-    },
-    {
-        "colorName": "PMS 803 2X",
-        "colorCode": "#1cce28"
-    },
-    {
-        "colorName": "PMS 804 2X",
-        "colorCode": "#ffd816"
-    },
-    {
-        "colorName": "PMS 805 2X",
-        "colorCode": "#ff7f1e"
-    },
-    {
-        "colorName": "PMS 806 2X",
-        "colorCode": "#f93a2b"
-    },
-    {
-        "colorName": "PMS 807 2X",
-        "colorCode": "#f7027c"
-    },
-    {
-        "colorName": "PMS 808",
-        "colorCode": "#bf008c"
-    },
-    {
-        "colorName": "PMS 809",
-        "colorCode": "#00b59b"
-    },
-    {
-        "colorName": "PMS 810",
-        "colorCode": "#dde00f"
-    },
-    {
-        "colorName": "PMS 811",
-        "colorCode": "#ffcc1e"
-    },
-    {
-        "colorName": "PMS 812",
-        "colorCode": "#ff7247"
-    },
-    {
-        "colorName": "PMS 813",
-        "colorCode": "#fc2366"
-    },
-    {
-        "colorName": "PMS 814",
-        "colorCode": "#e50099"
-    },
-    {
-        "colorName": "PMS 808 2X",
-        "colorCode": "#8c60c1"
-    },
-    {
-        "colorName": "PMS 809 2X",
-        "colorCode": "#00a087"
-    },
-    {
-        "colorName": "PMS 810 2X",
-        "colorCode": "#d6d60c"
-    },
-    {
-        "colorName": "PMS 811 2X",
-        "colorCode": "#ffbc21"
-    },
-    {
-        "colorName": "PMS 812 2X",
-        "colorCode": "#ff5416"
-    },
-    {
-        "colorName": "PMS 813 2X",
-        "colorCode": "#fc074f"
-    },
-    {
-        "colorName": "PMS 814 2X",
-        "colorCode": "#d10084"
-    }
+  {
+    "colorName": "Process Yellow",
+    "colorCode": "#f7e214"
+  },
+  {
+    "colorName": "PMS 100",
+    "colorCode": "#f4ed7c"
+  },
+  {
+    "colorName": "PMS 101",
+    "colorCode": "#f4ed47"
+  },
+  {
+    "colorName": "PMS 102",
+    "colorCode": "#f9e814"
+  },
+  {
+    "colorName": "Pantone Yellow",
+    "colorCode": "#fce016"
+  },
+  {
+    "colorName": "PMS 103",
+    "colorCode": "#c6ad0f"
+  },
+  {
+    "colorName": "PMS 104",
+    "colorCode": "#ad9b0c"
+  },
+  {
+    "colorName": "PMS 105",
+    "colorCode": "#82750f"
+  },
+  {
+    "colorName": "PMS 106",
+    "colorCode": "#f7e859"
+  },
+  {
+    "colorName": "PMS 107",
+    "colorCode": "#f9e526"
+  },
+  {
+    "colorName": "PMS 108",
+    "colorCode": "#f7dd16"
+  },
+  {
+    "colorName": "PMS 109",
+    "colorCode": "#f9d616"
+  },
+  {
+    "colorName": "PMS 110",
+    "colorCode": "#d8b511"
+  },
+  {
+    "colorName": "PMS 111",
+    "colorCode": "#aa930a"
+  },
+  {
+    "colorName": "PMS 112",
+    "colorCode": "#99840a"
+  },
+  {
+    "colorName": "PMS 113",
+    "colorCode": "#f9e55b"
+  },
+  {
+    "colorName": "PMS 114",
+    "colorCode": "#f9e24c"
+  },
+  {
+    "colorName": "PMS 115",
+    "colorCode": "#f9e04c"
+  },
+  {
+    "colorName": "PMS 116",
+    "colorCode": "#fcd116"
+  },
+  {
+    "colorName": "PMS 117",
+    "colorCode": "#c6a00c"
+  },
+  {
+    "colorName": "PMS 118",
+    "colorCode": "#aa8e0a"
+  },
+  {
+    "colorName": "PMS 119",
+    "colorCode": "#897719"
+  },
+  {
+    "colorName": "PMS 120",
+    "colorCode": "#f9e27f"
+  },
+  {
+    "colorName": "PMS 121",
+    "colorCode": "#f9e070"
+  },
+  {
+    "colorName": "PMS 122",
+    "colorCode": "#fcd856"
+  },
+  {
+    "colorName": "PMS 123",
+    "colorCode": "#ffc61e"
+  },
+  {
+    "colorName": "PMS 124",
+    "colorCode": "#e0aa0f"
+  },
+  {
+    "colorName": "PMS 125",
+    "colorCode": "#b58c0a"
+  },
+  {
+    "colorName": "PMS 1205",
+    "colorCode": "#f7e8aa"
+  },
+  {
+    "colorName": "PMS 1215",
+    "colorCode": "#f9e08c"
+  },
+  {
+    "colorName": "PMS 1225",
+    "colorCode": "#ffcc49"
+  },
+  {
+    "colorName": "PMS 1235",
+    "colorCode": "#fcb514"
+  },
+  {
+    "colorName": "PMS 1245",
+    "colorCode": "#bf910c"
+  },
+  {
+    "colorName": "PMS 1255",
+    "colorCode": "#a37f14"
+  },
+  {
+    "colorName": "PMS 1265",
+    "colorCode": "#7c6316"
+  },
+  {
+    "colorName": "PMS 127",
+    "colorCode": "#f4e287"
+  },
+  {
+    "colorName": "PMS 128",
+    "colorCode": "#f4db60"
+  },
+  {
+    "colorName": "PMS 129",
+    "colorCode": "#f2d13d"
+  },
+  {
+    "colorName": "PMS 130",
+    "colorCode": "#eaaf0f"
+  },
+  {
+    "colorName": "PMS 131",
+    "colorCode": "#c6930a"
+  },
+  {
+    "colorName": "PMS 132",
+    "colorCode": "#9e7c0a"
+  },
+  {
+    "colorName": "PMS 133",
+    "colorCode": "#705b0a"
+  },
+  {
+    "colorName": "PMS 134",
+    "colorCode": "#ffd87f"
+  },
+  {
+    "colorName": "PMS 135",
+    "colorCode": "#fcc963"
+  },
+  {
+    "colorName": "PMS 136",
+    "colorCode": "#fcbf49"
+  },
+  {
+    "colorName": "PMS 137",
+    "colorCode": "#fca311"
+  },
+  {
+    "colorName": "PMS 138",
+    "colorCode": "#d88c02"
+  },
+  {
+    "colorName": "PMS 139",
+    "colorCode": "#af7505"
+  },
+  {
+    "colorName": "PMS 140",
+    "colorCode": "#7a5b11"
+  },
+  {
+    "colorName": "PMS 1345",
+    "colorCode": "#ffd691"
+  },
+  {
+    "colorName": "PMS 1355",
+    "colorCode": "#fcce87"
+  },
+  {
+    "colorName": "PMS 1365",
+    "colorCode": "#fcba5e"
+  },
+  {
+    "colorName": "PMS 1375",
+    "colorCode": "#f99b0c"
+  },
+  {
+    "colorName": "PMS 1385",
+    "colorCode": "#cc7a02"
+  },
+  {
+    "colorName": "PMS 1395",
+    "colorCode": "#996007"
+  },
+  {
+    "colorName": "PMS 1405",
+    "colorCode": "#6b4714"
+  },
+  {
+    "colorName": "PMS 141",
+    "colorCode": "#f2ce68"
+  },
+  {
+    "colorName": "PMS 142",
+    "colorCode": "#f2bf49"
+  },
+  {
+    "colorName": "PMS 143",
+    "colorCode": "#efb22d"
+  },
+  {
+    "colorName": "PMS 144",
+    "colorCode": "#e28c05"
+  },
+  {
+    "colorName": "PMS 145",
+    "colorCode": "#c67f07"
+  },
+  {
+    "colorName": "PMS 146",
+    "colorCode": "#9e6b05"
+  },
+  {
+    "colorName": "PMS 147",
+    "colorCode": "#725e26"
+  },
+  {
+    "colorName": "PMS 148",
+    "colorCode": "#ffd69b"
+  },
+  {
+    "colorName": "PMS 149",
+    "colorCode": "#fccc93"
+  },
+  {
+    "colorName": "PMS 150",
+    "colorCode": "#fcad56"
+  },
+  {
+    "colorName": "PMS 151",
+    "colorCode": "#f77f00"
+  },
+  {
+    "colorName": "PMS 152",
+    "colorCode": "#dd7500"
+  },
+  {
+    "colorName": "PMS 153",
+    "colorCode": "#bc6d0a"
+  },
+  {
+    "colorName": "PMS 154",
+    "colorCode": "#995905"
+  },
+  {
+    "colorName": "PMS 1485",
+    "colorCode": "#ffb777"
+  },
+  {
+    "colorName": "PMS 1495",
+    "colorCode": "#ff993f"
+  },
+  {
+    "colorName": "PMS 1505",
+    "colorCode": "#f47c00"
+  },
+  {
+    "colorName": "Orange 021",
+    "colorCode": "#ef6b00"
+  },
+  {
+    "colorName": "PMS 1525",
+    "colorCode": "#b55400"
+  },
+  {
+    "colorName": "PMS 1535",
+    "colorCode": "#8c4400"
+  },
+  {
+    "colorName": "PMS 1545",
+    "colorCode": "#4c280f"
+  },
+  {
+    "colorName": "PMS 155",
+    "colorCode": "#f4dbaa"
+  },
+  {
+    "colorName": "PMS 156",
+    "colorCode": "#f2c68c"
+  },
+  {
+    "colorName": "PMS 157",
+    "colorCode": "#eda04f"
+  },
+  {
+    "colorName": "PMS 158",
+    "colorCode": "#e87511"
+  },
+  {
+    "colorName": "PMS 159",
+    "colorCode": "#c66005"
+  },
+  {
+    "colorName": "PMS 160",
+    "colorCode": "#9e540a"
+  },
+  {
+    "colorName": "PMS 161",
+    "colorCode": "#633a11"
+  },
+  {
+    "colorName": "PMS 1555",
+    "colorCode": "#f9bf9e"
+  },
+  {
+    "colorName": "PMS 1565",
+    "colorCode": "#fca577"
+  },
+  {
+    "colorName": "PMS 1575",
+    "colorCode": "#fc8744"
+  },
+  {
+    "colorName": "PMS 1585",
+    "colorCode": "#f96b07"
+  },
+  {
+    "colorName": "PMS 1595",
+    "colorCode": "#d15b05"
+  },
+  {
+    "colorName": "PMS 1605",
+    "colorCode": "#a04f11"
+  },
+  {
+    "colorName": "PMS 1615",
+    "colorCode": "#843f0f"
+  },
+  {
+    "colorName": "PMS 162",
+    "colorCode": "#f9c6aa"
+  },
+  {
+    "colorName": "PMS 163",
+    "colorCode": "#fc9e70"
+  },
+  {
+    "colorName": "PMS 164",
+    "colorCode": "#fc7f3f"
+  },
+  {
+    "colorName": "PMS 165",
+    "colorCode": "#f96302"
+  },
+  {
+    "colorName": "PMS 166",
+    "colorCode": "#dd5900"
+  },
+  {
+    "colorName": "PMS 167",
+    "colorCode": "#bc4f07"
+  },
+  {
+    "colorName": "PMS 168",
+    "colorCode": "#6d3011"
+  },
+  {
+    "colorName": "PMS 1625",
+    "colorCode": "#f9a58c"
+  },
+  {
+    "colorName": "PMS 1635",
+    "colorCode": "#f98e6d"
+  },
+  {
+    "colorName": "PMS 1645",
+    "colorCode": "#f97242"
+  },
+  {
+    "colorName": "PMS 1655",
+    "colorCode": "#f95602"
+  },
+  {
+    "colorName": "PMS 1665",
+    "colorCode": "#f95602"
+  },
+  {
+    "colorName": "PMS 1675",
+    "colorCode": "#a53f0f"
+  },
+  {
+    "colorName": "PMS 1685",
+    "colorCode": "#843511"
+  },
+  {
+    "colorName": "PMS 169",
+    "colorCode": "#f9baaa"
+  },
+  {
+    "colorName": "PMS 170",
+    "colorCode": "#f98972"
+  },
+  {
+    "colorName": "PMS 171",
+    "colorCode": "#f9603a"
+  },
+  {
+    "colorName": "PMS 172",
+    "colorCode": "#f74902"
+  },
+  {
+    "colorName": "PMS 173",
+    "colorCode": "#d14414"
+  },
+  {
+    "colorName": "PMS 174",
+    "colorCode": "#933311"
+  },
+  {
+    "colorName": "PMS 175",
+    "colorCode": "#6d3321"
+  },
+  {
+    "colorName": "PMS 176",
+    "colorCode": "#f9afad"
+  },
+  {
+    "colorName": "PMS 177",
+    "colorCode": "#f9827f"
+  },
+  {
+    "colorName": "PMS 178",
+    "colorCode": "#f95e59"
+  },
+  {
+    "colorName": "Warm Red",
+    "colorCode": "#f93f26"
+  },
+  {
+    "colorName": "PMS 179",
+    "colorCode": "#e23d28"
+  },
+  {
+    "colorName": "PMS 180",
+    "colorCode": "#c13828"
+  },
+  {
+    "colorName": "PMS 181",
+    "colorCode": "#7c2d23"
+  },
+  {
+    "colorName": "PMS 1765",
+    "colorCode": "#f99ea3"
+  },
+  {
+    "colorName": "PMS 1775",
+    "colorCode": "#f9848e"
+  },
+  {
+    "colorName": "PMS 1785",
+    "colorCode": "#fc4f59"
+  },
+  {
+    "colorName": "PMS 1788",
+    "colorCode": "#ef2b2d"
+  },
+  {
+    "colorName": "PMS 1795",
+    "colorCode": "#d62828"
+  },
+  {
+    "colorName": "PMS 1805",
+    "colorCode": "#af2626"
+  },
+  {
+    "colorName": "PMS 1815",
+    "colorCode": "#7c211e"
+  },
+  {
+    "colorName": "PMS 1767",
+    "colorCode": "#f9b2b7"
+  },
+  {
+    "colorName": "PMS 1777",
+    "colorCode": "#fc6675"
+  },
+  {
+    "colorName": "PMS 1787",
+    "colorCode": "#f43f4f"
+  },
+  {
+    "colorName": "Red 032",
+    "colorCode": "#ef2b2d"
+  },
+  {
+    "colorName": "PMS 1797",
+    "colorCode": "#cc2d30"
+  },
+  {
+    "colorName": "PMS 1807",
+    "colorCode": "#a03033"
+  },
+  {
+    "colorName": "PMS 1817",
+    "colorCode": "#5b2d28"
+  },
+  {
+    "colorName": "PMS 182",
+    "colorCode": "#f9bfc1"
+  },
+  {
+    "colorName": "PMS 183",
+    "colorCode": "#fc8c99"
+  },
+  {
+    "colorName": "PMS 184",
+    "colorCode": "#fc5e72"
+  },
+  {
+    "colorName": "PMS 185",
+    "colorCode": "#e8112d"
+  },
+  {
+    "colorName": "PMS 186",
+    "colorCode": "#ce1126"
+  },
+  {
+    "colorName": "PMS 187",
+    "colorCode": "#af1e2d"
+  },
+  {
+    "colorName": "PMS 188",
+    "colorCode": "#7c2128"
+  },
+  {
+    "colorName": "PMS 189",
+    "colorCode": "#ffa3b2"
+  },
+  {
+    "colorName": "PMS 190",
+    "colorCode": "#fc758e"
+  },
+  {
+    "colorName": "PMS 191",
+    "colorCode": "#f4476b"
+  },
+  {
+    "colorName": "PMS 192",
+    "colorCode": "#e5053a"
+  },
+  {
+    "colorName": "PMS 193",
+    "colorCode": "#bf0a30"
+  },
+  {
+    "colorName": "PMS 194",
+    "colorCode": "#992135"
+  },
+  {
+    "colorName": "PMS 195",
+    "colorCode": "#772d35"
+  },
+  {
+    "colorName": "PMS 1895",
+    "colorCode": "#fcbfc9"
+  },
+  {
+    "colorName": "PMS 1905",
+    "colorCode": "#fc9bb2"
+  },
+  {
+    "colorName": "PMS 1915",
+    "colorCode": "#f4547c"
+  },
+  {
+    "colorName": "PMS 1925",
+    "colorCode": "#e00747"
+  },
+  {
+    "colorName": "PMS 1935",
+    "colorCode": "#c10538"
+  },
+  {
+    "colorName": "PMS 1945",
+    "colorCode": "#a80c35"
+  },
+  {
+    "colorName": "PMS 1955",
+    "colorCode": "#931638"
+  },
+  {
+    "colorName": "PMS 196",
+    "colorCode": "#f4c9c9"
+  },
+  {
+    "colorName": "PMS 197",
+    "colorCode": "#ef99a3"
+  },
+  {
+    "colorName": "PMS 198",
+    "colorCode": "#e5566d"
+  },
+  {
+    "colorName": "PMS 199",
+    "colorCode": "#d81c3f"
+  },
+  {
+    "colorName": "PMS 200",
+    "colorCode": "#c41e3a"
+  },
+  {
+    "colorName": "PMS 201",
+    "colorCode": "#a32638"
+  },
+  {
+    "colorName": "PMS 202",
+    "colorCode": "#8c2633"
+  },
+  {
+    "colorName": "PMS 203",
+    "colorCode": "#f2afc1"
+  },
+  {
+    "colorName": "PMS 204",
+    "colorCode": "#ed7a9e"
+  },
+  {
+    "colorName": "PMS 205",
+    "colorCode": "#e54c7c"
+  },
+  {
+    "colorName": "PMS 206",
+    "colorCode": "#d30547"
+  },
+  {
+    "colorName": "PMS 207",
+    "colorCode": "#af003d"
+  },
+  {
+    "colorName": "PMS 208",
+    "colorCode": "#8e2344"
+  },
+  {
+    "colorName": "PMS 209",
+    "colorCode": "#75263d"
+  },
+  {
+    "colorName": "PMS 210",
+    "colorCode": "#ffa0bf"
+  },
+  {
+    "colorName": "PMS 211",
+    "colorCode": "#ff77a8"
+  },
+  {
+    "colorName": "PMS 212",
+    "colorCode": "#f94f8e"
+  },
+  {
+    "colorName": "PMS 213",
+    "colorCode": "#ea0f6b"
+  },
+  {
+    "colorName": "PMS 214",
+    "colorCode": "#cc0256"
+  },
+  {
+    "colorName": "PMS 215",
+    "colorCode": "#a50544"
+  },
+  {
+    "colorName": "PMS 216",
+    "colorCode": "#7c1e3f"
+  },
+  {
+    "colorName": "PMS 217",
+    "colorCode": "#f4bfd1"
+  },
+  {
+    "colorName": "PMS 218",
+    "colorCode": "#ed72aa"
+  },
+  {
+    "colorName": "PMS 219",
+    "colorCode": "#e22882"
+  },
+  {
+    "colorName": "Rubine Red",
+    "colorCode": "#d10056"
+  },
+  {
+    "colorName": "PMS 220",
+    "colorCode": "#aa004f"
+  },
+  {
+    "colorName": "PMS 221",
+    "colorCode": "#930042"
+  },
+  {
+    "colorName": "PMS 222",
+    "colorCode": "#70193d"
+  },
+  {
+    "colorName": "PMS 223",
+    "colorCode": "#f993c4"
+  },
+  {
+    "colorName": "PMS 224",
+    "colorCode": "#f46baf"
+  },
+  {
+    "colorName": "PMS 225",
+    "colorCode": "#ed2893"
+  },
+  {
+    "colorName": "PMS 226",
+    "colorCode": "#d60270"
+  },
+  {
+    "colorName": "PMS 227",
+    "colorCode": "#ad005b"
+  },
+  {
+    "colorName": "PMS 228",
+    "colorCode": "#8c004c"
+  },
+  {
+    "colorName": "PMS 229",
+    "colorCode": "#6d213f"
+  },
+  {
+    "colorName": "PMS 230",
+    "colorCode": "#ffa0cc"
+  },
+  {
+    "colorName": "PMS 231",
+    "colorCode": "#fc70ba"
+  },
+  {
+    "colorName": "PMS 232",
+    "colorCode": "#f43fa5"
+  },
+  {
+    "colorName": "Rhodamine Red",
+    "colorCode": "#ed0091"
+  },
+  {
+    "colorName": "PMS 233",
+    "colorCode": "#ce007c"
+  },
+  {
+    "colorName": "PMS 234",
+    "colorCode": "#aa0066"
+  },
+  {
+    "colorName": "PMS 235",
+    "colorCode": "#8e0554"
+  },
+  {
+    "colorName": "PMS 236",
+    "colorCode": "#f9afd3"
+  },
+  {
+    "colorName": "PMS 237",
+    "colorCode": "#f484c4"
+  },
+  {
+    "colorName": "PMS 238",
+    "colorCode": "#ed4faf"
+  },
+  {
+    "colorName": "PMS 239",
+    "colorCode": "#e0219e"
+  },
+  {
+    "colorName": "PMS 240",
+    "colorCode": "#c40f89"
+  },
+  {
+    "colorName": "PMS 241",
+    "colorCode": "#ad0075"
+  },
+  {
+    "colorName": "PMS 242",
+    "colorCode": "#7c1c51"
+  },
+  {
+    "colorName": "PMS 2365",
+    "colorCode": "#f7c4d8"
+  },
+  {
+    "colorName": "PMS 2375",
+    "colorCode": "#ea6bbf"
+  },
+  {
+    "colorName": "PMS 2385",
+    "colorCode": "#db28a5"
+  },
+  {
+    "colorName": "PMS 2395",
+    "colorCode": "#c4008c"
+  },
+  {
+    "colorName": "PMS 2405",
+    "colorCode": "#a8007a"
+  },
+  {
+    "colorName": "PMS 2415",
+    "colorCode": "#9b0070"
+  },
+  {
+    "colorName": "PMS 2425",
+    "colorCode": "#87005b"
+  },
+  {
+    "colorName": "PMS 243",
+    "colorCode": "#f2bad8"
+  },
+  {
+    "colorName": "PMS 244",
+    "colorCode": "#eda0d3"
+  },
+  {
+    "colorName": "PMS 245",
+    "colorCode": "#e87fc9"
+  },
+  {
+    "colorName": "PMS 246",
+    "colorCode": "#cc00a0"
+  },
+  {
+    "colorName": "PMS 247",
+    "colorCode": "#b7008e"
+  },
+  {
+    "colorName": "PMS 248",
+    "colorCode": "#a3057f"
+  },
+  {
+    "colorName": "PMS 249",
+    "colorCode": "#7f2860"
+  },
+  {
+    "colorName": "PMS 250",
+    "colorCode": "#edc4dd"
+  },
+  {
+    "colorName": "PMS 251",
+    "colorCode": "#e29ed6"
+  },
+  {
+    "colorName": "PMS 252",
+    "colorCode": "#d36bc6"
+  },
+  {
+    "colorName": "Purple",
+    "colorCode": "#bf30b5"
+  },
+  {
+    "colorName": "PMS 253",
+    "colorCode": "#af23a5"
+  },
+  {
+    "colorName": "PMS 254",
+    "colorCode": "#a02d96"
+  },
+  {
+    "colorName": "PMS 255",
+    "colorCode": "#772d6b"
+  },
+  {
+    "colorName": "PMS 256",
+    "colorCode": "#e5c4d6"
+  },
+  {
+    "colorName": "PMS 257",
+    "colorCode": "#d3a5c9"
+  },
+  {
+    "colorName": "PMS 258",
+    "colorCode": "#9b4f96"
+  },
+  {
+    "colorName": "PMS 259",
+    "colorCode": "#72166b"
+  },
+  {
+    "colorName": "PMS 260",
+    "colorCode": "#681e5b"
+  },
+  {
+    "colorName": "PMS 261",
+    "colorCode": "#5e2154"
+  },
+  {
+    "colorName": "PMS 262",
+    "colorCode": "#542344"
+  },
+  {
+    "colorName": "PMS 2562",
+    "colorCode": "#d8a8d8"
+  },
+  {
+    "colorName": "PMS 2572",
+    "colorCode": "#c687d1"
+  },
+  {
+    "colorName": "PMS 2582",
+    "colorCode": "#aa47ba"
+  },
+  {
+    "colorName": "PMS 2592",
+    "colorCode": "#930fa5"
+  },
+  {
+    "colorName": "PMS 2602",
+    "colorCode": "#820c8e"
+  },
+  {
+    "colorName": "PMS 2612",
+    "colorCode": "#701e72"
+  },
+  {
+    "colorName": "PMS 2622",
+    "colorCode": "#602d59"
+  },
+  {
+    "colorName": "PMS 2563",
+    "colorCode": "#d1a0cc"
+  },
+  {
+    "colorName": "PMS 2573",
+    "colorCode": "#ba7cbc"
+  },
+  {
+    "colorName": "PMS 2583",
+    "colorCode": "#9e4fa5"
+  },
+  {
+    "colorName": "PMS 2593",
+    "colorCode": "#872b93"
+  },
+  {
+    "colorName": "PMS 2603",
+    "colorCode": "#70147a"
+  },
+  {
+    "colorName": "PMS 2613",
+    "colorCode": "#66116d"
+  },
+  {
+    "colorName": "PMS 2623",
+    "colorCode": "#5b195e"
+  },
+  {
+    "colorName": "PMS 2567",
+    "colorCode": "#bf93cc"
+  },
+  {
+    "colorName": "PMS 2577",
+    "colorCode": "#aa72bf"
+  },
+  {
+    "colorName": "PMS 2587",
+    "colorCode": "#8e47ad"
+  },
+  {
+    "colorName": "PMS 2597",
+    "colorCode": "#66008c"
+  },
+  {
+    "colorName": "PMS 2607",
+    "colorCode": "#5b027a"
+  },
+  {
+    "colorName": "PMS 2617",
+    "colorCode": "#560c70"
+  },
+  {
+    "colorName": "PMS 2627",
+    "colorCode": "#4c145e"
+  },
+  {
+    "colorName": "PMS 263",
+    "colorCode": "#e0cee0"
+  },
+  {
+    "colorName": "PMS 264",
+    "colorCode": "#c6aadb"
+  },
+  {
+    "colorName": "PMS 265",
+    "colorCode": "#9663c4"
+  },
+  {
+    "colorName": "PMS 266",
+    "colorCode": "#6d28aa"
+  },
+  {
+    "colorName": "PMS 267",
+    "colorCode": "#59118e"
+  },
+  {
+    "colorName": "PMS 268",
+    "colorCode": "#4f2170"
+  },
+  {
+    "colorName": "PMS 269",
+    "colorCode": "#442359"
+  },
+  {
+    "colorName": "PMS 2635",
+    "colorCode": "#c9add8"
+  },
+  {
+    "colorName": "PMS 2645",
+    "colorCode": "#b591d1"
+  },
+  {
+    "colorName": "PMS 2655",
+    "colorCode": "#9b6dc6"
+  },
+  {
+    "colorName": "PMS 2665",
+    "colorCode": "#894fbf"
+  },
+  {
+    "colorName": "Violet",
+    "colorCode": "#6607a5"
+  },
+  {
+    "colorName": "PMS 2685",
+    "colorCode": "#56008c"
+  },
+  {
+    "colorName": "PMS 2695",
+    "colorCode": "#44235e"
+  },
+  {
+    "colorName": "PMS 270",
+    "colorCode": "#baafd3"
+  },
+  {
+    "colorName": "PMS 271",
+    "colorCode": "#9e91c6"
+  },
+  {
+    "colorName": "PMS 272",
+    "colorCode": "#8977ba"
+  },
+  {
+    "colorName": "PMS 273",
+    "colorCode": "#38197a"
+  },
+  {
+    "colorName": "PMS 274",
+    "colorCode": "#2b1166"
+  },
+  {
+    "colorName": "PMS 275",
+    "colorCode": "#260f54"
+  },
+  {
+    "colorName": "PMS 276",
+    "colorCode": "#2b2147"
+  },
+  {
+    "colorName": "PMS 2705",
+    "colorCode": "#ad9ed3"
+  },
+  {
+    "colorName": "PMS 2715",
+    "colorCode": "#937acc"
+  },
+  {
+    "colorName": "PMS 2725",
+    "colorCode": "#7251bc"
+  },
+  {
+    "colorName": "PMS 2735",
+    "colorCode": "#4f0093"
+  },
+  {
+    "colorName": "PMS 2745",
+    "colorCode": "#3f0077"
+  },
+  {
+    "colorName": "PMS 2755",
+    "colorCode": "#35006d"
+  },
+  {
+    "colorName": "PMS 2765",
+    "colorCode": "#2b0c56"
+  },
+  {
+    "colorName": "PMS 2706",
+    "colorCode": "#d1cedd"
+  },
+  {
+    "colorName": "PMS 2716",
+    "colorCode": "#a5a0d6"
+  },
+  {
+    "colorName": "PMS 2726",
+    "colorCode": "#6656bc"
+  },
+  {
+    "colorName": "PMS 2736",
+    "colorCode": "#4930ad"
+  },
+  {
+    "colorName": "PMS 2746",
+    "colorCode": "#3f2893"
+  },
+  {
+    "colorName": "PMS 2756",
+    "colorCode": "#332875"
+  },
+  {
+    "colorName": "PMS 2766",
+    "colorCode": "#2b265b"
+  },
+  {
+    "colorName": "PMS 2707",
+    "colorCode": "#bfd1e5"
+  },
+  {
+    "colorName": "PMS 2717",
+    "colorCode": "#a5bae0"
+  },
+  {
+    "colorName": "PMS 2727",
+    "colorCode": "#5e68c4"
+  },
+  {
+    "colorName": "Blue 072",
+    "colorCode": "#380096"
+  },
+  {
+    "colorName": "PMS 2747",
+    "colorCode": "#1c146b"
+  },
+  {
+    "colorName": "PMS 2757",
+    "colorCode": "#141654"
+  },
+  {
+    "colorName": "PMS 2767",
+    "colorCode": "#14213d"
+  },
+  {
+    "colorName": "PMS 2708",
+    "colorCode": "#afbcdb"
+  },
+  {
+    "colorName": "PMS 2718",
+    "colorCode": "#5b77cc"
+  },
+  {
+    "colorName": "PMS 2728",
+    "colorCode": "#3044b5"
+  },
+  {
+    "colorName": "PMS 2738",
+    "colorCode": "#2d008e"
+  },
+  {
+    "colorName": "PMS 2748",
+    "colorCode": "#1e1c77"
+  },
+  {
+    "colorName": "PMS 2758",
+    "colorCode": "#192168"
+  },
+  {
+    "colorName": "PMS 2768",
+    "colorCode": "#112151"
+  },
+  {
+    "colorName": "PMS 277",
+    "colorCode": "#b5d1e8"
+  },
+  {
+    "colorName": "PMS 278",
+    "colorCode": "#99badd"
+  },
+  {
+    "colorName": "PMS 279",
+    "colorCode": "#6689cc"
+  },
+  {
+    "colorName": "Reflex Blue",
+    "colorCode": "#0c1c8c"
+  },
+  {
+    "colorName": "PMS 280",
+    "colorCode": "#002b7f"
+  },
+  {
+    "colorName": "PMS 281",
+    "colorCode": "#002868"
+  },
+  {
+    "colorName": "PMS 282",
+    "colorCode": "#002654"
+  },
+  {
+    "colorName": "PMS 283",
+    "colorCode": "#9bc4e2"
+  },
+  {
+    "colorName": "PMS 284",
+    "colorCode": "#75aadb"
+  },
+  {
+    "colorName": "PMS 285",
+    "colorCode": "#3a75c4"
+  },
+  {
+    "colorName": "PMS 286",
+    "colorCode": "#0038a8"
+  },
+  {
+    "colorName": "PMS 287",
+    "colorCode": "#003893"
+  },
+  {
+    "colorName": "PMS 288",
+    "colorCode": "#00337f"
+  },
+  {
+    "colorName": "PMS 289",
+    "colorCode": "#002649"
+  },
+  {
+    "colorName": "PMS 290",
+    "colorCode": "#c4d8e2"
+  },
+  {
+    "colorName": "PMS 291",
+    "colorCode": ""
+  },
+  {
+    "colorName": "PMS 292",
+    "colorCode": "#a8cee2"
+  },
+  {
+    "colorName": "PMS 293",
+    "colorCode": "#75b2dd"
+  },
+  {
+    "colorName": "PMS 294",
+    "colorCode": "#0051ba"
+  },
+  {
+    "colorName": "PMS 295",
+    "colorCode": "#003f87"
+  },
+  {
+    "colorName": "PMS 296",
+    "colorCode": "#00386b"
+  },
+  {
+    "colorName": "PMS 2905",
+    "colorCode": "#002d47"
+  },
+  {
+    "colorName": "PMS 2915",
+    "colorCode": "#93c6e0"
+  },
+  {
+    "colorName": "PMS 2925",
+    "colorCode": "#60afdd"
+  },
+  {
+    "colorName": "PMS 2935",
+    "colorCode": "#008ed6"
+  },
+  {
+    "colorName": "PMS 2945",
+    "colorCode": "#005bbf"
+  },
+  {
+    "colorName": "PMS 2955",
+    "colorCode": "#0054a0"
+  },
+  {
+    "colorName": "PMS 2965",
+    "colorCode": "#003d6b"
+  },
+  {
+    "colorName": "PMS 297",
+    "colorCode": "#00334c"
+  },
+  {
+    "colorName": "PMS 298",
+    "colorCode": "#82c6e2"
+  },
+  {
+    "colorName": "PMS 299",
+    "colorCode": "#51b5e0"
+  },
+  {
+    "colorName": "PMS 300",
+    "colorCode": "#00a3dd"
+  },
+  {
+    "colorName": "PMS 301",
+    "colorCode": "#0072c6"
+  },
+  {
+    "colorName": "PMS 302",
+    "colorCode": "#005b99"
+  },
+  {
+    "colorName": "PMS 303",
+    "colorCode": "#004f6d"
+  },
+  {
+    "colorName": "PMS 2975",
+    "colorCode": "#003f54"
+  },
+  {
+    "colorName": "PMS 2985",
+    "colorCode": "#bae0e2"
+  },
+  {
+    "colorName": "PMS 2995",
+    "colorCode": "#51bfe2"
+  },
+  {
+    "colorName": "PMS 3005",
+    "colorCode": "#00a5db"
+  },
+  {
+    "colorName": "PMS 3015",
+    "colorCode": "#0084c9"
+  },
+  {
+    "colorName": "PMS 3025",
+    "colorCode": "#00709e"
+  },
+  {
+    "colorName": "PMS 3035",
+    "colorCode": "#00546b"
+  },
+  {
+    "colorName": "PMS 304",
+    "colorCode": "#004454"
+  },
+  {
+    "colorName": "PMS 305",
+    "colorCode": "#a5dde2"
+  },
+  {
+    "colorName": "PMS 306",
+    "colorCode": "#70cee2"
+  },
+  {
+    "colorName": "Process Blue",
+    "colorCode": "#00bce2"
+  },
+  {
+    "colorName": "PMS 307",
+    "colorCode": "#0091c9"
+  },
+  {
+    "colorName": "PMS 308",
+    "colorCode": "#007aa5"
+  },
+  {
+    "colorName": "PMS 309",
+    "colorCode": "#00607c"
+  },
+  {
+    "colorName": "PMS 310",
+    "colorCode": "#003f49"
+  },
+  {
+    "colorName": "PMS 311",
+    "colorCode": "#72d1dd"
+  },
+  {
+    "colorName": "PMS 312",
+    "colorCode": "#28c4d8"
+  },
+  {
+    "colorName": "PMS 313",
+    "colorCode": "#00adc6"
+  },
+  {
+    "colorName": "PMS 314",
+    "colorCode": "#0099b5"
+  },
+  {
+    "colorName": "PMS 315",
+    "colorCode": "#00829b"
+  },
+  {
+    "colorName": "PMS 316",
+    "colorCode": "#006b77"
+  },
+  {
+    "colorName": "PMS 3105",
+    "colorCode": "#00494f"
+  },
+  {
+    "colorName": "PMS 3115",
+    "colorCode": "#7fd6db"
+  },
+  {
+    "colorName": "PMS 3125",
+    "colorCode": "#2dc6d6"
+  },
+  {
+    "colorName": "PMS 3135",
+    "colorCode": "#00b7c6"
+  },
+  {
+    "colorName": "PMS 3145",
+    "colorCode": "#009baa"
+  },
+  {
+    "colorName": "PMS 3155",
+    "colorCode": "#00848e"
+  },
+  {
+    "colorName": "PMS 3165",
+    "colorCode": "#006d75"
+  },
+  {
+    "colorName": "PMS 317",
+    "colorCode": "#00565b"
+  },
+  {
+    "colorName": "PMS 318",
+    "colorCode": "#c9e8dd"
+  },
+  {
+    "colorName": "PMS 319",
+    "colorCode": "#93dddb"
+  },
+  {
+    "colorName": "PMS 320",
+    "colorCode": "#4cced1"
+  },
+  {
+    "colorName": "PMS 321",
+    "colorCode": "#009ea0"
+  },
+  {
+    "colorName": "PMS 322",
+    "colorCode": "#008789"
+  },
+  {
+    "colorName": "PMS 323",
+    "colorCode": "#007272"
+  },
+  {
+    "colorName": "PMS 324",
+    "colorCode": "#006663"
+  },
+  {
+    "colorName": "PMS 325",
+    "colorCode": "#aaddd6"
+  },
+  {
+    "colorName": "PMS 326",
+    "colorCode": "#56c9c1"
+  },
+  {
+    "colorName": "PMS 327",
+    "colorCode": "#00b2aa"
+  },
+  {
+    "colorName": "PMS 328",
+    "colorCode": "#008c82"
+  },
+  {
+    "colorName": "PMS 329",
+    "colorCode": "#007770"
+  },
+  {
+    "colorName": "PMS 330",
+    "colorCode": "#006d66"
+  },
+  {
+    "colorName": "PMS 3242",
+    "colorCode": "#005951"
+  },
+  {
+    "colorName": "PMS 3252",
+    "colorCode": "#87ddd1"
+  },
+  {
+    "colorName": "PMS 3262",
+    "colorCode": "#56d6c9"
+  },
+  {
+    "colorName": "PMS 3272",
+    "colorCode": "#00c1b5"
+  },
+  {
+    "colorName": "PMS 3282",
+    "colorCode": "#00aa9e"
+  },
+  {
+    "colorName": "PMS 3292",
+    "colorCode": "#008c82"
+  },
+  {
+    "colorName": "PMS 3302",
+    "colorCode": "#006056"
+  },
+  {
+    "colorName": "PMS 3245",
+    "colorCode": "#00493f"
+  },
+  {
+    "colorName": "PMS 3255",
+    "colorCode": "#8ce0d1"
+  },
+  {
+    "colorName": "PMS 3265",
+    "colorCode": "#47d6c1"
+  },
+  {
+    "colorName": "PMS 3275",
+    "colorCode": "#00c6b2"
+  },
+  {
+    "colorName": "PMS 3285",
+    "colorCode": "#00b2a0"
+  },
+  {
+    "colorName": "PMS 3295",
+    "colorCode": "#009987"
+  },
+  {
+    "colorName": "PMS 3305",
+    "colorCode": "#008272"
+  },
+  {
+    "colorName": "PMS 3248",
+    "colorCode": "#004f42"
+  },
+  {
+    "colorName": "PMS 3258",
+    "colorCode": "#7ad3c1"
+  },
+  {
+    "colorName": "PMS 3268",
+    "colorCode": "#35c4af"
+  },
+  {
+    "colorName": "PMS 3278",
+    "colorCode": "#00af99"
+  },
+  {
+    "colorName": "PMS 3288",
+    "colorCode": "#009b84"
+  },
+  {
+    "colorName": "PMS 3298",
+    "colorCode": "#008270"
+  },
+  {
+    "colorName": "PMS 3308",
+    "colorCode": "#006b5b"
+  },
+  {
+    "colorName": "PMS 331",
+    "colorCode": "#004438"
+  },
+  {
+    "colorName": "PMS 332",
+    "colorCode": "#baead6"
+  },
+  {
+    "colorName": "PMS 333",
+    "colorCode": "#a0e5ce"
+  },
+  {
+    "colorName": "Green",
+    "colorCode": "#5eddc1"
+  },
+  {
+    "colorName": "PMS 334",
+    "colorCode": "#00af93"
+  },
+  {
+    "colorName": "PMS 335",
+    "colorCode": "#00997c"
+  },
+  {
+    "colorName": "PMS 336",
+    "colorCode": "#007c66"
+  },
+  {
+    "colorName": "PMS 337",
+    "colorCode": "#006854"
+  },
+  {
+    "colorName": "PMS 338",
+    "colorCode": "#9bdbc1"
+  },
+  {
+    "colorName": "PMS 339",
+    "colorCode": "#7ad1b5"
+  },
+  {
+    "colorName": "PMS 340",
+    "colorCode": "#00b28c"
+  },
+  {
+    "colorName": "PMS 341",
+    "colorCode": "#009977"
+  },
+  {
+    "colorName": "PMS 342",
+    "colorCode": "#007a5e"
+  },
+  {
+    "colorName": "PMS 343",
+    "colorCode": "#006b54"
+  },
+  {
+    "colorName": "PMS 3375",
+    "colorCode": "#00563f"
+  },
+  {
+    "colorName": "PMS 3385",
+    "colorCode": "#8ee2bc"
+  },
+  {
+    "colorName": "PMS 3395",
+    "colorCode": "#54d8a8"
+  },
+  {
+    "colorName": "PMS 3405",
+    "colorCode": "#00c993"
+  },
+  {
+    "colorName": "PMS 3415",
+    "colorCode": "#00b27a"
+  },
+  {
+    "colorName": "PMS 3425",
+    "colorCode": "#007c59"
+  },
+  {
+    "colorName": "PMS 3435",
+    "colorCode": "#006847"
+  },
+  {
+    "colorName": "PMS 344",
+    "colorCode": "#024930"
+  },
+  {
+    "colorName": "PMS 345",
+    "colorCode": "#b5e2bf"
+  },
+  {
+    "colorName": "PMS 346",
+    "colorCode": "#96d8af"
+  },
+  {
+    "colorName": "PMS 347",
+    "colorCode": "#70ce9b"
+  },
+  {
+    "colorName": "PMS 348",
+    "colorCode": "#009e60"
+  },
+  {
+    "colorName": "PMS 349",
+    "colorCode": "#008751"
+  },
+  {
+    "colorName": "PMS 350",
+    "colorCode": "#006b3f"
+  },
+  {
+    "colorName": "PMS 351",
+    "colorCode": "#234f33"
+  },
+  {
+    "colorName": "PMS 352",
+    "colorCode": "#b5e8bf"
+  },
+  {
+    "colorName": "PMS 353",
+    "colorCode": "#99e5b2"
+  },
+  {
+    "colorName": "PMS 354",
+    "colorCode": "#84e2a8"
+  },
+  {
+    "colorName": "PMS 355",
+    "colorCode": "#00b760"
+  },
+  {
+    "colorName": "PMS 356",
+    "colorCode": "#009e49"
+  },
+  {
+    "colorName": "PMS 357",
+    "colorCode": "#007a3d"
+  },
+  {
+    "colorName": "PMS 358",
+    "colorCode": "#215b33"
+  },
+  {
+    "colorName": "PMS 359",
+    "colorCode": "#aadd96"
+  },
+  {
+    "colorName": "PMS 360",
+    "colorCode": "#a0db8e"
+  },
+  {
+    "colorName": "PMS 361",
+    "colorCode": "#60c659"
+  },
+  {
+    "colorName": "PMS 362",
+    "colorCode": "#1eb53a"
+  },
+  {
+    "colorName": "PMS 363",
+    "colorCode": "#339e35"
+  },
+  {
+    "colorName": "PMS 364",
+    "colorCode": "#3d8e33"
+  },
+  {
+    "colorName": "PMS 365",
+    "colorCode": "#3a7728"
+  },
+  {
+    "colorName": "PMS 366",
+    "colorCode": "#d3e8a3"
+  },
+  {
+    "colorName": "PMS 367",
+    "colorCode": "#c4e58e"
+  },
+  {
+    "colorName": "PMS 368",
+    "colorCode": "#aadd6d"
+  },
+  {
+    "colorName": "PMS 369",
+    "colorCode": "#5bbf21"
+  },
+  {
+    "colorName": "PMS 370",
+    "colorCode": "#56aa1c"
+  },
+  {
+    "colorName": "PMS 371",
+    "colorCode": "#568e14"
+  },
+  {
+    "colorName": "PMS 372",
+    "colorCode": "#566b21"
+  },
+  {
+    "colorName": "PMS 373",
+    "colorCode": "#d8ed96"
+  },
+  {
+    "colorName": "PMS 374",
+    "colorCode": "#ceea82"
+  },
+  {
+    "colorName": "PMS 375",
+    "colorCode": "#bae860"
+  },
+  {
+    "colorName": "PMS 376",
+    "colorCode": "#8cd600"
+  },
+  {
+    "colorName": "PMS 377",
+    "colorCode": "#7fba00"
+  },
+  {
+    "colorName": "PMS 378",
+    "colorCode": "#709302"
+  },
+  {
+    "colorName": "PMS 379",
+    "colorCode": "#566314"
+  },
+  {
+    "colorName": "PMS 380",
+    "colorCode": "#e0ea68"
+  },
+  {
+    "colorName": "PMS 381",
+    "colorCode": "#d6e542"
+  },
+  {
+    "colorName": "PMS 382",
+    "colorCode": "#cce226"
+  },
+  {
+    "colorName": "PMS 383",
+    "colorCode": "#bad80a"
+  },
+  {
+    "colorName": "PMS 384",
+    "colorCode": "#a3af07"
+  },
+  {
+    "colorName": "PMS 385",
+    "colorCode": "#939905"
+  },
+  {
+    "colorName": "PMS 386",
+    "colorCode": "#707014"
+  },
+  {
+    "colorName": "PMS 387",
+    "colorCode": "#e8ed60"
+  },
+  {
+    "colorName": "PMS 388",
+    "colorCode": "#e0ed44"
+  },
+  {
+    "colorName": "PMS 389",
+    "colorCode": "#d6e80f"
+  },
+  {
+    "colorName": "PMS 390",
+    "colorCode": "#cee007"
+  },
+  {
+    "colorName": "PMS 391",
+    "colorCode": "#bac405"
+  },
+  {
+    "colorName": "PMS 392",
+    "colorCode": "#9e9e07"
+  },
+  {
+    "colorName": "PMS 393",
+    "colorCode": "#848205"
+  },
+  {
+    "colorName": "PMS 394",
+    "colorCode": "#f2ef87"
+  },
+  {
+    "colorName": "PMS 395",
+    "colorCode": "#eaed35"
+  },
+  {
+    "colorName": "PMS 396",
+    "colorCode": "#e5e811"
+  },
+  {
+    "colorName": "PMS 397",
+    "colorCode": "#e0e20c"
+  },
+  {
+    "colorName": "PMS 398",
+    "colorCode": "#c1bf0a"
+  },
+  {
+    "colorName": "PMS 399",
+    "colorCode": "#afa80a"
+  },
+  {
+    "colorName": "PMS 3935",
+    "colorCode": "#998e07"
+  },
+  {
+    "colorName": "PMS 3945",
+    "colorCode": "#f2ed6d"
+  },
+  {
+    "colorName": "PMS 3955",
+    "colorCode": "#efea07"
+  },
+  {
+    "colorName": "PMS 3965",
+    "colorCode": "#ede211"
+  },
+  {
+    "colorName": "PMS 3975",
+    "colorCode": "#e8dd11"
+  },
+  {
+    "colorName": "PMS 3985",
+    "colorCode": "#b5a80c"
+  },
+  {
+    "colorName": "PMS 3995",
+    "colorCode": "#998c0a"
+  },
+  {
+    "colorName": "PMS 400",
+    "colorCode": "#6d6002"
+  },
+  {
+    "colorName": "PMS 401",
+    "colorCode": "#d1c6b5"
+  },
+  {
+    "colorName": "PMS 402",
+    "colorCode": "#c1b5a5"
+  },
+  {
+    "colorName": "PMS 403",
+    "colorCode": "#afa593"
+  },
+  {
+    "colorName": "PMS 404",
+    "colorCode": "#998c7c"
+  },
+  {
+    "colorName": "PMS 405",
+    "colorCode": "#827566"
+  },
+  {
+    "colorName": "Black",
+    "colorCode": "#6b5e4f"
+  },
+  {
+    "colorName": "PMS 406",
+    "colorCode": "#3d332b"
+  },
+  {
+    "colorName": "PMS 407",
+    "colorCode": "#cec1b5"
+  },
+  {
+    "colorName": "PMS 408",
+    "colorCode": "#baaa9e"
+  },
+  {
+    "colorName": "PMS 409",
+    "colorCode": "#a8998c"
+  },
+  {
+    "colorName": "PMS 410",
+    "colorCode": "#99897c"
+  },
+  {
+    "colorName": "PMS 411",
+    "colorCode": "#7c6d63"
+  },
+  {
+    "colorName": "PMS 412",
+    "colorCode": "#66594c"
+  },
+  {
+    "colorName": "PMS 413",
+    "colorCode": "#3d3028"
+  },
+  {
+    "colorName": "PMS 414",
+    "colorCode": "#c6c1b2"
+  },
+  {
+    "colorName": "PMS 415",
+    "colorCode": "#b5afa0"
+  },
+  {
+    "colorName": "PMS 416",
+    "colorCode": "#a39e8c"
+  },
+  {
+    "colorName": "PMS 417",
+    "colorCode": "#8e8c7a"
+  },
+  {
+    "colorName": "PMS 418",
+    "colorCode": "#777263"
+  },
+  {
+    "colorName": "PMS 419",
+    "colorCode": "#605e4f"
+  },
+  {
+    "colorName": "PMS 420",
+    "colorCode": "#282821"
+  },
+  {
+    "colorName": "PMS 421",
+    "colorCode": "#d1ccbf"
+  },
+  {
+    "colorName": "PMS 422",
+    "colorCode": "#bfbaaf"
+  },
+  {
+    "colorName": "PMS 423",
+    "colorCode": "#afaaa3"
+  },
+  {
+    "colorName": "PMS 424",
+    "colorCode": "#96938e"
+  },
+  {
+    "colorName": "PMS 425",
+    "colorCode": "#827f77"
+  },
+  {
+    "colorName": "PMS 426",
+    "colorCode": "#60605b"
+  },
+  {
+    "colorName": "PMS 427",
+    "colorCode": "#2b2b28"
+  },
+  {
+    "colorName": "PMS 428",
+    "colorCode": "#dddbd1"
+  },
+  {
+    "colorName": "PMS 429",
+    "colorCode": "#d1cec6"
+  },
+  {
+    "colorName": "PMS 430",
+    "colorCode": "#adafaa"
+  },
+  {
+    "colorName": "PMS 431",
+    "colorCode": "#919693"
+  },
+  {
+    "colorName": "PMS 432",
+    "colorCode": "#666d70"
+  },
+  {
+    "colorName": "PMS 433",
+    "colorCode": "#444f51"
+  },
+  {
+    "colorName": "PMS 434",
+    "colorCode": "#30383a"
+  },
+  {
+    "colorName": "PMS 435",
+    "colorCode": "#e0d1c6"
+  },
+  {
+    "colorName": "PMS 436",
+    "colorCode": "#d3bfb7"
+  },
+  {
+    "colorName": "PMS 437",
+    "colorCode": "#bca59e"
+  },
+  {
+    "colorName": "PMS 438",
+    "colorCode": "#8c706b"
+  },
+  {
+    "colorName": "PMS 439",
+    "colorCode": "#593f3d"
+  },
+  {
+    "colorName": "PMS 440",
+    "colorCode": "#493533"
+  },
+  {
+    "colorName": "PMS 441",
+    "colorCode": "#3f302b"
+  },
+  {
+    "colorName": "PMS 442",
+    "colorCode": "#d1d1c6"
+  },
+  {
+    "colorName": "PMS 443",
+    "colorCode": "#babfb7"
+  },
+  {
+    "colorName": "PMS 444",
+    "colorCode": "#a3a8a3"
+  },
+  {
+    "colorName": "PMS 445",
+    "colorCode": "#898e8c"
+  },
+  {
+    "colorName": "PMS 446",
+    "colorCode": "#565959"
+  },
+  {
+    "colorName": "PMS 447",
+    "colorCode": "#494c49"
+  },
+  {
+    "colorName": "Warm Gray 1",
+    "colorCode": "#3f3f38"
+  },
+  {
+    "colorName": "Warm Gray 2",
+    "colorCode": "#e5dbcc"
+  },
+  {
+    "colorName": "Warm Gray 3",
+    "colorCode": "#ddd1c1"
+  },
+  {
+    "colorName": "Warm Gray 4",
+    "colorCode": "#ccc1b2"
+  },
+  {
+    "colorName": "Warm Gray 5",
+    "colorCode": "#c1b5a5"
+  },
+  {
+    "colorName": "Warm Gray 6",
+    "colorCode": "#b5a899"
+  },
+  {
+    "colorName": "Warm Gray 7",
+    "colorCode": "#afa393"
+  },
+  {
+    "colorName": "Warm Gray 8",
+    "colorCode": "#a39687"
+  },
+  {
+    "colorName": "Warm Gray 9",
+    "colorCode": "#96897a"
+  },
+  {
+    "colorName": "Warm Gray 10",
+    "colorCode": "#8c7f70"
+  },
+  {
+    "colorName": "Warm Gray 11",
+    "colorCode": "#827263"
+  },
+  {
+    "colorName": "Cool Gray 1",
+    "colorCode": "#6d5e51"
+  },
+  {
+    "colorName": "Cool Gray 2",
+    "colorCode": "#e8e2d6"
+  },
+  {
+    "colorName": "Cool Gray 3",
+    "colorCode": "#ddd8ce"
+  },
+  {
+    "colorName": "Cool Gray 4",
+    "colorCode": "#d3cec4"
+  },
+  {
+    "colorName": "Cool Gray 5",
+    "colorCode": "#c4c1ba"
+  },
+  {
+    "colorName": "Cool Gray 6",
+    "colorCode": "#bab7af"
+  },
+  {
+    "colorName": "Cool Gray 7",
+    "colorCode": "#b5b2aa"
+  },
+  {
+    "colorName": "Cool Gray 8",
+    "colorCode": "#a5a39e"
+  },
+  {
+    "colorName": "Cool Gray 9",
+    "colorCode": "#9b9993"
+  },
+  {
+    "colorName": "Cool Gray 10",
+    "colorCode": "#8c8984"
+  },
+  {
+    "colorName": "Cool Gray 11",
+    "colorCode": "#777772"
+  },
+  {
+    "colorName": "PMS 448",
+    "colorCode": "#686663"
+  },
+  {
+    "colorName": "PMS 449",
+    "colorCode": "#54472d"
+  },
+  {
+    "colorName": "PMS 450",
+    "colorCode": "#544726"
+  },
+  {
+    "colorName": "PMS 451",
+    "colorCode": "#60542b"
+  },
+  {
+    "colorName": "PMS 452",
+    "colorCode": "#ada07a"
+  },
+  {
+    "colorName": "PMS 453",
+    "colorCode": "#c4b796"
+  },
+  {
+    "colorName": "PMS 454",
+    "colorCode": "#d6ccaf"
+  },
+  {
+    "colorName": "PMS 4485",
+    "colorCode": "#e2d8bf"
+  },
+  {
+    "colorName": "PMS 4495",
+    "colorCode": "#604c11"
+  },
+  {
+    "colorName": "PMS 4505",
+    "colorCode": "#877530"
+  },
+  {
+    "colorName": "PMS 4515",
+    "colorCode": "#a09151"
+  },
+  {
+    "colorName": "PMS 4525",
+    "colorCode": "#bcad75"
+  },
+  {
+    "colorName": "PMS 4535",
+    "colorCode": "#ccbf8e"
+  },
+  {
+    "colorName": "PMS 4545",
+    "colorCode": "#dbcea5"
+  },
+  {
+    "colorName": "PMS 455",
+    "colorCode": "#e5dbba"
+  },
+  {
+    "colorName": "PMS 456",
+    "colorCode": "#665614"
+  },
+  {
+    "colorName": "PMS 457",
+    "colorCode": "#998714"
+  },
+  {
+    "colorName": "PMS 458",
+    "colorCode": "#b59b0c"
+  },
+  {
+    "colorName": "PMS 459",
+    "colorCode": "#ddcc6b"
+  },
+  {
+    "colorName": "PMS 460",
+    "colorCode": "#e2d67c"
+  },
+  {
+    "colorName": "PMS 461",
+    "colorCode": "#eadd96"
+  },
+  {
+    "colorName": "PMS 462",
+    "colorCode": "#ede5ad"
+  },
+  {
+    "colorName": "PMS 463",
+    "colorCode": "#5b4723"
+  },
+  {
+    "colorName": "PMS 464",
+    "colorCode": "#755426"
+  },
+  {
+    "colorName": "PMS 465",
+    "colorCode": "#876028"
+  },
+  {
+    "colorName": "PMS 466",
+    "colorCode": "#c1a875"
+  },
+  {
+    "colorName": "PMS 467",
+    "colorCode": "#d1bf91"
+  },
+  {
+    "colorName": "PMS 468",
+    "colorCode": "#ddcca5"
+  },
+  {
+    "colorName": "PMS 4625",
+    "colorCode": "#e2d6b5"
+  },
+  {
+    "colorName": "PMS 4635",
+    "colorCode": "#472311"
+  },
+  {
+    "colorName": "PMS 4645",
+    "colorCode": "#8c5933"
+  },
+  {
+    "colorName": "PMS 4655",
+    "colorCode": "#b28260"
+  },
+  {
+    "colorName": "PMS 4665",
+    "colorCode": "#c49977"
+  },
+  {
+    "colorName": "PMS 4675",
+    "colorCode": "#d8b596"
+  },
+  {
+    "colorName": "PMS 4685",
+    "colorCode": "#e5c6aa"
+  },
+  {
+    "colorName": "PMS 469",
+    "colorCode": "#edd3bc"
+  },
+  {
+    "colorName": "PMS 4695",
+    "colorCode": "#603311"
+  },
+  {
+    "colorName": "PMS 4705",
+    "colorCode": "#51261c"
+  },
+  {
+    "colorName": "PMS 4715",
+    "colorCode": "#7c513d"
+  },
+  {
+    "colorName": "PMS 4725",
+    "colorCode": "#99705b"
+  },
+  {
+    "colorName": "PMS 4735",
+    "colorCode": "#b5917c"
+  },
+  {
+    "colorName": "PMS 4745",
+    "colorCode": "#ccaf9b"
+  },
+  {
+    "colorName": "PMS 4755",
+    "colorCode": "#d8bfaa"
+  },
+  {
+    "colorName": "PMS 476",
+    "colorCode": "#e2ccba"
+  },
+  {
+    "colorName": "PMS 477",
+    "colorCode": "#593d2b"
+  },
+  {
+    "colorName": "PMS 478",
+    "colorCode": "#633826"
+  },
+  {
+    "colorName": "PMS 479",
+    "colorCode": "#7a3f28"
+  },
+  {
+    "colorName": "PMS 480",
+    "colorCode": "#af8970"
+  },
+  {
+    "colorName": "PMS 481",
+    "colorCode": "#d3b7a3"
+  },
+  {
+    "colorName": "PMS 482",
+    "colorCode": "#e0ccba"
+  },
+  {
+    "colorName": "PMS 483",
+    "colorCode": "#e5d3c1"
+  },
+  {
+    "colorName": "PMS 484",
+    "colorCode": "#6b3021"
+  },
+  {
+    "colorName": "PMS 485",
+    "colorCode": "#9b301c"
+  },
+  {
+    "colorName": "PMS 486",
+    "colorCode": "#d81e05"
+  },
+  {
+    "colorName": "PMS 487",
+    "colorCode": "#ed9e84"
+  },
+  {
+    "colorName": "PMS 488",
+    "colorCode": "#efb5a0"
+  },
+  {
+    "colorName": "PMS 489",
+    "colorCode": "#f2c4af"
+  },
+  {
+    "colorName": "PMS 490",
+    "colorCode": "#f2d1bf"
+  },
+  {
+    "colorName": "PMS 491",
+    "colorCode": "#5b2626"
+  },
+  {
+    "colorName": "PMS 492",
+    "colorCode": "#752828"
+  },
+  {
+    "colorName": "PMS 493",
+    "colorCode": "#913338"
+  },
+  {
+    "colorName": "PMS 494",
+    "colorCode": "#db828c"
+  },
+  {
+    "colorName": "PMS 495",
+    "colorCode": "#f2adb2"
+  },
+  {
+    "colorName": "PMS 496",
+    "colorCode": "#f4bcbf"
+  },
+  {
+    "colorName": "PMS 497",
+    "colorCode": "#f7c9c6"
+  },
+  {
+    "colorName": "PMS 498",
+    "colorCode": "#512826"
+  },
+  {
+    "colorName": "PMS 499",
+    "colorCode": "#6d332b"
+  },
+  {
+    "colorName": "PMS 500",
+    "colorCode": "#7a382d"
+  },
+  {
+    "colorName": "PMS 501",
+    "colorCode": "#ce898c"
+  },
+  {
+    "colorName": "PMS 502",
+    "colorCode": "#eab2b2"
+  },
+  {
+    "colorName": "PMS 503",
+    "colorCode": "#f2c6c4"
+  },
+  {
+    "colorName": "PMS 4975",
+    "colorCode": "#f4d1cc"
+  },
+  {
+    "colorName": "PMS 4985",
+    "colorCode": "#441e1c"
+  },
+  {
+    "colorName": "PMS 4995",
+    "colorCode": "#844949"
+  },
+  {
+    "colorName": "PMS 5005",
+    "colorCode": "#a56b6d"
+  },
+  {
+    "colorName": "PMS 5015",
+    "colorCode": "#bc8787"
+  },
+  {
+    "colorName": "PMS 5025",
+    "colorCode": "#d8ada8"
+  },
+  {
+    "colorName": "PMS 5035",
+    "colorCode": "#e2bcb7"
+  },
+  {
+    "colorName": "PMS 504",
+    "colorCode": "#edcec6"
+  },
+  {
+    "colorName": "PMS 505",
+    "colorCode": "#511e26"
+  },
+  {
+    "colorName": "PMS 506",
+    "colorCode": "#661e2b"
+  },
+  {
+    "colorName": "PMS 507",
+    "colorCode": "#7a2638"
+  },
+  {
+    "colorName": "PMS 508",
+    "colorCode": "#d8899b"
+  },
+  {
+    "colorName": "PMS 509",
+    "colorCode": "#e8a5af"
+  },
+  {
+    "colorName": "PMS 510",
+    "colorCode": "#f2babf"
+  },
+  {
+    "colorName": "PMS 511",
+    "colorCode": "#f4c6c9"
+  },
+  {
+    "colorName": "PMS 512",
+    "colorCode": "#602144"
+  },
+  {
+    "colorName": "PMS 513",
+    "colorCode": "#84216b"
+  },
+  {
+    "colorName": "PMS 514",
+    "colorCode": "#9e2387"
+  },
+  {
+    "colorName": "PMS 515",
+    "colorCode": "#d884bc"
+  },
+  {
+    "colorName": "PMS 516",
+    "colorCode": "#e8a3c9"
+  },
+  {
+    "colorName": "PMS 517",
+    "colorCode": "#f2bad3"
+  },
+  {
+    "colorName": "PMS 5115",
+    "colorCode": "#f4ccd8"
+  },
+  {
+    "colorName": "PMS 5125",
+    "colorCode": "#4f213a"
+  },
+  {
+    "colorName": "PMS 5135",
+    "colorCode": "#754760"
+  },
+  {
+    "colorName": "PMS 5145",
+    "colorCode": "#936b7f"
+  },
+  {
+    "colorName": "PMS 5155",
+    "colorCode": "#ad8799"
+  },
+  {
+    "colorName": "PMS 5165",
+    "colorCode": "#ccafb7"
+  },
+  {
+    "colorName": "PMS 5175",
+    "colorCode": "#e0c9cc"
+  },
+  {
+    "colorName": "PMS 518",
+    "colorCode": "#e8d6d1"
+  },
+  {
+    "colorName": "PMS 519",
+    "colorCode": "#512d44"
+  },
+  {
+    "colorName": "PMS 520",
+    "colorCode": "#63305e"
+  },
+  {
+    "colorName": "PMS 521",
+    "colorCode": "#703572"
+  },
+  {
+    "colorName": "PMS 522",
+    "colorCode": "#b58cb2"
+  },
+  {
+    "colorName": "PMS 523",
+    "colorCode": "#c6a3c1"
+  },
+  {
+    "colorName": "PMS 524",
+    "colorCode": "#d3b7cc"
+  },
+  {
+    "colorName": "PMS 5185",
+    "colorCode": "#e2ccd3"
+  },
+  {
+    "colorName": "PMS 5195",
+    "colorCode": "#472835"
+  },
+  {
+    "colorName": "PMS 5205",
+    "colorCode": "#593344"
+  },
+  {
+    "colorName": "PMS 5215",
+    "colorCode": "#8e6877"
+  },
+  {
+    "colorName": "PMS 5225",
+    "colorCode": "#b5939b"
+  },
+  {
+    "colorName": "PMS 5235",
+    "colorCode": "#ccadaf"
+  },
+  {
+    "colorName": "PMS 5245",
+    "colorCode": "#ddc6c4"
+  },
+  {
+    "colorName": "PMS 525",
+    "colorCode": "#e5d3cc"
+  },
+  {
+    "colorName": "PMS 526",
+    "colorCode": "#512654"
+  },
+  {
+    "colorName": "PMS 527",
+    "colorCode": "#68217a"
+  },
+  {
+    "colorName": "PMS 528",
+    "colorCode": "#7a1e99"
+  },
+  {
+    "colorName": "PMS 529",
+    "colorCode": "#af72c1"
+  },
+  {
+    "colorName": "PMS 530",
+    "colorCode": "#cea3d3"
+  },
+  {
+    "colorName": "PMS 531",
+    "colorCode": "#d6afd6"
+  },
+  {
+    "colorName": "PMS 5255",
+    "colorCode": "#e5c6db"
+  },
+  {
+    "colorName": "PMS 5265",
+    "colorCode": "#35264f"
+  },
+  {
+    "colorName": "PMS 5275",
+    "colorCode": "#493d63"
+  },
+  {
+    "colorName": "PMS 5285",
+    "colorCode": "#605677"
+  },
+  {
+    "colorName": "PMS 5295",
+    "colorCode": "#8c8299"
+  },
+  {
+    "colorName": "PMS 5305",
+    "colorCode": "#b2a8b5"
+  },
+  {
+    "colorName": "PMS 5315",
+    "colorCode": "#ccc1c6"
+  },
+  {
+    "colorName": "PMS 532",
+    "colorCode": "#dbd3d3"
+  },
+  {
+    "colorName": "PMS 533",
+    "colorCode": "#353842"
+  },
+  {
+    "colorName": "PMS 534",
+    "colorCode": "#353f5b"
+  },
+  {
+    "colorName": "PMS 535",
+    "colorCode": "#3a4972"
+  },
+  {
+    "colorName": "PMS 536",
+    "colorCode": "#9ba3b7"
+  },
+  {
+    "colorName": "PMS 537",
+    "colorCode": "#adb2c1"
+  },
+  {
+    "colorName": "PMS 538",
+    "colorCode": "#c4c6ce"
+  },
+  {
+    "colorName": "PMS 539",
+    "colorCode": "#d6d3d6"
+  },
+  {
+    "colorName": "PMS 540",
+    "colorCode": "#003049"
+  },
+  {
+    "colorName": "PMS 541",
+    "colorCode": "#00335b"
+  },
+  {
+    "colorName": "PMS 542",
+    "colorCode": "#003f77"
+  },
+  {
+    "colorName": "PMS 543",
+    "colorCode": "#6693bc"
+  },
+  {
+    "colorName": "PMS 544",
+    "colorCode": "#93b7d1"
+  },
+  {
+    "colorName": "PMS 545",
+    "colorCode": "#b7ccdb"
+  },
+  {
+    "colorName": "PMS 5395",
+    "colorCode": "#c4d3dd"
+  },
+  {
+    "colorName": "PMS 5405",
+    "colorCode": "#02283a"
+  },
+  {
+    "colorName": "PMS 5415",
+    "colorCode": "#3f6075"
+  },
+  {
+    "colorName": "PMS 5425",
+    "colorCode": "#607c8c"
+  },
+  {
+    "colorName": "PMS 5435",
+    "colorCode": "#8499a5"
+  },
+  {
+    "colorName": "PMS 5445",
+    "colorCode": "#afbcbf"
+  },
+  {
+    "colorName": "PMS 5455",
+    "colorCode": "#c4cccc"
+  },
+  {
+    "colorName": "PMS 546",
+    "colorCode": "#d6d8d3"
+  },
+  {
+    "colorName": "PMS 547",
+    "colorCode": "#0c3844"
+  },
+  {
+    "colorName": "PMS 548",
+    "colorCode": "#003f54"
+  },
+  {
+    "colorName": "PMS 549",
+    "colorCode": "#004459"
+  },
+  {
+    "colorName": "PMS 550",
+    "colorCode": "#5e99aa"
+  },
+  {
+    "colorName": "PMS 551",
+    "colorCode": "#87afbf"
+  },
+  {
+    "colorName": "PMS 552",
+    "colorCode": "#a3c1c9"
+  },
+  {
+    "colorName": "PMS 5463",
+    "colorCode": "#c4d6d6"
+  },
+  {
+    "colorName": "PMS 5473",
+    "colorCode": "#00353a"
+  },
+  {
+    "colorName": "PMS 5483",
+    "colorCode": "#26686d"
+  },
+  {
+    "colorName": "PMS 5493",
+    "colorCode": "#609191"
+  },
+  {
+    "colorName": "PMS 5503",
+    "colorCode": "#8cafad"
+  },
+  {
+    "colorName": "PMS 5513",
+    "colorCode": "#aac4bf"
+  },
+  {
+    "colorName": "PMS 5523",
+    "colorCode": "#ced8d1"
+  },
+  {
+    "colorName": "PMS 5467",
+    "colorCode": "#d6ddd6"
+  },
+  {
+    "colorName": "PMS 5477",
+    "colorCode": "#193833"
+  },
+  {
+    "colorName": "PMS 5487",
+    "colorCode": "#3a564f"
+  },
+  {
+    "colorName": "PMS 5497",
+    "colorCode": "#667c72"
+  },
+  {
+    "colorName": "PMS 5507",
+    "colorCode": "#91a399"
+  },
+  {
+    "colorName": "PMS 5517",
+    "colorCode": "#afbab2"
+  },
+  {
+    "colorName": "PMS 5527",
+    "colorCode": "#c9cec4"
+  },
+  {
+    "colorName": "PMS 553",
+    "colorCode": "#ced1c6"
+  },
+  {
+    "colorName": "PMS 554",
+    "colorCode": "#234435"
+  },
+  {
+    "colorName": "PMS 555",
+    "colorCode": "#195e47"
+  },
+  {
+    "colorName": "PMS 556",
+    "colorCode": "#076d54"
+  },
+  {
+    "colorName": "PMS 557",
+    "colorCode": "#7aa891"
+  },
+  {
+    "colorName": "PMS 558",
+    "colorCode": "#a3c1ad"
+  },
+  {
+    "colorName": "PMS 559",
+    "colorCode": "#b7cebc"
+  },
+  {
+    "colorName": "PMS 5535",
+    "colorCode": "#c6d6c4"
+  },
+  {
+    "colorName": "PMS 5545",
+    "colorCode": "#213d30"
+  },
+  {
+    "colorName": "PMS 5555",
+    "colorCode": "#4f6d5e"
+  },
+  {
+    "colorName": "PMS 5565",
+    "colorCode": "#779182"
+  },
+  {
+    "colorName": "PMS 5575",
+    "colorCode": "#96aa99"
+  },
+  {
+    "colorName": "PMS 5585",
+    "colorCode": "#afbfad"
+  },
+  {
+    "colorName": "PMS 5595",
+    "colorCode": "#c4cebf"
+  },
+  {
+    "colorName": "PMS 560",
+    "colorCode": "#d8dbcc"
+  },
+  {
+    "colorName": "PMS 561",
+    "colorCode": "#2b4c3f"
+  },
+  {
+    "colorName": "PMS 562",
+    "colorCode": "#266659"
+  },
+  {
+    "colorName": "PMS 563",
+    "colorCode": "#1e7a6d"
+  },
+  {
+    "colorName": "PMS 564",
+    "colorCode": "#7fbcaa"
+  },
+  {
+    "colorName": "PMS 565",
+    "colorCode": "#a0cebc"
+  },
+  {
+    "colorName": "PMS 566",
+    "colorCode": "#bcdbcc"
+  },
+  {
+    "colorName": "PMS 5605",
+    "colorCode": "#d1e2d3"
+  },
+  {
+    "colorName": "PMS 5615",
+    "colorCode": "#233a2d"
+  },
+  {
+    "colorName": "PMS 5625",
+    "colorCode": "#546856"
+  },
+  {
+    "colorName": "PMS 5635",
+    "colorCode": "#728470"
+  },
+  {
+    "colorName": "PMS 5645",
+    "colorCode": "#9eaa99"
+  },
+  {
+    "colorName": "PMS 5655",
+    "colorCode": "#bcc1b2"
+  },
+  {
+    "colorName": "PMS 568",
+    "colorCode": "#c6ccba"
+  },
+  {
+    "colorName": "PMS 569",
+    "colorCode": "#d6d6c6"
+  },
+  {
+    "colorName": "PMS 570",
+    "colorCode": "#05705e"
+  },
+  {
+    "colorName": "PMS 571",
+    "colorCode": "#008772"
+  },
+  {
+    "colorName": "PMS 572",
+    "colorCode": "#7fc6b2"
+  },
+  {
+    "colorName": "PMS 573",
+    "colorCode": "#aadbc6"
+  },
+  {
+    "colorName": "PMS 574",
+    "colorCode": "#bce2ce"
+  },
+  {
+    "colorName": "PMS 575",
+    "colorCode": "#cce5d6"
+  },
+  {
+    "colorName": "PMS 576",
+    "colorCode": "#495928"
+  },
+  {
+    "colorName": "PMS 577",
+    "colorCode": "#547730"
+  },
+  {
+    "colorName": "PMS 578",
+    "colorCode": "#608e3a"
+  },
+  {
+    "colorName": "PMS 579",
+    "colorCode": "#b5cc8e"
+  },
+  {
+    "colorName": "PMS 580",
+    "colorCode": "#c6d6a0"
+  },
+  {
+    "colorName": "PMS 5743",
+    "colorCode": "#c9d6a3"
+  },
+  {
+    "colorName": "PMS 5753",
+    "colorCode": "#d8ddb5"
+  },
+  {
+    "colorName": "PMS 5763",
+    "colorCode": "#3f4926"
+  },
+  {
+    "colorName": "PMS 5773",
+    "colorCode": "#5e663a"
+  },
+  {
+    "colorName": "PMS 5783",
+    "colorCode": "#777c4f"
+  },
+  {
+    "colorName": "PMS 5793",
+    "colorCode": "#9b9e72"
+  },
+  {
+    "colorName": "PMS 803",
+    "colorCode": "#b5b58e"
+  },
+  {
+    "colorName": "PMS 5747",
+    "colorCode": "#c6c6a5"
+  },
+  {
+    "colorName": "PMS 5757",
+    "colorCode": "#d8d6b7"
+  },
+  {
+    "colorName": "PMS 5767",
+    "colorCode": "#424716"
+  },
+  {
+    "colorName": "PMS 5777",
+    "colorCode": "#6b702b"
+  },
+  {
+    "colorName": "PMS 5787",
+    "colorCode": "#8c914f"
+  },
+  {
+    "colorName": "PMS 5797",
+    "colorCode": "#aaad75"
+  },
+  {
+    "colorName": "PMS 5807",
+    "colorCode": "#c6c699"
+  },
+  {
+    "colorName": "PMS 581",
+    "colorCode": "#d3d1aa"
+  },
+  {
+    "colorName": "PMS 582",
+    "colorCode": "#e0ddbc"
+  },
+  {
+    "colorName": "PMS 583",
+    "colorCode": "#605e11"
+  },
+  {
+    "colorName": "PMS 584",
+    "colorCode": "#878905"
+  },
+  {
+    "colorName": "PMS 585",
+    "colorCode": "#aaba0a"
+  },
+  {
+    "colorName": "PMS 586",
+    "colorCode": "#dbe06b"
+  },
+  {
+    "colorName": "PMS 587",
+    "colorCode": "#e2e584"
+  },
+  {
+    "colorName": "PMS 5815",
+    "colorCode": "#e8e89b"
+  },
+  {
+    "colorName": "PMS 5825",
+    "colorCode": "#494411"
+  },
+  {
+    "colorName": "PMS 5835",
+    "colorCode": "#75702b"
+  },
+  {
+    "colorName": "PMS 5845",
+    "colorCode": "#9e9959"
+  },
+  {
+    "colorName": "PMS 5855",
+    "colorCode": "#b2aa70"
+  },
+  {
+    "colorName": "PMS 5865",
+    "colorCode": "#ccc693"
+  },
+  {
+    "colorName": "PMS 5875",
+    "colorCode": "#d6cea3"
+  },
+  {
+    "colorName": "PMS 600",
+    "colorCode": "#e0dbb5"
+  },
+  {
+    "colorName": "PMS 601",
+    "colorCode": "#f4edaf"
+  },
+  {
+    "colorName": "PMS 602",
+    "colorCode": "#f2ed9e"
+  },
+  {
+    "colorName": "PMS 603",
+    "colorCode": "#f2ea87"
+  },
+  {
+    "colorName": "PMS 604",
+    "colorCode": "#ede85b"
+  },
+  {
+    "colorName": "PMS 605",
+    "colorCode": "#e8dd21"
+  },
+  {
+    "colorName": "PMS 606",
+    "colorCode": "#ddce11"
+  },
+  {
+    "colorName": "PMS 607",
+    "colorCode": "#d3bf11"
+  },
+  {
+    "colorName": "PMS 608",
+    "colorCode": "#f2eabc"
+  },
+  {
+    "colorName": "PMS 609",
+    "colorCode": "#efe8ad"
+  },
+  {
+    "colorName": "PMS 610",
+    "colorCode": "#eae596"
+  },
+  {
+    "colorName": "PMS 611",
+    "colorCode": "#e2db72"
+  },
+  {
+    "colorName": "PMS 612",
+    "colorCode": "#d6ce49"
+  },
+  {
+    "colorName": "PMS 613",
+    "colorCode": "#c4ba00"
+  },
+  {
+    "colorName": "PMS 614",
+    "colorCode": "#afa00c"
+  },
+  {
+    "colorName": "PMS 615",
+    "colorCode": "#eae2b7"
+  },
+  {
+    "colorName": "PMS 616",
+    "colorCode": "#e2dbaa"
+  },
+  {
+    "colorName": "PMS 617",
+    "colorCode": "#ddd69b"
+  },
+  {
+    "colorName": "PMS 618",
+    "colorCode": "#ccc47c"
+  },
+  {
+    "colorName": "PMS 619",
+    "colorCode": "#b5aa59"
+  },
+  {
+    "colorName": "PMS 620",
+    "colorCode": "#968c28"
+  },
+  {
+    "colorName": "PMS 621",
+    "colorCode": "#847711"
+  },
+  {
+    "colorName": "PMS 622",
+    "colorCode": "#d8ddce"
+  },
+  {
+    "colorName": "PMS 623",
+    "colorCode": "#c1d1bf"
+  },
+  {
+    "colorName": "PMS 624",
+    "colorCode": "#a5bfaa"
+  },
+  {
+    "colorName": "PMS 625",
+    "colorCode": "#7fa08c"
+  },
+  {
+    "colorName": "PMS 626",
+    "colorCode": "#5b8772"
+  },
+  {
+    "colorName": "PMS 627",
+    "colorCode": "#21543f"
+  },
+  {
+    "colorName": "PMS 628",
+    "colorCode": "#0c3026"
+  },
+  {
+    "colorName": "PMS 629",
+    "colorCode": "#cce2dd"
+  },
+  {
+    "colorName": "PMS 630",
+    "colorCode": "#b2d8d8"
+  },
+  {
+    "colorName": "PMS 631",
+    "colorCode": "#8cccd3"
+  },
+  {
+    "colorName": "PMS 632",
+    "colorCode": "#54b7c6"
+  },
+  {
+    "colorName": "PMS 633",
+    "colorCode": "#00a0ba"
+  },
+  {
+    "colorName": "PMS 634",
+    "colorCode": "#007f99"
+  },
+  {
+    "colorName": "PMS 635",
+    "colorCode": "#00667f"
+  },
+  {
+    "colorName": "PMS 636",
+    "colorCode": "#bae0e0"
+  },
+  {
+    "colorName": "PMS 637",
+    "colorCode": "#99d6dd"
+  },
+  {
+    "colorName": "PMS 638",
+    "colorCode": "#6bc9db"
+  },
+  {
+    "colorName": "PMS 639",
+    "colorCode": "#00b5d6"
+  },
+  {
+    "colorName": "PMS 640",
+    "colorCode": "#00a0c4"
+  },
+  {
+    "colorName": "PMS 641",
+    "colorCode": "#008cb2"
+  },
+  {
+    "colorName": "PMS 642",
+    "colorCode": "#007aa5"
+  },
+  {
+    "colorName": "PMS 643",
+    "colorCode": "#d1d8d8"
+  },
+  {
+    "colorName": "PMS 644",
+    "colorCode": "#c6d1d6"
+  },
+  {
+    "colorName": "PMS 645",
+    "colorCode": "#9bafc4"
+  },
+  {
+    "colorName": "PMS 646",
+    "colorCode": "#7796b2"
+  },
+  {
+    "colorName": "PMS 647",
+    "colorCode": "#5e82a3"
+  },
+  {
+    "colorName": "PMS 648",
+    "colorCode": "#26547c"
+  },
+  {
+    "colorName": "PMS 649",
+    "colorCode": "#00305e"
+  },
+  {
+    "colorName": "PMS 650",
+    "colorCode": "#d6d6d8"
+  },
+  {
+    "colorName": "PMS 651",
+    "colorCode": "#bfc6d1"
+  },
+  {
+    "colorName": "PMS 652",
+    "colorCode": "#9baabf"
+  },
+  {
+    "colorName": "PMS 653",
+    "colorCode": "#6d87a8"
+  },
+  {
+    "colorName": "PMS 654",
+    "colorCode": "#335687"
+  },
+  {
+    "colorName": "PMS 655",
+    "colorCode": "#0f2b5b"
+  },
+  {
+    "colorName": "PMS 656",
+    "colorCode": "#0c1c47"
+  },
+  {
+    "colorName": "PMS 657",
+    "colorCode": "#d6dbe0"
+  },
+  {
+    "colorName": "PMS 658",
+    "colorCode": "#c1c9dd"
+  },
+  {
+    "colorName": "PMS 659",
+    "colorCode": "#a5afd6"
+  },
+  {
+    "colorName": "PMS 660",
+    "colorCode": "#7f8cbf"
+  },
+  {
+    "colorName": "PMS 661",
+    "colorCode": "#5960a8"
+  },
+  {
+    "colorName": "PMS 662",
+    "colorCode": "#2d338e"
+  },
+  {
+    "colorName": "PMS 663",
+    "colorCode": "#0c1975"
+  },
+  {
+    "colorName": "PMS 664",
+    "colorCode": "#e2d3d6"
+  },
+  {
+    "colorName": "PMS 665",
+    "colorCode": "#d8ccd1"
+  },
+  {
+    "colorName": "PMS 666",
+    "colorCode": "#c6b5c4"
+  },
+  {
+    "colorName": "PMS 667",
+    "colorCode": "#a893ad"
+  },
+  {
+    "colorName": "PMS 668",
+    "colorCode": "#7f6689"
+  },
+  {
+    "colorName": "PMS 669",
+    "colorCode": "#664975"
+  },
+  {
+    "colorName": "PMS 670",
+    "colorCode": "#472b59"
+  },
+  {
+    "colorName": "PMS 671",
+    "colorCode": "#f2d6d8"
+  },
+  {
+    "colorName": "PMS 672",
+    "colorCode": "#efc6d3"
+  },
+  {
+    "colorName": "PMS 673",
+    "colorCode": "#eaaac4"
+  },
+  {
+    "colorName": "PMS 674",
+    "colorCode": "#e08cb2"
+  },
+  {
+    "colorName": "PMS 675",
+    "colorCode": "#d36b9e"
+  },
+  {
+    "colorName": "PMS 676",
+    "colorCode": "#bc3877"
+  },
+  {
+    "colorName": "PMS 677",
+    "colorCode": "#a00054"
+  },
+  {
+    "colorName": "PMS 678",
+    "colorCode": "#edd6d6"
+  },
+  {
+    "colorName": "PMS 679",
+    "colorCode": "#eaccce"
+  },
+  {
+    "colorName": "PMS 680",
+    "colorCode": "#e5bfc6"
+  },
+  {
+    "colorName": "PMS 681",
+    "colorCode": "#d39eaf"
+  },
+  {
+    "colorName": "PMS 682",
+    "colorCode": "#b7728e"
+  },
+  {
+    "colorName": "PMS 683",
+    "colorCode": "#a05175"
+  },
+  {
+    "colorName": "PMS 684",
+    "colorCode": "#7f284f"
+  },
+  {
+    "colorName": "PMS 685",
+    "colorCode": "#efccce"
+  },
+  {
+    "colorName": "PMS 686",
+    "colorCode": "#eabfc4"
+  },
+  {
+    "colorName": "PMS 687",
+    "colorCode": "#e0aaba"
+  },
+  {
+    "colorName": "PMS 688",
+    "colorCode": "#c9899e"
+  },
+  {
+    "colorName": "PMS 689",
+    "colorCode": "#b26684"
+  },
+  {
+    "colorName": "PMS 690",
+    "colorCode": "#934266"
+  },
+  {
+    "colorName": "PMS 691",
+    "colorCode": "#702342"
+  },
+  {
+    "colorName": "PMS 692",
+    "colorCode": "#efd1c9"
+  },
+  {
+    "colorName": "PMS 693",
+    "colorCode": "#e8bfba"
+  },
+  {
+    "colorName": "PMS 694",
+    "colorCode": "#dba8a5"
+  },
+  {
+    "colorName": "PMS 695",
+    "colorCode": "#c98c8c"
+  },
+  {
+    "colorName": "PMS 696",
+    "colorCode": "#b26b70"
+  },
+  {
+    "colorName": "PMS 697",
+    "colorCode": "#8e4749"
+  },
+  {
+    "colorName": "PMS 698",
+    "colorCode": "#7f383a"
+  },
+  {
+    "colorName": "PMS 699",
+    "colorCode": "#f7d1cc"
+  },
+  {
+    "colorName": "PMS 700",
+    "colorCode": "#f7bfbf"
+  },
+  {
+    "colorName": "PMS 701",
+    "colorCode": "#f2a5aa"
+  },
+  {
+    "colorName": "PMS 702",
+    "colorCode": "#e8878e"
+  },
+  {
+    "colorName": "PMS 703",
+    "colorCode": "#d6606d"
+  },
+  {
+    "colorName": "PMS 704",
+    "colorCode": "#b73844"
+  },
+  {
+    "colorName": "PMS 705",
+    "colorCode": "#9e2828"
+  },
+  {
+    "colorName": "PMS 706",
+    "colorCode": "#f9ddd6"
+  },
+  {
+    "colorName": "PMS 707",
+    "colorCode": "#fcc9c6"
+  },
+  {
+    "colorName": "PMS 708",
+    "colorCode": "#fcadaf"
+  },
+  {
+    "colorName": "PMS 709",
+    "colorCode": "#f98e99"
+  },
+  {
+    "colorName": "PMS 710",
+    "colorCode": "#f26877"
+  },
+  {
+    "colorName": "PMS 711",
+    "colorCode": "#e04251"
+  },
+  {
+    "colorName": "PMS 712",
+    "colorCode": "#d12d33"
+  },
+  {
+    "colorName": "PMS 713",
+    "colorCode": "#ffd3aa"
+  },
+  {
+    "colorName": "PMS 714",
+    "colorCode": "#f9c9a3"
+  },
+  {
+    "colorName": "PMS 715",
+    "colorCode": "#f9ba82"
+  },
+  {
+    "colorName": "PMS 716",
+    "colorCode": "#fc9e49"
+  },
+  {
+    "colorName": "PMS 717",
+    "colorCode": "#f28411"
+  },
+  {
+    "colorName": "PMS 718",
+    "colorCode": "#d36d00"
+  },
+  {
+    "colorName": "PMS 719",
+    "colorCode": "#bf5b00"
+  },
+  {
+    "colorName": "PMS 720",
+    "colorCode": "#f4d1af"
+  },
+  {
+    "colorName": "PMS 721",
+    "colorCode": "#efc49e"
+  },
+  {
+    "colorName": "PMS 722",
+    "colorCode": "#e8b282"
+  },
+  {
+    "colorName": "PMS 723",
+    "colorCode": "#d18e54"
+  },
+  {
+    "colorName": "PMS 724",
+    "colorCode": "#ba7530"
+  },
+  {
+    "colorName": "PMS 725",
+    "colorCode": "#8e4905"
+  },
+  {
+    "colorName": "PMS 726",
+    "colorCode": "#753802"
+  },
+  {
+    "colorName": "PMS 727",
+    "colorCode": "#edd3b5"
+  },
+  {
+    "colorName": "PMS 728",
+    "colorCode": "#e2bf9b"
+  },
+  {
+    "colorName": "PMS 729",
+    "colorCode": "#d3a87c"
+  },
+  {
+    "colorName": "PMS 730",
+    "colorCode": "#c18e60"
+  },
+  {
+    "colorName": "PMS 731",
+    "colorCode": "#aa753f"
+  },
+  {
+    "colorName": "PMS 732",
+    "colorCode": "#723f0a"
+  },
+  {
+    "colorName": "Yellow 2X",
+    "colorCode": "#60330a"
+  },
+  {
+    "colorName": "PMS 116 2X",
+    "colorCode": "#fce216"
+  },
+  {
+    "colorName": "PMS 130 2X",
+    "colorCode": "#f7b50c"
+  },
+  {
+    "colorName": "PMS 165 2X",
+    "colorCode": "#e29100"
+  },
+  {
+    "colorName": "Warm Red 2X",
+    "colorCode": "#ea4f00"
+  },
+  {
+    "colorName": "PMS 1788 2X",
+    "colorCode": "#e03a00"
+  },
+  {
+    "colorName": "PMS 1852 2X",
+    "colorCode": "#d62100"
+  },
+  {
+    "colorName": "PMS 485 2X",
+    "colorCode": "#d11600"
+  },
+  {
+    "colorName": "Rubine Red 2X",
+    "colorCode": "#cc0c00"
+  },
+  {
+    "colorName": "Rhodamine Red 2X",
+    "colorCode": "#c6003d"
+  },
+  {
+    "colorName": "PMS 239 2X",
+    "colorCode": "#d10572"
+  },
+  {
+    "colorName": "Purple 2X",
+    "colorCode": "#c4057c"
+  },
+  {
+    "colorName": "PMS 2592 2X",
+    "colorCode": "#aa0096"
+  },
+  {
+    "colorName": "Violet 2X",
+    "colorCode": "#720082"
+  },
+  {
+    "colorName": "Reflex Blue 2X",
+    "colorCode": "#59008e"
+  },
+  {
+    "colorName": "Process Blue 2X",
+    "colorCode": "#1c007a"
+  },
+  {
+    "colorName": "PMS 299 2X",
+    "colorCode": "#0077bf"
+  },
+  {
+    "colorName": "PMS 306 2X",
+    "colorCode": "#007fcc"
+  },
+  {
+    "colorName": "PMS 320 2X",
+    "colorCode": "#00a3d1"
+  },
+  {
+    "colorName": "PMS 327 2X",
+    "colorCode": "#007f82"
+  },
+  {
+    "colorName": "Green 2X",
+    "colorCode": "#008977"
+  },
+  {
+    "colorName": "PMS 354 2X",
+    "colorCode": "#009677"
+  },
+  {
+    "colorName": "PMS 368 2X",
+    "colorCode": "#009944"
+  },
+  {
+    "colorName": "PMS 375 2X",
+    "colorCode": "#009e0f"
+  },
+  {
+    "colorName": "PMS 382 2X",
+    "colorCode": "#54bc00"
+  },
+  {
+    "colorName": "PMS 471 2X",
+    "colorCode": "#9ec400"
+  },
+  {
+    "colorName": "PMS 464 2X",
+    "colorCode": "#a34402"
+  },
+  {
+    "colorName": "PMS 433 2X",
+    "colorCode": "#704214"
+  },
+  {
+    "colorName": "Black 2",
+    "colorCode": "#0a0c11"
+  },
+  {
+    "colorName": "Black 3",
+    "colorCode": "#3a3321"
+  },
+  {
+    "colorName": "Black 4",
+    "colorCode": "#282d26"
+  },
+  {
+    "colorName": "Black 5",
+    "colorCode": "#3d3023"
+  },
+  {
+    "colorName": "Black 6",
+    "colorCode": "#422d2d"
+  },
+  {
+    "colorName": "Black 7",
+    "colorCode": "#1c2630"
+  },
+  {
+    "colorName": "Black 2 2X",
+    "colorCode": "#443d38"
+  },
+  {
+    "colorName": "Black 3 2X",
+    "colorCode": "#111111"
+  },
+  {
+    "colorName": "Black 4 2X",
+    "colorCode": "#111114"
+  },
+  {
+    "colorName": "Black 5 2X",
+    "colorCode": "#0f0f0f"
+  },
+  {
+    "colorName": "Black 6 2X",
+    "colorCode": "#110c0f"
+  },
+  {
+    "colorName": "Black 7 2X",
+    "colorCode": "#070c0f"
+  },
+  {
+    "colorName": "PMS 801",
+    "colorCode": "#33302b"
+  },
+  {
+    "colorName": "PMS 802",
+    "colorCode": "#00aacc"
+  },
+  {
+    "colorName": "PMS 803",
+    "colorCode": "#60dd49"
+  },
+  {
+    "colorName": "PMS 804",
+    "colorCode": "#ffed38"
+  },
+  {
+    "colorName": "PMS 805",
+    "colorCode": "#ff9338"
+  },
+  {
+    "colorName": "PMS 806",
+    "colorCode": "#f95951"
+  },
+  {
+    "colorName": "PMS 807",
+    "colorCode": "#ff0093"
+  },
+  {
+    "colorName": "PMS 801 2X",
+    "colorCode": "#d6009e"
+  },
+  {
+    "colorName": "PMS 802 2X",
+    "colorCode": "#0089af"
+  },
+  {
+    "colorName": "PMS 803 2X",
+    "colorCode": "#1cce28"
+  },
+  {
+    "colorName": "PMS 804 2X",
+    "colorCode": "#ffd816"
+  },
+  {
+    "colorName": "PMS 805 2X",
+    "colorCode": "#ff7f1e"
+  },
+  {
+    "colorName": "PMS 806 2X",
+    "colorCode": "#f93a2b"
+  },
+  {
+    "colorName": "PMS 807 2X",
+    "colorCode": "#f7027c"
+  },
+  {
+    "colorName": "PMS 808",
+    "colorCode": "#bf008c"
+  },
+  {
+    "colorName": "PMS 809",
+    "colorCode": "#00b59b"
+  },
+  {
+    "colorName": "PMS 810",
+    "colorCode": "#dde00f"
+  },
+  {
+    "colorName": "PMS 811",
+    "colorCode": "#ffcc1e"
+  },
+  {
+    "colorName": "PMS 812",
+    "colorCode": "#ff7247"
+  },
+  {
+    "colorName": "PMS 813",
+    "colorCode": "#fc2366"
+  },
+  {
+    "colorName": "PMS 814",
+    "colorCode": "#e50099"
+  },
+  {
+    "colorName": "PMS 808 2X",
+    "colorCode": "#8c60c1"
+  },
+  {
+    "colorName": "PMS 809 2X",
+    "colorCode": "#00a087"
+  },
+  {
+    "colorName": "PMS 810 2X",
+    "colorCode": "#d6d60c"
+  },
+  {
+    "colorName": "PMS 811 2X",
+    "colorCode": "#ffbc21"
+  },
+  {
+    "colorName": "PMS 812 2X",
+    "colorCode": "#ff5416"
+  },
+  {
+    "colorName": "PMS 813 2X",
+    "colorCode": "#fc074f"
+  },
+  {
+    "colorName": "PMS 814 2X",
+    "colorCode": "#d10084"
+  }
 ]

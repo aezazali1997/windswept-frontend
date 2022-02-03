@@ -4,8 +4,7 @@ import { combineReducers } from 'redux';
 import orderReducer from './order';
 
 const rootReducer = combineReducers({
-    order: orderReducer,
-
+  order: orderReducer
 });
 
 export default rootReducer;

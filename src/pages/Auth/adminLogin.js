@@ -59,19 +59,13 @@ const AdminLogin = () => {
       setShowAlert(true);
       localStorage.setItem('user_id', data.user_id);
       localStorage.setItem('role', data.role);
-      
-        window.location = '/admin/wimpie';
-      
+
+      window.location = '/admin/wimpie';
     } catch ({
-      response:
-      {
-        data:
-          {
-          error,
-          message
-          }
+      response: {
+        data: { error, message }
       }
-      }) {
+    }) {
       setError(true);
       setStatus(message);
       disableLoading();
@@ -143,7 +137,7 @@ const AdminLogin = () => {
             svg={<EmailSVG />}
             inputClass={`${getInputClasses(
               'email'
-            )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-16`}
+            )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
             label={'Email'}
           />
           {formik.touched.email && formik.errors.email && (
@@ -160,7 +154,7 @@ const AdminLogin = () => {
               name={'password'}
               className={`${getInputClasses(
                 'password'
-              )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-16`}
+              )} border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -169,7 +163,7 @@ const AdminLogin = () => {
             />
             <label
               htmlFor="username"
-              className="absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
+              className="absolute text-gray-700 text-sm top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out ">
               Password
             </label>
             <div
@@ -184,7 +178,7 @@ const AdminLogin = () => {
             <div className="text-red-700 text-sm mb-4">{formik.errors.password}</div>
           ) : null}
 
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-center">
             {/* <div className="text-sm">
                             <Link to="/forget-password" className="font-medium text-gray-600 hover:text-red-500 hover:underline">
                                 Forgot your password?
@@ -194,12 +188,12 @@ const AdminLogin = () => {
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className={`flex items-center text-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
+              className={`flex items-center justify-center text-center w-24 py-2 px-4 border border-red-600 text-base font-medium text-white hover:text-red-600 ${
                 formik.isSubmitting
-                  ? 'bg-red-500 cursor-not-allowed pointer-events-none'
-                  : ' bg-red-600 hover:bg-red-700 '
+                  ? 'bg-red-400 cursor-not-allowed pointer-events-none'
+                  : ' bg-red-600 hover:bg-transparent hover:text-red-600'
               }focus:outline-none`}>
-              Log in
+              Login
               {loading && (
                 <div className=" ml-3 loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 "></div>
               )}

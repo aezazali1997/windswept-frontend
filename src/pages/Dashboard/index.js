@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 // import _ from 'lodash';
@@ -8,7 +8,7 @@ import NewOrder from './newOrder';
 import OpenOrder from './openOrder';
 import ClosedOrder from './closedOrder';
 import Draft from './draft';
-import ReactTooltip from "react-tooltip";
+import ReactTooltip from 'react-tooltip';
 import { CustomModal, SearchFilters } from '../../components';
 import { InfoSVG } from '../../assets/SVGs';
 // import moment from 'moment';
@@ -58,14 +58,14 @@ const Dashboard = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(undefined);
-  const [showCustomOrderModel,setShowCustomOrderModel]=useState(true);
+  const [showCustomOrderModel, setShowCustomOrderModel] = useState(true);
 
   useEffect(() => {
-  //   // fetchDrafts();
+    //   // fetchDrafts();
     if (query.get('active') === null) {
       props.history.push(`/dashboard?active=${activeIndex}`);
       // setActiveIndex(activeIndex);
-  //   } else {
+      //   } else {
       // const active = query.get('active');
       // setActiveIndex(active);
     }
@@ -113,7 +113,6 @@ const Dashboard = (props) => {
     setShowDraft(false);
     setShowOpenOrder(false);
     setShowNewOrder(true);
-    
   };
   let handleOpenOrder = (id) => {
     setActiveIndex(id);
@@ -146,7 +145,13 @@ const Dashboard = (props) => {
   const ActiveView = () => {
     switch (activeIndex) {
       case 'new-order':
-        return <NewOrder readOnly={false} showCustomOrderModel={showCustomOrderModel} setShowCustomOrderModel={setShowCustomOrderModel} />;
+        return (
+          <NewOrder
+            readOnly={false}
+            showCustomOrderModel={showCustomOrderModel}
+            setShowCustomOrderModel={setShowCustomOrderModel}
+          />
+        );
       case 'open-order':
         return (
           <OpenOrder
@@ -170,7 +175,7 @@ const Dashboard = (props) => {
         <title>Dashboard | Windswept</title>
       </Helmet>
 
-      <div className="flex flex-col h-screen lg:h-96 justify-center items-center p-5">
+      <div className="flex flex-col lg:h-96 justify-center items-center p-5">
         <h1 className="lg:text-5xl md:text-3xl sm:text-2xl text-2xl font-light mb-10">
           What would you like to do?
         </h1>
@@ -243,7 +248,7 @@ const Dashboard = (props) => {
                 </ul>
               </ReactTooltip>
             </span>{' '}
-            &nbsp;
+            
             <div className="w-full md:rounded flex bg-white">
               <span className="w-auto flex justify-end items-center text-gray-500 p-2">
                 <svg
@@ -270,18 +275,22 @@ const Dashboard = (props) => {
                 className="custom-place-holder w-full px-4 text-md h-9 border focus:outline-none border-gray-300 bg-gray-50 md:rounded"
               />
             </div>
+            </div>
+            <div className='flex flex-row mt-2 md:mt-0'>
+            <div>
             <button
               onClick={searchForData}
-              className="border bg-red-600 ml-2 h-9 hover:bg-transparent  text-white hover:text-red-600 hover:border-red-600  p-2 pl-6 pr-6">
+              className="border bg-red-600 ml-2 h-9 hover:bg-transparent  text-white hover:text-red-600 hover:border-red-600 mr-4 md:mr-0  p-2 pl-6 pr-6">
               <p className="text-sm font-medium">Search</p>
             </button>
           </div>
-          <div className="text-larger md:text-sm md:ml-5 mt-3 md:mt-0">
+          <div className="text-larger md:text-sm md:ml-5 mt-2">
             <p
               onClick={_ResetFilter}
               className="font-medium text-sm text-gray-600 hover:text-red-600 hover:underline cursor-pointer">
               Reset
             </p>
+          </div>
           </div>
         </div>
       </div>

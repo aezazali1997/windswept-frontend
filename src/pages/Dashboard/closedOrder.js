@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { isEmpty } from 'lodash';
 import NewOrder from './newOrder';
 import Button from './button';
@@ -11,7 +11,7 @@ import AxiosInstance from '../../APIs/axiosInstance';
 import { Spinner } from '../../components/spinner/Spinner';
 const ClosedOrder = ({ filters, searched, setSearched }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [showQuantityModal,setShowQuantityModal]=useState(true);
+  const [showQuantityModal, setShowQuantityModal] = useState(true);
   const checkFilters = (filters) => {
     if (
       filters.date !== '' ||
@@ -118,7 +118,14 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
           &nbsp; Edit
         </button>
       </div>
-      <NewOrder closeOrder={'closeOrder'} readOnly={readOnly} setReadOnly={setReadOnly} selectedOrder={selectedOrder} showQuantityModal={showQuantityModal} setShowQuantityModal={setShowQuantityModal} />
+      <NewOrder
+        closeOrder={'closeOrder'}
+        readOnly={readOnly}
+        setReadOnly={setReadOnly}
+        selectedOrder={selectedOrder}
+        showQuantityModal={showQuantityModal}
+        setShowQuantityModal={setShowQuantityModal}
+      />
     </>
   ) : (
     <>
@@ -145,8 +152,11 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
                     className="flex flex-col self-center lg:self-auto lg:flex-row relative h-auto border rounded-md card w-2/4 lg:w-full">
                     <div className="flex flex-col w-full lg:w-1/4 py-2">
                       <img
-                        src={purchase_order ? `data:image/;base64,${purchase_order}` : 'https://res.cloudinary.com/portfoliov1mushaaf/image/upload/v1643627467/windswept/place-holder_q2ksof.png'}
-                          
+                        src={
+                          purchase_order
+                            ? `data:image/;base64,${purchase_order}`
+                            : 'https://res.cloudinary.com/portfoliov1mushaaf/image/upload/v1643627467/windswept/place-holder_q2ksof.png'
+                        }
                         alt="item"
                         className="object-contain w-auto h-40"
                       />
@@ -161,10 +171,8 @@ const ClosedOrder = ({ filters, searched, setSearched }) => {
                       <div className="flex w-full h-full flex-col space-y-4 justify-end lg:justify-between">
                         <p className="text-sm text-gray-500 break-all whitespace-pre-wrap">
                           <b>Status</b> : {cf_opportunity_status}
-                          
                         </p>
                         <p className="text-sm text-gray-500 break-all whitespace-pre-wrap">
-                          
                           <b>Opportunity No</b> : {opportunity_id}
                         </p>
                         <div className="flex flex-col lg:flex-row justify-between">

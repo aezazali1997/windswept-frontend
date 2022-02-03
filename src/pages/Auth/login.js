@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import { useFormik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { InputField } from "../../components";
-import { LoginSchema } from "../../utils/validation_schema";
-import AxiosInstance from "../../APIs/axiosInstance";
+import { InputField } from '../../components';
+import { LoginSchema } from '../../utils/validation_schema';
+import AxiosInstance from '../../APIs/axiosInstance';
 import { getInputClasses } from '../../utils/helpers';
-import { ClosedEyeSVG, EmailSVG, OpenEyeSVG } from "../../assets/SVGs";
+import { ClosedEyeSVG, EmailSVG, OpenEyeSVG } from '../../assets/SVGs';
 import setLocalStorage from '../../utils/setLocalStorage';
 
 const initialValues = {
@@ -38,7 +38,7 @@ const Login = () => {
   const _OnSubmit = async (email, password, setStatus, setSubmitting) => {
     try {
       const {
-        data: { email_id, first_name, user_id, person_ref, role,markup, message }
+        data: { email_id, first_name, user_id, person_ref, role, markup, message }
       } = await AxiosInstance.login({
         email,
         password
@@ -47,7 +47,7 @@ const Login = () => {
       setError(false);
       setStatus(message);
       setShowAlert(true);
-      setLocalStorage(email_id, user_id, first_name, person_ref, role,markup);
+      setLocalStorage(email_id, user_id, first_name, person_ref, role, markup);
       window.location = '/dashboard?active=new-order';
     } catch ({ response: { data } }) {
       setError(true);
@@ -193,4 +193,3 @@ const Login = () => {
 };
 
 export default Login;
-

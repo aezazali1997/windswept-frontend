@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import {productName} from '../../utils/productNameGenerator.js'
 //   import { useReactToPrint } from 'react-to-print'; only works with class component.
 
 class EstimateChart extends Component {
@@ -13,10 +14,10 @@ class EstimateChart extends Component {
                     <td className="left-estimate-table text-right">Estimated Price:</td>
                     <td className="left-estimate-table"></td>
                 </tr> */}
-				<tr>
+				{/* <tr>
 					<td className="left-estimate-table text-right">Backing:</td>
-					<td className="left-estimate-table">{values.backing}</td>
-				</tr>
+					<td className="left-estimate-table">{values.backing.split(":")[1]	}</td>
+				</tr> */}
 				{/* <tr>
                     <td className=" left-estimate-table text-right">Pricing:</td>
                     <td className=" left-estimate-table"></td>
@@ -202,23 +203,27 @@ class EstimateChart extends Component {
 				</tr> */}
 				<tr>
 					<td className=" left-estimate-table text-right">Product Name:</td>
-					<td className=" left-estimate-table">{values.product}</td>
+					<td className=" left-estimate-table">{productName(values.product)}</td>
 				</tr>
 				<tr>
-					<td className=" left-estimate-table text-right">Border:</td>
-					<td className="left-estimate-table">{values.border}</td>
-				</tr>
-				<tr>
-					<td className=" left-estimate-table text-right">Percent Embriodery:</td>
-					<td className=" left-estimate-table">{values.pe}</td>
+					<td className=" left-estimate-table text-right">Material:</td>
+					<td className=" left-estimate-table">{values.material.split(':')[1]}</td>
 				</tr>
 				<tr>
 					<td className="left-estimate-table text-right">Backing:</td>
-					<td className=" left-estimate-table">{values.backing}</td>
+					<td className=" left-estimate-table">{values.backing.split(':')[1]}</td>
+				</tr>
+				<tr>
+					<td className=" left-estimate-table text-right">Percent Embriodery:</td>
+					<td className=" left-estimate-table">{values.pe.split(':')[1]}</td>
+				</tr>
+				<tr>
+					<td className=" left-estimate-table text-right">Border:</td>
+					<td className="left-estimate-table">{values.border.split(':')[1]}</td>
 				</tr>
 				<tr>
 					<td className=" left-estimate-table text-right">Shape:</td>
-					<td className="left-estimate-table ">{values.cut}</td>
+					<td className="left-estimate-table ">{values.cut.split(':')[1]}</td>
 				</tr>
 				<tr>
 					<td className="left-estimate-table text-right">Size:</td>

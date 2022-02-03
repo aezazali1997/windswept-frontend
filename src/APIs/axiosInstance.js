@@ -1,15 +1,15 @@
 import axios from "axios";
 import { deserializeItems } from '../utils/helpers';
-import { BASE_URL } from '../constants/API.constant';
-import imgPlaceHolder from '../assets/place.png'
-import {} from 'base-64'
-import {fs} from 'fs'
-;
+import { BASE_URL,ADMIN_BASE_URL } from '../constants/API.constant';
+
 class AxiosInstance {
   // proc param will be used to call specific functions on backend.
   //e.g. proc 1 will call the get open orders i.e pending or client invoiced
   // e.g. proc 2 will get closed orders i.e. delivered
- 
+  async wimpieEstimate(payload){
+    return await axios.post(`${ADMIN_BASE_URL}/wimpie`,payload);
+  }
+
   async ordereEstimate(payload) {
     return await axios.post(`${BASE_URL}/wimpie`, payload);
   }

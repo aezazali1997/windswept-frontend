@@ -131,7 +131,7 @@ const From = ({
               value={values.material}
               onChange={(e) => handleChange(e, orderNo)}
               className={`select ${material ? 'border-red-500' : 'border-gray-500'}`}>
-              <option value="select">select...</option>
+              <option value="">select...</option>
               <option value="EMB/MAT: Full Embroidery">Full Embriodery</option>
               <option value="EMB/MAT: Twill">Twill</option>
               <option value="EMB/MAT: Dye Sub 100% Embroidered">Dye Sub 100% Embriodered</option>
@@ -160,7 +160,7 @@ const From = ({
               value={values.backing}
               onChange={(e) => handleChange(e, orderNo)}
               className={`select ${backing ? 'border-red-500' : 'border-gray-500'}`}>
-              <option value="select">select...</option>
+              <option value="">select...</option>
               <option value="EMB/BAC: Plastic (sew on)">Plastic (sew on)</option>
               <option value="EMB/BAC: Heat Seal (iron on)">Heat Seal (iron on)</option>
               <option value="EMB/BAC: Peel-N-Stick Embroidery™ (stick on)">
@@ -185,7 +185,7 @@ const From = ({
               value={values.pe}
               onChange={(e) => handleChange(e, orderNo)}
               className={`select ${pe ? 'border-red-500' : 'border-gray-500'}`}>
-              <option value="select">select...</option>
+              <option value="">select...</option>
               <option value="EMB/PEM: 100%">100%</option>
               <option value="EMB/PEM: 85%">85%</option>
               <option value="EMB/PEM: 75%">75%</option>
@@ -206,7 +206,7 @@ const From = ({
               value={values.border}
               onChange={(e) => handleChange(e, orderNo)}
               className=" select border-gray-500">
-              <option value="select">select...</option>
+              <option value="">select...</option>
               <option value="EMB/BOR: Merrowed">Merrowed</option>
               <option value="EMB/BOR: Heat Cut">Heat Cut</option>
             </select>
@@ -223,7 +223,7 @@ const From = ({
               value={values.cut}
               onChange={(e) => handleChange(e, orderNo)}
               className="select border-gray-500">
-              <option value="select">select...</option>
+              <option value="">select...</option>
               <option value="EMB/CUT: Round">Round</option>
               <option value="EMB/CUT: Square">Square</option>
               <option value="EMB/CUT: Rectangle">Rectangle</option>
@@ -245,7 +245,7 @@ const From = ({
               value={values.packaging}
               onChange={(e) => handleChange(e, orderNo)}
               className=" select border-gray-500">
-              <option value="select">select...</option>
+              <option value="">select...</option>
               <option value="None">None</option>
               <option value="Backer Card">Backer Card</option>
               <option value="Poly Bag and Header Card">Poly Bag and Header Card</option>
@@ -333,7 +333,7 @@ const From = ({
                 value={values?.wLeft}
                 name="wLeft"
                 onChange={(e) => handleChange(e, orderNo)}
-                className=" rounded-md w-auto py-2 border border-gray-500 bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer  sm:text-sm ">
+                className=" rounded-md w-auto py-2 border border-gray-500 bg-gray-50 focus:bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer  sm:text-sm ">
                 <option value="1">1"</option>
                 <option value="2">2"</option>
                 <option value="3">3"</option>
@@ -345,7 +345,7 @@ const From = ({
                 <option value="9">9"</option>
               </select>
               <input
-                className="py-2 px-3 mx-1 border border-gray-500 rounded-md w-full focus:outline-none"
+                className="py-2 px-3 mx-1 border bg-gray-50  border-gray-500 rounded-md w-full focus:outline-none"
                 name="wCenter"
                 value={values.wCenter}
                 readOnly
@@ -379,7 +379,7 @@ const From = ({
                 value={values?.hLeft}
                 onChange={(e) => handleChange(e, orderNo)}
                 name="hLeft"
-                className="border rounded-md w-auto py-2 border-gray-500 bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer sm:text-sm">
+                className="border rounded-md w-auto py-2 border-gray-500 bg-gray-50 focus:bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer sm:text-sm">
                 <option value="1">1"</option>
                 <option value="2">2"</option>
                 <option value="3">3"</option>
@@ -391,7 +391,7 @@ const From = ({
                 <option value="9">9"</option>
               </select>
               <input
-                className="py-2 px-3 mx-1 rounded-md border border-gray-500 w-full focus:outline-none"
+                className="py-2 px-3 mx-1 rounded-md border border-gray-500 bg-gray-50 w-full focus:outline-none"
                 readOnly
                 name="hCenter"
                 value={values.hCenter}
@@ -435,7 +435,7 @@ const From = ({
               value={values.size}
               disabled={true}
               className="input border-gray-500 text-gray-600"
-              name="optionalItem"
+              name="size"
               type="text"
               
             />
@@ -446,7 +446,7 @@ const From = ({
             <p className="text-left sm:text-right text-sm align-top">Colors</p>
           </div>
           <div className="flex flex-col w-full sm:w-9/12 px-3 py-2 ">
-            <div className="flex w-full  border rounded-md">
+            <div className="flex w-full  rounded-md">
               <input
                 value={color}
                 type="text"
@@ -461,7 +461,7 @@ const From = ({
                 onChange={(e) => {
                   setColor(e.target.value);
                 }}
-                className="color-place-holder rounded-md mr-1 w-full p-2 border border-gray-500  focus:outline-none"
+                className="rounded-md mr-1 w-full p-2 border border-gray-500  focus:outline-none"
               />
 
               <button
@@ -485,7 +485,7 @@ const From = ({
                 </p>
               </button>
             </div>
-            <div className="flex flex-row w-full">
+            <div className="flex flex-row w-full my-1">
               <button
                 onClick={() => handlePMSModal()}
                 type="button"

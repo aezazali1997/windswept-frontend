@@ -16,7 +16,7 @@ export const deserializeApiResponse = (items) => {
     let pe = items[i]['object_ref']['percentage_embroidery'];
     let product = items[i]['object_ref']['product'];
     let quantitySum = items[i]['object_ref']['unit_quantity'];
-    let markup = items[i]['object_ref']['markup']===null ? 1 :items[i]['object_ref']['markup'];
+    let markup = items[i]['object_ref']['markup'] === null ? 1 : items[i]['object_ref']['markup'];
     let setQty = arrayGenerator(quantitySum);
     let size = items[i]['object_ref']['cf_opportunity_line_item_size'];
     let data = {

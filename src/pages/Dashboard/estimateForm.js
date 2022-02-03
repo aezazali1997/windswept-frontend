@@ -1,18 +1,43 @@
 import React from 'react';
 import 'react-dropdown/style.css';
-import MultiSelect from "react-multi-select-component";
-import { multiQty, size, products, materials, backings, peData, borders, cutData, packagingData, colorData } from '../../utils/consts';
+import MultiSelect from 'react-multi-select-component';
+import {
+  multiQty,
+  size,
+  products,
+  materials,
+  backings,
+  peData,
+  borders,
+  cutData,
+  packagingData,
+  colorData
+} from '../../utils/consts';
 import { Select } from '../../components';
 
-const Form = ({ thread, handleChange, handleColors, selected, setChecked, filterOptions,
-    values, checked, Size, setColor, color, removeColor, ColorsArray, handleQty, errors, loading,
+const Form = ({
+  thread,
+  handleChange,
+  handleColors,
+  selected,
+  setChecked,
+  filterOptions,
+  values,
+  checked,
+  Size,
+  setColor,
+  color,
+  removeColor,
+  ColorsArray,
+  handleQty,
+  errors,
+  loading
 }) => {
+  const { product, material, pe, backing, qty } = errors;
 
-    const { product, material, pe, backing, qty } = errors;
-
-    return (
-        <>
-            {/* <div className="flex flex-col sm:flex-row">
+  return (
+    <>
+      {/* <div className="flex flex-col sm:flex-row">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
                     <p className="text-left sm:text-right text-sm align-top">Vendor</p>
                 </div>
@@ -25,124 +50,125 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                     />
                 </div>
             </div> */}
-            <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Product <span className="text-red-600 font-bold">*</span></p>
-                </div>
-                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <Select
-                        id='product'
-                        name='product'
-                        classNames={`select ${product ? 'border-red-500' : 'border-gray-500'}`}
-                        handleChange={handleChange}
-                        data={products}
-                    />
-                </div>
+      <div className="flex flex-col sm:flex-row w-full ">
+        <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <p className="text-left sm:text-right text-sm align-top">
+            Product <span className="text-red-600 font-bold">*</span>
+          </p>
+        </div>
+        <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+          <Select
+            id="product"
+            name="product"
+            classNames={`select ${product ? 'border-red-500' : 'border-gray-500'}`}
+            handleChange={handleChange}
+            data={products}
+          />
+        </div>
+      </div>
+      <div className="flex flex-col sm:flex-row w-full ">
+        <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <p className="text-left sm:text-right text-sm align-top">
+            Material <span className="text-red-600 font-bold">*</span>
+          </p>
+        </div>
+        <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+          <Select
+            id="material"
+            name="material"
+            classNames={`select ${material ? 'border-red-500' : 'border-gray-500'}`}
+            handleChange={handleChange}
+            data={materials}
+          />
+        </div>
+      </div>
+      {values.material === 'Woven' && (
+        <>
+          <div className="flex flex-col sm:flex-row w-full ">
+            <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+              <p className="text-left sm:text-right text-sm align-top">Custom</p>
             </div>
-            <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Material <span className="text-red-600 font-bold">*</span></p>
-                </div>
-                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <Select
-                        id='material'
-                        name='material'
-                        classNames={`select ${material ? 'border-red-500' : 'border-gray-500'}`}
-                        handleChange={handleChange}
-                        data={materials}
-                    />
-                </div>
+            <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+              <input
+                value={`${values.custom}%`}
+                disabled={true}
+                className="input"
+                name="custom"
+                type="text"
+              />
             </div>
-            {
-                values.material === 'Woven' && (
-                    <>
-                        <div className="flex flex-col sm:flex-row w-full ">
-                            <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                                <p className="text-left sm:text-right text-sm align-top">Custom</p>
-                            </div>
-                            <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                                <input
-                                    value={`${values.custom}%`}
-                                    disabled={true}
-                                    className="input"
-                                    name="custom"
-                                    type="text"
-                                />
-                            </div>
-                        </div>
-                        <div className="flex flex-col sm:flex-row w-full ">
-                            <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                                <p className="text-left sm:text-right text-sm align-top">Freight</p>
-                            </div>
-                            <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                                <input
-                                    onChange={handleChange}
-                                    className="input"
-                                    name="freight"
-                                    type="text"
-                                />
-                            </div>
-                        </div>
-                    </>
-                )
-            }
-            <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Backing <span className="text-red-600 font-bold">*</span></p>
-                </div>
-                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <Select
-                        id='backing'
-                        name='backing'
-                        classNames={`select ${backing ? 'border-red-500' : 'border-gray-500'}`}
-                        handleChange={handleChange}
-                        data={backings}
-                    />
-                </div>
+          </div>
+          <div className="flex flex-col sm:flex-row w-full ">
+            <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+              <p className="text-left sm:text-right text-sm align-top">Freight</p>
             </div>
-            <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Percent Embriodery <span className="text-red-600 font-bold">*</span></p>
-                </div>
-                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <Select
-                        id='pe'
-                        name='pe'
-                        classNames={`select ${pe ? 'border-red-500' : 'border-gray-500'}`}
-                        handleChange={handleChange}
-                        data={peData}
-                    />
-                </div>
+            <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+              <input onChange={handleChange} className="input" name="freight" type="text" />
             </div>
-            <div className="flex flex-col sm:flex-row w-full">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Border</p>
-                </div>
-                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <Select
-                        id='border'
-                        name='border'
-                        classNames={`select`}
-                        handleChange={handleChange}
-                        data={borders}
-                    />
-                </div>
-            </div>
-            <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Shape</p>
-                </div>
-                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <Select
-                        id='cut'
-                        name='cut'
-                        classNames={`select`}
-                        handleChange={handleChange}
-                        data={cutData}
-                    />
-                </div>
-            </div>
-            {/* <div className="flex flex-col sm:flex-row w-full ">
+          </div>
+        </>
+      )}
+      <div className="flex flex-col sm:flex-row w-full ">
+        <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <p className="text-left sm:text-right text-sm align-top">
+            Backing <span className="text-red-600 font-bold">*</span>
+          </p>
+        </div>
+        <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+          <Select
+            id="backing"
+            name="backing"
+            classNames={`select ${backing ? 'border-red-500' : 'border-gray-500'}`}
+            handleChange={handleChange}
+            data={backings}
+          />
+        </div>
+      </div>
+      <div className="flex flex-col sm:flex-row w-full ">
+        <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <p className="text-left sm:text-right text-sm align-top">
+            Percent Embriodery <span className="text-red-600 font-bold">*</span>
+          </p>
+        </div>
+        <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+          <Select
+            id="pe"
+            name="pe"
+            classNames={`select ${pe ? 'border-red-500' : 'border-gray-500'}`}
+            handleChange={handleChange}
+            data={peData}
+          />
+        </div>
+      </div>
+      <div className="flex flex-col sm:flex-row w-full">
+        <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <p className="text-left sm:text-right text-sm align-top">Border</p>
+        </div>
+        <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+          <Select
+            id="border"
+            name="border"
+            classNames={`select border-gray-500`}
+            handleChange={handleChange}
+            data={borders}
+          />
+        </div>
+      </div>
+      <div className="flex flex-col sm:flex-row w-full ">
+        <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <p className="text-left sm:text-right text-sm align-top">Shape</p>
+        </div>
+        <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+          <Select
+            id="cut"
+            name="cut"
+            classNames={`select border-gray-500`}
+            handleChange={handleChange}
+            data={cutData}
+          />
+        </div>
+      </div>
+      {/* <div className="flex flex-col sm:flex-row w-full ">
                         <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
                             <p className="text-left sm:text-right text-sm align-top">Quantity</p>
                         </div>
@@ -161,7 +187,7 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                             </select>
                         </div>
                     </div> */}
-            {/* <div className="flex flex-col sm:flex-row w-full ">
+      {/* <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start">
                     <p className="text-left sm:text-right text-sm align-top">Packaging</p>
                 </div>
@@ -175,23 +201,25 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                     />
                 </div>
             </div> */}
-            <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Select Quantity <span className="text-red-600 font-bold">*</span></p>
-                </div>
-                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <MultiSelect
-                        className={`border rounded-md ${qty ? 'border-red-500' : 'border-gray-50'}`}
-                        value={selected}
-                        options={multiQty}
-                        selected={selected}
-                        onChange={handleQty}
-                        labelledBy={"Select"}
-                        filterOptions={filterOptions}
-                    />
-                </div>
-            </div>
-            {/* <div className="flex flex-col sm:flex-row w-full ">
+      <div className="flex flex-col sm:flex-row w-full ">
+        <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <p className="text-left sm:text-right text-sm align-top">
+            Select Quantity <span className="text-red-600 font-bold">*</span>
+          </p>
+        </div>
+        <div className="flex flex-col w-full sm:w-9/12 px-3">
+          <MultiSelect
+            className={`multi border rounded-md ${qty ? 'border-red-500' : 'border-gray-500'}`}
+            value={selected}
+            options={multiQty}
+            selected={selected}
+            onChange={handleQty}
+            labelledBy={'Select'}
+            filterOptions={filterOptions}
+          />
+        </div>
+      </div>
+      {/* <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
                     <p className="text-left sm:text-right text-sm align-top">Optional item #</p>
                 </div>
@@ -204,20 +232,20 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                     />
                 </div>
             </div> */}
-            <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Mark Up</p>
-                </div>
-                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <input
-                        onChange={handleChange}
-                        className="input"
-                        name="markup"
-                        type="text"
-                    />
-                </div>
-            </div>
-            {/* <div className="flex flex-col sm:flex-row w-full ">
+      <div className="flex flex-col sm:flex-row w-full ">
+        <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <p className="text-left sm:text-right text-sm align-top">Mark Up</p>
+        </div>
+        <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+          <input
+            onChange={handleChange}
+            className="input border-gray-500"
+            name="markup"
+            type="text"
+          />
+        </div>
+      </div>
+      {/* <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2 justify-start">
                     <p className="text-left sm:text-right text-sm align-top">Discount Apply</p>
                 </div>
@@ -230,96 +258,127 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                     />
                 </div>
             </div> */}
-            <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Width</p>
-                </div>
-                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <div className="flex flex-row border border-gray-400 w-full sm:w-1/2">
-                        <select id="wLeft" value={values.wLeft} name="wLeft" onChange={handleChange} className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
-                            <option value="1">1"</option>
-                            <option value="2">2"</option>
-                            <option value="3">3"</option>
-                            <option value="4">4"</option>
-                            <option value="5">5"</option>
-                            <option value="6">6"</option>
-                            <option value="7">7"</option>
-                            <option value="8">8"</option>
-                            <option value="9">9"</option>
-                        </select>
-                        <input
-                            className="py-2 px-3 w-full focus:outline-none"
-                            name='wCenter'
-                            value={values.wCenter}
-                            readOnly
-                            type="text" />
-                        <select id="wRight" value={values.wRight} name="wRight" onChange={handleChange} className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
-                            {
-                                size && size.map((value, index) => (
-                                    <option className="bg-white text-black" key={index} value={value}>{`${value}`}</option>
-                                ))
-                            }
-                        </select>
-
-                    </div>
-                </div>
-            </div>
-            <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Height</p>
-                </div>
-                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <div className="flex flex-row border border-gray-400 w-full sm:w-1/2">
-                        <select id="hLeft" value={values.hLeft} onChange={handleChange} name="hLeft" className=" w-auto py-2 border border-gray-300 bg-white shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
-                            <option value="1">1"</option>
-                            <option value="2">2"</option>
-                            <option value="3">3"</option>
-                            <option value="4">4"</option>
-                            <option value="5">5"</option>
-                            <option value="6">6"</option>
-                            <option value="7">7"</option>
-                            <option value="8">8"</option>
-                            <option value="9">9"</option>
-                        </select>
-                        <input
-                            className="py-2 px-3 w-full focus:outline-none"
-                            readOnly
-                            name='hCenter'
-                            value={values.hCenter}
-                            type="text" />
-                        <select id="hRight" value={values.hRight} name="hRight" onChange={handleChange} className=" w-auto py-2  text-white bg-red-600 shadow-sm focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
-                            {
-                                size && size.map((value, index) => (
-                                    <option className="bg-white text-black" key={index} value={value}>{`${value}`}</option>
-                                ))
-                            }
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Size</p>
-                </div>
-                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <p className="text-sm ">{values.size}</p>
-                </div>
-            </div>
-            <div className="flex flex-col sm:flex-row w-full ">
-                <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
-                    <p className="text-left sm:text-right text-sm align-top">Color</p>
-                </div>
-                <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
-                    <Select
-                        id='color'
-                        name='color'
-                        classNames={`select`}
-                        handleChange={handleChange}
-                        data={colorData}
-                    />
-                </div>
-            </div>
-            {/* 
+      <div className="flex flex-col sm:flex-row w-full ">
+        <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <p className="text-left sm:text-right text-sm align-top">Width</p>
+        </div>
+        <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+          <div className="flex flex-row  w-full sm:w-1/2">
+            <select
+              id="wLeft"
+              value={values.wLeft}
+              name="wLeft"
+              onChange={handleChange}
+              className="rounded-md cursor-pointer w-auto py-2 border border-gray-500 bg-gray-50 focus:bg-white shadow-sm focus:outline-none focus:border-gray-400  sm:text-sm">
+              <option value="1">1"</option>
+              <option value="2">2"</option>
+              <option value="3">3"</option>
+              <option value="4">4"</option>
+              <option value="5">5"</option>
+              <option value="6">6"</option>
+              <option value="7">7"</option>
+              <option value="8">8"</option>
+              <option value="9">9"</option>
+            </select>
+            <input
+              className="py-2 px-3 w-full bg-gray-50 focus:outline-none border border-gray-400 mx-1 rounded-md"
+              name="wCenter"
+              value={values.wCenter}
+              readOnly
+              type="text"
+            />
+            <select
+              id="wRight"
+              value={values.wRight}
+              name="wRight"
+              onChange={handleChange}
+              className=" w-auto rounded-md py-2  text-white border border-red-600 bg-red-600 shadow-sm cursor-pointer hover:bg-transparent hover:text-red-600  focus:outline-none focus:border-gray-400 hover:cursor-pointer sm:text-sm">
+              {size &&
+                size.map((value, index) => (
+                  <option
+                    className="bg-white text-black"
+                    key={index}
+                    value={value}>{`${value}`}</option>
+                ))}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col sm:flex-row w-full ">
+        <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <p className="text-left sm:text-right text-sm align-top">Height</p>
+        </div>
+        <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+          <div className="flex flex-row  w-full sm:w-1/2">
+            <select
+              id="hLeft"
+              value={values.hLeft}
+              onChange={handleChange}
+              name="hLeft"
+              className="rounded-md w-auto py-2 border border-gray-500 bg-gray-50 focus:bg-white shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer sm:text-sm">
+              <option value="1">1"</option>
+              <option value="2">2"</option>
+              <option value="3">3"</option>
+              <option value="4">4"</option>
+              <option value="5">5"</option>
+              <option value="6">6"</option>
+              <option value="7">7"</option>
+              <option value="8">8"</option>
+              <option value="9">9"</option>
+            </select>
+            <input
+              className="rounded-md bg-gray-50 mx-1 border border-gray-400 py-2 px-3 w-full focus:outline-none"
+              readOnly
+              name="hCenter"
+              value={values.hCenter}
+              type="text"
+            />
+            <select
+              id="hRight"
+              value={values.hRight}
+              name="hRight"
+              onChange={handleChange}
+              className="rounded-md w-auto py-2  text-white bg-red-600 hover:bg-transparent hover:text-red-600 border border-red-600 shadow-sm focus:outline-none focus:border-gray-400 cursor-pointer sm:text-sm">
+              {size &&
+                size.map((value, index) => (
+                  <option
+                    className="bg-white text-black"
+                    key={index}
+                    value={value}>{`${value}`}</option>
+                ))}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col sm:flex-row w-full ">
+        <div className="flex flex-col w-full sm:w-3/12 px-4 py-2  justify-start  ">
+          <p className="text-left sm:text-right text-sm align-top">Size</p>
+        </div>
+        <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+          <input
+            value={values.size}
+            disabled={true}
+            className="input border-gray-500 text-gray-600"
+            name="size"
+            type="text"
+          />
+        </div>
+      </div>
+      <div className="flex flex-col sm:flex-row w-full ">
+        <div className="flex flex-col w-full sm:w-3/12 px-3 py-2  justify-start  ">
+          <p className="text-left sm:text-right text-sm align-top">Color</p>
+        </div>
+        <div className="flex flex-col w-full sm:w-9/12 px-3 py-2">
+          <Select
+            id="color"
+            name="color"
+            classNames={`select border-gray-500`}
+            handleChange={handleChange}
+            data={colorData}
+          />
+        </div>
+      </div>
+      {/* 
             <div className="flex flex-col sm:flex-row w-full ">
                 <div className="flex flex-col w-full sm:w-3/12 px-3 py-2 justify-start">
                     <p className="text-left sm:text-right text-sm align-top">Colors</p>
@@ -408,9 +467,8 @@ const Form = ({ thread, handleChange, handleColors, selected, setChecked, filter
                     }
                 </div>
             </div> */}
-
-        </>
-    )
-}
+    </>
+  );
+};
 
 export default Form;

@@ -14,7 +14,7 @@ const Index = ({ filter, handleChange, setOrderType, orderType }) => {
         value={date}
         onChange={handleChange}
         svg={''}
-        inputClass={`border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
+        inputClass={`border bg-gray-100 focus:bg-gray-50 focus:bg-white border-gray-300 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
         label={'Date'}
       />
       <InputField
@@ -23,7 +23,7 @@ const Index = ({ filter, handleChange, setOrderType, orderType }) => {
         value={oppStage}
         onChange={handleChange}
         svg={''}
-        inputClass={`border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
+        inputClass={`border bg-gray-100 focus:bg-gray-50 border-gray-300 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
         label={'Opp Stage'}
       />
       <InputField
@@ -32,7 +32,7 @@ const Index = ({ filter, handleChange, setOrderType, orderType }) => {
         value={productName}
         onChange={handleChange}
         svg={''}
-        inputClass={` border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
+        inputClass={` border  bg-gray-100 focus:bg-gray-50 border-gray-300 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
         label={'Product Name'}
       />
       <InputField
@@ -41,7 +41,7 @@ const Index = ({ filter, handleChange, setOrderType, orderType }) => {
         value={customerReference}
         onChange={handleChange}
         svg={''}
-        inputClass={` border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
+        inputClass={` border bg-gray-100 focus:bg-gray-50 border-gray-300 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
         label={'Customer Reference'}
       />
       <InputField
@@ -50,7 +50,7 @@ const Index = ({ filter, handleChange, setOrderType, orderType }) => {
         value={orderName}
         onChange={handleChange}
         svg={''}
-        inputClass={` border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
+        inputClass={` border bg-gray-100 focus:bg-gray-50 border-gray-300 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
         label={'Order Name'}
       />
       <InputField
@@ -59,7 +59,7 @@ const Index = ({ filter, handleChange, setOrderType, orderType }) => {
         value={otherOpportunity}
         onChange={handleChange}
         svg={''}
-        inputClass={` border bg-gray-50 border-gray-200 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
+        inputClass={` border bg-gray-100 focus:bg-gray-50 border-gray-300 focus:outline-none rounded-md focus:shadow-sm w-full p-3 h-14`}
         label={'Other Opportunity'}
       />
     </div>

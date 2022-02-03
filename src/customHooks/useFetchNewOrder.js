@@ -34,6 +34,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
   // const history = useHistory();
 
   const [loading, setLoading] = useState(false);
+  // (errors[orderNo].product || errors[orderNo].material || errors[orderNo].backing || errors[orderNo].pe || errors[orderNo].qty)
+  const [canSubmit,setCanSubmit]=useState(false);
   const [canAddAnother, setCanAnother] = useState(true);
   const [orderNo, setOrderNo] = useState(0);
   const [date, setDate] = useState('');
@@ -203,6 +205,15 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
     _Total();
     return ()=> setTotal(0);
   }, [data]);
+  useEffect(()=>{
+    console.log();
+    if(!errors[orderNo].backing && !errors[orderNo].material && !errors[orderNo].pe && !errors[orderNo].product && !errors[orderNo].qty){
+      setCanSubmit(true);
+    }
+    else if (errors[orderNo].backing || errors[orderNo].material || errors[orderNo].pe || errors[orderNo].product || errors[orderNo].qty){
+      setCanSubmit(false);
+    }
+  },[errors])
 
   
     useEffect(()=>{
@@ -231,7 +242,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
   const quanityChangeModelPopUp =() =>{
     // 
      Swal.fire({
-          text:"You have changed something in this order therefore Windswept will review this and get back to you via email",
+          text:"You have changed something in this line item therefore Windswept will review this and get back to you via email",
           icon: 'info',
           showCancelButton: false,
           confirmButtonText: 'Ok',
@@ -311,8 +322,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
   };
 
   const _HandleChange = (e, index) => {
-    
-
+    console.log("changed in simple");
     const { name, value, checked } = e.target;
     const NewArray = [...values];
     const NewErrors = [...errors];
@@ -449,13 +459,17 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
         let res= await axiosInstance.ordereEstimate(data)
           if( res.data[0].error){
           if(showCustomOrderModel){
-            swal({
-              text: 'Custom Quote will be given in 1-2 days',
-              icon: 'info',
-              dangerMode: true,
-              buttons: false,
-              timer: 3000
-            });
+          Swal.fire({
+          text: 'Custom Quote will be given in 1-2 days',
+          icon: 'info',
+          showCancelButton: false,
+          confirmButtonText: 'Ok',
+          buttonsStyling: false,
+          customClass: {
+            confirmButton:
+              'w-96 inline-flex bg-red-600 justify-center border border-red-600 hover:bg-transparent  hover:text-red-600 px-4 py-2 text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm'
+          }
+        })
             setTotal(0);
             setGrandTotal(0);
             setGrandTotal(0);
@@ -1043,9 +1057,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
   };
   const clearAllFormData = ()=> {
     const copyValues={...Item}
-          const copyErrors={...Error}
+          const copyErrors=JSON.parse(JSON.stringify(Error));
           setValues([copyValues]);
-          setErrors([copyErrors]);
+          setErrors([{...copyErrors}]);
           setDate('')
           setOrderImages('')
           setOrderNo(0);
@@ -1056,7 +1070,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
     let {pe,backing,material,product,setQty}=values[orderNo];
     if (pe==='' || backing==='' || product=='' || material==='' || setQty.length===0 || date===''){
       Swal.fire({
-              text: 'Fill mandatory Fields',
+              text: 'Fill atleast mandatory fields',
               icon: 'error',
               showCancelButton: false,
               confirmButtonText: 'OK',
@@ -1384,7 +1398,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
     updateDraft,
     setValues,
     setErrors,
-    setCanAnother
+    setCanAnother,
+    canSubmit,
+    setCanSubmit
   };
 };
 
