@@ -60,7 +60,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
   const [showThreadModal, setShowThreadModal] = useState(false);
   const [draftId,setDraftId]=useState(0);
   
-  useEffect(() => {
+   useEffect(() => {
+     
     if (selectedOrder) {
       let [date, tmpNotes] = ['', ''];
       let items = [];
@@ -91,9 +92,19 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
         // //   // JSON.parse(items[i]);
           
         // }
-        if(query.get('active')==='saved-as-draft'){
+        const checkDraft = async ()=>{
+          if(query.get('active')==='saved-as-draft'){
           setDraftId(selectedOrder.id);
+          let DataUrl=null;
+          let file=null;
+          let url = selectedOrder.purchase_order.url;
+          const dataUrl=await toDataURL(url);
+          DataUrl=dataUrl;
+          file = dataURLtoFile(dataUrl, selectedOrder.purchase_order.filename);;
+          setOrderImages(file);
         }
+        }
+        checkDraft();
         date = selectedOrder.in_hands_date ? selectedOrder.in_hands_date : selectedOrder.date;
         tmpNotes = selectedOrder.customer_notes;
 

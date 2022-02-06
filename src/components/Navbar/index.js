@@ -11,7 +11,7 @@ const Navbar = ({ toggle, isOpen, login, handleLogout }) => {
             role='navigation'
         >
             <Link to='/dashboard' className='pl-8'>
-                <img className="mx-auto h-9 w-auto" src="https://windsweptmarketing.com/wp-content/uploads/2015/12/logo.png" alt="Workflow" />
+                <img className="mx-auto h-9 w-auto" src="https://windsweptmarketing.com/wp-content/uploads/2015/12/logo.png" alt="Winswept marketing" />
             </Link>
             <div className='px-4 lg:hidden'>
                 <Hamburger toggled={isOpen} onToggle={toggle} color='#dc2626' direction="right" duration={0.5} rounded />
