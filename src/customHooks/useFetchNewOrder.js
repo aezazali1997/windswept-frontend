@@ -62,7 +62,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
   
   useEffect(() => {
     if (selectedOrder) {
-      let [date, notes] = ['', ''];
+      let [date, tmpNotes] = ['', ''];
       let items = [];
       if (selectedOrder['object_ref']) {
         let { document_date, cf_opportunity_portal_notes, opp_line_items } =
@@ -75,7 +75,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
           }
 
         date = document_date;
-        notes = cf_opportunity_portal_notes;
+        tmpNotes = cf_opportunity_portal_notes;
         // setOrderImages(selectedOrder?.object_ref?.purchase_order_image);
       } else {
         items = selectedOrder.items;
@@ -95,7 +95,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
           setDraftId(selectedOrder.id);
         }
         date = selectedOrder.in_hands_date ? selectedOrder.in_hands_date : selectedOrder.date;
-        notes = selectedOrder.customer_notes;
+        tmpNotes = selectedOrder.customer_notes;
 
       }
       if (!isEmptyArray(items)) {
@@ -185,7 +185,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
         
 
         setValues(items);
-        setNotes(notes);
+        setNotes(tmpNotes);
         setWeek(week);
       
           
@@ -206,7 +206,6 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
     return ()=> setTotal(0);
   }, [data]);
   useEffect(()=>{
-    console.log();
     if(!errors[orderNo].backing && !errors[orderNo].material && !errors[orderNo].pe && !errors[orderNo].product && !errors[orderNo].qty){
       setCanSubmit(true);
     }
@@ -234,7 +233,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
     date: date || '',
     shipAddress:
       selectedOrder?.object_ref?.cf_opportunity_ship_to_address || selectedOrder?.shipAdress || selectedOrder?.ship_to_address ||  '',
-    customerNote: notes || ''
+    customerNote: selectedOrder?.object_ref?.cf_opportunity_portal_notes || ''
   };
 
   let upload = useRef();
@@ -322,7 +321,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
   };
 
   const _HandleChange = (e, index) => {
-    console.log("changed in simple");
+    
     const { name, value, checked } = e.target;
     const NewArray = [...values];
     const NewErrors = [...errors];
@@ -835,6 +834,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
     disableLoading();
       }
     });
+    
   };
 
 
@@ -1065,6 +1065,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
           setOrderNo(0);
           formik.resetForm();
           DisableAddAnother();
+          setData([]);
   }
   const saveAsDraft = async () => {
     let {pe,backing,material,product,setQty}=values[orderNo];
@@ -1141,7 +1142,7 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
   };
   
   const formik = useFormik({
-    enableReinitialize: selectedOrder ? true : false,
+    enableReinitialize:  false,
     initialValues,
     validationSchema: OrderFormSchema,
     validateOnBlur: true,
@@ -1264,6 +1265,9 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
     if (date === '') {
       e.currentTarget.type = 'text';
       e.currentTarget.placeholder = 'In hands date';
+    }
+    else{
+      e.currentTarget.value=date;
     }
   };
 
