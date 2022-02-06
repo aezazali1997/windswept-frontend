@@ -7,13 +7,13 @@ import Button from './button';
 const Draft = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(undefined);
-  const [readOnly, setReadOnly] = useState(false);
+  // const [readOnly, setReadOnly] = useState(false);
   const [loadingDraft, setLoadingDraft] = useState(false);
 
   useEffect(() => {
     getDraftOrder();
     return () => setOrders([]);
-  }, [1]);
+  }, []);
 
   const getDraftOrder = async () => {
     setLoadingDraft(true);
@@ -63,7 +63,8 @@ const Draft = () => {
           &nbsp; Back
         </button>
       </div>
-      <NewOrder readOnly={readOnly} selectedOrder={selectedOrder} />
+      <NewOrder  selectedOrder={selectedOrder} />
+      {/* readOnly={readOnly} */}
     </>
   ) : loadingDraft ? (
     <Spinner />

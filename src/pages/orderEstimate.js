@@ -26,7 +26,7 @@ const OrderEstimate = () => {
   // const [rightWidth, setRightWidth] = useState('');
   // const [rightHeight, setRightHeight] = useState('');
   const [color, setColor] = useState('');
-  const [Size, setSize] = useState('');
+  // const [Size, setSize] = useState('');
   const [colors, setColors] = useState([]);
   const [errors, setErrors] = useState({
     qty: true,
@@ -67,14 +67,14 @@ const OrderEstimate = () => {
     pageStyle: () => 'justifyCenter',
     content: () => PDF.current
   });
-
   useEffect(() => {
     handleSubmit();
+// eslint-disable-next-line
   }, [values, errors, selected, colors]);
 
-  useEffect(() => {
-    // handleSize();
-  }, [data]);
+  // useEffect(() => {
+  //   // handleSize();
+  // }, [data]);
 
   const enableLoading = () => {
     setLoading(true);
@@ -88,14 +88,27 @@ const OrderEstimate = () => {
     let price = '';
     let cost = '';
     if (data) {
-      selected.map(({ value }) => {
-        return data.map(({ count, unitCost, unitPrice }, index) => {
-          if (value === count.toString()) {
+      // converting map to for loop
+      for (let i=0; i<selected.length; i++){
+        const {value}=selected[i];
+        for (let j=0; j<data.length; j++){
+          const {count, unitCost, unitPrice}=data[i];
+          if( value===count.toString()){
             price = price + `pcs${count} @ ${unitPrice} / `;
             cost = cost + `pcs${count} @ ${unitCost} / `;
           }
-        });
-      });
+        }
+      }
+      // conversion end
+
+      // selected.map(({ value }) => {
+      //   return data.map(({ count, unitCost, unitPrice }, index) => {
+      //     if (value === count.toString()) {
+      //       price = price + `pcs${count} @ ${unitPrice} / `;
+      //       cost = cost + `pcs${count} @ ${unitCost} / `;
+      //     }
+      //   });
+      // });
       navigator.clipboard.writeText(
         `Backing: ${backing.split(':')[1]}, Date: ${moment().format(
           'MMMM Do YYYY'
@@ -186,7 +199,7 @@ const OrderEstimate = () => {
   };
 
   let handleSubmit = async () => {
-    const { product, material, backing, size, pe, freight, markup, color } = values;
+    const { product, material, backing, size, pe, markup, color } = values;
     if (
       product === '' ||
       material === '' ||
@@ -307,7 +320,7 @@ const OrderEstimate = () => {
         <EstimateChart
           ref={PDF}
           data={data}
-          Size={Size}
+          // Size={Size}
           selected={selected}
           values={values}
           apiError={apiError}
@@ -368,7 +381,7 @@ const OrderEstimate = () => {
         <Form
           loading={loading}
           errors={errors}
-          Size={Size}
+          // Size={Size}
           color={color}
           values={values}
           checked={checked}
@@ -382,7 +395,7 @@ const OrderEstimate = () => {
           setSelected={setSelected}
           handleChange={handleChange}
           handleColors={handleColors}
-          handleSubmit={handleSubmit}
+          // handleSubmit={handleSubmit}
           filterOptions={filterOptions}
           setHeightClicked={setHeightClicked}
           handleQty={handleQty}

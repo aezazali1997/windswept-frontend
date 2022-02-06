@@ -55,7 +55,7 @@ const NewOrder = ({
     gTotalWithMarkup,
     loading,
     orderImages,
-    setOrderImages,
+    // setOrderImages,
     apiError,
     showPMSModal,
     showThreadModal,
@@ -68,7 +68,7 @@ const NewOrder = ({
     orderUpload,
     upload,
     canAddAnother,
-    setCanAnother,
+    // setCanAnother,
     saveAsDraft,
     setErrors,
     setValues,
@@ -92,7 +92,7 @@ const NewOrder = ({
       setValues([copyItem]);
       setErrors([copyError]);
     }
-  }, [1]);
+  }, [query,setErrors,setValues]);
 
   return (
     <>
@@ -279,7 +279,7 @@ const NewOrder = ({
                     query.get('active') === 'closed-order' || query.get('active') === 'open-order'
                   ) ? (
                     <button
-                      disabled={readOnly && !query.get('active') === 'new-order' || !canSubmit ? (!(formik.isValid && formik.dirty)) : false}
+                      disabled={(readOnly && !query.get('active') === 'new-order') || !canSubmit ? (!(formik.isValid && formik.dirty)) : false}
                       type="button"
                       onClick={query.get('active') !== 'saved-as-draft' ? saveAsDraft : updateDraft}
                       className={` text-white inline-flex  justify-center w-full border border-white shadow-sm mr-1 px-2 py-2 text-sm font-medium  focus:outline-none  ${ !canSubmit || (!(formik.isValid && formik.dirty)) ? 'bg-red-400 cursor-default' : 'bg-red-600 hover:bg-transparent  hover:text-red-600  border-red-600' }`}>

@@ -24,7 +24,6 @@ const Form = ({
   filterOptions,
   values,
   checked,
-  Size,
   setColor,
   color,
   removeColor,

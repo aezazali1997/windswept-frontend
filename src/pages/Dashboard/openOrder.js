@@ -8,8 +8,6 @@ import AxiosInstance from '../../APIs/axiosInstance';
 import { Spinner } from '../../components/spinner/Spinner';
 import Swal from 'sweetalert2';
 import moment from 'moment';
-import imgPlaceHolder from '../../assets/place.png';
-// import {decode as base64_decode, encode as base64_encode} from 'base-64';
 
 let useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -64,14 +62,15 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
       setIsLoading(false);
     }
   };
-  useEffect(() => {
-    setSearched(false);
-  }, [1]);
+  // useEffect(() => {
+  // }, []);
   // make a query to get all the open orders
   useEffect(() => {
     getData();
+    // eslint-disable-next-line
   }, [searched]);
   useEffect(() => {
+    setSearched(false);
     if (query.get('item') !== null && !isEmpty(Orders)) {
       const index = query.get('item');
       let Order = Orders.filter((Order) => Order[index]);
@@ -80,7 +79,8 @@ const OpenOrder = ({ filters, searched, setSearched, setSelectedOrder, selectedO
         // setActiveIndex((activeIndex) => (activeIndex = index));
       }
     }
-  }, []);
+        
+  }, [Orders,query,setSearched,setSelectedOrder]);
 
   let handleDetails = (order, index) => {
     // setActiveIndex(index);
