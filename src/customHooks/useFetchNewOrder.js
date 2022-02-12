@@ -7,8 +7,8 @@ import { storeOrderCache } from '../actions';
 import { updateErrors, updateValues } from '../utils/helpers';
 import axiosInstance from '../APIs/axiosInstance';
 import Swal from 'sweetalert2';
-import swal from 'sweetalert';
-import imgPlaceHolder from '../assets/place.png'
+import base64 from 'base-64'
+
 
 // import { useHistory } from 'react-router-dom';
 import { OrderFormSchema } from '../utils/validation_schema';
@@ -266,15 +266,19 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
   }
   let onChangeFile = (event) => {
     
-    let imageFiles = [];
+    // let imageFiles = [];
+    
     let blobImagesArray=[];
     fileObj = event.target.files;
     for (let i = 0; i < fileObj.length; i++) {
-      imageFiles.push(fileObj[i]);
+      
+      let {name,type,size}=fileObj[i]
+      console.log(name,type,size);
+      // imageFiles.push(fileObj[i]);
       blobImagesArray.push(URL.createObjectURL(fileObj[i]));
     }
     let tmpValues = [...values]
-    tmpValues[orderNo].images= [...imageFiles] 
+    // tmpValues[orderNo].images= [...imageFiles] 
     tmpValues[orderNo].blobImages=[...blobImagesArray]
      setValues([...tmpValues])
     // setImageFiles([...imageFiles]);
@@ -620,8 +624,8 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
     //  [...errors];
     let err =  JSON.parse(JSON.stringify(ERROR));
   
-    let newValueArray = [...CopyOriginalValues, {...Item}];
-    let newErrorArray = [...CopyOriginalErrors, {...err}];
+    let newValueArray = [...CopyOriginalValues, Item];
+    let newErrorArray = [...CopyOriginalErrors, err];
     setOrderNo(orderNo + 1);
     setErrors(newErrorArray);
     setValues(newValueArray);

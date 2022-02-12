@@ -92,7 +92,7 @@ const NewOrder = ({
       setValues([copyItem]);
       setErrors([copyError]);
     }
-  }, [query,setErrors,setValues]);
+  }, []);
 
   return (
     <>
