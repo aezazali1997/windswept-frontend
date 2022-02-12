@@ -7,7 +7,6 @@ import { storeOrderCache } from '../actions';
 import { updateErrors, updateValues } from '../utils/helpers';
 import axiosInstance from '../APIs/axiosInstance';
 import Swal from 'sweetalert2';
-import base64 from 'base-64'
 
 
 // import { useHistory } from 'react-router-dom';
@@ -21,6 +20,7 @@ import {singleArray } from '../utils/singleArray'
 import '../styles/custom-style.css';
 import { getpercentage } from '../utils/percentageCalculator';
 import { arrayGenerator } from '../utils/arrayGenerator';
+import base64 from 'base-64'
 
 // let fileArray = [];
 // let serverImages=[];
@@ -102,6 +102,14 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
           DataUrl=dataUrl;
           file = dataURLtoFile(dataUrl, selectedOrder.purchase_order.filename);;
           setOrderImages(file);
+          for (let i=0; i<selectedOrder.items.length; i++){
+            let images=[];
+            // console.log(JSON.parse(selectedOrder.items[i].images))
+          let imagesLength = selectedOrder.items[i].images.length
+          for (let j=0; j<imagesLength; j++){
+            console.log(selectedOrder.items[i].images[j])
+          }
+          }
         }
         }
         checkDraft();
@@ -266,24 +274,21 @@ const UseFetchNewOrder = ({ selectedOrder, readOnly,setReadOnly,showQuantityModa
   }
   let onChangeFile = (event) => {
     
-    // let imageFiles = [];
-    
+    let imageFiles = [];
     let blobImagesArray=[];
+
+
     fileObj = event.target.files;
     for (let i = 0; i < fileObj.length; i++) {
-      
-      let {name,type,size}=fileObj[i]
-      console.log(name,type,size);
-      // imageFiles.push(fileObj[i]);
+      imageFiles.push(fileObj[i]);
       blobImagesArray.push(URL.createObjectURL(fileObj[i]));
     }
     let tmpValues = [...values]
-    // tmpValues[orderNo].images= [...imageFiles] 
+    tmpValues[orderNo].images= [...imageFiles] 
     tmpValues[orderNo].blobImages=[...blobImagesArray]
      setValues([...tmpValues])
-    // setImageFiles([...imageFiles]);
-    // setImages([...fileArray]);
   };
+
 
   let handleClick = () => {
     upload.current.click();

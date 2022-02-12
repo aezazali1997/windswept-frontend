@@ -27,6 +27,7 @@
     "react-draft-wysiwyg": "^1.14.7",
     "react-dropdown": "^1.9.2",
     "react-excel-workbook": "^0.0.4",
+    "react-file-base64": "^1.0.3",
     "react-helmet": "^6.1.0",
     "react-input-autosize": "^3.0.0",
     "react-multi-select-component": "^4.0.2",
